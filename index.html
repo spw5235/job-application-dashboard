@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-      <title>Example</title>
+      <title>Job Tracker</title>
       <meta name="viewport" content="width=device-width, initial-scale=1">
 
       <!-- Do not add `link` tags unless you know what you are doing -->
@@ -12,14 +12,107 @@
       <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
     </head>
     <body class="container-fluid">
-      <h1>Example</h1>
 
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-      eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-      minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-      ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-      velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-      cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
-      est laborum.</p>
+      <div class="credentials-container">
+  <div class="btn-group" id="sign-up">
+      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Sign Up
+      </button>
+      <div class="dropdown-menu">
+        <form class="auth">
+          <p class="failure signup-failure"></p>
+          <p class="success signup-success"></p>
+          <fieldset>
+            <label class="email">
+                  Email
+                  <input class="form-clear signup-email" type="email" name="credentials[email]">
+            </label>
+
+            <label class="password">
+                  Password
+                  <input id="password" type="password" name="credentials[password]" class="form-clear signup-password">
+            </label>
+
+            <label class="password_confirmation">
+                  Password Confirmation
+                  <input id="password_confirmation" type="password" name="credentials[password_confirmation]" class="form-clear signup-password signup-password-confirm">
+            </label>
+            <input type="submit" class="btn btn-default" name="submit" value="Sign-up">
+          </fieldset>
+        </form>
+      </div>
+    </div>
+
+    <div class="btn-group" id="sign-in">
+      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Sign In
+      </button>
+      <div class="dropdown-menu">
+        <form class="auth">
+          <p class="failure signin-failure"></p>
+          <p class="success signin-success"></p>
+          <fieldset>
+            <label class="email">
+                Email
+              <input type="email" name="credentials[email]" class="form-clear signin-email">
+            </label>
+
+            <label class="password">
+                Password
+                <input type="password" name="credentials[password]" class="form-clear signin-password">
+            </label>
+            <input type="submit" class="btn btn-default" name="submit" value="Sign-in">
+          </fieldset>
+        </form>
+      </div>
+    </div>
+    <div class="btn-group" id="change-password">
+      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Change Password
+      </button>
+      <div class="dropdown-menu changepw-dropdown">
+        <form class="auth">
+          <p class="failure changepw-failure"></p>
+          <p class="success changepw-success"></p>
+          <fieldset>
+            <label class="old">
+                  Old password
+                  <input type="password" name="passwords[old]" class="form-clear old-password">
+            </label>
+
+            <label class="new">
+                  New password
+                  <input type="password" name="passwords[new]" class="form-clear new-password">
+            </label>
+
+            <input type="submit" class="btn btn-default" name="submit" value="Change Password">
+          </fieldset>
+        </form>
+      </div>
+    </div>
+
+    <div class="btn-group sign-out" role="group" aria-label="...">
+      <form id="sign-out">
+          <button type="submit" class="btn btn-danger">Sign Out</button>
+      </form>
+      <p class="failure signout-failure"></p>
+      <p class="success signout-success"></p>
+    </div>
+
+  <div class="clearfix"></div>
+  <div class="notification-container">
+    <div class="success-alert">
+
+    </div>
+    <div class="failure-alert">
+
+    </div>
+  </div>
+</div>
+
+
+  <div class="clearfix"></div>
+  <div class="content">
+  </div>
     </body>
 </html>
