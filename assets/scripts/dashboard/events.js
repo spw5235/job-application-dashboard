@@ -4,7 +4,7 @@
 const displayNewSessionDash = require('../templates/dashboard/new-job-home.handlebars');
 // const apiStudents = require('../students/api');
 // const uiDashBoard = require('./ui');
-// const displaySessionCreateForm = require('../templates/session/new-session-form.handlebars');
+// const displaySessionCreateForm = require('../templates/job/new-job-form.handlebars');
 
 const onShowCreateDash = function(event) {
   event.preventDefault();
@@ -26,14 +26,14 @@ const onShowCreateDash = function(event) {
 //   $(".content").children().remove();
 //   let showCreateForm = displaySessionCreateForm();
 //   $('.content').append(showCreateForm);
-//   $(".current").attr("data-current-session-id", store.currentSessionId);
+//   $(".current").attr("data-current-job-id", store.currentSessionId);
 //   $(".current").attr("data-current-student-id", store.currentStudentId);
 // };
 
 const addHandlers = () => {
   // $('.content').on('click', '#dashboard-new-job-btn', onShowCreateDash)
   $('.content').on('click', '#dashboard-new-job-btn', onShowCreateDash);
-  // $('.content').on('click', '#new-session-existing-student', onExistingStudent);
+  // $('.content').on('click', '#new-job-existing-student', onExistingStudent);
   // $('.content').on('click', '.dashboard-existing-create-btn', onCreateFromExisting);
 };
 
