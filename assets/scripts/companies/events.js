@@ -2,13 +2,12 @@
 const apiCompanies = require('./api');
 const uiCompanies = require('./ui');
 // const getFormFields = require('../../../lib/get-form-fields');
-// const store = require('../store');
+const store = require('../store');
 // const logic = require('./logic');
 
 // STUDENT EVENTS
 
 const onGetCompanies = function(event) {
-  alert();
   event.preventDefault();
   apiCompanies.getCompanies()
     .done(uiCompanies.getCompanySuccess)
@@ -23,21 +22,19 @@ const onGetCompanies = function(event) {
 // };
 //
 //
-// const onViewCompanyRecord = function(event) {
-//   event.preventDefault();
-//   store.currentCompanyId = $(this).attr("data-current-company-id");
-//   apiCompanies.showCompany()
-//     .done(uiCompanies.viewCompanyRecordSuccess)
-//     .fail(uiCompanies.viewCompanyRecordFailure);
-// };
+const onShowCompanyRecord = function(event) {
+  event.preventDefault();
+  store.currentCompanyId = $(this).attr("data-current-company-id");
+  apiCompanies.showCompany()
+    .done(uiCompanies.viewCompanyRecordSuccess)
+    .fail(uiCompanies.viewCompanyRecordFailure);
+};
 //
-// const onEditCompany = function(event) {
-//   event.preventDefault();
-//   store.currentCompanyId = $(this).attr("data-current-company-id");
-//   apiCompanies.showCompany()
-//     .done(uiCompanies.editCompanySuccess)
-//     .fail(uiCompanies.edithCompanyFailure);
-// };
+const onEditCompany = function(event) {
+  event.preventDefault();
+  store.currentCompanyId = $(this).attr("data-current-company-id");
+  uiCompanies.updateFormGenerator();
+};
 //
 // const onCreateCompany = function(event) {
 //   event.preventDefault();
@@ -51,14 +48,13 @@ const onGetCompanies = function(event) {
 //     .fail(uiCompanies.createCompanyFailure);
 // };
 //
-// const onDeleteCompany = function(event) {
-//   event.preventDefault();
-//   store.currentCompanyId= $("#company-record-delete").attr("data-current-company-id");
-//   // let data = getFormFields(event.target);
-//   apiCompanies.deleteCompany(store.currentCompanyId)
-//     .done(uiCompanies.deleteCompanySuccess)
-//     .fail(uiCompanies.deleteCompanyFailure);
-// };
+const onDeleteCompany = function(event) {
+  event.preventDefault();
+  store.currentCompanyId= $("#company-record-delete").attr("data-current-company-id");
+  apiCompanies.deleteCompany(store.currentCompanyId)
+    .done(uiCompanies.deleteCompanySuccess)
+    .fail(uiCompanies.deleteCompanyFailure);
+};
 //
 // const onUpdateCompany = function(event) {
 //   event.preventDefault();
@@ -68,10 +64,10 @@ const onGetCompanies = function(event) {
 //     .fail(uiCompanies.updateCompanyFailure);
 // };
 //
-// const onShowCompanyCreateForm = function(event) {
-//   event.preventDefault();
-//   uiCompanies.showCompanyCreateForm();
-// };
+const onShowCompanyCreateForm = function(event) {
+  event.preventDefault();
+  uiCompanies.showCompanyCreateForm();
+};
 
 const addHandlers = () => {
   // $('#dashboard-home-btn').on('click', onGetCompanies);
@@ -82,12 +78,12 @@ const addHandlers = () => {
   // $('#update-company-form').on('submit', onUpdateCompany);
   // $('#update-company-btn').on('click', onEditCompany);
   // $('.content').on('submit', '#update-company-form', onUpdateCompany);
-  // $('.content').on('click', '#company-record-btn-edit', onEditCompany);
-  // $('.content').on('click', '#new-session-new-company', onShowCompanyCreateForm);
-  // // $('.company-dashboard-container').on('click', '.dashboard-company-record-btn', onViewCompanyRecord);
-  // $('.content').on('click', '.dashboard-company-record-btn', onViewCompanyRecord);
+  $('.content').on('click', '#company-record-btn-edit', onEditCompany);
+  $('.content').on('click', '#new-session-new-company', onShowCompanyCreateForm);
+  // // $('.company-dashboard-container').on('click', '.dashboard-company-record-btn', onShowCompanyRecord);
+  $('.content').on('click', '.dashboard-company-record-btn', onShowCompanyRecord);
   $('.content').on('click', '#dashboard-home-btn', onGetCompanies);
-  // $('.content').on('click', '#company-record-delete', onDeleteCompany);
+  $('.content').on('click', '#company-record-delete', onDeleteCompany);
 };
 
 module.exports = {

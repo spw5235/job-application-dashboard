@@ -1,10 +1,10 @@
 'use strict';
 
 const store = require('../store');
-// const displayEditCompany = require('../templates/company/edit-company.handlebars');
+const displayEditCompany = require('../templates/company/update-company-form.handlebars');
 const displayCompanyDashboard = require('../templates/company/get-companies.handlebars');
-// const displayCompanyDetails = require('../templates/company/show-company-record.handlebars');
-// const displayCompanyCreateForm = require('../templates/company/create-company.handlebars');
+const displayCompanyDetails = require('../templates/company/show-company-record.handlebars');
+const displayCompanyCreateForm = require('../templates/company/create-company.handlebars');
 // const displaySessionsTable = require('../templates/session/get-sessions.handlebars');
 // // const displayDashboard = require('../templates/dashboard/dashboard-btn.handlebars');
 // const apiCompanies = require('./api');
@@ -28,37 +28,12 @@ const displayCompanyDashboard = require('../templates/company/get-companies.hand
 //   $(".notification-container").children().text("");
 // };
 //
-// const viewCompanyRecordSuccess = (data) => {
-//   $(".notification-container").children().text("");
-//   $(".content").children().remove();
-//   // $(".company-record-table").remove();
-//   let companyDetails = displayCompanyDetails({
-//     company: data.company
-//   });
-//   // $('.company-details-container').append(companyDetails);
-//   $('.content').append(companyDetails);
-//   store.currentCompanyFn = $(".company-name-header").attr("data-current-company-fn");
-//   store.currentCompanyLn = $(".company-name-header").attr("data-current-company-ln");
-//   sessionsApi.getSessions()
-//     .done(getSessionSuccess)
-//     .fail(getSessionFailure);
-// };
-//
-// const viewCompanyRecordFailure = () => {
-//   $(".notification-container").children().text("");
-// };
-//
-// const showCompanyCreateForm = () => {
-//   $(".notification-container").children().text("");
-//   $(".content").children().remove();
-//   let showCreateForm = displayCompanyCreateForm();
-//   $('.content').append(showCreateForm);
-// };
 
 const getCompanySuccess = (data) => {
   $(".notification-container").children().text("");
   store.currentCompanyId = 0;
   store.currentJobId = 0;
+  store.companyDataForEdit = data;
 
   $(".content").children().remove();
   let companyDashboard = displayCompanyDashboard({
@@ -68,16 +43,43 @@ const getCompanySuccess = (data) => {
   $('.content').append(companyDashboard);
   // $('.content').append(dashboardHomeBtn);
 };
+
+const viewCompanyRecordSuccess = (data) => {
+  $(".notification-container").children().text("");
+  $(".content").children().remove();
+  let companyDetails = displayCompanyDetails({
+    company: data.company
+  });
+  // $('.company-details-container').append(companyDetails);
+  $('.content').append(companyDetails);
+  // store.currentCompanyFn = $(".company-name-header").attr("data-current-company-fn");
+  // store.currentCompanyLn = $(".company-name-header").attr("data-current-company-ln");
+  // sessionsApi.getSessions()
+  //   .done(getSessionSuccess)
+  //   .fail(getSessionFailure);
+};
 //
-// const editCompanySuccess = (data) => {
+// const viewCompanyRecordFailure = () => {
 //   $(".notification-container").children().text("");
-//   $(".content").children().remove();
-//
-//   let editCompany = displayEditCompany({
-//     company: data.company
-//   });
-//   $('.content').append(editCompany);
 // };
+//
+const showCompanyCreateForm = () => {
+  $(".notification-container").children().text("");
+  $(".content").children().remove();
+  let showCreateForm = displayCompanyCreateForm();
+  $('.content').append(showCreateForm);
+};
+
+//
+const updateFormGenerator = function() {
+  $(".notification-container").children().text("");
+  $(".content").children().remove();
+
+  let editCompany = displayEditCompany({
+    company: store.companyDataForEdit.company
+  });
+  $('.content').append(editCompany);
+};
 //
 // const editCompanyFailure = () => {
 //   $(".notification-container").children().text("");
@@ -120,16 +122,18 @@ const getCompanySuccess = (data) => {
 //   $("#create-company-error").text("Error: Company not created.  Please ensure all required fields have values");
 // };
 //
-// const deleteCompanySuccess = () => {
-//   $(".notification-container").children().text("");
-//   apiCompanies.getCompanies()
-//     .done(getCompanySuccess)
-//     .fail(getCompanyFailure);
-// };
-//
-// const deleteCompanyFailure = () => {
-//   $(".notification-container").children().text("");
-// };
+const deleteCompanySuccess = () => {
+  $(".notification-container").children().text("");
+  console.log('delete success');
+  // apiCompanies.getCompanies()
+  //   .done(getCompanySuccess)
+  //   .fail(getCompanyFailure);
+};
+
+const deleteCompanyFailure = () => {
+  $(".notification-container").children().text("");
+  console.log('delete fail');
+};
 //
 // const updateCompanySuccess = (data) => {
 //   $(".notification-container").children().text("");
@@ -153,19 +157,18 @@ const getCompanySuccess = (data) => {
 // };
 
 module.exports = {
+  getCompanySuccess,
+  viewCompanyRecordSuccess,
+  deleteCompanySuccess,
+  deleteCompanyFailure,
+  updateFormGenerator,
+  showCompanyCreateForm,
   // createCompanySuccess,
   // createCompanyFailure,
-  getCompanySuccess,
   // getCompanyFailure,
   // showCompanySuccess,
   // showCompanyFailure,
   // updateCompanySuccess,
   // updateCompanyFailure,
-  // deleteCompanySuccess,
-  // deleteCompanyFailure,
-  // editCompanySuccess,
-  // editCompanyFailure,
-  // viewCompanyRecordSuccess,
   // viewCompanyRecordFailure,
-  // showCompanyCreateForm,
 };
