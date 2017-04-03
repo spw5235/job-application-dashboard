@@ -5,29 +5,45 @@ const displayEditCompany = require('../templates/company/update-company-form.han
 const displayCompanyDashboard = require('../templates/company/get-companies.handlebars');
 const displayCompanyDetails = require('../templates/company/show-company-record.handlebars');
 const displayCompanyCreateForm = require('../templates/company/create-company.handlebars');
-// const displaySessionsTable = require('../templates/job/get-jobs.handlebars');
+const displayJobsTable = require('../templates/job/get-jobs.handlebars');
+const displayShowJobTable = require('../templates/job/show-job.handlebars');
 // // const displayDashboard = require('../templates/dashboard/dashboard-btn.handlebars');
-const apiCompanies = require('./api');
-// const jobsApi = require('../jobs/api');
+const companiesApi = require('./api');
+const jobsApi = require('../jobs/api');
+// const jobsUi = require('../jobs/ui');
 
 // Company UI
 
-// const getSessionSuccess = (data) => {
-//   $(".notification-container").children().text("");
-//   let jobDashboard = displaySessionsTable({
-//     jobs: data.jobs
-//   });
-//   // $('.company-dashboard-container').append(companyDashboard);
-//   $('.content').append(jobDashboard);
-//   $(".current-company-fn").text(store.currentCompanyFn);
-//   $(".current-company-ln").text(store.currentCompanyLn);
-//   $("#create-job-company-btn").attr("data-current-company-id", store.currentCompanyId);
-// };
-//
-// const getSessionFailure = () => {
-//   $(".notification-container").children().text("");
-// };
-//
+const getJobSuccess = (data) => {
+  $(".notification-container").children().text("");
+  const numberOfJobs = data.jobs.length;
+  let singleJobData = data.jobs[0];
+
+  let singleJobDetails = displayShowJobTable({
+    job: singleJobData
+  });
+
+  let jobDashboard = displayJobsTable({
+    jobs: data.jobs
+  });
+
+  if (numberOfJobs === 1) {
+    $(".content").append(singleJobDetails);
+  } else if (numberOfJobs > 1) {
+    $(".content").append(jobDashboard);
+  }
+  // $('.company-dashboard-container').append(companyDashboard);
+  const currentCompanyName = store.companyName;
+  $("#job-record-btn-edit").attr("data-current-company-id", store.currentCompanyId);
+  $("#job-record-delete").attr("data-current-company-id", store.currentCompanyId);
+  $("#create-job-company-btn").attr("data-current-company-id", store.currentCompanyId);
+  $(".current-company-name").text(currentCompanyName);
+};
+
+const getJobFailure = () => {
+  $(".notification-container").children().text("");
+};
+
 
 const getCompanySuccess = (data) => {
   $(".notification-container").children().text("");
@@ -49,6 +65,7 @@ const showCompanyRecordSuccess = (data) => {
   $(".notification-container").children().text("");
   $(".content").children().remove();
   store.lastShowCompanyData = data;
+  store.companyName = data.company.name;
   data.company.company_page = true;
   store.companyPage = data.company.company_page;
   let companyDetails = displayCompanyDetails({
@@ -58,9 +75,9 @@ const showCompanyRecordSuccess = (data) => {
   $('.content').append(companyDetails);
   // store.currentCompanyFn = $(".company-name-header").attr("data-current-company-fn");
   // store.currentCompanyLn = $(".company-name-header").attr("data-current-company-ln");
-  // jobsApi.getSessions()
-  //   .done(getSessionSuccess)
-  //   .fail(getSessionFailure);
+  jobsApi.getJobs()
+    .done(getJobSuccess)
+    .fail(getJobFailure);
 };
 //
 const showCompanyRecordFailure = () => {
@@ -113,7 +130,7 @@ const createCompanySuccess = () => {
     company: store.createCompanyData.company
   });
   $(".content").append(showCompanyDetails);
-  // apiCompanies.showCompany()
+  // companiesApi.showCompany()
   //   .done(showCompanyRecordSuccess)
   //   .fail(showCompanyRecordFailure);
   // $("#create-job-stud-id").attr("value", store.currentCompanyId);
@@ -131,7 +148,7 @@ const createCompanySuccess = () => {
 const deleteCompanySuccess = () => {
   $(".notification-container").children().text("");
   console.log('delete success');
-  apiCompanies.getCompanies()
+  companiesApi.getCompanies()
     .done(getCompanySuccess)
     .fail(getCompanyFailure);
 };
@@ -146,7 +163,7 @@ const updateCompanySuccess = (data) => {
   $(".success-alert").text("Company Has Been Successfully Updated");
   store.currentCompanyId = data.company.id;
   $(".content").children().remove();
-  apiCompanies.showCompany()
+  companiesApi.showCompany()
     .done(showCompanyRecordSuccess)
     .fail(showCompanyRecordFailure);
 };

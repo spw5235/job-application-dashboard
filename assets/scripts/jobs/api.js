@@ -46,6 +46,28 @@ const deleteJob = function() {
   });
 };
 
+const updateJobManual = function(title, posting_date, post_url, salary, responsibility, requirement, deadline, comment) {
+  return $.ajax({
+    url: config.apiOrigin + '/jobs/' + store.currentJobId,
+    method: 'PATCH',
+    headers: {
+      Authorization: 'Token token=' + store.user.token,
+    },
+    data: {
+      job: {
+        title: title,
+        posting_date: posting_date,
+        post_url: post_url,
+        salary: salary,
+        responsibility: responsibility,
+        requirement: requirement,
+        deadline: deadline,
+        comment: comment
+      }
+    }
+  });
+};
+
 const updateJob = function(data) {
   return $.ajax({
     url: config.apiOrigin + '/jobs/' + store.currentJobId,
@@ -63,4 +85,5 @@ module.exports = {
   showJob,
   updateJob,
   deleteJob,
+  updateJobManual,
 };

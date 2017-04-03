@@ -7,8 +7,8 @@ const displayJobCreateForm = require('../templates/job/new-job-form.handlebars')
 const displayJobsTable = require('../templates/job/get-jobs.handlebars');
 const displayJobDetails = require('../templates/job/show-job.handlebars');
 const displayJobUpdateForm = require('../templates/job/update-job-form.handlebars');
-const uiCompanies = require('../companies/ui');
-const apiCompanies = require('../companies/api');
+const companiesUi = require('../companies/ui');
+const companiesApi = require('../companies/api');
 const displayCompanyDetails = require('../templates/company/show-company-record.handlebars');
 
 // Job UI
@@ -86,6 +86,7 @@ const generateUpdateForm = (data) => {
   });
   $('.content').append(generatedUpdateForm);
   $(".current").attr("data-current-company-id", store.currentCompanyId);
+  $(".current").attr("data-current-job-id",store.currentJobId);
   // let today = generateTodaysDate();
   // $("#job-date-create-field").val(today);
 };
@@ -142,7 +143,7 @@ const createJobSuccess = () => {
   $(".success-alert").text("Job Successfully Created");
   $(".content").children().remove();
 
-  apiCompanies.showCompany()
+  companiesApi.showCompany()
     .done(showCompanyRecordSuccess)
     .fail(showCompanyRecordFailure);
 
@@ -167,9 +168,9 @@ const deleteJobSuccess = () => {
   // jobsApi.getJobs()
   //   .done(getJobSuccess)
   //   .fail(getJobFailure);
-  apiCompanies.showCompany()
-    .done(uiCompanies.viewCompanyRecordSuccess)
-    .fail(uiCompanies.viewCompanyRecordFailure);
+  companiesApi.showCompany()
+    .done(companiesUi.showCompanyRecordSuccess)
+    .fail(companiesUi.showCompanyRecordSuccess);
 };
 
 const deleteJobFailure = () => {
@@ -178,13 +179,16 @@ const deleteJobFailure = () => {
 
 const updateJobSuccess = (data) => {
   $(".notification-container").children().text("");
-  store.currentCompanyId = data.job.id;
+  console.log("update success");
+  store.currentJobId = data.job.id;
   $(".content").children().remove();
   let jobDetails = displayJobDetails({
     job: data.job
   });
   // $('.company-details-container').append(companyDetails);
   $('.content').append(jobDetails);
+  $(".current").attr("data-current-company-id", store.currentCompanyId);
+  $(".current").attr("data-current-job-id",store.currentJobId);
 
 };
 

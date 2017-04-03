@@ -2,8 +2,8 @@
 
 // const store = require('../store');
 const displayNewJobDash = require('../templates/dashboard/new-job-home.handlebars');
-const apiCompanies = require('../companies/api');
-const uiDashBoard = require('./ui');
+const companiesApi = require('../companies/api');
+const dashboardUi = require('./ui');
 // const displayJobCreateForm = require('../templates/job/new-job-form.handlebars');
 
 const onShowCreateDash = function(event) {
@@ -15,9 +15,9 @@ const onShowCreateDash = function(event) {
 //
 const onExistingCompany = function(event) {
   event.preventDefault();
-  apiCompanies.getCompanies()
-    .done(uiDashBoard.getExistingSuccess)
-    .fail(uiDashBoard.getExistingFailure);
+  companiesApi.getCompanies()
+    .done(dashboardUi.getExistingSuccess)
+    .fail(dashboardUi.getExistingFailure);
 };
 //
 // const onCreateFromExisting = function(event) {

@@ -21,8 +21,9 @@ const onShowJob = function(event) {
   event.preventDefault();
   store.currentCompanyId = $(this).attr("data-current-company-id");
   store.currentJobId = $(this).attr("data-current-job-id");
-  // store.currentCompanyFn = $(".company-name-tr").attr("data-current-company-fn");
-  // store.currentCompanyLn = $(".company-name-tr").attr("data-current-company-ln");
+  jobsApi.showJob()
+    .done(jobsUi.showJobSuccess)
+    .fail(jobsUi.showJobFailure);
 };
 //
 const onCreateJob = function(event) {
@@ -38,16 +39,16 @@ const onCreateJob = function(event) {
     .done(jobsUi.createJobSuccess)
     .fail(jobsUi.createJobFailure);
 };
-//
-// const onDeleteJob = function(event) {
-//   event.preventDefault();
-//   store.currentJobId= $("#job-record-delete").attr("data-current-job-id");
-//   store.currentCompanyId =$("#job-record-delete").attr("data-current-company-id");
-//   jobsApi.deleteJob()
-//     .done(jobsUi.deleteJobSuccess)
-//     .fail(jobsUi.deleteJobFailure);
-// };
-//
+
+const onDeleteJob = function(event) {
+  event.preventDefault();
+  store.currentJobId= $("#job-record-delete").attr("data-current-job-id");
+  store.currentCompanyId = $("#job-record-delete").attr("data-current-company-id");
+  jobsApi.deleteJob()
+    .done(jobsUi.deleteJobSuccess)
+    .fail(jobsUi.deleteJobFailure);
+};
+
 // const onUpdateJob = function(event) {
 //   event.preventDefault();
 //   let data = getFormFields(event.target);
@@ -55,6 +56,23 @@ const onCreateJob = function(event) {
 //     .done(jobsUi.updateJobSuccess)
 //     .fail(jobsUi.updateJobFailure);
 // };
+
+const onUpdateJobManual = function(event) {
+  event.preventDefault();
+  let title = $(".job-title").val();
+  let postingDate = $(".posting-date").val();
+  let postUrl = $(".post-url").val();;
+  let salary = $(".salary").val();;
+  let responsibility = $(".responsiblity").val();;
+  let requirement = $(".requirement").val();;
+  let deadline = $(".deadline").val();;
+  let comment = $(".comment").val();;
+
+
+  jobsApi.updateJobManual(title, postingDate, postUrl, salary, responsibility, requirement, deadline, comment)
+    .done(jobsUi.updateJobSuccess)
+    .fail(jobsUi.updateJobFailure);
+};
 //
 // // Calculates total time of job
 //
@@ -88,14 +106,14 @@ const onGenerateCreateForm = function(event) {
   jobsUi.generateCreateForm();
 };
 
-// const onEditJob = function(event) {
-//   event.preventDefault();
-//   store.currentCompanyId = $(this).attr("data-current-company-id");
-//   store.currentJobId = $(this).attr("data-current-job-id");
-//   jobsApi.showJob()
-//     .done(jobsUi.generateUpdateForm)
-//     .fail(jobsUi.generateUpdateFormFailure);
-// };
+const onEditJob = function(event) {
+  event.preventDefault();
+  store.currentCompanyId = $(this).attr("data-current-company-id");
+  store.currentJobId = $(this).attr("data-current-job-id");
+  jobsApi.showJob()
+    .done(jobsUi.generateUpdateForm)
+    .fail(jobsUi.generateUpdateFormFailure);
+};
 
 const addHandlers = () => {
   $('.content').on('click', '#dashboard-new-job-btn-company', onGenerateCreateForm);
@@ -112,9 +130,9 @@ const addHandlers = () => {
   $('.content').on('submit', '#new-job-form', onCreateJob);
   // $('.content').on('click', '#company-record-view-jobs', onGetJobs);
   $('.content').on('click', '#view-job-details-btn', onShowJob);
-  // $('.content').on('click', '#job-record-btn-edit', onEditJob);
-  // $('.content').on('submit', '#update-job-form', onUpdateJob);
-  // $('.content').on('click', '#job-record-delete', onDeleteJob);
+  $('.content').on('click', '#job-record-btn-edit', onEditJob);
+  $('.content').on('submit', '#update-job-form', onUpdateJobManual);
+  $('.content').on('click', '#job-record-delete', onDeleteJob);
   // $('.content').on('click', '#create-job-company-btn', onGenerateCreateForm);
 
 };
