@@ -3,6 +3,7 @@ const jobsApi = require('./api');
 const jobsUi = require('./ui');
 const getFormFields = require('../../../lib/get-form-fields');
 const store = require('../store');
+
 // const logic = require('./logic');
 
 // SETTING EVENTS
@@ -15,30 +16,24 @@ const store = require('../store');
 //     .fail(jobsUi.getJobFailure);
 // };
 //
+
 const onShowJob = function(event) {
   event.preventDefault();
   store.currentCompanyId = $(this).attr("data-current-company-id");
   store.currentJobId = $(this).attr("data-current-job-id");
   // store.currentCompanyFn = $(".company-name-tr").attr("data-current-company-fn");
   // store.currentCompanyLn = $(".company-name-tr").attr("data-current-company-ln");
-  jobsApi.showJob()
-    .done(jobsUi.showJobSuccess)
-    .fail(jobsUi.showJobFailure);
 };
 //
 const onCreateJob = function(event) {
   event.preventDefault();
+  store.currentCompanyId = $("#create-job-btn").attr("data-current-company-id");
   let data = getFormFields(event.target);
   store.createJobData = data;
   jobsApi.createJob(data)
     .then((response) => {
       store.currentJobId = response.job.id;
-      store.currentNumofIntervals = response.job.int_num;
-      // alert(store.currentNumofIntervals);
-      // console.log(store.currentNumofIntervals);
-      store.currentObsIntervalTime = response.job.obs_time;
-      // store.currentObsNum = 1;
-      // return store.currentJob;
+      return store.currentJobId;
     })
     .done(jobsUi.createJobSuccess)
     .fail(jobsUi.createJobFailure);
@@ -107,7 +102,7 @@ const addHandlers = () => {
   // $('#delete-job-form').on('submit', onDeleteJob);
   // $('#get-jobs-form').on('submit', onGetJobs);
   // $('#show-job-form').on('submit', onShowJob);
-  // $('#new-job-form').on('submit', onCreateJob);
+  // $('.content').on('submit', '#new-job-form', onCreateJob);
   // $('#update-job-form').on('submit', onUpdateJob);
   // $('.content').on('keyup', '#interval-number-entry', totalTimeCalculator);
   // $('.content').on('keyup', '#interval-length-entry', totalTimeCalculator);

@@ -1,7 +1,7 @@
 'use strict';
 
 const store = require('../store');
-const jobsApi = require('./api');
+// const jobsApi = require('./api');
 const displayJobCreateForm = require('../templates/job/new-job-form.handlebars');
 // const displayObservationLandingPage = require('../templates/observation/obs-landing.handlebars');
 const displayJobsTable = require('../templates/job/get-jobs.handlebars');
@@ -9,6 +9,7 @@ const displayJobDetails = require('../templates/job/show-job.handlebars');
 const displayJobUpdateForm = require('../templates/job/update-job-form.handlebars');
 const uiCompanies = require('../companies/ui');
 const apiCompanies = require('../companies/api');
+const displayCompanyDetails = require('../templates/company/show-company-record.handlebars');
 
 // Job UI
 
@@ -94,13 +95,13 @@ const generateUpdateFormFailure = () => {
 
 };
 
-const createLandingPage = function() {
-  $(".content").children().remove();
-  let landingPage = displayObservationLandingPage();
-  $('.content').append(landingPage);
-  $(".current").attr("data-current-job-id", store.currentJobId);
-  $(".current").attr("data-current-company-id", store.currentCompanyId);
-};
+// const createLandingPage = function() {
+//   $(".content").children().remove();
+//   let landingPage = displayObservationLandingPage();
+//   $('.content').append(landingPage);
+//   $(".current").attr("data-current-job-id", store.currentJobId);
+//   $(".current").attr("data-current-company-id", store.currentCompanyId);
+// };
 
 // const beginObservations = (data) => {
 //   console.log(data);
@@ -112,16 +113,39 @@ const createLandingPage = function() {
 //   $(".current").attr("data-current-company-id", store.currentCompanyId);
 // }
 
+const showCompanyRecordSuccess = (data) => {
+  $(".notification-container").children().text("");
+  $(".content").children().remove();
+  store.lastShowCompanyData = data;
+  data.company.company_page = true;
+  store.companyPage = data.company.company_page;
+  let companyDetails = displayCompanyDetails({
+    company: data.company
+  });
+  let jobDetails = displayJobDetails({
+    job: store.createJobData.job
+  });
+  $(".content").append(companyDetails);
+  $(".content").append(jobDetails);
+  $(".dashboard-home-btn-company-page").remove();
+  $(".current").attr("data-current-company-id",store.currentCompanyId);
+  $(".current").attr("data-current-job-id",store.currentJobId);
+};
+
+const showCompanyRecordFailure = () => {
+  console.log('showCompanyRecordFailure failure');
+};
+
 const createJobSuccess = () => {
   $(".form-error").text("");
   $(".notification-container").children().text("");
   $(".success-alert").text("Job Successfully Created");
-  let data = store.createJobData;
   $(".content").children().remove();
-  let jobDetails = displayJobDetails({
-    job: data.job
-  });
-  $(".content").append(jobDetails);
+
+  apiCompanies.showCompany()
+    .done(showCompanyRecordSuccess)
+    .fail(showCompanyRecordFailure);
+
   // store.observationIdNum = 0;
   // $("#new-job-form").hide();
   // $("#new-observation-form").show();
@@ -148,7 +172,7 @@ const deleteJobSuccess = () => {
     .fail(uiCompanies.viewCompanyRecordFailure);
 };
 
-const deleteJobFailure = (data) => {
+const deleteJobFailure = () => {
   $(".notification-container").children().text("");
 };
 
@@ -164,7 +188,7 @@ const updateJobSuccess = (data) => {
 
 };
 
-const updateJobFailure = (data) => {
+const updateJobFailure = () => {
   $(".notification-container").children().text("");
   $("#update-job-error").text("Error updating job. Please check if all required fields are entered and number values fall within the listed range.");
 };
