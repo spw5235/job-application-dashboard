@@ -1,0 +1,41 @@
+<div class="existing-company-selection-container">
+
+<h3>Company Selection</h3>
+<p>Please select the company whom you will be observing.</p>
+
+<table class="table existing-company-selection-table table-hover">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Location</th>
+      <th>URL</th>
+      <th>Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each companies as |company|}}
+      <tr>
+        <td class="display-company-fn">
+          {{company.name}}
+        </td>
+        <td class="display-company-ln">
+          {{company.location}}
+        </td>
+        <td class="display-company-dob">
+          {{company.url}}
+        </td>
+        <td class="display-company-school">
+          {{company.note}}
+        </td>
+        <td class="display-obs-obs-comment">
+          <input class="btn btn-info btn-sm dashboard-existing-create-btn" type="button" value="Select Company" data-current-company-id="{{company.id}}">
+        </td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>
+<br><br>
+<div class="dashboard-container">
+  <button id="dashboard-home-btn" type="button" class="btn btn-primary">View Dashboard</button>
+</div>
+</div>

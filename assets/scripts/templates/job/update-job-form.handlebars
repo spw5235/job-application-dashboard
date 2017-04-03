@@ -1,0 +1,36 @@
+<div class="update-jobs-form-container">
+
+<form class="form jobs-form" id="update-job-form" name="update-job-form">
+  <fieldset>
+    <legend>Update Job Form</legend>
+    <p id="update-job-error" class="warning form-error"></p>
+    <p>All fields are <u>optional</u> unless otherwise indicated</p>
+    <br>
+    <p class="field-description">Job Date</p>
+    <input name="job[obs_on]" placeholder="Job Date" type="date" value="{{job.obs_on}}">
+    <br>
+    <p class="field-description">Job Setting (required)</p>
+    <input name="job[obs_setting]" placeholder="Job Setting" type="text" value="{{job.obs_setting}}">
+    <br>
+    <p class="field-description">Job Task (required)</p>
+    <input name="job[obs_task]" placeholder="Job Task" type="text" value="{{job.obs_task}}">
+    <br>
+    <p class="field-description">Number of Intervals (read-only)</p>
+    <input class="read-only" name="job[int_num]" placeholder="Number of Intervals" type="text" value="{{job.int_num}}" readonly>
+    <br>
+    <p class="field-description">Time of Intervals (in seconds) (read-only)</p>
+    <input class="read-only" name="job[obs_time]" type="text" placeholder="Time" value="{{job.obs_time}}" readonly>
+    <br>
+    <p class="field-description">Job Comment</p>
+    <input name="job[comment]" placeholder="Comment" type="text" value="{{job.comment}}">
+    <br>
+    <input name="submit" class="current" type="submit" value="Submit Update" data-obs-time="{{job.obs_time}}" data-int-num="{{job.int_num}}" data-current-company-id="" data-current-job-id="{{job.id}}">
+  </fieldset>
+</form>
+</div>
+
+<br><br>
+<div class="dashboard-container">
+  <button id="dashboard-home-btn" type="button" class="btn btn-primary">View Dashboard</button>
+  <button id="dashboard-new-job-btn" type="button" class="btn btn-success">Create Job</button>
+</div>

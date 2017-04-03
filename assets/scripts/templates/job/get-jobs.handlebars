@@ -1,0 +1,46 @@
+
+<h3>Company Jobs</h3>
+
+<table class="table job-summary-table table-hover">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Website Url</th>
+      <th>Deadline</th>
+      <th>View Job</th>
+    </tr>
+  </thead>
+  {{#each jobs as |job|}}
+    <tbody>
+      <tr>
+        <td class="display-obs-num">
+          {{job.title}}
+        </td>
+        <td class="display-obs-aet">
+          {{job.post_url}}
+        </td>
+        <td class="display-obs-pet">
+          {{job.deadline}}
+        </td>
+        <td>
+          <button id="view-job-details-btn" type="button" class="btn btn-info btn-sm current" data-current-job-id="{{job.id}}" data-current-company-id="{{job.company_id}}">View Job</button>
+        </td>
+      </tr>
+    </tbody>
+  {{/each}}
+</table>
+<br><br>
+
+<div class="create-job-company-record-container">
+  <h3>New Job</h3>
+  <p>To create a new job for <span class="current-company-fn"></span> <span class="current-company-ln"></span>, please click the button below:
+    <div class="create-job-company-btn-container">
+      <button id="create-job-company-btn" class="btn btn-success current" type="button" data-current-company-id="{{job.company_id}}">New Job</button>
+    </div>
+  </p>
+</div>
+
+<br><br>
+<div class="dashboard-container">
+  <button id="dashboard-home-btn" type="button" class="btn btn-primary">View Dashboard</button>
+</div>

@@ -1,19 +1,19 @@
 'use strict'
 
 const store = require('../store');
-const displayExistingStudents = require('../templates/dashboard/existing-student.handlebars');
+const displayExistingCompanies = require('../templates/dashboard/existing-company.handlebars');
 
-// Student UI
+// Company UI
 
 const getExistingSuccess = (data) => {
   $(".notification-container").children().text("");
-  store.currentStudentId = 0;
-  store.currentSessionId = 0;
+  store.currentCompanyId = 0;
+  store.currentJobId = 0;
   $(".content").children().remove();
-  let existingStudents = displayExistingStudents({
-    students: data.students
+  let existingCompanies = displayExistingCompanies({
+    companies: data.companies
   });
-  $('.content').append(existingStudents);
+  $('.content').append(existingCompanies);
 };
 
 const getExistingFailure = () => {

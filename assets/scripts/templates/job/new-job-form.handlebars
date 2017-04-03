@@ -1,0 +1,57 @@
+<form class="form jobs-form" id="new-job-form" name="new-job-form">
+  <fieldset>
+    <legend>Create Job Form</legend>
+    <p id="create-job-error" class="warning form-error"></p>
+    <p>All fields are <u>optional</u> unless otherwise indicated</p>
+
+    <div class="form-group">
+      <label>Job Title</label>
+      <input id="job-date-create-field" class="form-control" name="job[title]" placeholder="Job Title" type="text">
+    </div>
+
+    <div class="form-group">
+      <label>Job Posting Date</label>
+      <input name="job[posting_date]" class="form-control" placeholder="Posting Date" type="date">
+    </div>
+
+    <div class="form-group">
+      <label>Job Post Url</label>
+      <input name="job[post_url]" class="form-control" placeholder="Job Post Link" type="text">
+    </div>
+
+    <div class="form-group">
+      <label>Job Salary</label>
+      <input id="interval-number-entry" class="form-control" name="job[salary]" placeholder="Job Salary" type="text">
+    </div>
+
+    <div class="form-group">
+      <label>Responsibilities</label>
+      <textarea class="form-control field-input note-input" name="job[responsibility]" placeholder="Job Responsibilities" type="textarea"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label>Requirements</label>
+      <textarea class="form-control field-input note-input" name="job[requirement]" placeholder="Job Requirements" type="textarea"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label>Job Deadline</label>
+      <input name="job[deadline]" class="form-control" placeholder="Deadline" type="date">
+    </div>
+
+    <div class="form-group">
+      <label>Job Comment</label>
+      <input name="job[comment]" class="form-control" placeholder="Comment" type="text">
+    </div>
+
+    <div class="form-group">
+      <input id="create-job-btn" class="current btn btn-success submit-btn" name="submit" type="submit" value="Submit" data-current-company-id="">
+    </div>
+
+  </fieldset>
+</form>
+
+<br><br>
+<div class="dashboard-container">
+  <button id="dashboard-home-btn" type="button" class="btn btn-primary">View Dashboard</button>
+</div>

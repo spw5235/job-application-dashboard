@@ -31,6 +31,7 @@ const apiCompanies = require('./api');
 
 const getCompanySuccess = (data) => {
   $(".notification-container").children().text("");
+  store.companyPage = false;
   store.currentCompanyId = 0;
   store.currentJobId = 0;
   store.companyDataForEdit = data;
@@ -48,6 +49,8 @@ const showCompanyRecordSuccess = (data) => {
   $(".notification-container").children().text("");
   $(".content").children().remove();
   store.lastShowCompanyData = data;
+  data.company.company_page = true;
+  store.companyPage = data.company.company_page;
   let companyDetails = displayCompanyDetails({
     company: data.company
   });
@@ -105,6 +108,7 @@ const createCompanySuccess = () => {
   $(".notification-container").children().text("");
   $(".content").children().remove();
   $(".success-alert").text("Company Has Been Successfully Created");
+  store.companyPage = true;
   let showCompanyDetails = displayCompanyDetails({
     company: store.createCompanyData.company
   });

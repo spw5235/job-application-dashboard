@@ -39,6 +39,9 @@ const onEditCompany = function(event) {
 const onCreateCompany = function(event) {
   event.preventDefault();
   let data = getFormFields(event.target);
+  data.company.company_page = true;
+  data.company.company_id = store.currentCompanyId;
+  store.companyPage = data.company.company_page;
   store.createCompanyData = (data);
   apiCompanies.createCompany(data)
     .then((response) => {
