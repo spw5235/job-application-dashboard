@@ -1,0 +1,42 @@
+<div class="create-status-form-container form-container form-group">
+  <h1>Create a Reminder</h1>
+
+  <form class="form status-form" id="new-reminder-form" name="new-status-form">
+    <fieldset>
+      <!-- <legend>Create Status Form</legend> -->
+      <p id="create-status-error" class="warning form-error"></p>
+      <p>All fields are <u>optional</u> unless otherwise indicated</p>
+
+      <div class="form-group">
+        <label>Reminder Type (required)</label>
+          <select class="form-control" id="reminder-type-select">
+            <option class="form-control required-field" name="status[status_type]" placeholder="Status Type" type="text" value="action_required">Reminder Required</option>
+            <option class="form-control required-field" name="status[status_type]" placeholder="Status Type" type="text" value="pending">Pending</option>
+          </select>
+      </div>
+
+      <div class="form-group">
+        <label>Reminder Subject (required)</label>
+        <input class="form-control required-field" name="status[subject]" placeholder="Subject" type="text">
+      </div>
+
+      <div class="form-group">
+        <label>Reminder Details</label>
+        <textarea class="form-control field-input reminder-details" name="status[details]" type="text" placeholder="Reminder Details"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>Reminder Notification Date</label>
+        <input class="form-control field-input" name="status[due_date]" placeholder="Date" type="date">
+      </div>
+
+      <div class="form-group">
+        <input class="btn btn-success submit-btn current" name="submit" id="create-reminder-btn" type="submit" value="Submit" data-current-company-id="" data-current-job-id="">
+      </div>
+    </fieldset>
+  </form>
+  <br><br>
+  <div class="dashboard-container">
+    <button id="dashboard-home-btn" type="button" class="btn btn-primary">View Dashboard</button>
+  </div>
+</div>

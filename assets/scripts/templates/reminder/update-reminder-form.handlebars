@@ -1,0 +1,39 @@
+<div class="update-status-form-container form-container">
+<form class="form status-form" id="update-status-form" name="update-status-form">
+  <fieldset>
+    <legend>Update Action Form</legend>
+    <p id="update-status-error" class="warning form-error"></p>
+    <p>All fields are <u>optional</u> unless otherwise indicated</p>
+
+    <div class="form-group">
+      <label>Status Type (required)</label>
+      <input class="form-control required-field" name="status[status_type]" placeholder="Status Type" type="text" value="{{status.status_type}}">
+    </div>
+
+    <div class="form-group">
+      <label>Action Subject</label>
+      <input class="form-control required-field" name="status[subject]" placeholder="Subject" type="text" value="{{status.subject}}">
+    </div>
+
+    <div class="form-group">
+      <label>Action Details</label>
+      <textarea class="form-control field-input status-details" name="status[details]" type="text" placeholder="Action Details">{{status.details}}</textarea>
+    </div>
+
+    <div class="form-group">
+      <label>Archive</label>
+      <input name="status[due_date]" type="hidden" value="false">
+      <input name="status[due_date]" class="form-control field-checkbox" type="checkbox" value="true">
+    </div>
+
+    <div class="form-group">
+      <input class="btn btn-success submit-btn current" name="submit" id="submit-status-update-btn" type="submit" value="Submit">
+    </div>
+  </fieldset>
+</form>
+<br><br>
+<div class="dashboard-container">
+  <button id="dashboard-home-btn" type="button" class="btn btn-primary">View Dashboard</button>
+  <button id="dashboard-new-job-btn" type="button" class="btn btn-success">Create Session</button>
+</div>
+</div>

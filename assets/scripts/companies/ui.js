@@ -6,15 +6,104 @@ const displayCompanyDashboard = require('../templates/company/get-companies.hand
 const displayCompanyDetails = require('../templates/company/show-company-record.handlebars');
 const displayCompanyCreateForm = require('../templates/company/create-company.handlebars');
 const displayJobsTable = require('../templates/job/get-jobs.handlebars');
+const displayRemindersTable = require('../templates/reminder/get-reminders.handlebars');
 const displayShowJobTable = require('../templates/job/show-job.handlebars');
+const displayShowReminderTable = require('../templates/reminder/show-reminder-record.handlebars');
 // // const displayDashboard = require('../templates/dashboard/dashboard-btn.handlebars');
 const companiesApi = require('./api');
 const jobsApi = require('../jobs/api');
+const remindersApi = require('../reminders/api');
 // const jobsUi = require('../jobs/ui');
 
 // Company UI
 
+const getReminderSuccess = (data) => {
+  $(".notification-container").children().text("");
+
+
+
+  //
+  // const numberOfReminders = data.statuses.length;
+  // let singleReminderData = data.statuses[0];
+  //
+  // let singleReminderDetails = displayShowReminderTable({
+  //   status: singleReminderData
+  // });
+  //
+  // let reminderDashboard = displayRemindersTable({
+  //   statuses: data.statuses
+  // });
+  //
+  // if (numberOfReminders === 1 && store.oneJobListed) {
+  //   $(".content").append(singleReminderDetails);
+  // } else if (numberOfReminders > 1) {
+  //   $(".content").append(reminderDashboard);
+  // }
+  //
+  // $("#job-record-btn-edit").attr("data-current-company-id", store.currentCompanyId);
+  // $("#job-record-delete").attr("data-current-company-id", store.currentCompanyId);
+  // $("#create-job-company-btn").attr("data-current-company-id", store.currentCompanyId);
+  // $("#job-reminder-create").attr("data-current-company-id", store.currentCompanyId);
+};
+
+// const getReminderFailure = () => {
+//   $(".notification-container").children().text("");
+// };
+
+const addOrRemove = function(signal, arr) {
+  if (signal === "reset") {
+    store.remindersObjectSave = {
+      statuses: [],
+    };
+  } else {
+    let tempStore = store.remindersObjectSave;
+    tempStore.statuses.push(arr);
+    store.remindersObjectSave = tempStore;
+    return store.remindersObjectSave;
+  }
+};
+
+const remindersIterationSuccess = (data) => {
+  console.log(data);
+  let dataLength = data.statuses.length;
+
+  if (dataLength > 0) {
+
+    for (let i = 0; i < data.statuses.length; i++ ) {
+      let tempArr;
+      tempArr = [data.statuses[i].id, data.statuses[i].subject, data.statuses[i].details, data.statuses[i].due_date];
+      addOrRemove("continue", tempArr);
+    }
+  }
+};
+
+const remindersIterationFailure = (data) => {
+  console.log(data);
+};
+
+const remindersIteration = function(jobIdArr) {
+  addOrRemove("reset");
+
+  for (let i = 0; i < jobIdArr.length; i++ ) {
+    remindersApi.getRemindersIteration(jobIdArr[i])
+      .done(remindersIterationSuccess)
+      .fail(remindersIterationFailure);
+  }
+};
+
 const getJobSuccess = (data) => {
+  console.log('jobdata');
+  console.log(data);
+
+  const jobsObject = data.jobs;
+  let jobsIdArr = [];
+  let jobsTitleArr = [];
+
+  for (let i = 0; i < jobsObject.length; i++ ) {
+    jobsIdArr.push(jobsObject[i].id);
+    jobsTitleArr.push(jobsObject[i].title);
+  }
+
   $(".notification-container").children().text("");
   const numberOfJobs = data.jobs.length;
   let singleJobData = data.jobs[0];
@@ -27,6 +116,8 @@ const getJobSuccess = (data) => {
     jobs: data.jobs
   });
 
+  store.oneJobListed = (numberOfJobs === 1);
+
   if (numberOfJobs === 1) {
     $(".content").append(singleJobDetails);
   } else if (numberOfJobs > 1) {
@@ -37,7 +128,13 @@ const getJobSuccess = (data) => {
   $("#job-record-btn-edit").attr("data-current-company-id", store.currentCompanyId);
   $("#job-record-delete").attr("data-current-company-id", store.currentCompanyId);
   $("#create-job-company-btn").attr("data-current-company-id", store.currentCompanyId);
+  $("#job-reminder-create").attr("data-current-company-id", store.currentCompanyId);
   $(".current-company-name").text(currentCompanyName);
+
+  remindersIteration(jobsIdArr, jobsTitleArr);
+  // remindersApi.getReminders()
+  //   .done(getReminderSuccess)
+  //   .fail(getReminderFailure);
 };
 
 const getJobFailure = () => {
@@ -48,8 +145,6 @@ const getJobFailure = () => {
 const getCompanySuccess = (data) => {
   $(".notification-container").children().text("");
   store.companyPage = false;
-  store.currentCompanyId = 0;
-  store.currentJobId = 0;
   store.companyDataForEdit = data;
 
   $(".content").children().remove();
@@ -189,4 +284,5 @@ module.exports = {
   updateCompanyFailure,
   showCompanyRecordFailure,
   createCompanySuccess,
+  getReminderSuccess,
 };

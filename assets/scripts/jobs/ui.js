@@ -22,6 +22,8 @@ const getJobSuccess = (data) => {
   });
   // $('.company-dashboard-container').append(companyDashboard);
   $('.content').append(jobDashboard);
+  store.currentJobId = $('.current').attr("data-current-job-id");
+  console.log(store.currentJobId);
   // $("#current-company-fn").text(store.currentCompanyFn);
   // $("#current-company-ln").text(store.currentCompanyLn);
 };
@@ -41,6 +43,8 @@ const showJobSuccess = (data) => {
   $('.content').append(jobDetails);
 
   $(".current").attr("data-current-company-id", store.currentCompanyId);
+  $('.current').attr("data-current-job-id", store.currentJobId);
+
 };
 
 const showJobFailure = () => {

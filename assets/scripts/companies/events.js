@@ -39,6 +39,7 @@ const onEditCompany = function(event) {
 const onCreateCompany = function(event) {
   event.preventDefault();
   let data = getFormFields(event.target);
+  console.log(data.company.location);
   data.company.company_page = true;
   data.company.company_id = store.currentCompanyId;
   store.companyPage = data.company.company_page;
@@ -84,11 +85,10 @@ const addHandlers = () => {
   $('.content').on('submit', '#update-company-form', onUpdateCompany);
   $('.content').on('click', '#company-record-btn-edit', onEditCompany);
   $('.content').on('click', '#new-job-new-company', onShowCompanyCreateForm);
-  // // $('.company-dashboard-container').on('click', '.dashboard-company-record-btn', onShowCompanyRecord);
   $('.content').on('click', '.dashboard-company-record-btn', onShowCompanyRecord);
   $('.content').on('click', '#dashboard-home-btn', onGetCompanies);
   $('.content').on('click', '#company-record-delete', onDeleteCompany);
-  $('.content').on('click', '#job-back-company-overview', onShowCompanyRecord)
+  $('.content').on('click', '#job-back-company-overview', onShowCompanyRecord);
 };
 
 module.exports = {

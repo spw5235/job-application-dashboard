@@ -7,8 +7,6 @@ const displayExistingCompanies = require('../templates/dashboard/existing-compan
 
 const getExistingSuccess = (data) => {
   $(".notification-container").children().text("");
-  store.currentCompanyId = 0;
-  store.currentJobId = 0;
   $(".content").children().remove();
   let existingCompanies = displayExistingCompanies({
     companies: data.companies
