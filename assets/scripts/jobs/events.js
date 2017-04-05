@@ -61,12 +61,12 @@ const onUpdateJobManual = function(event) {
   event.preventDefault();
   let title = $(".job-title").val();
   let postingDate = $(".posting-date").val();
-  let postUrl = $(".post-url").val();;
-  let salary = $(".salary").val();;
-  let responsibility = $(".responsiblity").val();;
-  let requirement = $(".requirement").val();;
-  let deadline = $(".deadline").val();;
-  let comment = $(".comment").val();;
+  let postUrl = $(".post-url").val();
+  let salary = $(".salary").val();
+  let responsibility = $(".responsiblity").val();
+  let requirement = $(".requirement").val();
+  let deadline = $(".deadline").val();
+  let comment = $(".comment").val();
 
 
   jobsApi.updateJobManual(title, postingDate, postUrl, salary, responsibility, requirement, deadline, comment)

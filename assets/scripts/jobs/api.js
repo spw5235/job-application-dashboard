@@ -23,7 +23,7 @@ const getJobsDropdown = function(id) {
       Authorization: 'Token token=' + store.user.token,
     },
   });
-}
+};
 
 const showJob = function() {
   return $.ajax({

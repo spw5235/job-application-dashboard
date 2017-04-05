@@ -4,6 +4,7 @@ const store = require('../store');
 const displayEditCompany = require('../templates/company/update-company-form.handlebars');
 const displayCompanyDashboard = require('../templates/company/get-companies.handlebars');
 const displayReminderDashboard = require('../templates/reminder/get-reminders.handlebars');
+const displayReminderDashboardCompanyPage = require('../templates/reminder/get-reminders-company.handlebars');
 const displayCompanyDetails = require('../templates/company/show-company-record.handlebars');
 const displayCompanyCreateForm = require('../templates/company/create-company.handlebars');
 const displayJobsTable = require('../templates/job/get-jobs.handlebars');
@@ -13,6 +14,35 @@ const jobsApi = require('../jobs/api');
 const remindersApi = require('../reminders/api');
 
 // Company UI
+
+const getReminderCompanyPageSuccess = (data) => {
+  console.log(data);
+  let reminderData = data.reminders;
+  let reminderDataLength = reminderData.length;
+  let currentCompanyId = parseInt(store.currentCompanyId);
+
+  let count = 0;
+  for (let i = 0; i < reminderData.length; i++) {
+    let iterationCompanyId = reminderData[i].company_ref_id;
+
+    if (iterationCompanyId === currentCompanyId) {
+      data.reminders[i].show_data = true;
+      count += 1;
+    }
+  }
+
+  console.log(count);
+
+  if (count > 0) {
+    let insertCompId = store.currentCompanyId;
+    let reminderDashboard = displayReminderDashboardCompanyPage({
+      reminders: data.reminders,
+      insert: insertCompId
+    });
+
+    $('.content').append(reminderDashboard);
+  }
+};
 
 const getReminderSuccess = (data) => {
   let insertCompId = store.currentCompanyId;
@@ -67,7 +97,7 @@ const getJobSuccess = (data) => {
   $(".current-company-name").text(currentCompanyName);
 
   remindersApi.getReminders()
-    .done(getReminderSuccess)
+    .done(getReminderCompanyPageSuccess)
     .fail(getReminderFailure);
 };
 
@@ -86,6 +116,10 @@ const getCompanySuccess = (data) => {
   });
 
   $('.content').append(companyDashboard);
+
+  remindersApi.getReminders()
+    .done(getReminderSuccess)
+    .fail(getReminderFailure);
 
 };
 
