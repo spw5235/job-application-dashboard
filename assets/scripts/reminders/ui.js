@@ -1,14 +1,8 @@
 'use strict';
 
 const store = require('../store');
-// const displayEditStatus = require('../templates/status/update-status-form.handlebars');
-// const displayStatusDashboard = require('../templates/status/get-statuses.handlebars');
 const displayStatusDetails = require('../templates/reminder/show-reminder-record.handlebars');
 const displayStatusCreateForm = require('../templates/reminder/create-reminder.handlebars');
-// const displayJobsTable = require('../templates/job/get-jobs.handlebars');
-// const displayShowJobTable = require('../templates/job/show-job.handlebars');
-const remindersApi = require('./api');
-// const jobsApi = require('../jobs/api');
 
 
 // Status UI
@@ -102,7 +96,7 @@ const showReminderCreateForm = () => {
 //   console.log('get status failure');
 // };
 //
-const createReminderSuccess = (data) => {
+const createReminderSuccess = () => {
   console.log(store.createReminderData);
   console.log(store.currentReminderId);
   $(".form-error").text("");
@@ -151,17 +145,7 @@ const createReminderFailure = function() {
 };
 
 module.exports = {
-  // getStatusSuccess,
-  // showReminderRecordSuccess,
-  // deleteReminderSuccess,
-  // deleteReminderFailure,
-  // updateFormGenerator,
   showReminderCreateForm,
   createReminderFailure,
   createReminderSuccess,
-  // getStatusFailure,
-  // updateReminderSuccess,
-  // updateReminderFailure,
-  // showReminderRecordFailure,
-  // createReminderSuccess,
 };

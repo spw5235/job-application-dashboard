@@ -3,21 +3,11 @@
 const config = require('../config');
 const store = require('../store');
 
-// Statuses API
+// reminders API
 
 const getReminders = function() {
   return $.ajax({
-    url: config.apiOrigin + '/companies/' + store.currentCompanyId + '/jobs/' + store.currentJobId + '/statuses',
-    method: 'GET',
-    headers: {
-      Authorization: 'Token token=' + store.user.token,
-    },
-  });
-};
-
-const getRemindersIteration = function(jobId) {
-  return $.ajax({
-    url: config.apiOrigin + '/companies/' + store.currentCompanyId + '/jobs/' + jobId + '/statuses',
+    url: config.apiOrigin + '/companies/' + store.currentCompanyId + '/reminders',
     method: 'GET',
     headers: {
       Authorization: 'Token token=' + store.user.token,
@@ -27,7 +17,7 @@ const getRemindersIteration = function(jobId) {
 
 const showReminder = function() {
   return $.ajax({
-    url: config.apiOrigin + '/statuses/' + store.currentReminderId,
+    url: config.apiOrigin + '/reminders/' + store.currentReminderId,
     method: 'GET',
     headers: {
       Authorization: 'Token token=' + store.user.token,
@@ -37,7 +27,7 @@ const showReminder = function() {
 
 const createReminder = function(data) {
   return $.ajax({
-    url: config.apiOrigin + '/companies/' + store.currentCompanyId + '/jobs/' + store.currentJobId + '/statuses',
+    url: config.apiOrigin + '/companies/' + store.currentCompanyId + '/reminders',
     method: 'POST',
     headers: {
       Authorization: 'Token token=' + store.user.token,
@@ -48,7 +38,7 @@ const createReminder = function(data) {
 
 const deleteReminder = function(id) {
   return $.ajax({
-    url: config.apiOrigin + '/statuses/' + id,
+    url: config.apiOrigin + '/reminders/' + id,
     method: 'DELETE',
     headers: {
       Authorization: 'Token token=' + store.user.token,
@@ -58,7 +48,7 @@ const deleteReminder = function(id) {
 
 const updateReminder = function(data) {
   return $.ajax({
-    url: config.apiOrigin + '/statuses/' + store.currentReminderId,
+    url: config.apiOrigin + '/reminders/' + store.currentReminderId,
     method: 'PATCH',
     headers: {
       Authorization: 'Token token=' + store.user.token,
@@ -73,5 +63,4 @@ module.exports = {
   deleteReminder,
   showReminder,
   updateReminder,
-  getRemindersIteration,
 };

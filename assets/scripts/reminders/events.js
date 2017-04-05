@@ -39,7 +39,7 @@ const store = require('../store');
 const onCreateReminder = function(event) {
   event.preventDefault();
   let data = getFormFields(event.target);
-  data.status.status_type = $('#reminder-type-select').val();;
+  data.status.status_type = $('#reminder-type-select').val();
   // data.reminder.reminder_page = true;
   // data.reminder.id = store.currentReminderId;
   // store.reminderPage = data.reminder.reminder_page;

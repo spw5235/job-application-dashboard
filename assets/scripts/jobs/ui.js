@@ -1,9 +1,7 @@
 'use strict';
 
 const store = require('../store');
-// const jobsApi = require('./api');
 const displayJobCreateForm = require('../templates/job/new-job-form.handlebars');
-// const displayObservationLandingPage = require('../templates/observation/obs-landing.handlebars');
 const displayJobsTable = require('../templates/job/get-jobs.handlebars');
 const displayJobDetails = require('../templates/job/show-job.handlebars');
 const displayJobUpdateForm = require('../templates/job/update-job-form.handlebars');
@@ -24,8 +22,6 @@ const getJobSuccess = (data) => {
   $('.content').append(jobDashboard);
   store.currentJobId = $('.current').attr("data-current-job-id");
   console.log(store.currentJobId);
-  // $("#current-company-fn").text(store.currentCompanyFn);
-  // $("#current-company-ln").text(store.currentCompanyLn);
 };
 
 const getJobFailure = () => {
@@ -39,7 +35,6 @@ const showJobSuccess = (data) => {
   let jobDetails = displayJobDetails({
     job: data.job
   });
-  // $('.company-dashboard-container').append(companyDashboard);
   $('.content').append(jobDetails);
 
   $(".current").attr("data-current-company-id", store.currentCompanyId);
@@ -51,34 +46,12 @@ const showJobFailure = () => {
   $(".notification-container").children().text("");
 };
 
-// const generateTodaysDate = function() {
-//   let today = new Date();
-//   let dd = today.getDate();
-//   let mm = today.getMonth()+1;
-//   let yyyy = today.getFullYear();
-//
-//   if (dd < 10) {
-//       dd='0'+dd;
-//     }
-//
-//   if(mm<10) {
-//       mm='0'+mm;
-//   }
-//
-//   today = yyyy+'/'+mm+'/'+dd;
-//   return today;
-// };
-
 const generateCreateForm = () => {
   $(".content").children().remove();
   let showCreateForm = displayJobCreateForm();
   $('.content').append(showCreateForm);
   $(".current").attr("data-current-job-id", store.currentJobId);
   $(".current").attr("data-current-company-id", store.currentCompanyId);
-  // let today = generateTodaysDate();
-
-  // let today = moment().format('YYYY-MM-DD');
-  // document.getElementById("job-date-create-field").value = today;
 };
 
 const generateUpdateForm = (data) => {
@@ -91,32 +64,11 @@ const generateUpdateForm = (data) => {
   $('.content').append(generatedUpdateForm);
   $(".current").attr("data-current-company-id", store.currentCompanyId);
   $(".current").attr("data-current-job-id",store.currentJobId);
-  // let today = generateTodaysDate();
-  // $("#job-date-create-field").val(today);
 };
 
 const generateUpdateFormFailure = () => {
   $(".notification-container").children().text("");
-
 };
-
-// const createLandingPage = function() {
-//   $(".content").children().remove();
-//   let landingPage = displayObservationLandingPage();
-//   $('.content').append(landingPage);
-//   $(".current").attr("data-current-job-id", store.currentJobId);
-//   $(".current").attr("data-current-company-id", store.currentCompanyId);
-// };
-
-// const beginObservations = (data) => {
-//   console.log(data);
-//   store.observationIdNum = 0;
-//   $("#new-observation-form").show();
-//   $("#interval-total").text(store.currentNumofIntervals);
-//   $("#company-observed").html('<span id="target-company">Target Company</span>');
-//   $(".current").attr("data-current-job-id", store.currentJobId);
-//   $(".current").attr("data-current-company-id", store.currentCompanyId);
-// }
 
 const showCompanyRecordSuccess = (data) => {
   $(".notification-container").children().text("");
@@ -150,16 +102,6 @@ const createJobSuccess = () => {
   companiesApi.showCompany()
     .done(showCompanyRecordSuccess)
     .fail(showCompanyRecordFailure);
-
-  // store.observationIdNum = 0;
-  // $("#new-job-form").hide();
-  // $("#new-observation-form").show();
-  // $("#interval-total").text(store.currentNumofIntervals);
-  // // $(".interval-count").text(store.currentObsNum);
-  // $("#company-observed").html('<span id="target-company">Target Company</span>');
-  //
-  // $(".current").attr("data-current-job-id", store.currentJobId);
-  // $(".current").attr("data-current-company-id", store.currentCompanyId);
 };
 
 const createJobFailure = () => {
@@ -169,9 +111,6 @@ const createJobFailure = () => {
 
 const deleteJobSuccess = () => {
   $(".notification-container").children().text("");
-  // jobsApi.getJobs()
-  //   .done(getJobSuccess)
-  //   .fail(getJobFailure);
   companiesApi.showCompany()
     .done(companiesUi.showCompanyRecordSuccess)
     .fail(companiesUi.showCompanyRecordSuccess);
@@ -189,7 +128,6 @@ const updateJobSuccess = (data) => {
   let jobDetails = displayJobDetails({
     job: data.job
   });
-  // $('.company-details-container').append(companyDetails);
   $('.content').append(jobDetails);
   $(".current").attr("data-current-company-id", store.currentCompanyId);
   $(".current").attr("data-current-job-id",store.currentJobId);

@@ -13,15 +13,7 @@ const onGetCompanies = function(event) {
     .done(companiesUi.getCompanySuccess)
     .fail(companiesUi.getCompanyFailure);
 };
-//
-// const onShowCompany = function(event) {
-//   event.preventDefault();
-//   companiesApi.showCompany()
-//     .done(companiesUi.showCompanySuccess)
-//     .fail(companiesUi.showCompanyFailure);
-// };
-//
-//
+
 const onShowCompanyRecord = function(event) {
   event.preventDefault();
   store.currentCompanyId = $(this).attr("data-current-company-id");
@@ -75,13 +67,7 @@ const onShowCompanyCreateForm = function(event) {
 };
 
 const addHandlers = () => {
-  // $('#dashboard-home-btn').on('click', onGetCompanies);
-  // $('#show-company-form').on('submit', onShowCompany);
-  // // $('#new-company-form').on('submit', onCreateCompany);
   $('.content').on('submit', '#new-company-form', onCreateCompany);
-  // $('#delete-company-form').on('submit', onDeleteCompany);
-  // $('#update-company-form').on('submit', onUpdateCompany);
-  // $('#update-company-btn').on('click', onEditCompany);
   $('.content').on('submit', '#update-company-form', onUpdateCompany);
   $('.content').on('click', '#company-record-btn-edit', onEditCompany);
   $('.content').on('click', '#new-job-new-company', onShowCompanyCreateForm);
