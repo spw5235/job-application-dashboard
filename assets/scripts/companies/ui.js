@@ -8,7 +8,7 @@ const displayCompanyCreateForm = require('../templates/company/create-company.ha
 const displayJobsTable = require('../templates/job/get-jobs.handlebars');
 const displayRemindersTable = require('../templates/reminder/get-reminders.handlebars');
 const displayShowJobTable = require('../templates/job/show-job.handlebars');
-const displayShowReminderTable = require('../templates/reminder/show-reminder-record.handlebars');
+const displayShowReminderTable = require('../templates/reminder/show-group-table.handlebars');
 // // const displayDashboard = require('../templates/dashboard/dashboard-btn.handlebars');
 const companiesApi = require('./api');
 const jobsApi = require('../jobs/api');
@@ -50,6 +50,10 @@ const getReminderSuccess = (data) => {
 //   $(".notification-container").children().text("");
 // };
 
+store.remindersObjectSave = {
+  statuses: [],
+};
+
 const addOrRemove = function(signal, arr) {
   if (signal === "reset") {
     store.remindersObjectSave = {
@@ -63,18 +67,12 @@ const addOrRemove = function(signal, arr) {
   }
 };
 
+store.testVal = false;
+
 const remindersIterationSuccess = (data) => {
-  console.log(data);
-  let dataLength = data.statuses.length;
-
-  if (dataLength > 0) {
-
-    for (let i = 0; i < data.statuses.length; i++ ) {
-      let tempArr;
-      tempArr = [data.statuses[i].id, data.statuses[i].subject, data.statuses[i].details, data.statuses[i].due_date];
-      addOrRemove("continue", tempArr);
-    }
-  }
+  // if (data.statuses.length > 0) {
+  //   store.testVal = true;
+  // }
 };
 
 const remindersIterationFailure = (data) => {
@@ -82,13 +80,30 @@ const remindersIterationFailure = (data) => {
 };
 
 const remindersIteration = function(jobIdArr) {
-  addOrRemove("reset");
 
-  for (let i = 0; i < jobIdArr.length; i++ ) {
+  let remindersIterationContainer = $('<div class="reminders-group-table-container"><h1>Status Dashboard</h1></div>');
+
+  let startingTemplate = $('<table class="table status-summary-table table-hover"><thead><tr><th>Status Type</th><th>Status Subject</th><th>Notification Date</th><th>View Record</th></tr></thead></table>');
+  let tbody = $('<tbody class="reminder-summary-table-tbody"></tbody>');
+  let homebuttons = $('<div class="dashboard-container"><button id="dashboard-home-btn" type="button" class="btn btn-primary dashboard-home-btn-status-page">View Dashboard</button><button id="dashboard-new-job-btn-status" type="button" class="btn btn-success dashboard-home-btn-status-page" data-current-reminder-id="{{status.id}}" data-type-status-page="{{status.status_page}}">Create Job</button></div>');
+
+  for (let i = 0; i < jobIdArr.length; i++) {
     remindersApi.getRemindersIteration(jobIdArr[i])
+      .then((response) => {
+        if( response.statuses.length > 0 ) {
+          let reminderDashboard = displayShowReminderTable({
+            statuses: response.statuses
+          });
+          $(tbody).append(reminderDashboard);
+        }
+      })
       .done(remindersIterationSuccess)
       .fail(remindersIterationFailure);
   }
+    $(startingTemplate).append(tbody);
+    $(remindersIterationContainer).append(startingTemplate);
+    $('.content').append(remindersIterationContainer);
+    $('.content').append(homebuttons);
 };
 
 const getJobSuccess = (data) => {
@@ -99,7 +114,7 @@ const getJobSuccess = (data) => {
   let jobsIdArr = [];
   let jobsTitleArr = [];
 
-  for (let i = 0; i < jobsObject.length; i++ ) {
+  for (let i = 0; i < jobsObject.length; i++) {
     jobsIdArr.push(jobsObject[i].id);
     jobsTitleArr.push(jobsObject[i].title);
   }
@@ -263,7 +278,7 @@ const updateCompanySuccess = (data) => {
     .fail(showCompanyRecordFailure);
 };
 
-const updateCompanyFailure = (data) => {
+const updateCompanyFailure = () => {
   $(".notification-container").children().text("");
   $("#update-company-error").text("Error: Company not updated.  Please ensure all required fields have values");
 };
