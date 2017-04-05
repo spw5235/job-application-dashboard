@@ -1,33 +1,33 @@
-<div class="update-status-form-container form-container">
-<form class="form status-form" id="update-status-form" name="update-status-form">
+<div class="update-reminder-form-container form-container">
+<form class="form reminder-form" id="update-reminder-form" name="update-reminder-form">
   <fieldset>
     <legend>Update Action Form</legend>
-    <p id="update-status-error" class="warning form-error"></p>
+    <p id="update-reminder-error" class="warning form-error"></p>
     <p>All fields are <u>optional</u> unless otherwise indicated</p>
 
     <div class="form-group">
-      <label>Status Type (required)</label>
-      <input class="form-control required-field" name="status[status_type]" placeholder="Status Type" type="text" value="{{status.status_type}}">
+      <label>reminder Type (required)</label>
+      <input class="form-control required-field" name="reminder[reminder_type]" placeholder="reminder Type" type="text" value="{{reminder.reminder_type}}">
     </div>
 
     <div class="form-group">
       <label>Action Subject</label>
-      <input class="form-control required-field" name="status[subject]" placeholder="Subject" type="text" value="{{status.subject}}">
+      <input class="form-control required-field" name="reminder[subject]" placeholder="Subject" type="text" value="{{reminder.subject}}">
     </div>
 
     <div class="form-group">
       <label>Action Details</label>
-      <textarea class="form-control field-input status-details" name="status[details]" type="text" placeholder="Action Details">{{status.details}}</textarea>
+      <textarea class="form-control field-input reminder-details" name="reminder[details]" type="text" placeholder="Action Details">{{reminder.details}}</textarea>
     </div>
 
     <div class="form-group">
       <label>Archive</label>
-      <input name="status[due_date]" type="hidden" value="false">
-      <input name="status[due_date]" class="form-control field-checkbox" type="checkbox" value="true">
+      <input name="reminder[due_date]" type="hidden" value="false">
+      <input name="reminder[due_date]" class="form-control field-checkbox" type="checkbox" value="true">
     </div>
 
     <div class="form-group">
-      <input class="btn btn-success submit-btn current" name="submit" id="submit-status-update-btn" type="submit" value="Submit">
+      <input class="btn btn-success submit-btn current" name="submit" id="submit-reminder-update-btn" type="submit" value="Submit">
     </div>
   </fieldset>
 </form>

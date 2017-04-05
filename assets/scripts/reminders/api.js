@@ -7,7 +7,7 @@ const store = require('../store');
 
 const getReminders = function() {
   return $.ajax({
-    url: config.apiOrigin + '/companies/' + store.currentCompanyId + '/reminders',
+    url: config.apiOrigin + '/reminders',
     method: 'GET',
     headers: {
       Authorization: 'Token token=' + store.user.token,
@@ -27,7 +27,7 @@ const showReminder = function() {
 
 const createReminder = function(data) {
   return $.ajax({
-    url: config.apiOrigin + '/companies/' + store.currentCompanyId + '/reminders',
+    url: config.apiOrigin + '/reminders',
     method: 'POST',
     headers: {
       Authorization: 'Token token=' + store.user.token,

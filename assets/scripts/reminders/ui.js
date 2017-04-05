@@ -1,11 +1,11 @@
 'use strict';
 
 const store = require('../store');
-const displayStatusDetails = require('../templates/reminder/show-reminder-record.handlebars');
-const displayStatusCreateForm = require('../templates/reminder/create-reminder.handlebars');
+const displayReminderDetails = require('../templates/reminder/show-reminder-record.handlebars');
+const displayReminderCreateForm = require('../templates/reminder/create-reminder.handlebars');
+const displayCompanyDashboard = require('../templates/reminder/display-company-create-form.handlebars');
 
-
-// Status UI
+// Reminder UI
 
 // const getJobSuccess = (data) => {
 //   $(".notification-container").children().text("");
@@ -25,11 +25,11 @@ const displayStatusCreateForm = require('../templates/reminder/create-reminder.h
 //   } else if (numberOfJobs > 1) {
 //     $(".content").append(jobDashboard);
 //   }
-//   const currentStatusName = store.statusName;
+//   const currentReminderName = store.reminderName;
 //   $("#job-record-btn-edit").attr("data-current-reminder-id", store.currentReminderId);
 //   $("#job-record-delete").attr("data-current-reminder-id", store.currentReminderId);
-//   $("#create-job-status-btn").attr("data-current-reminder-id", store.currentReminderId);
-//   $(".current-status-name").text(currentStatusName);
+//   $("#create-job-reminder-btn").attr("data-current-reminder-id", store.currentReminderId);
+//   $(".current-reminder-name").text(currentReminderName);
 // };
 
 // const getJobFailure = () => {
@@ -37,31 +37,31 @@ const displayStatusCreateForm = require('../templates/reminder/create-reminder.h
 // };
 
 //
-// const getStatusSuccess = (data) => {
+// const getReminderSuccess = (data) => {
 //   $(".notification-container").children().text("");
-//   store.statusPage = false;
+//   store.reminderPage = false;
 //   store.currentReminderId = 0;
 //   store.currentJobId = 0;
-//   store.statusDataForEdit = data;
+//   store.reminderDataForEdit = data;
 //
 //   $(".content").children().remove();
-//   let statusDashboard = displayStatusDashboard({
-//     statuses: data.statuses
+//   let reminderDashboard = displayReminderDashboard({
+//     reminders: data.reminders
 //   });
-//   $('.content').append(statusDashboard);
+//   $('.content').append(reminderDashboard);
 // };
 //
 // const showReminderRecordSuccess = (data) => {
 //   $(".notification-container").children().text("");
 //   $(".content").children().remove();
-//   store.lastShowStatusData = data;
-//   store.statusName = data.status.name;
-//   data.status.status_page = true;
-//   store.statusPage = data.status.status_page;
-//   let statusDetails = displayStatusDetails({
-//     status: data.status
+//   store.lastShowReminderData = data;
+//   store.reminderName = data.reminder.name;
+//   data.reminder.reminder_page = true;
+//   store.reminderPage = data.reminder.reminder_page;
+//   let reminderDetails = displayReminderDetails({
+//     reminder: data.reminder
 //   });
-//   $('.content').append(statusDetails);
+//   $('.content').append(reminderDetails);
 //   jobsApi.getJobs()
 //     .done(getJobSuccess)
 //     .fail(getJobFailure);
@@ -75,7 +75,7 @@ const displayStatusCreateForm = require('../templates/reminder/create-reminder.h
 const showReminderCreateForm = () => {
   $(".notification-container").children().text("");
   $(".content").children().remove();
-  let showCreateForm = displayStatusCreateForm();
+  let showCreateForm = displayReminderCreateForm();
   $('.content').append(showCreateForm);
   $(".current").attr("data-current-job-id", store.currentJobId);
   $(".current").attr("data-current-company-id", store.currentCompanyId);
@@ -85,15 +85,15 @@ const showReminderCreateForm = () => {
 //   $(".notification-container").children().text("");
 //   $(".content").children().remove();
 //
-//   let editStatus = displayEditStatus({
-//     status: store.lastShowStatusData.status
+//   let editReminder = displayEditReminder({
+//     reminder: store.lastShowReminderData.reminder
 //   });
-//   $('.content').append(editStatus);
+//   $('.content').append(editReminder);
 // };
 //
-// const getStatusFailure = () => {
+// const getReminderFailure = () => {
 //   $(".notification-container").children().text("");
-//   console.log('get status failure');
+//   console.log('get reminder failure');
 // };
 //
 const createReminderSuccess = () => {
@@ -102,10 +102,10 @@ const createReminderSuccess = () => {
   $(".form-error").text("");
   $(".notification-container").children().text("");
   $(".content").children().remove();
-  $(".success-alert").text("Status Has Been Successfully Created");
-  store.statusPage = true;
-  let showReminderDetails = displayStatusDetails({
-    status: store.createReminderData.status
+  $(".success-alert").text("Reminder Has Been Successfully Created");
+  store.reminderPage = true;
+  let showReminderDetails = displayReminderDetails({
+    reminder: store.createReminderData.reminder
   });
   $(".content").append(showReminderDetails);
   $(".current").attr("data-current-reminder-id", store.currentReminderId);
@@ -116,8 +116,8 @@ const createReminderSuccess = () => {
 //   $(".notification-container").children().text("");
 //   console.log('delete success');
 //   remindersApi.getReminders()
-//     .done(getStatusSuccess)
-//     .fail(getStatusFailure);
+//     .done(getReminderSuccess)
+//     .fail(getReminderFailure);
 // };
 //
 // const deleteReminderFailure = () => {
@@ -127,8 +127,8 @@ const createReminderSuccess = () => {
 //
 // const updateReminderSuccess = (data) => {
 //   $(".notification-container").children().text("");
-//   $(".success-alert").text("Status Has Been Successfully Updated");
-//   store.currentReminderId = data.status.id;
+//   $(".success-alert").text("Reminder Has Been Successfully Updated");
+//   store.currentReminderId = data.reminder.id;
 //   $(".content").children().remove();
 //   remindersApi.showReminder()
 //     .done(showReminderRecordSuccess)
@@ -137,15 +137,33 @@ const createReminderSuccess = () => {
 //
 // const updateReminderFailure = (data) => {
 //   $(".notification-container").children().text("");
-//   $("#update-status-error").text("Error: Status not updated.  Please ensure all required fields have values");
+//   $("#update-reminder-error").text("Error: Reminder not updated.  Please ensure all required fields have values");
 // };
 
 const createReminderFailure = function() {
   console.log('failure');
 };
 
+const displayCompanyDropdownSuccess = function(data) {
+  $(".notification-container").children().text("");
+
+  console.log(data.companies);
+
+  let companyOptionDisplay = displayCompanyDashboard({
+    companies: data.companies
+  });
+
+  $('.associate-reminder-with-company-container').append(companyOptionDisplay);
+
+};
+
+const displayCompanyDropdownFailure = function() {
+  console.log('fail');
+};
+
 module.exports = {
   showReminderCreateForm,
   createReminderFailure,
   createReminderSuccess,
+  displayCompanyDropdownSuccess
 };

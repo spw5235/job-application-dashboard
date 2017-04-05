@@ -3,19 +3,32 @@
 const store = require('../store');
 const displayEditCompany = require('../templates/company/update-company-form.handlebars');
 const displayCompanyDashboard = require('../templates/company/get-companies.handlebars');
+const displayReminderDashboard = require('../templates/reminder/get-reminders.handlebars');
 const displayCompanyDetails = require('../templates/company/show-company-record.handlebars');
 const displayCompanyCreateForm = require('../templates/company/create-company.handlebars');
 const displayJobsTable = require('../templates/job/get-jobs.handlebars');
 const displayShowJobTable = require('../templates/job/show-job.handlebars');
 const companiesApi = require('./api');
 const jobsApi = require('../jobs/api');
-// const jobsUi = require('../jobs/ui');
+const remindersApi = require('../reminders/api');
 
 // Company UI
 
-const getJobSuccess = (data) => {
-  console.log('jobdata');
+const getReminderSuccess = (data) => {
+  let insertCompId = store.currentCompanyId;
+  let reminderDashboard = displayReminderDashboard({
+    reminders: data.reminders,
+    insert: insertCompId
+  });
+
+  $('.content').append(reminderDashboard);
+};
+
+const getReminderFailure = (data) => {
   console.log(data);
+};
+
+const getJobSuccess = (data) => {
 
   const jobsObject = data.jobs;
   let jobsIdArr = [];
@@ -52,12 +65,15 @@ const getJobSuccess = (data) => {
   $("#create-job-company-btn").attr("data-current-company-id", store.currentCompanyId);
   $("#job-reminder-create").attr("data-current-company-id", store.currentCompanyId);
   $(".current-company-name").text(currentCompanyName);
+
+  remindersApi.getReminders()
+    .done(getReminderSuccess)
+    .fail(getReminderFailure);
 };
 
 const getJobFailure = () => {
   $(".notification-container").children().text("");
 };
-
 
 const getCompanySuccess = (data) => {
   $(".notification-container").children().text("");
@@ -170,4 +186,5 @@ module.exports = {
   updateCompanyFailure,
   showCompanyRecordFailure,
   createCompanySuccess,
+  getReminderSuccess,
 };

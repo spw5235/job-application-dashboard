@@ -1,0 +1,9 @@
+<div id="company-select-options">
+  <select id="select-option-company-name" class="form-control">
+      <option class="form-control blank-option" placeholder="Blank" type="text" value="blank"></option>
+      {{#each companies as |company|}}
+        <option class="form-control option-company-name" name="reminder[company_name]" placeholder="reminder Type" type="text" data-company-id="{{company.id}}" data-company-name="{{company.name}}" value="{{company.id}}">{{company.name}}</option>
+        <!-- <option hidden class="form-control required-field" name="reminder[company_ref_id]" placeholder="reminder Type" type="text" value="{{company.id}}" data-reminder-company-name="{{company.name}}">{{company.name}}</option> -->
+      {{/each}}
+  </select>
+</div>

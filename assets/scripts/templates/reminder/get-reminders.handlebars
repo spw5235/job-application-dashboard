@@ -1,34 +1,38 @@
-<h1>Status Dashboard</h1>
+<h1>Reminder Dashboard</h1>
 
-<table class="table status-summary-table table-hover">
+<table class="table reminder-summary-table table-hover">
   <thead>
     <tr>
-      <th>Status Type</th>
-      <th>Status Subject</th>
+      <th>Reminder Type</th>
+      <th>Company Name</th>
+      <th>Reminder Subject</th>
       <th>Notification Date</th>
       <th>View Record</th>
     </tr>
   </thead>
   <tbody>
-    {{#each statuses as |status|}}
+    {{#each reminders as |reminder|}}
       <tr>
-        <td class="display-status-name">
-          {{status.status_type}}
+        <td class="display-reminder-name">
+          {{reminder.reminder_type}}
         </td>
-        <td class="display-status-location">
-          {{status.subject}}
+        <td class="display-company-name">
+          {{reminder.company_name}}
         </td>
-        <td class="display-status-url">
-          {{status.due_date}}
+        <td class="display-reminder-location">
+          {{reminder.reminder_subject}}
         </td>
-        <td class="display-status-submit">
-          <button type="button" class="btn btn-info btn-sm status-record-btn" data-current-reminder-id="{{status.id}}">View status</button>
+        <td class="display-reminder-url">
+          {{reminder.reminder_date}}
+        </td>
+        <td class="display-reminder-submit">
+          <button type="button" class="btn btn-info btn-sm reminder-record-btn" data-current-reminder-id="{{reminder.id}}" data-current-company-id="{{reminder.company_id}}">View reminder</button>
         </td>
       </tr>
     {{/each}}
   </tbody>
 </table>
 <br><br>
-<div class="dashboard-container">
-  <button id="dashboard-new-job-btn" type="button" class="btn btn-success" data-type-status-page="false">Create Job</button>
+<div class="create-reminder-container">
+  <button id="job-reminder-create" type="button" class="btn btn-success" data-current-company-id="{{insert}}">Create Reminder</button>
 </div>

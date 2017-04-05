@@ -1,37 +1,46 @@
-<div class="create-status-form-container form-container form-group">
+<div class="create-reminder-form-container form-container form-group">
   <h1>Create a Reminder</h1>
 
-  <form class="form status-form" id="new-reminder-form" name="new-status-form">
+  <form class="form reminder-form" id="new-reminder-form" name="new-reminder-form">
     <fieldset>
-      <!-- <legend>Create Status Form</legend> -->
-      <p id="create-status-error" class="warning form-error"></p>
+      <!-- <legend>Create reminder Form</legend> -->
+      <p id="create-reminder-error" class="warning form-error"></p>
       <p>All fields are <u>optional</u> unless otherwise indicated</p>
 
       <div class="form-group">
         <label>Reminder Type (required)</label>
-          <select class="form-control" id="reminder-type-select">
-            <option class="form-control required-field" name="status[status_type]" placeholder="Status Type" type="text" value="action_required">Reminder Required</option>
-            <option class="form-control required-field" name="status[status_type]" placeholder="Status Type" type="text" value="pending">Pending</option>
-          </select>
+        <select class="form-control" id="reminder-type-select">
+            <option class="form-control required-field" name="reminder[reminder_type]" placeholder="reminder Type" type="text" value="Action">Action Required</option>
+            <option class="form-control required-field" name="reminder[reminder_type]" placeholder="reminder Type" type="text" value="Pending">Pending</option>
+        </select>
       </div>
 
       <div class="form-group">
         <label>Reminder Subject (required)</label>
-        <input class="form-control required-field" name="status[subject]" placeholder="Subject" type="text">
+        <input class="form-control required-field" name="reminder[reminder_subject]" placeholder="Subject" type="text">
       </div>
 
       <div class="form-group">
         <label>Reminder Details</label>
-        <textarea class="form-control field-input reminder-details" name="status[details]" type="text" placeholder="Reminder Details"></textarea>
+        <textarea class="form-control field-input reminder-details" name="reminder[reminder_details]" type="text" placeholder="Reminder Details"></textarea>
       </div>
 
       <div class="form-group">
         <label>Reminder Notification Date</label>
-        <input class="form-control field-input" name="status[due_date]" placeholder="Date" type="date">
+        <input class="form-control field-input" name="reminder[reminder_date]" placeholder="Date" type="date">
       </div>
 
       <div class="form-group">
-        <input class="btn btn-success submit-btn current" name="submit" id="create-reminder-btn" type="submit" value="Submit" data-current-company-id="" data-current-job-id="">
+        <label>Associate Reminder With Company and/or Job</label>
+        <div class="form-group associate-reminder-with-company-container">
+          <label><input class="form-control" id="associate-reminder-with-company" type="checkbox" value="">Yes</label>
+        </div>
+      </div>
+
+      <div class="form-group display-company-names"></div>
+
+      <div class="form-group">
+        <input class="btn btn-success submit-btn current" name="submit" id="create-reminder-btn" type="submit" value="Submit" data-current-company-id="">
       </div>
     </fieldset>
   </form>

@@ -3,6 +3,7 @@ const remindersApi = require('./api');
 const remindersUi = require('./ui');
 const getFormFields = require('../../../lib/get-form-fields');
 const store = require('../store');
+const companiesApi = require('../companies/api');
 // const logic = require('./logic');
 
 // STUDENT EVENTS
@@ -10,8 +11,8 @@ const store = require('../store');
 // const onGetReminders = function(event) {
 //   event.preventDefault();
 //   remindersApi.getReminders()
-//     .done(remindersUi.getStatusSuccess)
-//     .fail(remindersUi.getStatusFailure);
+//     .done(remindersUi.getReminderSuccess)
+//     .fail(remindersUi.getReminderFailure);
 // };
 //
 // const onShowReminder = function(event) {
@@ -39,14 +40,14 @@ const store = require('../store');
 const onCreateReminder = function(event) {
   event.preventDefault();
   let data = getFormFields(event.target);
-  data.status.status_type = $('#reminder-type-select').val();
+  data.reminder.reminder_type = $('#reminder-type-select').val();
   // data.reminder.reminder_page = true;
   // data.reminder.id = store.currentReminderId;
   // store.reminderPage = data.reminder.reminder_page;
   store.createReminderData = data;
   remindersApi.createReminder(data)
     .then((response) => {
-      store.currentReminderId = response.status.id;
+      store.currentReminderId = response.reminder.id;
       return store.currentReminderId;
     })
     .done(remindersUi.createReminderSuccess)
@@ -55,7 +56,7 @@ const onCreateReminder = function(event) {
 //
 // const onDeleteReminder = function(event) {
 //   event.preventDefault();
-//   store.currentReminderId= $("#status-record-delete").attr("data-current-reminder-id");
+//   store.currentReminderId= $("#reminder-record-delete").attr("data-current-reminder-id");
 //   remindersApi.deleteReminder(store.currentReminderId)
 //     .done(remindersUi.deleteReminderSuccess)
 //     .fail(remindersUi.deleteReminderFailure);
@@ -71,22 +72,61 @@ const onCreateReminder = function(event) {
 //
 const onShowReminderCreateForm = function(event) {
   event.preventDefault();
-  store.currentJobId = $(this).attr("data-current-job-id");
+  store.currentCompanyId = $(this).attr("data-current-company-id");
   remindersUi.showReminderCreateForm();
-  // store.currentJobId = $("#job-reminder-create").attr("data-current-job-id");
+};
+
+const onSelectOptionCompanyVal = function() {
+  let obtainVal = $(this).val();
+  let obtainValString = '#select-option-company-name option[value="' + obtainVal + '"]';
+  console.log(obtainValString);
+  let companyName = $(obtainValString).text();
+  console.log(companyName);
+
+  store.selectedCompanyId = obtainVal;
+  store.selectedCompanyName = companyName;
+
+  let currentSelectedValue = $("#select-option-company-name").val();
+
+  if( currentSelectedValue === "blank" ) {
+    console.log('error');
+  } else {
+    console.log('run get for job');
+  }
+};
+
+const onDisplayCompanyDropdown = function() {
+  if (this.checked) {
+    companiesApi.getCompanies()
+      .done(remindersUi.displayCompanyDropdownSuccess)
+      .fail(remindersUi.displayCompanyDropdownFail);
+  } else {
+    $("#company-select-options").remove();
+    console.log("remove");
+  }
+
+  // if (isChecked) {
+  //   companiesApi.getCompanies()
+  //     .done(remindersUi.displayCompanyDropdownSuccess)
+  //     .fail(remindersUi.displayCompanyDropdownFail);
+  // } else {
+  //   $("#company-select-options").hide();
+  // }
 };
 
 const addHandlers = () => {
-  // $('.content').on('submit', '#new-status-form', onCreateStatus);
-  // $('.content').on('submit', '#update-status-form', onUpdateReminder);
-  // $('.content').on('click', '#status-record-btn-edit', onEditReminder);
-  // $('.content').on('click', '#new-job-new-status', onShowReminderCreateForm);
-  // $('.content').on('click', '.dashboard-status-record-btn', onShowReminderRecord);
+  // $('.content').on('submit', '#new-reminder-form', onCreateReminder);
+  // $('.content').on('submit', '#update-reminder-form', onUpdateReminder);
+  // $('.content').on('click', '#reminder-record-btn-edit', onEditReminder);
+  // $('.content').on('click', '#new-job-new-reminder', onShowReminderCreateForm);
+  // $('.content').on('click', '.dashboard-reminder-record-btn', onShowReminderRecord);
   // $('.content').on('click', '#dashboard-home-btn', onGetReminders);
-  // $('.content').on('click', '#status-record-delete', onDeleteReminder);
-  // $('.content').on('click', '#job-back-status-overview', onShowReminderRecord);
+  // $('.content').on('click', '#reminder-record-delete', onDeleteReminder);
+  // $('.content').on('click', '#job-back-reminder-overview', onShowReminderRecord);
   $('.content').on('click', '#job-reminder-create', onShowReminderCreateForm);
   $('.content').on('submit', '#new-reminder-form', onCreateReminder);
+  $('.content').on('click', '#associate-reminder-with-company', onDisplayCompanyDropdown);
+  $('.content').on('change', '#select-option-company-name', onSelectOptionCompanyVal);
 };
 
 module.exports = {

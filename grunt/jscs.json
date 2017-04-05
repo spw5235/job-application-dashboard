@@ -3,7 +3,7 @@
     "config": ".jscsrc"
   },
 
-  "status": {
+  "reminder": {
     "src": ["<%= paths.scripts.all %>"],
     "options": {
       "force": true

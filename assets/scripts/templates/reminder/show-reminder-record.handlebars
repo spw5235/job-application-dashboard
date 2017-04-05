@@ -1,61 +1,61 @@
 <h1>Reminder</h1>
 
-<h2 class="status-name-header" data-current-status-name="{{status.name}}">{{status.name}}</h2>
+<h2 class="reminder-name-header" data-current-reminder-name="{{reminder.name}}">{{reminder.name}}</h2>
 
 <h3>Reminder Details</h3>
-<table class="table status-record-table table-hover">
+<table class="table reminder-record-table table-hover">
   <tbody>
     <tr>
-      <td class="status-record-title status-status-type">
+      <td class="reminder-record-title reminder-reminder-type">
         Reminder Type:
       </td>
-      <td class="display-status-type">
-        {{status.status_type}}
+      <td class="display-reminder-type">
+        {{reminder.reminder_type}}
       </td>
     </tr>
     <tr>
-      <td class="status-record-title status-record-location">
+      <td class="reminder-record-title reminder-record-location">
         Reminder Subject:
       </td>
-      <td class="display-status-subject">
-        {{status.subject}}
+      <td class="display-reminder-subject">
+        {{reminder.reminder_subject}}
       </td>
     </tr>
     <tr>
-      <td class="status-record-title status-details">
+      <td class="reminder-record-title reminder-details">
         Reminder Details:
       </td>
-      <td class="display-status-teacher">
-        {{status.details}}
+      <td class="display-reminder-teacher">
+        {{reminder.reminder_details}}
       </td>
     </tr>
     <tr>
-      <td class="status-record-title status-record-note">
+      <td class="reminder-record-title reminder-record-note">
         Reminder Notification Date:
       </td>
-      <td class="display-status-note">
-        {{status.due_date}}
+      <td class="display-reminder-note">
+        {{reminder.reminder_date}}
       </td>
     </tr>
     <tr>
-      <td class="status-record-title status-archive">
+      <td class="reminder-record-title reminder-archive">
         Archived:
       </td>
-      <td class="display-status-note">
-        {{status.archive}}
+      <td class="display-reminder-note">
+        {{reminder.archive}}
       </td>
     </tr>
   </tbody>
 </table>
 
-<div class="dashboard-status-btn-container">
-  <div class="status-record-btn-options">
-    <button id="status-record-btn-edit" type="button" class="btn btn-warning current" data-current-reminder-id="{{status.id}}">Edit Status Record</button>
-    <button id="status-record-delete" type="button" class="btn btn-danger current" data-current-reminder-id="{{status.id}}">Delete Status Record</button>
+<div class="dashboard-reminder-btn-container">
+  <div class="reminder-record-btn-options">
+    <button id="reminder-record-btn-edit" type="button" class="btn btn-warning current" data-current-reminder-id="{{reminder.id}}">Edit reminder Record</button>
+    <button id="reminder-record-delete" type="button" class="btn btn-danger current" data-current-reminder-id="{{reminder.id}}">Delete reminder Record</button>
   </div>
 </div>
 
 <div class="dashboard-container">
-  <button id="dashboard-home-btn" type="button" class="btn btn-primary dashboard-home-btn-status-page">View Dashboard</button>
-  <button id="dashboard-new-job-btn-status" type="button" class="btn btn-success dashboard-home-btn-status-page" data-current-reminder-id="{{status.id}}" data-type-status-page="{{status.status_page}}">Create Job</button>
+  <button id="dashboard-home-btn" type="button" class="btn btn-primary dashboard-home-btn-reminder-page">View Dashboard</button>
+  <button id="dashboard-new-job-btn-reminder" type="button" class="btn btn-success dashboard-home-btn-reminder-page" data-current-reminder-id="{{reminder.id}}" data-type-reminder-page="{{reminder.reminder_page}}">Create Job</button>
 </div>
