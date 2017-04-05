@@ -4,6 +4,7 @@ const remindersUi = require('./ui');
 const getFormFields = require('../../../lib/get-form-fields');
 const store = require('../store');
 const companiesApi = require('../companies/api');
+const jobsApi = require('../jobs/api');
 // const logic = require('./logic');
 
 // STUDENT EVENTS
@@ -40,10 +41,11 @@ const companiesApi = require('../companies/api');
 const onCreateReminder = function(event) {
   event.preventDefault();
   let data = getFormFields(event.target);
+  data.reminder.company_name = store.selectedCompanyName;
+  data.reminder.company_ref_id = store.selectedCompanyId;
+  data.reminder.job_ref_id = store.selectedJobId;
+  data.reminder.job_title = store.selectedJobTitle;
   data.reminder.reminder_type = $('#reminder-type-select').val();
-  // data.reminder.reminder_page = true;
-  // data.reminder.id = store.currentReminderId;
-  // store.reminderPage = data.reminder.reminder_page;
   store.createReminderData = data;
   remindersApi.createReminder(data)
     .then((response) => {
@@ -91,7 +93,28 @@ const onSelectOptionCompanyVal = function() {
   if( currentSelectedValue === "blank" ) {
     console.log('error');
   } else {
-    console.log('run get for job');
+    jobsApi.getJobsDropdown(obtainVal)
+      .done(remindersUi.displayJobDropdownSuccess)
+      .fail(remindersUi.displayJobDropdownFail);
+  }
+};
+
+const onSelectOptionJobVal = function() {
+  let obtainVal = $(this).val();
+  let obtainValString = '#select-option-job-title option[value="' + obtainVal + '"]';
+  console.log(obtainValString);
+  let jobTitle = $(obtainValString).text();
+  console.log(jobTitle);
+
+  store.selectedJobId = obtainVal;
+  store.selectedJobTitle = jobTitle;
+
+  let currentSelectedValue = $("#select-option-job-title").val();
+
+  if( currentSelectedValue === "blank" ) {
+    console.log('error');
+  } else {
+    console.log('done');
   }
 };
 
@@ -127,6 +150,7 @@ const addHandlers = () => {
   $('.content').on('submit', '#new-reminder-form', onCreateReminder);
   $('.content').on('click', '#associate-reminder-with-company', onDisplayCompanyDropdown);
   $('.content').on('change', '#select-option-company-name', onSelectOptionCompanyVal);
+  $('.content').on('change', '#select-option-job-title', onSelectOptionJobVal);
 };
 
 module.exports = {

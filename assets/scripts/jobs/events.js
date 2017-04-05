@@ -103,6 +103,7 @@ const onUpdateJobManual = function(event) {
 const onGenerateCreateForm = function(event) {
   event.preventDefault();
   store.currentCompanyId = $(this).attr("data-current-company-id");
+  console.log(store.currentCompanyId);
   jobsUi.generateCreateForm();
 };
 

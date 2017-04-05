@@ -4,6 +4,7 @@ const store = require('../store');
 const displayReminderDetails = require('../templates/reminder/show-reminder-record.handlebars');
 const displayReminderCreateForm = require('../templates/reminder/create-reminder.handlebars');
 const displayCompanyDashboard = require('../templates/reminder/display-company-create-form.handlebars');
+const displayJobDashboard = require('../templates/reminder/display-job-create-form.handlebars');
 
 // Reminder UI
 
@@ -97,8 +98,6 @@ const showReminderCreateForm = () => {
 // };
 //
 const createReminderSuccess = () => {
-  console.log(store.createReminderData);
-  console.log(store.currentReminderId);
   $(".form-error").text("");
   $(".notification-container").children().text("");
   $(".content").children().remove();
@@ -161,9 +160,27 @@ const displayCompanyDropdownFailure = function() {
   console.log('fail');
 };
 
+const displayJobDropdownSuccess = (data) => {
+  console.log(data);
+  $(".notification-container").children().text("");
+
+  let jobOptionDisplay = displayJobDashboard({
+    jobs: data.jobs
+  });
+
+  $('.associate-reminder-with-company-container').append(jobOptionDisplay);
+};
+
+const displayJobDropdownFailure = () => {
+  console.log('failure');
+};
+
 module.exports = {
   showReminderCreateForm,
   createReminderFailure,
   createReminderSuccess,
-  displayCompanyDropdownSuccess
+  displayCompanyDropdownSuccess,
+  displayJobDropdownSuccess,
+  displayCompanyDropdownFailure,
+  displayJobDropdownFailure,
 };
