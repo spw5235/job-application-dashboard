@@ -24,13 +24,13 @@ const jobsApi = require('../jobs/api');
 // };
 //
 //
-// const onShowReminderRecord = function(event) {
-//   event.preventDefault();
-//   store.currentReminderId = $(this).attr("data-current-reminder-id");
-//   remindersApi.showReminder()
-//     .done(remindersUi.showReminderRecordSuccess)
-//     .fail(remindersUi.showReminderRecordFailure);
-// };
+const onShowReminderRecord = function(event) {
+  event.preventDefault();
+  store.currentReminderId = $(this).attr("data-current-reminder-id");
+  remindersApi.showReminder()
+    .done(remindersUi.showReminderRecordSuccess)
+    .fail(remindersUi.showReminderRecordFailure);
+};
 //
 // const onEditReminder = function(event) {
 //   event.preventDefault();
@@ -142,7 +142,7 @@ const addHandlers = () => {
   // $('.content').on('submit', '#update-reminder-form', onUpdateReminder);
   // $('.content').on('click', '#reminder-record-btn-edit', onEditReminder);
   // $('.content').on('click', '#new-job-new-reminder', onShowReminderCreateForm);
-  // $('.content').on('click', '.dashboard-reminder-record-btn', onShowReminderRecord);
+  $('.content').on('click', '.view-reminder-record-btn', onShowReminderRecord);
   // $('.content').on('click', '#dashboard-home-btn', onGetReminders);
   // $('.content').on('click', '#reminder-record-delete', onDeleteReminder);
   // $('.content').on('click', '#job-back-reminder-overview', onShowReminderRecord);

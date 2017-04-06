@@ -52,21 +52,19 @@ const displayJobDashboard = require('../templates/reminder/display-job-create-fo
 //   $('.content').append(reminderDashboard);
 // };
 //
-// const showReminderRecordSuccess = (data) => {
-//   $(".notification-container").children().text("");
-//   $(".content").children().remove();
-//   store.lastShowReminderData = data;
-//   store.reminderName = data.reminder.name;
-//   data.reminder.reminder_page = true;
-//   store.reminderPage = data.reminder.reminder_page;
-//   let reminderDetails = displayReminderDetails({
-//     reminder: data.reminder
-//   });
-//   $('.content').append(reminderDetails);
-//   jobsApi.getJobs()
-//     .done(getJobSuccess)
-//     .fail(getJobFailure);
-// };
+const showReminderRecordSuccess = (data) => {
+  $(".notification-container").children().text("");
+  $(".content").children().remove();
+  console.log(data);
+  store.lastShowReminderData = data;
+  let reminderDetails = displayReminderDetails({
+    reminder: data.reminder
+  });
+  $('.content').append(reminderDetails);
+  // jobsApi.getJobs()
+  //   .done(getJobSuccess)
+  //   .fail(getJobFailure);
+};
 //
 // const showReminderRecordFailure = () => {
 //   $(".notification-container").children().text("");
@@ -183,4 +181,5 @@ module.exports = {
   displayJobDropdownSuccess,
   displayCompanyDropdownFailure,
   displayJobDropdownFailure,
+  showReminderRecordSuccess,
 };

@@ -1,4 +1,5 @@
 
+<div class="job-summary-table-container">
 <h3>Company Jobs</h3>
 
 <table class="table job-summary-table table-hover">
@@ -10,8 +11,8 @@
       <th>View Job</th>
     </tr>
   </thead>
+  <tbody>
   {{#each jobs as |job|}}
-    <tbody>
       <tr>
         <td class="display-obs-num">
           {{job.title}}
@@ -23,13 +24,14 @@
           {{job.deadline}}
         </td>
         <td>
-          <button id="view-job-details-btn" type="button" class="btn btn-info btn-sm current" data-current-job-id="{{job.id}}" data-current-company-id="{{job.company_id}}">View Job</button>
+          <button class="btn btn-primary view-job-details-btn" type="button" class="btn btn-info btn-sm current" data-current-job-id="{{job.id}}" data-current-company-id="{{job.company_id}}">View Job</button>
         </td>
       </tr>
-    </tbody>
   {{/each}}
+  </tbody>
 </table>
 <br><br>
+</div>
 
 <div class="create-job-company-record-container">
   <h3>New Job</h3>

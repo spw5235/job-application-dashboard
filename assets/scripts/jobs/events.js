@@ -3,6 +3,8 @@ const jobsApi = require('./api');
 const jobsUi = require('./ui');
 const getFormFields = require('../../../lib/get-form-fields');
 const store = require('../store');
+const companiesApi = require('../companies/api');
+const companiesUi = require('../companies/ui');
 
 // const logic = require('./logic');
 
@@ -130,7 +132,7 @@ const addHandlers = () => {
   // $('.content').on('click', '#company-record-create-job', onGenerateCreateForm);
   $('.content').on('submit', '#new-job-form', onCreateJob);
   // $('.content').on('click', '#company-record-view-jobs', onGetJobs);
-  $('.content').on('click', '#view-job-details-btn', onShowJob);
+  $('.content').on('click', '.view-job-details-btn', onShowJob);
   $('.content').on('click', '#job-record-btn-edit', onEditJob);
   $('.content').on('submit', '#update-job-form', onUpdateJobManual);
   $('.content').on('click', '#job-record-delete', onDeleteJob);

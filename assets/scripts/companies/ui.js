@@ -16,9 +16,7 @@ const remindersApi = require('../reminders/api');
 // Company UI
 
 const getReminderCompanyPageSuccess = (data) => {
-  console.log(data);
   let reminderData = data.reminders;
-  let reminderDataLength = reminderData.length;
   let currentCompanyId = parseInt(store.currentCompanyId);
 
   let count = 0;
@@ -30,8 +28,6 @@ const getReminderCompanyPageSuccess = (data) => {
       count += 1;
     }
   }
-
-  console.log(count);
 
   if (count > 0) {
     let insertCompId = store.currentCompanyId;
