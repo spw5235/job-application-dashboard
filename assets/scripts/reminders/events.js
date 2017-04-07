@@ -87,15 +87,16 @@ const onCreateReminder = function(event) {
     .done(remindersUi.createReminderSuccess)
     .fail(remindersUi.createReminderFailure);
 };
-//
-// const onDeleteReminder = function(event) {
-//   event.preventDefault();
-//   store.currentReminderId= $("#reminder-record-delete").attr("data-current-reminder-id");
-//   remindersApi.deleteReminder(store.currentReminderId)
-//     .done(remindersUi.deleteReminderSuccess)
-//     .fail(remindersUi.deleteReminderFailure);
-// };
-//
+
+const onDeleteReminder = function(event) {
+  event.preventDefault();
+  store.currentReminderId= $(this).attr("data-current-reminder-id");
+  console.log(store.currentReminderId);
+  remindersApi.deleteReminder(store.currentReminderId)
+    .done(remindersUi.deleteReminderSuccess)
+    .fail(remindersUi.deleteReminderFailure);
+};
+
 const onUpdateReminder = function(event) {
   event.preventDefault();
   let data = getFormFields(event.target);
@@ -297,8 +298,9 @@ const addHandlers = () => {
   $('.content').on('click', '#reminder-record-btn-edit', onEditReminder);
   // $('.content').on('click', '#new-job-new-reminder', onShowReminderCreateForm);
   $('.content').on('click', '.view-reminder-record-btn', onShowReminderRecord);
+  $('.content').on('click', '.reminder-record-btn', onShowReminderRecord);
   // $('.content').on('click', '#dashboard-home-btn', onGetReminders);
-  // $('.content').on('click', '#reminder-record-delete', onDeleteReminder);
+  $('.content').on('click', '#reminder-record-delete', onDeleteReminder);
   // $('.content').on('click', '#job-back-reminder-overview', onShowReminderRecord);
   $('.content').on('click', '#job-reminder-create', onShowReminderCreateForm);
   $('.content').on('submit', '#new-reminder-form', onCreateReminder);

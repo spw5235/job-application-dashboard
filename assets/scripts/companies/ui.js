@@ -48,6 +48,22 @@ const getReminderSuccess = (data) => {
   });
 
   $('.content').append(reminderDashboard);
+
+  // let dataRemindersArr = data.reminders;
+  //
+  // let storeArr = [];
+  //
+  // for (let i = 0; i < dataRemindersArr.length; i++ ) {
+  //   let dateOne;
+  //   let dateTwo;
+  //   if (i > 0) {
+  //     dateOne = (dataRemindersArr[i].reminder_date);
+  //     dateTwo = (dataRemindersArr[i-1].reminder_date);
+  //     if (dateOne > dateTwo) {
+  //       console.log("true");
+  //     }
+  //   }
+  // }
 };
 
 const getReminderFailure = (data) => {

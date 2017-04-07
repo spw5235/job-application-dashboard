@@ -8,6 +8,8 @@ const displayJobDashboard = require('../templates/reminder/display-job-create-fo
 const displayEditReminder = require('../templates/reminder/update-reminder-form.handlebars');
 const companiesApi = require('../companies/api');
 const jobsApi = require('../jobs/api');
+const remindersApi = require('./api');
+const displayReminderDashboard = require('../templates/reminder/get-reminders.handlebars');
 
 // Reminder UI
 
@@ -185,21 +187,21 @@ const displayCompanyDropdownSuccess = function(data) {
 //   $(".notification-container").children().text("");
 // };
 
-//
-// const getReminderSuccess = (data) => {
-//   $(".notification-container").children().text("");
-//   store.reminderPage = false;
-//   store.currentReminderId = 0;
-//   store.currentJobId = 0;
-//   store.reminderDataForEdit = data;
-//
-//   $(".content").children().remove();
-//   let reminderDashboard = displayReminderDashboard({
-//     reminders: data.reminders
-//   });
-//   $('.content').append(reminderDashboard);
-// };
-//
+
+const getReminderSuccess = (data) => {
+  $(".notification-container").children().text("");
+  store.reminderPage = false;
+  store.currentReminderId = 0;
+  store.currentJobId = 0;
+  store.reminderDataForEdit = data;
+
+  $(".content").children().remove();
+  let reminderDashboard = displayReminderDashboard({
+    reminders: data.reminders
+  });
+  $('.content').append(reminderDashboard);
+};
+
 const showReminderRecordSuccess = (data) => {
   $(".notification-container").children().text("");
   $(".content").children().remove();
@@ -286,11 +288,11 @@ const updateFormGenerator = function() {
   }
 };
 
-// const getReminderFailure = () => {
-//   $(".notification-container").children().text("");
-//   console.log('get reminder failure');
-// };
-//
+const getReminderFailure = () => {
+  $(".notification-container").children().text("");
+  console.log('get reminder failure');
+};
+
 const createReminderSuccess = () => {
   $(".form-error").text("");
   $(".notification-container").children().text("");
@@ -305,19 +307,19 @@ const createReminderSuccess = () => {
   $(".current").attr("data-current-reminder-id", store.currentReminderId);
 
 };
-//
-// const deleteReminderSuccess = () => {
-//   $(".notification-container").children().text("");
-//   console.log('delete success');
-//   remindersApi.getReminders()
-//     .done(getReminderSuccess)
-//     .fail(getReminderFailure);
-// };
-//
-// const deleteReminderFailure = () => {
-//   $(".notification-container").children().text("");
-//   console.log('delete fail');
-// };
+
+const deleteReminderSuccess = () => {
+  $(".notification-container").children().text("");
+  console.log('delete success');
+  remindersApi.getReminders()
+    .done(getReminderSuccess)
+    .fail(getReminderFailure);
+};
+
+const deleteReminderFailure = () => {
+  $(".notification-container").children().text("");
+  console.log('delete fail');
+};
 
 const updateReminderSuccess = (data) => {
   $(".form-error").text("");
@@ -369,4 +371,6 @@ module.exports = {
   updateFormGenerator,
   updateReminderFailure,
   updateReminderSuccess,
+  deleteReminderSuccess,
+  deleteReminderFailure,
 };
