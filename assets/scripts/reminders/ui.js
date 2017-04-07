@@ -38,6 +38,7 @@ const displayJobsDropdownFail = function() {
 
 const displayCompanyDropdownSuccess = function(data) {
   $(".notification-container").children().text("");
+  $(".association-job-insert").remove();
 
   console.log(data.companies);
 
@@ -55,6 +56,8 @@ const displayCompanyDropdownSuccess = function(data) {
 
   if (selectedValInt > 0) {
       $(".display-job-title").append('<div class="form-group"><label>Associate Reminder With Specific Job?</label><div class="form-group associate-reminder-with-job-container"><span>Check Box for Yes</span><input id="associate-reminder-with-job" type="checkbox" value=""></div></div>');
+  } else {
+    $(".association-job-insert").remove();
   }
 
   // let currentReminderCompanyName = $("#associate-reminder-with-company").attr("data-current-company-name");
@@ -69,23 +72,23 @@ const displayCompanyDropdownSuccess = function(data) {
 
   $(valueString).prop('selected',true);
 
-  let currentReminderJobId = $("#associate-reminder-with-company").attr("data-current-job-id");
+  // let currentReminderJobId = $("#associate-reminder-with-company").attr("data-current-job-id");
+  //
+  // let hasJob;
 
-  let hasJob;
-
-  if ( currentReminderJobId > 0 ) {
-    hasJob = true;
-    console.log('has - job')
-  } else {
-    hasJob = false;
-  }
-
-  if (hasJob) {
-    jobsApi.getJobs()
-      .done(displayJobDropdownSuccess)
-      .fail(displayJobsDropdownFail);
-
-  }
+  // if ( currentReminderJobId > 0 ) {
+  //   hasJob = true;
+  //   console.log('has - job')
+  // } else {
+  //   hasJob = false;
+  // }
+  //
+  // if (hasJob) {
+  //   jobsApi.getJobs()
+  //     .done(displayJobDropdownSuccess)
+  //     .fail(displayJobsDropdownFail);
+  //
+  // }
 
 };
 

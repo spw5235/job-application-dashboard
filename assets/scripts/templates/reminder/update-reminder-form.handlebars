@@ -29,7 +29,7 @@
     </div>
 
     <div class="form-group">
-      <label>Associate Reminder With Company and Job?</label>
+      <label>Associate Reminder With Company?</label>
       <div class="form-group associate-reminder-with-company-container" data-current-company-name="{{reminder.company_name}}" data-current-company-id="{{reminder.company_ref_id}}" data-current-job-id="{{reminder.job_ref_id}}" data-current-job-title="{{reminder.job_title}}">
         <span>Check Box for Yes</span>
           <input id="associate-reminder-with-company" type="checkbox" value="" data-current-company-name="{{reminder.company_name}}" data-current-company-id="{{reminder.company_ref_id}}" data-current-job-id="{{reminder.job_ref_id}}" data-current-job-title="{{reminder.job_title}}">
@@ -44,6 +44,9 @@
       <input name="reminder[due_date]" type="hidden" value="false">
       <input name="reminder[due_date]" class="form-control field-checkbox" type="checkbox" value="true">
     </div>
+
+    <div class="form-group display-company-names"></div>
+    <div class="form-group display-job-title"></div>
 
     <div class="form-group">
       <input class="btn btn-success submit-btn current" name="submit" id="submit-reminder-update-btn" type="submit" value="Submit">

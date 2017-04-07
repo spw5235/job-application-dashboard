@@ -46,53 +46,37 @@ const onCreateReminder = function(event) {
   event.preventDefault();
   let data = getFormFields(event.target);
 
-  // let isCheckedCompany = $("#associate-reminder-with-company").prop("checked");
-  // let isCheckedJob = $("#associate-reminder-with-Job").prop("checked");
-
-
   let selectedComp = $("#select-option-company-name").val();
   console.log(selectedComp);
+
+  store.selectedCompanyId = parseInt(store.selectedCompanyId);
+  store.selectedJobId = parseInt(store.selectedJobId);
 
   data.reminder.company_name = store.selectedCompanyName;
   data.reminder.company_ref_id = store.selectedCompanyId;
 
-  // if (!isCheckedCompany) {
-  //   data.reminder.company_name = 0;
-  //   data.reminder.company_ref_id = 0;
-  //   data.reminder.job_ref_id = 0;
-  //   data.reminder.job_title = 0;
-  // } else if ( isCheckedCompany && !isCheckedJob) {
-  //   data.reminder.job_ref_id = 0;
-  //   data.reminder.job_title = 0;
-  //   console.log('in here');
-  //   console.log(data.reminder.company_name);
-  //   if (data.reminder.company_name === undefined) {
-  //     data.reminder.company_name = 0;
-  //     data.reminder.company_ref_id = 0;
-  //   } else {
-  //     data.reminder.company_name = store.selectedCompanyName;
-  //     data.reminder.company_ref_id = store.selectedCompanyId;
-  //   }
-  // } else {
-  //   data.reminder.company_name = store.selectedCompanyName;
-  //   data.reminder.company_ref_id = store.selectedCompanyId;
-  //   if (data.reminder.job_title === undefined) {
-  //     data.reminder.job_title = 0;
-  //     data.reminder.job_ref_id = 0;
-  //   } else {
-  //     data.reminder.job_ref_id = store.selectedJobId;
-  //     data.reminder.job_title = store.selectedJobTitle;
-  //   }
-  // }
+  data.reminder.reminder_type = $('#reminder-type-select').val();
 
   console.log('values of create');
-  console.log(data.reminder.company_name);
-  console.log(data.reminder.company_ref_id);
-  // console.log(data.reminder.job_ref_id);
-  // console.log(data.reminder.job_title);
 
-  data.reminder.reminder_type = $('#reminder-type-select').val();
+  let jobRefId = $("#select-option-job-title").val();
+
+  if (jobRefId === undefined) {
+    data.reminder.job_ref_id = 0;
+    data.reminder.job_title = 0;
+  } else {
+    data.reminder.job_ref_id = store.selectedJobId;
+    data.reminder.job_title = store.selectedJobTitle;
+  }
+
+  if (data.reminder.job_ref_id === 0 || data.reminder.job_ref_id === "0") {
+    data.reminder.job_title = 0;
+  }
+
   store.createReminderData = data;
+
+  console.log(store.createReminderData);
+
   remindersApi.createReminder(data)
     .then((response) => {
       store.currentReminderId = response.reminder.id;
@@ -130,7 +114,8 @@ const onShowReminderCreateForm = function(event) {
 };
 
 const onSelectOptionCompanyVal = function() {
-
+  $(".association-job-insert").remove();
+  $(".display-job-title").children().remove();
   let obtainVal = $(this).val();
 
   if (obtainVal === 0 || obtainVal === "0") {
@@ -139,8 +124,8 @@ const onSelectOptionCompanyVal = function() {
     store.selectedCompanyId = 0;
     store.selectedCompanyName = 0;
     // $("#job-select-options").remove();
-    store.selectedJobId = 0;
-    store.selectedJobTitle = 0;
+    // store.selectedJobId = 0;
+    // store.selectedJobTitle = 0;
     $("#associate-reminder-with-job").prop("checked", false);
     $(".association-job-insert").remove();
   }
@@ -176,14 +161,6 @@ const onSelectOptionJobVal = function() {
 
   store.selectedJobId = obtainVal;
   store.selectedJobTitle = jobTitle;
-
-  let currentSelectedValue = $("#select-option-job-title").val();
-
-  if( currentSelectedValue === 0 ) {
-    console.log('error');
-  } else {
-    console.log('done');
-  }
 };
 
 const onDisplayCompanyDropdown = function() {
@@ -191,6 +168,15 @@ const onDisplayCompanyDropdown = function() {
   let isUpdateForm = $(".reminder-form").attr("data-update-form");
 
   console.log(isUpdateForm === "true");
+
+  let isCompanyChecked = $("#associate-reminder-with-company").prop("checked");
+
+  if (!isCompanyChecked) {
+    store.selectedCompanyId = 0;
+    store.selectedCompanyName = 0;
+    store.selectedJobId = 0;
+    store.selectedJobTitle = 0;
+  }
 
   if (this.checked) {
     let currentReminderCompanyId = $("#associate-reminder-with-company").attr("data-current-company-id");
