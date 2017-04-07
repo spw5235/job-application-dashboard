@@ -1,5 +1,5 @@
 <div class="update-reminder-form-container form-container">
-<form class="form reminder-form" id="update-reminder-form" name="update-reminder-form" data-update-form="true">
+<form class="form reminder-form" id="update-reminder-form" name="update-reminder-form" data-update-form="1">
   <fieldset>
     <legend>Update Action Form</legend>
     <p id="update-reminder-error" class="warning form-error"></p>
@@ -28,13 +28,21 @@
       <textarea class="form-control field-input reminder-details" name="reminder[reminder_details]" type="text" placeholder="Action Details">{{reminder.reminder_details}}</textarea>
     </div>
 
-    <div class="form-group">
+    <div id="associate-with-job-company" class="form-group">
+      <label>Associate Reminder With Company?</label>
+      <div class="form-group associate-reminder-with-company-container">
+        <span>Check Box for Yes</span>
+          <input id="associate-reminder-with-company" type="checkbox" value="" data-current-company-id="{{reminder.company_ref_id}}" data-current-job-id="{{reminder.job_ref_id}}">
+      </div>
+    </div>
+
+    <!-- <div class="form-group">
       <label>Associate Reminder With Company?</label>
       <div class="form-group associate-reminder-with-company-container" data-current-company-name="{{reminder.company_name}}" data-current-company-id="{{reminder.company_ref_id}}" data-current-job-id="{{reminder.job_ref_id}}" data-current-job-title="{{reminder.job_title}}">
         <span>Check Box for Yes</span>
           <input id="associate-reminder-with-company" type="checkbox" value="" data-current-company-name="{{reminder.company_name}}" data-current-company-id="{{reminder.company_ref_id}}" data-current-job-id="{{reminder.job_ref_id}}" data-current-job-title="{{reminder.job_title}}">
       </div>
-    </div>
+    </div> -->
 
     <div class="form-group display-company-names"></div>
     <div class="form-group display-job-title"></div>
@@ -44,9 +52,6 @@
       <input name="reminder[due_date]" type="hidden" value="false">
       <input name="reminder[due_date]" class="form-control field-checkbox" type="checkbox" value="true">
     </div>
-
-    <div class="form-group display-company-names"></div>
-    <div class="form-group display-job-title"></div>
 
     <div class="form-group">
       <input class="btn btn-success submit-btn current" name="submit" id="submit-reminder-update-btn" type="submit" value="Submit">

@@ -156,6 +156,10 @@ const updateFormGenerator = function() {
     company: store.lastShowCompanyData.company
   });
   $('.content').append(editCompany);
+
+  $(".associate-reminder-with-company-container").attr("current-company-id", store.currentCompanyId);
+  $(".associate-reminder-with-company-container").attr("current-job", store.currentJobId);
+
 };
 
 const getCompanyFailure = () => {

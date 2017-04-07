@@ -38,6 +38,8 @@ const onShowReminderRecord = function(event) {
 const onEditReminder = function(event) {
   event.preventDefault();
   store.currentReminderId = $(this).attr("data-current-reminder-id");
+  store.currentCompanyId = $(this).attr("data-current-company-id");
+  store.currentJobId = $(this).attr("data-current-job-id");
   remindersUi.updateFormGenerator();
 
 };

@@ -11,6 +11,10 @@ const jobsApi = require('../jobs/api');
 
 // Reminder UI
 
+const displayJobDropdownFailure = () => {
+  console.log('failure');
+};
+
 const displayJobDropdownSuccess = (data) => {
 
   $(".notification-container").children().text("");
@@ -34,6 +38,38 @@ const displayJobDropdownSuccess = (data) => {
 const displayJobsDropdownFail = function() {
   console.log("failure");
 }
+
+const determineCompany = function() {
+  let jobId = $("#associate-reminder-with-company").attr("data-current-job-id");
+  jobId = parseInt(jobId);
+
+  if (jobId > 0) {
+    $(".display-job-title").append('<div class="form-group"><label>Associate Reminder With Specific Job?</label><div class="form-group associate-reminder-with-job-container"><span>Check Box for Yes</span><input id="associate-reminder-with-job" type="checkbox" value=""></div></div>');
+    $("#associate-reminder-with-job").prop("checked", true);
+
+    let isJobChecked = $("#associate-reminder-with-job").prop("checked");
+
+    if (isJobChecked) {
+      let currentReminderCompanyId = $("#select-option-company-name").val();
+
+      // if ( currentReminderJobId === 0 ) {
+      //   $("#job-select-options").remove();
+      //   store.selectedJobId = 0;
+      //   store.selectedJobTitle = 0;
+      //   return;
+      // }
+
+      jobsApi.getJobsById(currentReminderCompanyId)
+        .done(displayJobDropdownSuccess)
+        .fail(displayJobDropdownFail);
+    } else {
+      $("#job-select-options").remove();
+      store.selectedJobId = 0;
+      store.selectedJobTitle = 0;
+      console.log("remove");
+    }
+  }
+};
 
 
 const displayCompanyDropdownSuccess = function(data) {
@@ -89,6 +125,34 @@ const displayCompanyDropdownSuccess = function(data) {
   //     .fail(displayJobsDropdownFail);
   //
   // }
+  let updateForm = $(".reminder-form").attr("data-update-form");
+  updateForm = parseInt(updateForm);
+
+  if ( updateForm === 1) {
+    determineCompany();
+  }
+
+  // if (updateForm) {
+  //   let currentReminderCompanyId = $("#associate-reminder-with-company").attr("data-current-company-id");
+  //   currentReminderCompanyId = parseInt(currentReminderCompanyId);
+  //
+  //   let hasCompany;
+  //
+  //   if ( currentReminderCompanyId > 0 ) {
+  //     hasCompany = true;
+  //   } else {
+  //     hasCompany = false;
+  //   }
+  //
+  //   if (hasCompany) {
+  //     $("#associate-reminder-with-company").prop('checked', true);
+  //     companiesApi.getCompanies()
+  //       .done(displayCompanyDropdownSuccess)
+  //       .fail(displayCompanyDropdownFail);
+  //
+  //   }
+  // }
+
 
 };
 
@@ -145,6 +209,7 @@ const showReminderRecordSuccess = (data) => {
     reminder: data.reminder
   });
   $('.content').append(reminderDetails);
+
   // jobsApi.getJobs()
   //   .done(getJobSuccess)
   //   .fail(getJobFailure);
@@ -202,6 +267,7 @@ const updateFormGenerator = function() {
   $(".current").attr("data-current-reminder-id", store.currentReminderId);
 
   let currentReminderCompanyId = $("#associate-reminder-with-company").attr("data-current-company-id");
+  currentReminderCompanyId = parseInt(currentReminderCompanyId);
 
   let hasCompany;
 
@@ -288,12 +354,6 @@ const createReminderFailure = function() {
 
 const displayCompanyDropdownFailure = function() {
   console.log('fail');
-};
-
-
-
-const displayJobDropdownFailure = () => {
-  console.log('failure');
 };
 
 module.exports = {
