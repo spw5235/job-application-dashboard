@@ -1,12 +1,23 @@
 <h1>Reminder Dashboard</h1>
 
-<table class="table reminder-summary-table table-hover">
+<input type="text" id="search-reminder-input" placeholder="Search Company Name..." title="Type in a name">
+<br><br>
+
+<table id="reminder-summary-table" class="table reminder-summary-table table-hover bootstrap-table">
   <thead>
     <tr>
-      <th>Reminder Type</th>
-      <th>Company Name</th>
-      <th>Reminder Subject</th>
-      <th>Notification Date</th>
+      <th data-field="reminder" data-sortable="true">
+        <div class="th-inner sortable both desc">Reminder Type</div>
+      </th>
+      <th data-field="name"  data-sortable="true">
+        <div class="">Company Name</div>
+      </th>
+      <th data-field="subject"  data-sortable="true">
+        <div class="">Reminder Subject</div>
+      </th>
+      <th data-field="date"  data-sortable="true" data-sort-name="_date_data" data-sorter="monthSorter">
+        <div class="">Notification Date</div>
+      </th>
       <th>View Record</th>
     </tr>
   </thead>
@@ -26,7 +37,7 @@
           {{reminder.reminder_date}}
         </td>
         <td class="display-reminder-submit">
-          <button type="button" class="btn btn-info btn-sm view-reminder-record-btn" data-current-reminder-id="{{reminder.id}}" data-current-company-id="{{reminder.company_ref_id}}" data-current-job-id="{{reminder.job_ref_id}}"">View reminder</button>
+          <button type="button" class="btn btn-info btn-sm view-reminder-record-btn" data-current-reminder-id="{{reminder.id}}" data-current-company-id="{{reminder.company_ref_id}}" data-current-job-id="{{reminder.job_ref_id}}">View reminder</button>
         </td>
       </tr>
     {{/each}}

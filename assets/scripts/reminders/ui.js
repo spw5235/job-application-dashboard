@@ -5,8 +5,77 @@ const displayReminderDetails = require('../templates/reminder/show-reminder-reco
 const displayReminderCreateForm = require('../templates/reminder/create-reminder.handlebars');
 const displayCompanyDashboard = require('../templates/reminder/display-company-create-form.handlebars');
 const displayJobDashboard = require('../templates/reminder/display-job-create-form.handlebars');
+const displayEditReminder = require('../templates/reminder/update-reminder-form.handlebars');
+const companiesApi = require('../companies/api');
+const jobsApi = require('../jobs/api');
 
 // Reminder UI
+
+const displayJobDropdownSuccess = (data) => {
+  console.log(data);
+  $(".notification-container").children().text("");
+
+  let jobOptionDisplay = displayJobDashboard({
+    jobs: data.jobs
+  });
+
+  $('.associate-reminder-with-company-container').append(jobOptionDisplay);
+
+  let currentReminderJobId = $("#associate-reminder-with-company").attr("data-current-job-id");
+
+  $("#associate-reminder-with-company").val(currentReminderJobId);
+
+  let valueString = '#select-option-job-title option[value=' + currentReminderJobId + ']';
+
+  $(valueString).prop('selected',true);
+
+};
+
+const displayJobsDropdownFail = function() {
+  console.log("failure");
+}
+
+
+const displayCompanyDropdownSuccess = function(data) {
+  $(".notification-container").children().text("");
+
+  console.log(data.companies);
+
+  let companyOptionDisplay = displayCompanyDashboard({
+    companies: data.companies
+  });
+
+  let currentReminderCompanyId = $("#associate-reminder-with-company").attr("data-current-company-id");
+  // let currentReminderCompanyName = $("#associate-reminder-with-company").attr("data-current-company-name");
+  // let currentReminderJobId = $("#associate-reminder-with-company").attr("data-current-job-id");
+  // let currentReminderJobTitle = $("#associate-reminder-with-company").attr("data-current-job-title");
+
+  $('.associate-reminder-with-company-container').append(companyOptionDisplay);
+
+  $("#associate-reminder-with-company").val(currentReminderCompanyId);
+
+  let valueString = '#select-option-company-name option[value=' + currentReminderCompanyId + ']';
+
+  $(valueString).prop('selected',true);
+
+  let currentReminderJobId = $("#associate-reminder-with-company").attr("data-current-job-id");
+
+  let hasJob;
+
+  if ( currentReminderJobId > 0 ) {
+    hasJob = true;
+  } else {
+    hasJob = false;
+  }
+
+  if (hasJob) {
+    jobsApi.getJobs()
+      .done(displayJobDropdownSuccess)
+      .fail(displayJobsDropdownFail);
+
+  }
+
+};
 
 // const getJobSuccess = (data) => {
 //   $(".notification-container").children().text("");
@@ -71,6 +140,10 @@ const showReminderRecordSuccess = (data) => {
 //   console.log('failure');
 // };
 
+const displayCompanyDropdownFail = function() {
+  console.log("displayCompanyDropdownFail");
+};
+
 const showReminderCreateForm = () => {
   $(".notification-container").children().text("");
   $(".content").children().remove();
@@ -80,16 +153,58 @@ const showReminderCreateForm = () => {
   $(".current").attr("data-current-company-id", store.currentCompanyId);
 };
 
-// const updateFormGenerator = function() {
-//   $(".notification-container").children().text("");
-//   $(".content").children().remove();
-//
-//   let editReminder = displayEditReminder({
-//     reminder: store.lastShowReminderData.reminder
-//   });
-//   $('.content').append(editReminder);
-// };
-//
+const updateFormGenerator = function() {
+  $(".notification-container").children().text("");
+  $(".content").children().remove();
+
+  let data = store.lastShowReminderData;
+  console.log(data.reminder);
+
+  let editReminder = displayEditReminder({
+    reminder: data.reminder
+  });
+  $('.content').append(editReminder);
+
+  // Determine Placeholder
+
+  let currentOptionType = $("#reminder-type-select").attr("data-reminder-type");
+  console.log(currentOptionType);
+
+  if ( currentOptionType === "Action" ) {
+    $(".option-one").val("Action");
+    $(".option-one").text("Action");
+    $(".option-two").val("Pending");
+    $(".option-two").text("Pending");
+  } else if ( currentOptionType === "Pending" ) {
+    $(".option-one").val("Pending");
+    $(".option-one").text("Pending");
+    $(".option-two").val("Action");
+    $(".option-two").text("Action");
+  }
+
+  $(".current").attr("data-current-job-id", store.currentJobId);
+  $(".current").attr("data-current-company-id", store.currentCompanyId);
+  $(".current").attr("data-current-reminder-id", store.currentReminderId);
+
+  let currentReminderCompanyId = $("#associate-reminder-with-company").attr("data-current-company-id");
+
+  let hasCompany;
+
+  if ( currentReminderCompanyId > 0 ) {
+    hasCompany = true;
+  } else {
+    hasCompany = false;
+  }
+
+  if (hasCompany) {
+    $("#associate-reminder-with-company").prop('checked', true);
+    companiesApi.getCompanies()
+      .done(displayCompanyDropdownSuccess)
+      .fail(displayCompanyDropdownFail);
+
+  }
+};
+
 // const getReminderFailure = () => {
 //   $(".notification-container").children().text("");
 //   console.log('get reminder failure');
@@ -121,53 +236,46 @@ const createReminderSuccess = () => {
 //   $(".notification-container").children().text("");
 //   console.log('delete fail');
 // };
-//
-// const updateReminderSuccess = (data) => {
-//   $(".notification-container").children().text("");
-//   $(".success-alert").text("Reminder Has Been Successfully Updated");
-//   store.currentReminderId = data.reminder.id;
-//   $(".content").children().remove();
-//   remindersApi.showReminder()
-//     .done(showReminderRecordSuccess)
-//     .fail(showReminderRecordFailure);
-// };
-//
-// const updateReminderFailure = (data) => {
-//   $(".notification-container").children().text("");
-//   $("#update-reminder-error").text("Error: Reminder not updated.  Please ensure all required fields have values");
-// };
+
+const updateReminderSuccess = (data) => {
+  $(".form-error").text("");
+  $(".notification-container").children().text("");
+  store.currentReminderId = data.reminder.id;
+  $(".content").children().remove();
+  $(".success-alert").text("Reminder Has Been Successfully Updated");
+
+  let showReminderDetails = displayReminderDetails({
+    reminder: store.createReminderData.reminder
+  });
+  $(".content").append(showReminderDetails);
+  $(".current").attr("data-current-reminder-id", store.currentReminderId);
+
+
+
+
+  // $(".notification-container").children().text("");
+  // $(".success-alert").text("Reminder Has Been Successfully Updated");
+  // store.currentReminderId = data.reminder.id;
+  // $(".content").children().remove();
+  // remindersApi.showReminder()
+  //   .done(showReminderRecordSuccess)
+  //   .fail(showReminderRecordFailure);
+};
+
+const updateReminderFailure = () => {
+  $(".notification-container").children().text("");
+  $("#update-reminder-error").text("Error: Reminder not updated.  Please ensure all required fields have values");
+};
 
 const createReminderFailure = function() {
   console.log('failure');
-};
-
-const displayCompanyDropdownSuccess = function(data) {
-  $(".notification-container").children().text("");
-
-  console.log(data.companies);
-
-  let companyOptionDisplay = displayCompanyDashboard({
-    companies: data.companies
-  });
-
-  $('.associate-reminder-with-company-container').append(companyOptionDisplay);
-
 };
 
 const displayCompanyDropdownFailure = function() {
   console.log('fail');
 };
 
-const displayJobDropdownSuccess = (data) => {
-  console.log(data);
-  $(".notification-container").children().text("");
 
-  let jobOptionDisplay = displayJobDashboard({
-    jobs: data.jobs
-  });
-
-  $('.associate-reminder-with-company-container').append(jobOptionDisplay);
-};
 
 const displayJobDropdownFailure = () => {
   console.log('failure');
@@ -182,4 +290,7 @@ module.exports = {
   displayCompanyDropdownFailure,
   displayJobDropdownFailure,
   showReminderRecordSuccess,
+  updateFormGenerator,
+  updateReminderFailure,
+  updateReminderSuccess,
 };

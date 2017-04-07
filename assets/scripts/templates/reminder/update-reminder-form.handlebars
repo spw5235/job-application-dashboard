@@ -6,19 +6,38 @@
     <p>All fields are <u>optional</u> unless otherwise indicated</p>
 
     <div class="form-group">
-      <label>reminder Type (required)</label>
-      <input class="form-control required-field" name="reminder[reminder_type]" placeholder="reminder Type" type="text" value="{{reminder.reminder_type}}">
+      <label>Reminder Type (required)</label>
+      <select class="form-control" id="reminder-type-select" data-reminder-type="{{reminder.reminder_type}}">
+          <option class="form-control required-field option-one" name="reminder[reminder_type]" placeholder="reminder Type" type="text" value="Action">{{reminder.reminder_type}}</option>
+          <option class="form-control required-field option-two" name="reminder[reminder_type]" placeholder="reminder Type" type="text" value="Pending">{{reminder.reminder_type}}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>Reminder Notification Date</label>
+      <input class="form-control field-input" name="reminder[reminder_date]" placeholder="Date" type="date" value="{{reminder.reminder_date}}">
     </div>
 
     <div class="form-group">
       <label>Action Subject</label>
-      <input class="form-control required-field" name="reminder[subject]" placeholder="Subject" type="text" value="{{reminder.subject}}">
+      <input class="form-control required-field" name="reminder[reminder_subject]" placeholder="Subject" type="text" value="{{reminder.reminder_subject}}">
     </div>
 
     <div class="form-group">
       <label>Action Details</label>
-      <textarea class="form-control field-input reminder-details" name="reminder[details]" type="text" placeholder="Action Details">{{reminder.details}}</textarea>
+      <textarea class="form-control field-input reminder-details" name="reminder[reminder_details]" type="text" placeholder="Action Details">{{reminder.reminder_details}}</textarea>
     </div>
+
+    <div class="form-group">
+      <label>Associate Reminder With Company and Job?</label>
+      <div class="form-group associate-reminder-with-company-container" data-current-company-name="{{reminder.company_name}}" data-current-company-id="{{reminder.company_ref_id}}" data-current-job-id="{{reminder.job_ref_id}}" data-current-job-title="{{reminder.job_title}}">
+        <span>Check Box for Yes</span>
+          <input id="associate-reminder-with-company" type="checkbox" value="" data-current-company-name="{{reminder.company_name}}" data-current-company-id="{{reminder.company_ref_id}}" data-current-job-id="{{reminder.job_ref_id}}" data-current-job-title="{{reminder.job_title}}">
+      </div>
+    </div>
+
+    <div class="form-group display-company-names"></div>
+    <div class="form-group display-job-title"></div>
 
     <div class="form-group">
       <label>Archive</label>

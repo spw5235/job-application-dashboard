@@ -3,8 +3,8 @@ const jobsApi = require('./api');
 const jobsUi = require('./ui');
 const getFormFields = require('../../../lib/get-form-fields');
 const store = require('../store');
-const companiesApi = require('../companies/api');
-const companiesUi = require('../companies/ui');
+// const companiesApi = require('../companies/api');
+// const companiesUi = require('../companies/ui');
 
 // const logic = require('./logic');
 

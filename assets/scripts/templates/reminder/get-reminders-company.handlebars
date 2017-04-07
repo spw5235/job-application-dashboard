@@ -1,6 +1,6 @@
 <h1>Reminder Dashboard</h1>
 
-<table class="table reminder-summary-table table-hover">
+<table id="reminder-summary-table" class="table reminder-summary-table table-hover" data-toggle="table">
   <thead>
     <tr>
       <th>Reminder Type</th>
@@ -13,7 +13,7 @@
   <tbody>
     {{#each reminders as |reminder|}}
       {{#if reminder.show_data}}
-      <tr>
+      <tr data-index="{{reminder.id}}">
         <td class="display-reminder-name">
             {{reminder.reminder_type}}
         </td>
@@ -27,7 +27,7 @@
           {{reminder.reminder_date}}
         </td>
         <td class="display-reminder-submit">
-          <button type="button" class="btn btn-info btn-sm reminder-record-btn" data-current-reminder-id="{{reminder.id}}" data-current-company-id="{{reminder.company_id}}">View reminder</button>
+          <button type="button" class="btn btn-info btn-sm reminder-record-btn" data-current-reminder-id="{{reminder.id}}" data-current-company-id="{{reminder.company_ref_id}}" data-current-job-id="{{reminder.job_ref_id}}">View reminder</button>
         </td>
       </tr>
       {{/if}}
