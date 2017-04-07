@@ -34,12 +34,22 @@
         <label>Associate Reminder With Company?</label>
         <div class="form-group associate-reminder-with-company-container">
           <span>Check Box for Yes</span>
-            <input id="associate-reminder-with-company" type="checkbox" value="">
+            <input id="associate-reminder-with-company" type="checkbox" value="" data-current-contact-id="">
         </div>
       </div>
 
       <div class="form-group display-company-names"></div>
       <div class="form-group display-job-title"></div>
+
+      <div id="associate-with-job-company" class="form-group">
+        <label>Tag Reminder to Contact?</label>
+        <div class="form-group associate-reminder-with-contact-container">
+          <span>Check Box for Yes</span>
+            <input id="associate-reminder-with-contact" type="checkbox" value="" data-current-contact-id="">
+        </div>
+      </div>
+
+      <div class="form-group display-contact-name"></div>
 
       <div class="form-group">
         <input class="btn btn-success submit-btn current" name="submit" id="create-reminder-btn" type="submit" value="Submit" data-current-company-id="">

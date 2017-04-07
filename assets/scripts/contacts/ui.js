@@ -12,7 +12,9 @@ const displayContactCreateForm = require('../templates/contact/create-contact.ha
 const contactsApi = require('./api');
 // const jobsApi = require('../jobs/api');
 const remindersApi = require('../reminders/api');
-//
+const displayContactOptions = require('../templates/contact/display-contact-create-form.handlebars');
+
+
 // // Contact UI
 //
 // const getReminderContactPageSuccess = (data) => {
@@ -211,6 +213,45 @@ const updateContactSuccess = (data) => {
 //   $("#update-contact-error").text("Error: Contact not updated.  Please ensure all required fields have values");
 // };
 
+
+
+
+
+const displayContactDropdownSuccess = function(data) {
+  $(".notification-container").children().text("");
+
+  let companyOptionDisplay = displayContactOptions({
+    contacts: data.contacts
+  });
+
+  // let selectedVal = $("#select-option-contact-name").val();
+  // let selectedValInt = parseInt(selectedVal)
+
+  let currentReminderContactId = $("#associate-reminder-with-company").attr("data-current-contact-id");
+
+  // if (selectedValInt) {
+  //     $(".display-contact-name").append('<div class="form-group"><label>Associate Reminder With Specific Job?</label><div class="form-group associate-reminder-with-job-container"><span>Check Box for Yes</span><input id="associate-reminder-with-job" type="checkbox" value=""></div></div>');
+  // } else {
+  //   $(".association-job-insert").remove();
+  // }
+
+  $('.associate-reminder-with-contact-container').append(companyOptionDisplay);
+
+  $("#associate-reminder-with-contact").val(currentReminderContactId);
+
+  // let valueString = '#select-option-contact-name option[value=' + currentReminderContactId + ']';
+  //
+  // $(valueString).prop('selected',true);
+
+  // let updateForm = $(".reminder-form").attr("data-update-form");
+  // updateForm = parseInt(updateForm);
+  //
+  // console.log(updateForm);
+  // if ( updateForm === 1) {
+  //   determineCompany();
+  // }
+};
+
 module.exports = {
   getContactSuccess,
   showContactRecordSuccess,
@@ -223,5 +264,7 @@ module.exports = {
   // updateContactFailure,
   showContactRecordFailure,
   createContactSuccess,
+  displayContactDropdownSuccess,
+  displayContactOptions,
   // getReminderSuccess,
 };

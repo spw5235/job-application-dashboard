@@ -5,6 +5,8 @@ const getFormFields = require('../../../lib/get-form-fields');
 const store = require('../store');
 const companiesApi = require('../companies/api');
 const jobsApi = require('../jobs/api');
+const contactsApi = require('../contacts/api');
+const contactsUi = require('../contacts/ui');
 
 // const logic = require('./logic');
 
@@ -48,20 +50,34 @@ const onCreateReminder = function(event) {
   event.preventDefault();
   let data = getFormFields(event.target);
 
-  let selectedComp = $("#select-option-company-name").val();
-  console.log(selectedComp);
+  // let selectedComp = $("#select-option-company-name").val();
+
+  let contactVal = $("#select-option-contact-name").val();
+  let obtainContactNameText = '#select-option-contact-name option[value=' + contactVal + ']';
+
+  let selectedContactName = $(obtainContactNameText).text();
 
   store.selectedCompanyId = parseInt(store.selectedCompanyId);
   store.selectedJobId = parseInt(store.selectedJobId);
+  store.selectedContactId = parseInt(store.selectedContactId);
 
   data.reminder.company_name = store.selectedCompanyName;
-  data.reminder.company_ref_id = store.selectedCompanyId;
+  data.reminder.company_ref_id = $("#select-option-company-name").val();
 
   data.reminder.reminder_type = $('#reminder-type-select').val();
 
-  console.log('values of create');
-
   let jobRefId = $("#select-option-job-title").val();
+
+  let companyRefId = $("#select-option-company-name").val();
+
+  if (companyRefId === undefined) {
+    data.reminder.company_ref_id = 0;
+    data.reminder.company_name = "";
+  } else {
+    data.reminder.company_ref_id = $("#select-option-company-name").val();
+    data.reminder.company_name = store.selectedCompanyName;
+  }
+
 
   if (jobRefId === undefined) {
     data.reminder.job_ref_id = 0;
@@ -73,6 +89,16 @@ const onCreateReminder = function(event) {
 
   if (data.reminder.job_ref_id === 0 || data.reminder.job_ref_id === "0") {
     data.reminder.job_title = "";
+  }
+
+  let contactRefId = $("#select-option-contact-name").val();
+
+  if (contactRefId === undefined) {
+    data.reminder.contact_ref_id = 0;
+    data.reminder.contact_name = "";
+  } else {
+    data.reminder.contact_name = selectedContactName;
+    data.reminder.contact_ref_id = $("#select-option-contact-name").val();
   }
 
   store.createReminderData = data;
@@ -126,9 +152,6 @@ const onSelectOptionCompanyVal = function() {
     $(valueString).prop('selected',true);
     store.selectedCompanyId = 0;
     store.selectedCompanyName = "";
-    // $("#job-select-options").remove();
-    // store.selectedJobId = 0;
-    // store.selectedJobTitle = 0;
     $("#associate-reminder-with-job").prop("checked", false);
     $(".association-job-insert").remove();
   }
@@ -170,8 +193,6 @@ const onDisplayCompanyDropdown = function() {
 
   let isUpdateForm = $(".reminder-form").attr("data-update-form");
 
-  console.log(isUpdateForm === "true");
-
   let isCompanyChecked = $("#associate-reminder-with-company").prop("checked");
 
   if (!isCompanyChecked) {
@@ -206,14 +227,61 @@ const onDisplayCompanyDropdown = function() {
   let selectedVal = $("#select-option-company-name").val();
   let selectedValInt = parseInt(selectedVal);
 
-  // let currentReminderCompanyIdInt = parseInt(currentReminderCompanyId);
-
-
   if (selectedValInt > 0) {
       $("#company-select-options").append('<div class="form-group"><label>Associate Reminder With Specific Job?</label><div class="form-group associate-reminder-with-job-container"><span>Check Box for Yes</span><input id="associate-reminder-with-job" type="checkbox" value=""></div></div>');
   }
 
 };
+
+
+
+
+
+
+const onDisplayContactDropdown = function() {
+
+  let isUpdateForm = $(".reminder-form").attr("data-update-form");
+
+  let isCompanyChecked = $("#associate-reminder-with-contact").prop("checked");
+
+  if (!isCompanyChecked) {
+    store.selectedContactId = 0;
+  }
+
+  if (this.checked) {
+    let currentReminderContactId = $("#associate-reminder-with-contact").attr("data-current-contact-id");
+
+    if ( currentReminderContactId === 0 ) {
+      // $("#company-select-options").remove();
+      // $("#job-select-options").remove();
+      $(".display-contact-name").children().remove();
+      return;
+    }
+
+    contactsApi.getContacts()
+      .done(contactsUi.displayContactDropdownSuccess)
+      .fail(contactsUi.displayContactDropdownFail);
+  } else {
+    $(".display-contact-name").children().remove();
+    $(".association-contact-insert").remove();
+    $("#contact-select-options").remove();
+    console.log("remove");
+  }
+
+  // let selectedVal = $("#select-option-contact-name").val();
+  // let selectedValInt = parseInt(selectedVal);
+  //
+  // if (selectedValInt > 0) {
+  //     $("#company-select-options").append('<div class="form-group"><label>Associate Reminder With Specific Job?</label><div class="form-group associate-reminder-with-job-container"><span>Check Box for Yes</span><input id="associate-reminder-with-job" type="checkbox" value=""></div></div>');
+  // }
+
+};
+
+
+
+
+
+
 
 
 
@@ -303,6 +371,7 @@ const addHandlers = () => {
   $('.content').on('click', '#job-reminder-create', onShowReminderCreateForm);
   $('.content').on('submit', '#new-reminder-form', onCreateReminder);
   $('.content').on('change', '#associate-reminder-with-company', onDisplayCompanyDropdown);
+  $('.content').on('change', '#associate-reminder-with-contact', onDisplayContactDropdown);
   $('.content').on('change', '#associate-reminder-with-job', onDisplayJobDropdown);
   $('.content').on('change', '#select-option-company-name', onSelectOptionCompanyVal);
   $('.content').on('change', '#select-option-job-title', onSelectOptionJobVal);

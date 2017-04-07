@@ -1,0 +1,9 @@
+<div id="contact-select-options">
+  <label>Contact Name Selection:</label>
+  <select id="select-option-contact-name" class="form-control">
+      <option class="form-control blank-option" placeholder="Blank" type="text" value="0"></option>
+      {{#each contacts as |contact|}}
+        <option class="form-control option-company-name" name="reminder[company_name]" placeholder="reminder Type" type="text" data-company-id="{{company.id}}" data-company-name="{{company.name}}" value="{{contact.id}}">{{contact.full_name}}</option>
+      {{/each}}
+  </select>
+</div>
