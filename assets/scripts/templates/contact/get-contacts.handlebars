@@ -3,26 +3,30 @@
 <table class="table contact-summary-table table-hover">
   <thead>
     <tr>
-      <th>Date</th>
-      <th>Contact Subject</th>
-      <th>Contact Url</th>
+      <th>Full Name</th>
+      <th>Company Name</th>
+      <th>Contact Email</th>
+      <th>Contact Phone</th>
       <th>View Record</th>
     </tr>
   </thead>
   <tbody>
     {{#each contacts as |contact|}}
       <tr>
-        <td class="display-contact-date">
-          {{contact.docdate}}
+        <td class="display-contact-full-name">
+          {{contact.full_name}}
         </td>
-        <td class="display-contact-subject">
-          {{contact.docsubject}}
+        <td class="display-contact-company-name">
+          {{contact.company_name}}
         </td>
-        <td class="display-contact-url">
-          {{contact.docurl}}
+        <td class="display-contact-email">
+          {{contact.email}}
+        </td>
+        <td class="display-contact-email">
+          {{contact.phone}}
         </td>
         <td class="display-contact-submit">
-          <button type="button" class="btn btn-info btn-sm dashboard-contact-record-btn" data-current-contact-id="{{contact.id}}">View contact</button>
+          <button type="button" class="btn btn-info btn-sm dashboard-contact-record-btn" data-current-contact-id="{{contact.id}}" data-current-company-id="{{contact.company_ref_id}}" data-current-job-id="{{contact.job_ref_id}}" data-current-document-id="{{contact.document_ref_id}}">View Contact</button>
         </td>
       </tr>
     {{/each}}
@@ -31,4 +35,5 @@
 <br><br>
 <div class="dashboard-container">
   <button id="dashboard-new-job-btn" type="button" class="btn btn-success">Create Job</button>
+  <button id="dashboard-new-job-btn-company" type="button" class="btn btn-success dashboard-home-btn-company-page" data-current-company-id="{{company.id}}">Create Job</button>
 </div>

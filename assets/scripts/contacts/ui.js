@@ -155,6 +155,7 @@ const updateFormGenerator = function() {
 
   let companyId = parseInt($("#associate-reminder-with-company").attr("data-current-company-id"));
 
+
   if (companyId > 0) {
     console.log("true");
     // $("#associate-reminder-with-company").prop("checked", true);
@@ -164,10 +165,10 @@ const updateFormGenerator = function() {
 
 };
 
-// const getContactFailure = () => {
-//   $(".notification-container").children().text("");
-//   console.log('get contact failure');
-// };
+const getContactFailure = () => {
+  $(".notification-container").children().text("");
+  console.log('get contact failure');
+};
 
 const createContactSuccess = () => {
   $(".form-error").text("");
@@ -217,7 +218,7 @@ module.exports = {
   deleteContactFailure,
   updateFormGenerator,
   showContactCreateForm,
-  // getContactFailure,
+  getContactFailure,
   updateContactSuccess,
   // updateContactFailure,
   showContactRecordFailure,

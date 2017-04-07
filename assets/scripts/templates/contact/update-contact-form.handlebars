@@ -6,35 +6,55 @@
     <p>All fields are <u>optional</u> unless otherwise indicated</p>
 
     <div class="form-group">
-      <label>Contact Name (required)</label>
-      <input class="form-control required-field" name="contact[docdate]" placeholder="Contact Date" type="date" value="{{contact.docdate}}">
+      <label>First Name (required)</label>
+      <input class="form-control required-field" name="contact[first_name]" placeholder="Contact First Name" type="text" value={{contact.first_name}}>
     </div>
 
     <div class="form-group">
-      <label>Contact Type</label>
-      <input class="form-control required-field" name="contact[doctype]" placeholder="Contact Type" type="text" value="{{contact.doctype}}">
+      <label>First Name (required)</label>
+      <input class="form-control required-field" name="contact[last_name]" placeholder="Contact Last Name" type="text" value={{contact.last_name}}>
     </div>
 
     <div class="form-group">
-      <label>Contact Website (url)</label>
-      <input class="form-control" name="contact[docurl]" placeholder="url" type="text" value="{{contact.docurl}}">
+      <label>Nickname</label>
+      <input class="form-control required-field" name="contact[nickname]" placeholder="Contact Nickname" type="text" value={{contact.nickname}}>
     </div>
 
     <div class="form-group">
-      <label>Contact Subject (required)</label>
-      <input class="form-control" name="contact[docsubject]" placeholder="Subject" type="text" value="{{contact.docsubject}}">
+      <label>Company Name</label>
+      <input class="form-control required-field" name="contact[company_name]" placeholder="Contact Company Name" type="text" value={{contact.company_name}}>
     </div>
 
     <div class="form-group">
-      <label>Contact Text</label>
-      <textarea class="form-control field-input note-input" name="contact[doctext]" placeholder="Contact Text">{{contact.doctext}}</textarea>
+      <label>Job Title</label>
+      <input class="form-control required-field" name="contact[job_title]" placeholder="Contact Job Title" type="text" value={{contact.job_title}}>
+    </div>
+
+    <div class="form-group">
+      <label>Email</label>
+      <input class="form-control required-field" name="contact[email]" placeholder="Contact Email" type="text" value={{contact.email}}>
+    </div>
+
+    <div class="form-group">
+      <label>Phone</label>
+      <input class="form-control required-field" name="contact[phone]" placeholder="Contact Phone" type="text" value={{contact.phone}}>
+    </div>
+
+    <div class="form-group">
+      <label>Website</label>
+      <input class="form-control required-field" name="contact[website]" placeholder="Contact Website" type="text" value={{contact.website}}>
+    </div>
+
+    <div class="form-group">
+      <label>Contact Notes</label>
+      <textarea class="form-control field-input note-input" name="contact[doctext]" placeholder="Contact Notes">{{contact.notes}}</textarea>
     </div>
 
     <div id="associate-with-job-company" class="form-group">
-      <label>Associate Reminder With Company?</label>
+      <label>Tag Contact to a Company?</label>
       <div class="form-group associate-reminder-with-company-container">
         <span>Check Box for Yes</span>
-          <input id="associate-reminder-with-company" type="checkbox" value="" data-current-company-id="{{contact.company_ref_id}}" data-current-job-id="{{contact.job_ref_id}}">
+          <input id="associate-reminder-with-company" type="checkbox" value="" data-current-contact-id="{{contact.id}}" data-current-company-id="{{contact.company_ref_id}}" data-current-job-id="{{contact.job_ref_id}}" data-current-document-id="{{contact.document_ref_id}}">
       </div>
     </div>
 
