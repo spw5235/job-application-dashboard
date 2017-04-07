@@ -65,7 +65,7 @@ const determineCompany = function() {
     } else {
       $("#job-select-options").remove();
       store.selectedJobId = 0;
-      store.selectedJobTitle = 0;
+      store.selectedJobTitle = "";
       console.log("remove");
     }
   }
@@ -83,14 +83,14 @@ const displayCompanyDropdownSuccess = function(data) {
   });
 
   let selectedVal = $("#select-option-company-name").val();
-  let selectedValInt = parseInt(selectedVal);
+  let selectedValInt = parseInt(selectedVal)
 
   let currentReminderCompanyId = $("#associate-reminder-with-company").attr("data-current-company-id");
 
   // let currentReminderCompanyIdInt = parseInt(currentReminderCompanyId);
 
 
-  if (selectedValInt > 0) {
+  if (selectedValInt) {
       $(".display-job-title").append('<div class="form-group"><label>Associate Reminder With Specific Job?</label><div class="form-group associate-reminder-with-job-container"><span>Check Box for Yes</span><input id="associate-reminder-with-job" type="checkbox" value=""></div></div>');
   } else {
     $(".association-job-insert").remove();
@@ -297,8 +297,9 @@ const createReminderSuccess = () => {
   $(".content").children().remove();
   $(".success-alert").text("Reminder Has Been Successfully Created");
   store.reminderPage = true;
+  let data = store.createReminderData;
   let showReminderDetails = displayReminderDetails({
-    reminder: store.createReminderData.reminder
+    reminder: data.reminder
   });
   $(".content").append(showReminderDetails);
   $(".current").attr("data-current-reminder-id", store.currentReminderId);
@@ -326,7 +327,7 @@ const updateReminderSuccess = (data) => {
   $(".success-alert").text("Reminder Has Been Successfully Updated");
 
   let showReminderDetails = displayReminderDetails({
-    reminder: store.createReminderData.reminder
+    reminder: data.reminder
   });
   $(".content").append(showReminderDetails);
   $(".current").attr("data-current-reminder-id", store.currentReminderId);

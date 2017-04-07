@@ -65,14 +65,14 @@ const onCreateReminder = function(event) {
 
   if (jobRefId === undefined) {
     data.reminder.job_ref_id = 0;
-    data.reminder.job_title = 0;
+    data.reminder.job_title = "";
   } else {
     data.reminder.job_ref_id = store.selectedJobId;
     data.reminder.job_title = store.selectedJobTitle;
   }
 
   if (data.reminder.job_ref_id === 0 || data.reminder.job_ref_id === "0") {
-    data.reminder.job_title = 0;
+    data.reminder.job_title = "";
   }
 
   store.createReminderData = data;
@@ -124,7 +124,7 @@ const onSelectOptionCompanyVal = function() {
     let valueString = '#select-option-job-title option[value=0]';
     $(valueString).prop('selected',true);
     store.selectedCompanyId = 0;
-    store.selectedCompanyName = 0;
+    store.selectedCompanyName = "";
     // $("#job-select-options").remove();
     // store.selectedJobId = 0;
     // store.selectedJobTitle = 0;
@@ -175,9 +175,9 @@ const onDisplayCompanyDropdown = function() {
 
   if (!isCompanyChecked) {
     store.selectedCompanyId = 0;
-    store.selectedCompanyName = 0;
+    store.selectedCompanyName = "";
     store.selectedJobId = 0;
-    store.selectedJobTitle = 0;
+    store.selectedJobTitle = "";
   }
 
   if (this.checked) {
@@ -240,7 +240,7 @@ const onDisplayJobDropdown = function() {
   } else {
     $("#job-select-options").remove();
     store.selectedJobId = 0;
-    store.selectedJobTitle = 0;
+    store.selectedJobTitle = "";
     console.log("remove");
   }
 };
