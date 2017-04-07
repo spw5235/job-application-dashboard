@@ -1,0 +1,63 @@
+<h1>Contact Overview</h1>
+
+<h2 class="contact-name-header" data-current-contact-name="{{contact.id}}">{{contact.id}}</h2>
+
+<h3>Contact Details</h3>
+<table class="table contact-record-table table-hover">
+  <tbody>
+    <tr>
+      <td class="contact-record-date">
+        Contact Date:
+      </td>
+      <td class="display-contact-name">
+        {{contact.docdate}}
+      </td>
+    </tr>
+    <tr>
+      <td class="contact-record-title contact-record-location">
+        Contact Type:
+      </td>
+      <td class="display-contact-doctype">
+        {{contact.doctype}}
+      </td>
+    </tr>
+    <tr>
+      <td class="contact-url">
+        Contact Url:
+      </td>
+      <td class="display-contact-url">
+        {{contact.docurl}}
+      </td>
+    </tr>
+    <tr>
+      <td class="contact-record-title contact-record-subject">
+        Contact Subject:
+      </td>
+      <td class="display-contact-subject">
+        {{contact.docsubject}}
+      </td>
+    </tr>
+    <tr>
+      <td class="contact-record-title contact-record-note">
+        Contact Text:
+      </td>
+      <td class="display-contact-note">
+        {{contact.doctext}}
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="dashboard-contact-btn-container">
+  <div class="contact-record-btn-options">
+    <button id="contact-record-btn-edit" type="button" class="btn btn-warning current" data-current-contact-id="{{contact.id}}">Edit Contact Record</button>
+    <button id="contact-record-delete" type="button" class="btn btn-danger current" data-current-contact-id="{{contact.id}}">Delete Contact Record</button>
+  </div>
+</div>
+
+<div class="dashboard-container">
+  <button id="dashboard-home-btn" type="button" class="btn btn-primary dashboard-home-btn-contact-page">View Dashboard</button>
+  <button id="dashboard-new-job-btn-contact" type="button" class="btn btn-success dashboard-home-btn-contact-page" data-current-contact-id="{{contact.id}}" data-type-contact-page="{{contact.contact_page}}">Create Job</button>
+</div>
+
+<div class="filter-show-job-container"></div>

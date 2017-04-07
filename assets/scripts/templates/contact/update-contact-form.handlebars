@@ -1,0 +1,54 @@
+<div class="update-contact-form-container form-container">
+<form class="form contact-form reminder-form" id="update-contact-form" name="update-contact-form" data-update-form="1">
+  <fieldset>
+    <legend>Update Contact Form</legend>
+    <p id="update-contact-error" class="warning form-error"></p>
+    <p>All fields are <u>optional</u> unless otherwise indicated</p>
+
+    <div class="form-group">
+      <label>Contact Name (required)</label>
+      <input class="form-control required-field" name="contact[docdate]" placeholder="Contact Date" type="date" value="{{contact.docdate}}">
+    </div>
+
+    <div class="form-group">
+      <label>Contact Type</label>
+      <input class="form-control required-field" name="contact[doctype]" placeholder="Contact Type" type="text" value="{{contact.doctype}}">
+    </div>
+
+    <div class="form-group">
+      <label>Contact Website (url)</label>
+      <input class="form-control" name="contact[docurl]" placeholder="url" type="text" value="{{contact.docurl}}">
+    </div>
+
+    <div class="form-group">
+      <label>Contact Subject (required)</label>
+      <input class="form-control" name="contact[docsubject]" placeholder="Subject" type="text" value="{{contact.docsubject}}">
+    </div>
+
+    <div class="form-group">
+      <label>Contact Text</label>
+      <textarea class="form-control field-input note-input" name="contact[doctext]" placeholder="Contact Text">{{contact.doctext}}</textarea>
+    </div>
+
+    <div id="associate-with-job-company" class="form-group">
+      <label>Associate Reminder With Company?</label>
+      <div class="form-group associate-reminder-with-company-container">
+        <span>Check Box for Yes</span>
+          <input id="associate-reminder-with-company" type="checkbox" value="" data-current-company-id="{{contact.company_ref_id}}" data-current-job-id="{{contact.job_ref_id}}">
+      </div>
+    </div>
+
+    <div class="form-group display-company-names"></div>
+    <div class="form-group display-job-title"></div>
+
+    <div class="form-group">
+      <input class="btn btn-success submit-btn current" name="submit" id="submit-contact-update-btn" type="submit" value="Submit">
+    </div>
+  </fieldset>
+</form>
+<br><br>
+<div class="dashboard-container">
+  <button id="dashboard-home-btn" type="button" class="btn btn-primary">View Dashboard</button>
+  <button id="dashboard-new-job-btn" type="button" class="btn btn-success">Create Session</button>
+</div>
+</div>

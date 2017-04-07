@@ -1,0 +1,67 @@
+<div class="create-contact-form-container form-container form-group">
+  <h1>Create a Contact</h1>
+
+  <p>Please note, in order to create a job, you must first create a contact record.</p>
+
+  <form class="form contact-form" id="new-contact-form" name="new-contact-form">
+    <fieldset>
+      <!-- <legend>Create Contact Form</legend> -->
+      <p id="create-contact-error" class="warning form-error"></p>
+      <p>All fields are <u>optional</u> unless otherwise indicated</p>
+
+
+      <div class="form-group">
+        <label>Contact Type (required)</label>
+        <input class="form-control required-field" name="contact[doctype]" placeholder="Contact Type" type="text">
+      </div>
+
+      <div class="form-group">
+        <label>Contact Date</label>
+        <input class="form-control required-field" name="contact[docdate]" placeholder="Contact Date" type="date">
+      </div>
+
+      <div class="form-group">
+        <label>Contact Url</label>
+        <input class="form-control required-field" name="contact[docurl]" placeholder="Contact Link" type="text">
+      </div>
+
+      <div class="form-group">
+        <label>Contact Subject (required)</label>
+        <input class="form-control required-field" name="contact[docsubject]" placeholder="Contact Subject" type="text">
+      </div>
+
+      <div class="form-group">
+        <label>Contact Text</label>
+        <textarea class="form-control field-input note-input" name="contact[doctext]" placeholder="Contact Text"></textarea>
+      </div>
+
+      <div id="associate-with-job-company" class="form-group">
+        <label>Associate Reminder With Company?</label>
+        <div class="form-group associate-reminder-with-company-container">
+          <span>Check Box for Yes</span>
+            <input id="associate-reminder-with-company" type="checkbox" value="">
+        </div>
+      </div>
+
+      <div class="form-group display-company-names"></div>
+      <div class="form-group display-job-title"></div>
+      <!-- <div id="associate-contact-with-company" class="form-group">
+        <label>Associate Contact With Company?</label>
+        <div class="form-group associate-contact-with-company-container">
+          <span>Check Box for Yes</span>
+            <input id="associate-contact-with-company" type="checkbox" value="">
+        </div>
+      </div>
+
+      <div class="form-group display-company-names"></div> -->
+
+      <div class="form-group">
+        <input class="btn btn-success submit-btn current" name="submit" id="create-contact-btn" type="submit" value="Submit">
+      </div>
+    </fieldset>
+  </form>
+  <br><br>
+  <div class="dashboard-container">
+    <button id="dashboard-home-btn" type="button" class="btn btn-primary">View Dashboard</button>
+  </div>
+</div>
