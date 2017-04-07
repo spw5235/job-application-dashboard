@@ -1,0 +1,63 @@
+<h1>Document Overview</h1>
+
+<h2 class="document-name-header" data-current-document-name="{{document.id}}">{{document.id}}</h2>
+
+<h3>Document Details</h3>
+<table class="table document-record-table table-hover">
+  <tbody>
+    <tr>
+      <td class="document-record-date">
+        Document Date:
+      </td>
+      <td class="display-document-name">
+        {{document.docdate}}
+      </td>
+    </tr>
+    <tr>
+      <td class="document-record-title document-record-location">
+        Document Type:
+      </td>
+      <td class="display-document-doctype">
+        {{document.doctype}}
+      </td>
+    </tr>
+    <tr>
+      <td class="document-url">
+        Document Url:
+      </td>
+      <td class="display-document-url">
+        {{document.docurl}}
+      </td>
+    </tr>
+    <tr>
+      <td class="document-record-title document-record-subject">
+        Document Subject:
+      </td>
+      <td class="display-document-subject">
+        {{document.docsubject}}
+      </td>
+    </tr>
+    <tr>
+      <td class="document-record-title document-record-note">
+        Document Text:
+      </td>
+      <td class="display-document-note">
+        {{document.doctext}}
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="dashboard-document-btn-container">
+  <div class="document-record-btn-options">
+    <button id="document-record-btn-edit" type="button" class="btn btn-warning current" data-current-document-id="{{document.id}}">Edit Document Record</button>
+    <button id="document-record-delete" type="button" class="btn btn-danger current" data-current-document-id="{{document.id}}">Delete Document Record</button>
+  </div>
+</div>
+
+<div class="dashboard-container">
+  <button id="dashboard-home-btn" type="button" class="btn btn-primary dashboard-home-btn-document-page">View Dashboard</button>
+  <button id="dashboard-new-job-btn-document" type="button" class="btn btn-success dashboard-home-btn-document-page" data-current-document-id="{{document.id}}" data-type-document-page="{{document.document_page}}">Create Job</button>
+</div>
+
+<div class="filter-show-job-container"></div>

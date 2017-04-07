@@ -1,0 +1,34 @@
+<h1>Document Dashboard</h1>
+
+<table class="table document-summary-table table-hover">
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Document Subject</th>
+      <th>Document Url</th>
+      <th>View Record</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each documents as |document|}}
+      <tr>
+        <td class="display-document-date">
+          {{document.docdate}}
+        </td>
+        <td class="display-document-subject">
+          {{document.docsubject}}
+        </td>
+        <td class="display-document-url">
+          {{document.docurl}}
+        </td>
+        <td class="display-document-submit">
+          <button type="button" class="btn btn-info btn-sm dashboard-document-record-btn" data-current-document-id="{{document.id}}">View document</button>
+        </td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>
+<br><br>
+<div class="dashboard-container">
+  <button id="dashboard-new-job-btn" type="button" class="btn btn-success">Create Job</button>
+</div>

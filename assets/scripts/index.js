@@ -7,6 +7,7 @@ const companyEvents = require('./companies/events.js');
 const jobEvents = require('./jobs/events.js');
 const reminderEvents = require('./reminders/events.js');
 const dashboardEvents = require('./dashboard/events.js');
+const documentEvents = require('./documents/events.js');
 
 $(() => {
   authEvents.addHandlers();
@@ -14,6 +15,7 @@ $(() => {
   dashboardEvents.addHandlers();
   jobEvents.addHandlers();
   reminderEvents.addHandlers();
+  documentEvents.addHandlers();
   $(".credentials-container").show();
 
 });

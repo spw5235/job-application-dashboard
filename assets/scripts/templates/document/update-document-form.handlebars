@@ -1,0 +1,43 @@
+<div class="update-document-form-container form-container">
+<form class="form document-form" id="update-document-form" name="update-document-form">
+  <fieldset>
+    <legend>Update Document Form</legend>
+    <p id="update-document-error" class="warning form-error"></p>
+    <p>All fields are <u>optional</u> unless otherwise indicated</p>
+
+    <div class="form-group">
+      <label>Document Name (required)</label>
+      <input class="form-control required-field" name="document[docdate]" placeholder="Document Date" type="date" value="{{document.docdate}}">
+    </div>
+
+    <div class="form-group">
+      <label>Document Type</label>
+      <input class="form-control required-field" name="document[doctype]" placeholder="Document Type" type="text" value="{{document.doctype}}">
+    </div>
+
+    <div class="form-group">
+      <label>Document Website (url)</label>
+      <input class="form-control" name="document[docurl]" placeholder="url" type="text" value="{{document.docurl}}">
+    </div>
+
+    <div class="form-group">
+      <label>Document Subject (required)</label>
+      <input class="form-control" name="document[docsubject]" placeholder="Subject" type="text" value="{{document.docsubject}}">
+    </div>
+
+    <div class="form-group">
+      <label>Document Text</label>
+      <textarea class="form-control field-input note-input" name="document[doctext]" placeholder="Document Text">{{document.doctext}}</textarea>
+    </div>
+
+    <div class="form-group">
+      <input class="btn btn-success submit-btn current" name="submit" id="submit-document-update-btn" type="submit" value="Submit">
+    </div>
+  </fieldset>
+</form>
+<br><br>
+<div class="dashboard-container">
+  <button id="dashboard-home-btn" type="button" class="btn btn-primary">View Dashboard</button>
+  <button id="dashboard-new-job-btn" type="button" class="btn btn-success">Create Session</button>
+</div>
+</div>
