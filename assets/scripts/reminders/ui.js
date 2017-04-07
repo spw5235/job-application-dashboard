@@ -12,14 +12,14 @@ const jobsApi = require('../jobs/api');
 // Reminder UI
 
 const displayJobDropdownSuccess = (data) => {
-  console.log(data);
+
   $(".notification-container").children().text("");
 
   let jobOptionDisplay = displayJobDashboard({
     jobs: data.jobs
   });
 
-  $('.associate-reminder-with-company-container').append(jobOptionDisplay);
+  $('.display-job-title').append(jobOptionDisplay);
 
   let currentReminderJobId = $("#associate-reminder-with-company").attr("data-current-job-id");
 
@@ -45,7 +45,18 @@ const displayCompanyDropdownSuccess = function(data) {
     companies: data.companies
   });
 
+  let selectedVal = $("#select-option-company-name").val();
+  let selectedValInt = parseInt(selectedVal);
+
   let currentReminderCompanyId = $("#associate-reminder-with-company").attr("data-current-company-id");
+
+  // let currentReminderCompanyIdInt = parseInt(currentReminderCompanyId);
+
+
+  if (selectedValInt > 0) {
+      $(".display-job-title").append('<div class="form-group"><label>Associate Reminder With Specific Job?</label><div class="form-group associate-reminder-with-job-container"><span>Check Box for Yes</span><input id="associate-reminder-with-job" type="checkbox" value=""></div></div>');
+  }
+
   // let currentReminderCompanyName = $("#associate-reminder-with-company").attr("data-current-company-name");
   // let currentReminderJobId = $("#associate-reminder-with-company").attr("data-current-job-id");
   // let currentReminderJobTitle = $("#associate-reminder-with-company").attr("data-current-job-title");
@@ -64,6 +75,7 @@ const displayCompanyDropdownSuccess = function(data) {
 
   if ( currentReminderJobId > 0 ) {
     hasJob = true;
+    console.log('has - job')
   } else {
     hasJob = false;
   }

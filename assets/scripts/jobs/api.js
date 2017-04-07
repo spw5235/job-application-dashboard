@@ -15,6 +15,16 @@ const getJobs = function() {
   });
 };
 
+const getJobsById = function(id) {
+  return $.ajax({
+    url: config.apiOrigin + '/companies/' + id + '/jobs',
+    method: 'GET',
+    headers: {
+      Authorization: 'Token token=' + store.user.token,
+    },
+  });
+};
+
 const getJobsDropdown = function(id) {
   return $.ajax({
     url: config.apiOrigin + '/companies/' + id + '/jobs',
@@ -97,4 +107,5 @@ module.exports = {
   deleteJob,
   updateJobManual,
   getJobsDropdown,
+  getJobsById,
 };
