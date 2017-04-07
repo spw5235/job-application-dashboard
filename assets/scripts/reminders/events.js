@@ -221,8 +221,6 @@ const onDisplayJobDropdown = function() {
 
   let isUpdateForm = $(".reminder-form").attr("data-update-form");
 
-  console.log(isUpdateForm === "true");
-
   let isJobChecked = $("#associate-reminder-with-job").prop("checked");
 
   if (isJobChecked) {

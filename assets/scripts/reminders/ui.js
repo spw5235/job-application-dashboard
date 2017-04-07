@@ -39,7 +39,7 @@ const displayJobDropdownSuccess = (data) => {
 
 const displayJobsDropdownFail = function() {
   console.log("failure");
-}
+};
 
 const determineCompany = function() {
   let jobId = $("#associate-reminder-with-company").attr("data-current-job-id");
@@ -48,6 +48,7 @@ const determineCompany = function() {
   if (jobId > 0) {
     $(".display-job-title").append('<div class="form-group"><label>Associate Reminder With Specific Job?</label><div class="form-group associate-reminder-with-job-container"><span>Check Box for Yes</span><input id="associate-reminder-with-job" type="checkbox" value=""></div></div>');
     $("#associate-reminder-with-job").prop("checked", true);
+    console.log('in here now');
 
     let isJobChecked = $("#associate-reminder-with-job").prop("checked");
 
@@ -130,30 +131,11 @@ const displayCompanyDropdownSuccess = function(data) {
   let updateForm = $(".reminder-form").attr("data-update-form");
   updateForm = parseInt(updateForm);
 
+  console.log(updateForm);
   if ( updateForm === 1) {
     determineCompany();
   }
 
-  // if (updateForm) {
-  //   let currentReminderCompanyId = $("#associate-reminder-with-company").attr("data-current-company-id");
-  //   currentReminderCompanyId = parseInt(currentReminderCompanyId);
-  //
-  //   let hasCompany;
-  //
-  //   if ( currentReminderCompanyId > 0 ) {
-  //     hasCompany = true;
-  //   } else {
-  //     hasCompany = false;
-  //   }
-  //
-  //   if (hasCompany) {
-  //     $("#associate-reminder-with-company").prop('checked', true);
-  //     companiesApi.getCompanies()
-  //       .done(displayCompanyDropdownSuccess)
-  //       .fail(displayCompanyDropdownFail);
-  //
-  //   }
-  // }
 
 
 };

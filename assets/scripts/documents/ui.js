@@ -153,6 +153,15 @@ const updateFormGenerator = function() {
   $(".associate-reminder-with-document-container").attr("current-document-id", store.currentDocumentId);
   $(".associate-reminder-with-document-container").attr("current-job", store.currentJobId);
 
+  let companyId = parseInt($("#associate-reminder-with-company").attr("data-current-company-id"));
+
+  if (companyId > 0) {
+    console.log("true");
+    // $("#associate-reminder-with-company").prop("checked", true);
+    $("#associate-reminder-with-company").click();
+    // $(".display-job-title").append('<div class="form-group"><label>Associate Reminder With Specific Job?</label><div class="form-group associate-reminder-with-job-container"><span>Check Box for Yes</span><input id="associate-reminder-with-job" type="checkbox" value=""></div></div>');
+  }
+
 };
 
 // const getDocumentFailure = () => {
