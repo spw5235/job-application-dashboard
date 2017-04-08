@@ -1,6 +1,5 @@
 'use strict';
 
-const config = require('../config');
 const store = require('../store');
 const contactsApi = require('../contacts/api');
 const displayContactOptions = require('../templates/contact/option-dropdown-contacts.handlebars');
@@ -21,7 +20,7 @@ const displayContactOptions = require('../templates/contact/option-dropdown-cont
 
 const displayDropdownFail = function() {
   console.log('fail');
-}
+};
 
 const displayDropdownSuccess = function(data) {
   console.log(data);
@@ -37,22 +36,38 @@ const displayDropdownSuccess = function(data) {
   }
 
   $(classAppend).append(dataToAppend);
-  // const currentSelectIdText = '#select-option-' + category;
-  // let optionValue = $(currentSelectIdText).val();
-  // store.categoryIdSaved = optionValue;
-  //
-  // const currentSelectIdNameText = currentSelectIdText + " option[value=" + optionValue + ']';
-  // let selectedText = $(currentSelectIdNameText).text();
-  // store.categoryTextSaved = selectedText;
+
+  let isUpdateForm = parseInt($("#update-communication-form").attr("data-update-form"));
+
+  if (isUpdateForm === 1) {
+    let divIdSelector = "#" + store.currentUpdateInputId;
+    let idValue = parseInt($(divIdSelector).val());
+    let communicationTextSelect = '#select-option-' + category + ' option[value=' + idValue + ']';
+    $(communicationTextSelect).prop('selected', true);
+
+  } else {
+    return;
+  }
 
 };
 
-const determineApiRequest = function(category) {
+const determineApiRequest = function(category, isUpdate, checkboxId) {
+  console.log(category);
+  console.log(isUpdate);
+
+  let checkDivId = checkboxId;
   store.apiRequestCategory = category;
   if (category === "contact-category") {
-    contactsApi.getContacts()
-      .done(displayDropdownSuccess)
-      .fail(displayDropdownFail);
+    if (isUpdate) {
+      $(checkDivId).click();
+      // contactsApi.getContacts()
+      //   .done(displayDropdownSuccess)
+      //   .fail(displayDropdownFail);
+    } else {
+      contactsApi.getContacts()
+        .done(displayDropdownSuccess)
+        .fail(displayDropdownFail);
+    }
   }
 };
 
@@ -67,36 +82,46 @@ const calcStoreDefaultVals = function(category) {
   $(dropdownContainer).remove();
 };
 
-const tagCheckboxClickedUpdate = function(category, isBoxChecked) {
-  console.log('is update form');
-  // const storedId = calcStoreId(category, isBoxChecked);
-  // const storedName = calcStoreName(category, isBoxChecked);
-};
-
 
 const tagCheckboxClickedCreate = function(category, isBoxChecked) {
-
+  let isUpdate = false;
   if (!isBoxChecked) {
     calcStoreDefaultVals(category);
   } else {
-    determineApiRequest(category);
+    determineApiRequest(category, isUpdate);
   }
 };
 
-const tagCheckboxClicked = function(category, inputId, isUpdateForm) {
+const tagCheckboxClicked = function(category, inputId) {
   const inputidString = "#" + inputId;
   const isBoxChecked = $(inputidString).prop("checked");
   store.currentInputId = inputId;
   store.classAppend = "." + inputId + "-container";
   store.currentCategory = category;
-  if (isUpdateForm) {
-    tagCheckboxClickedUpdate(category, isBoxChecked);
+  tagCheckboxClickedCreate(category, isBoxChecked);
+};
+
+const tagCheckboxUpdate = function(category) {
+  const isUpdate = true;
+  const checkboxIdText = "." + category;
+  const checkboxIdVal = $(checkboxIdText).attr("id");
+  const checkboxId = "#" + checkboxIdVal;
+
+  store.currentUpdateInputId = checkboxIdVal;
+  console.log(checkboxId);
+  const isExistingId = parseInt($(checkboxId).val());
+
+  console.log(isExistingId);
+  if ( isExistingId > 0 ) {
+    determineApiRequest(category, isUpdate, checkboxId);
   } else {
-    tagCheckboxClickedCreate(category, isBoxChecked);
+    calcStoreDefaultVals(category);
   }
+  // tagCheckboxClickedUpdate(category, isBoxChecked);
 };
 
 module.exports = {
   tagCheckboxClicked,
   determineApiRequest,
+  tagCheckboxUpdate,
 };

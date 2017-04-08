@@ -22,10 +22,20 @@ const onShowCommunicationRecord = function(event) {
     .fail(communicationsUi.showCommunicationRecordFailure);
 };
 
+
+
+
+
 const onEditCommunication = function(event) {
   event.preventDefault();
   store.currentCommunicationId = $(this).attr("data-current-communication-id");
   communicationsUi.updateFormGenerator();
+
+  let category = "contact-category";
+
+  dashboardLogic.tagCheckboxUpdate(category);
+
+
 };
 
 const onCreateCommunication = function(event) {
@@ -92,17 +102,17 @@ const onDisplayCommunicationDropdown = function(event) {
   } else {
     isUpdateForm = false;
   }
-  dashboardLogic.tagCheckboxClicked(tagCategory, checkboxDivId, isUpdateForm);
+  dashboardLogic.tagCheckboxClicked(tagCategory, checkboxDivId);
 };
 
 
 const addHandlers = () => {
   $('.content').on('submit', '#new-communication-form', onCreateCommunication);
   // $('.content').on('submit', '#update-communication-form', onUpdateCommunication);
-  // $('.content').on('click', '#communication-record-btn-edit', onEditCommunication);
+  $('.content').on('click', '#communication-record-btn-edit', onEditCommunication);
   $('.content').on('click', '#generate-create-communication-btn', onShowCommunicationCreateForm);
-  // $('.content').on('click', '.dashboard-communication-record-btn', onShowCommunicationRecord);
-  // $('.content').on('click', '#get-communications-btn', onGetCommunications);
+  $('.content').on('click', '.dashboard-communication-record-btn', onShowCommunicationRecord);
+  $('.content').on('click', '#get-communications-btn', onGetCommunications);
   // $('.content').on('click', '#communication-record-delete', onDeleteCommunication);
 
   $('.content').on('change', '#tag-contact-to-communication', onDisplayCommunicationDropdown);

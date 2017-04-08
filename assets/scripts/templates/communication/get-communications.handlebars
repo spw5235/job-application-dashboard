@@ -3,10 +3,9 @@
 <table class="table communication-summary-table table-hover">
   <thead>
     <tr>
-      <th>Full Name</th>
-      <th>Company Name</th>
-      <th>Communication Email</th>
-      <th>Communication Phone</th>
+      <th>Date</th>
+      <th>Communication Method</th>
+      <th>Communication Subject</th>
       <th>View Record</th>
     </tr>
   </thead>
@@ -14,16 +13,13 @@
     {{#each communications as |communication|}}
       <tr>
         <td class="display-communication-full-name">
-          {{communication.full_name}}
+          {{communication.c_date}}
         </td>
         <td class="display-communication-company-name">
-          {{communication.company_name}}
+          {{communication.c_method}}
         </td>
         <td class="display-communication-email">
-          {{communication.email}}
-        </td>
-        <td class="display-communication-email">
-          {{communication.phone}}
+          {{communication.c_subject}}
         </td>
         <td class="display-communication-submit">
           <button type="button" class="btn btn-info btn-sm dashboard-communication-record-btn" data-current-communication-id="{{communication.id}}" data-current-company-id="{{communication.company_ref_id}}" data-current-job-id="{{communication.job_ref_id}}" data-current-document-id="{{communication.document_ref_id}}">View Communication</button>
