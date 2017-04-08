@@ -11,36 +11,8 @@ const displayContactCreateForm = require('../templates/contact/create-contact.ha
 // const displayShowJobTable = require('../templates/job/show-job.handlebars');
 const contactsApi = require('./api');
 // const jobsApi = require('../jobs/api');
-const remindersApi = require('../reminders/api');
+// const remindersApi = require('../reminders/api');
 const displayContactOptions = require('../templates/contact/display-contact-create-form.handlebars');
-
-
-// // Contact UI
-//
-// const getReminderContactPageSuccess = (data) => {
-//   let reminderData = data.reminders;
-//   let currentContactId = parseInt(store.currentContactId);
-//
-//   let count = 0;
-//   for (let i = 0; i < reminderData.length; i++) {
-//     let iterationContactId = reminderData[i].contact_ref_id;
-//
-//     if (iterationContactId === currentContactId) {
-//       data.reminders[i].show_data = true;
-//       count += 1;
-//     }
-//   }
-//
-//   if (count > 0) {
-//     let insertCompId = store.currentContactId;
-//     let reminderDashboard = displayReminderDashboardContactPage({
-//       reminders: data.reminders,
-//       insert: insertCompId
-//     });
-//
-//     $('.content').append(reminderDashboard);
-//   }
-// };
 
 const getReminderSuccess = (data) => {
   // let insertCompId = store.currentContactId;
@@ -52,57 +24,6 @@ const getReminderSuccess = (data) => {
   $('.content').append(reminderDashboard);
 
 };
-
-const getReminderFailure = (data) => {
-  console.log(data);
-};
-
-// const getJobSuccess = (data) => {
-//
-//   const jobsObject = data.jobs;
-//   let jobsIdArr = [];
-//   let jobsTitleArr = [];
-//
-//   for (let i = 0; i < jobsObject.length; i++) {
-//     jobsIdArr.push(jobsObject[i].id);
-//     jobsTitleArr.push(jobsObject[i].title);
-//   }
-//
-//   $(".notification-container").children().text("");
-//   const numberOfJobs = data.jobs.length;
-//   let singleJobData = data.jobs[0];
-//
-//   let singleJobDetails = displayShowJobTable({
-//     job: singleJobData
-//   });
-//
-//   let jobDashboard = displayJobsTable({
-//     jobs: data.jobs
-//   });
-//
-//   store.oneJobListed = (numberOfJobs === 1);
-//
-//   if (numberOfJobs === 1) {
-//     $(".content").append(singleJobDetails);
-//   } else if (numberOfJobs > 1) {
-//     $(".content").append(jobDashboard);
-//   }
-//   // $('.contact-dashboard-container').append(contactDashboard);
-//   const currentContactName = store.contactName;
-//   $("#job-record-btn-edit").attr("data-current-contact-id", store.currentContactId);
-//   $("#job-record-delete").attr("data-current-contact-id", store.currentContactId);
-//   $("#create-job-contact-btn").attr("data-current-contact-id", store.currentContactId);
-//   $("#job-reminder-create").attr("data-current-contact-id", store.currentContactId);
-//   $(".current-contact-name").text(currentContactName);
-//
-//   remindersApi.getReminders()
-//     .done(getReminderContactPageSuccess)
-//     .fail(getReminderFailure);
-// };
-//
-// const getJobFailure = () => {
-//   $(".notification-container").children().text("");
-// };
 
 const getContactSuccess = (data) => {
   $(".notification-container").children().text("");
@@ -208,15 +129,6 @@ const updateContactSuccess = (data) => {
     .fail(showContactRecordFailure);
 };
 
-// const updateContactFailure = () => {
-//   $(".notification-container").children().text("");
-//   $("#update-contact-error").text("Error: Contact not updated.  Please ensure all required fields have values");
-// };
-
-
-
-
-
 const displayContactDropdownSuccess = function(data) {
   $(".notification-container").children().text("");
 
@@ -224,32 +136,15 @@ const displayContactDropdownSuccess = function(data) {
     contacts: data.contacts
   });
 
-  // let selectedVal = $("#select-option-contact-name").val();
-  // let selectedValInt = parseInt(selectedVal)
-
-  let currentReminderContactId = $("#associate-reminder-with-company").attr("data-current-contact-id");
-
-  // if (selectedValInt) {
-  //     $(".display-contact-name").append('<div class="form-group"><label>Associate Reminder With Specific Job?</label><div class="form-group associate-reminder-with-job-container"><span>Check Box for Yes</span><input id="associate-reminder-with-job" type="checkbox" value=""></div></div>');
-  // } else {
-  //   $(".association-job-insert").remove();
-  // }
+  let dataUpdateFormVal = parseInt($("#update-reminder-form").attr("data-update-form"));
 
   $('.associate-reminder-with-contact-container').append(companyOptionDisplay);
 
-  $("#associate-reminder-with-contact").val(currentReminderContactId);
-
-  // let valueString = '#select-option-contact-name option[value=' + currentReminderContactId + ']';
-  //
-  // $(valueString).prop('selected',true);
-
-  // let updateForm = $(".reminder-form").attr("data-update-form");
-  // updateForm = parseInt(updateForm);
-  //
-  // console.log(updateForm);
-  // if ( updateForm === 1) {
-  //   determineCompany();
-  // }
+  if (dataUpdateFormVal === 1) {
+    let currentContactId = store.currentContactId;
+    let valueString = '#select-option-contact-name option[value=' + currentContactId + ']';
+    $(valueString).prop('selected', true);
+  }
 };
 
 module.exports = {
@@ -266,5 +161,6 @@ module.exports = {
   createContactSuccess,
   displayContactDropdownSuccess,
   displayContactOptions,
+  getReminderSuccess,
   // getReminderSuccess,
 };

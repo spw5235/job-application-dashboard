@@ -37,6 +37,10 @@ const getReminderJobPageFailure = function() {
 
 const getReminderJobPageSuccess = (data) => {
   console.log(data);
+
+
+  $('.current').attr("data-current-job-id", store.currentJobId);
+
   let reminderData = data.reminders;
   let currentCompanyId = parseInt(store.currentCompanyId);
   let currentJobId = parseInt(store.currentJobId);

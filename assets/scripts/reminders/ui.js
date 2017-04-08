@@ -13,6 +13,10 @@ const displayReminderDashboard = require('../templates/reminder/get-reminders.ha
 
 // Reminder UI
 
+const displayJobDropdownFail = function() {
+  console.log('fail');
+}
+
 const displayJobDropdownFailure = () => {
   console.log('failure');
 };
@@ -72,6 +76,20 @@ const determineCompany = function() {
       console.log("remove");
     }
   }
+
+  let isContactTagged = parseInt(store.currentContactId);
+  let isContactTaggedStr = isContactTagged.toString();
+
+  $("#associate-reminder-with-contact").attr("data-current-contact-id", store.currentContactId);
+  if (isContactTagged > 0) {
+    $("#associate-reminder-with-contact").click();
+    // $("#associate-reminder-with-contact").click();
+    console.log('there is contact');
+    // $('#select-option-contact-name option').eq(isContactTagged).prop('selected', true);
+  }
+
+
+
 };
 
 
@@ -189,10 +207,17 @@ const showReminderRecordSuccess = (data) => {
   $(".content").children().remove();
   console.log(data);
   store.lastShowReminderData = data;
+  store.currentContactId = data.reminder.contact_ref_id;
+  console.log(data);
+  // alert(data.reminder.contact_ref_id);
+  // alert(store.currentContactId);
   let reminderDetails = displayReminderDetails({
     reminder: data.reminder
   });
   $('.content').append(reminderDetails);
+
+  $("#reminder-record-btn-edit").attr("data-current-contact-id", data.reminder.contact_ref_id);
+  $('.current').attr("data-contact-id", store.currentContactId);
 
   // jobsApi.getJobs()
   //   .done(getJobSuccess)
@@ -249,6 +274,8 @@ const updateFormGenerator = function() {
   $(".current").attr("data-current-job-id", store.currentJobId);
   $(".current").attr("data-current-company-id", store.currentCompanyId);
   $(".current").attr("data-current-reminder-id", store.currentReminderId);
+  $(".current").attr("data-current-contact-id", store.currentContactId);
+
 
   let currentReminderCompanyId = $("#associate-reminder-with-company").attr("data-current-company-id");
   currentReminderCompanyId = parseInt(currentReminderCompanyId);
@@ -356,4 +383,5 @@ module.exports = {
   deleteReminderSuccess,
   deleteReminderFailure,
   displayJobsDropdownFail,
+  displayJobDropdownFail,
 };

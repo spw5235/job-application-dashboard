@@ -42,6 +42,8 @@ const onEditReminder = function(event) {
   store.currentReminderId = $(this).attr("data-current-reminder-id");
   store.currentCompanyId = $(this).attr("data-current-company-id");
   store.currentJobId = $(this).attr("data-current-job-id");
+  store.currentContactId = $(this).attr("data-current-contact-id");
+
   remindersUi.updateFormGenerator();
 
 };
@@ -99,6 +101,7 @@ const onCreateReminder = function(event) {
   } else {
     data.reminder.contact_name = selectedContactName;
     data.reminder.contact_ref_id = $("#select-option-contact-name").val();
+    alert(data.reminder.contact_ref_id);
   }
 
   store.createReminderData = data;
@@ -232,10 +235,6 @@ const onDisplayCompanyDropdown = function() {
   }
 
 };
-
-
-
-
 
 
 const onDisplayContactDropdown = function() {
