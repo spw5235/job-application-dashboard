@@ -1,0 +1,36 @@
+<h1>Communication Dashboard</h1>
+
+<table class="table communication-summary-table table-hover">
+  <thead>
+    <tr>
+      <th>Job Title</th>
+      <th>Job Post Url</th>
+      <th>Job Deadline</th>
+      <th>View Record</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each communications as |communication|}}
+    <tr>
+      <td class="display-obs-num">
+        {{job.title}}
+      </td>
+      <td class="display-obs-aet">
+        {{job.post_url}}
+      </td>
+      <td class="display-obs-pet">
+        {{job.deadline}}
+      </td>
+      <td>
+        <button class="btn btn-primary view-job-details-btn" type="button" class="btn btn-info btn-sm current" data-current-job-id="{{job.id}}" data-current-company-id="{{job.company_id}}">View Job</button>
+      </td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>
+<br><br>
+<div class="dashboard-container">
+  <button id="dashboard-home-btn" type="button" class="btn btn-primary">View Dashboard</button>
+  <button id="dashboard-new-job-btn" type="button" class="btn btn-success">Create Job</button>
+  <button id="dashboard-new-job-btn-company" type="button" class="btn btn-success dashboard-home-btn-company-page" data-current-company-id="{{company.id}}">Create Job</button>
+</div>

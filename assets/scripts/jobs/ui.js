@@ -1,238 +1,169 @@
 'use strict';
 
 const store = require('../store');
-const displayJobCreateForm = require('../templates/job/new-job-form.handlebars');
-const displayJobsTable = require('../templates/job/get-jobs.handlebars');
-const displayJobDetails = require('../templates/job/show-job.handlebars');
-const displayJobUpdateForm = require('../templates/job/update-job-form.handlebars');
-const companiesUi = require('../companies/ui');
-const companiesApi = require('../companies/api');
-const displayCompanyDetails = require('../templates/company/show-company-record.handlebars');
-const displayReminderDashboardCompanyPage = require('../templates/reminder/get-reminders-company.handlebars');
-const remindersApi = require('../reminders/api');
+const displayEditCommunication = require('../templates/communication/update-communication-form.handlebars');
+const displayCommunicationDashboard = require('../templates/communication/get-communications.handlebars');
+const displayReminderDashboard = require('../templates/reminder/get-reminders.handlebars');
+// const displayReminderDashboardCommunicationPage = require('../templates/reminder/get-reminders-communication.handlebars');
+const displayCommunicationDetails = require('../templates/communication/show-communication-record.handlebars');
+const displayCommunicationCreateForm = require('../templates/communication/create-communication.handlebars');
+// const displayJobsTable = require('../templates/job/get-jobs.handlebars');
+// const displayShowJobTable = require('../templates/job/show-job.handlebars');
+const communicationsApi = require('./api');
+// const jobsApi = require('../jobs/api');
+// const remindersApi = require('../reminders/api');
+const displayCommunicationOptions = require('../templates/communication/display-communication-create-form.handlebars');
+const dashboardLogic = require('../dashboard/logic');
 
-// Job UI
-
-const getJobSuccess = (data) => {
-  $(".notification-container").children().text("");
-
-  $(".content").children().remove();
-  let jobDashboard = displayJobsTable({
-    jobs: data.jobs
+const getReminderSuccess = (data) => {
+  // let insertCompId = store.currentCommunicationId;
+  let reminderDashboard = displayReminderDashboard({
+    reminders: data.reminders
+    // insert: insertCompId
   });
-  // $('.company-dashboard-container').append(companyDashboard);
-  $('.content').append(jobDashboard);
-  store.currentJobId = $('.current').attr("data-current-job-id");
-  console.log(store.currentJobId);
+
+  $('.content').append(reminderDashboard);
+
 };
 
-const getJobFailure = () => {
+const getCommunicationSuccess = (data) => {
   $(".notification-container").children().text("");
-};
-
-
-const getReminderJobPageFailure = function() {
-  console.log("failure");
-};
-
-const getReminderJobPageSuccess = (data) => {
-  console.log(data);
-
-
-  $('.current').attr("data-current-job-id", store.currentJobId);
-
-  let reminderData = data.reminders;
-  let currentCompanyId = parseInt(store.currentCompanyId);
-  let currentJobId = parseInt(store.currentJobId);
-
-  let count = 0;
-
-  for (let i = 0; i < reminderData.length; i++) {
-    let iterationJobId = reminderData[i].job_ref_id;
-    let iterationCompanyId = reminderData[i].company_ref_id;
-    let iterationCompanyIdCompanyIdRel = (iterationCompanyId === currentCompanyId);
-    let iterationCompanyIdJobIdRel = (iterationJobId === currentJobId);
-
-    if (iterationCompanyIdCompanyIdRel && iterationCompanyIdJobIdRel) {
-      data.reminders[i].show_data = true;
-      count += 1;
-    }
-  }
-
-  console.log(count);
-
-  if (count > 0) {
-    let insertCompId = store.currentCompanyId;
-    let reminderDashboard = displayReminderDashboardCompanyPage({
-      reminders: data.reminders,
-      insert: insertCompId
-    });
-
-    $('.content').append(reminderDashboard);
-  }
-};
-
-
-const showJobSuccess = (data) => {
-  $(".notification-container").children().text("");
-  // $(".job-summary-table-container").remove();
+  store.communicationDataForEdit = data;
 
   $(".content").children().remove();
 
-  let companyData = store.lastShowCompanyData;
-  let companyDetails = displayCompanyDetails({
-    company: companyData.company
+  let communicationDashboard = displayCommunicationDashboard({
+    communications: data.communications
   });
 
-  $('.content').append(companyDetails);
-
-  let jobDetails = displayJobDetails({
-    job: data.job
-  });
-  $('.content').append(jobDetails);
-
-  $(".current").attr("data-current-company-id", store.currentCompanyId);
-  $('.current').attr("data-current-job-id", store.currentJobId);
-
-  remindersApi.getReminders()
-    .done(getReminderJobPageSuccess)
-    .fail(getReminderJobPageFailure);
+  $('.content').append(communicationDashboard);
 
 };
 
-
-const showCompanySuccessJobPage = (data) => {
+const showCommunicationRecordSuccess = (data) => {
   $(".notification-container").children().text("");
   $(".content").children().remove();
-  store.lastShowCompanyData = data;
-  store.companyName = data.company.name;
-  data.company.company_page = true;
-  store.companyPage = data.company.company_page;
-  let companyDetails = displayCompanyDetails({
-    company: data.company
+  store.lastShowCommunicationData = data;
+
+  let communicationDetails = displayCommunicationDetails({
+    communication: data.communication
   });
-  $('.content').append(companyDetails);
-  //
-  // jobsApi.showJob()
-  //   .done(showJobSuccess)
-  //   .fail(showJobFailure);
+  $('.content').append(communicationDetails);
 };
 
-const showJobFailure = () => {
+const showCommunicationRecordFailure = () => {
   $(".notification-container").children().text("");
-};
-
-const generateCreateForm = () => {
-  $(".content").children().remove();
-  let showCreateForm = displayJobCreateForm();
-  $('.content').append(showCreateForm);
-  $(".current").attr("data-current-job-id", store.currentJobId);
-  $(".current").attr("data-current-company-id", store.currentCompanyId);
-};
-
-const generateUpdateForm = (data) => {
-  $(".notification-container").children().text("");
-  $(".content").children().remove();
-  data.job.company_id = store.currentCompanyId;
-  let generatedUpdateForm = displayJobUpdateForm({
-    job: data.job
-  });
-  $('.content').append(generatedUpdateForm);
-  $(".current").attr("data-current-company-id", store.currentCompanyId);
-  $(".current").attr("data-current-job-id",store.currentJobId);
-};
-
-const generateUpdateFormFailure = () => {
-  $(".notification-container").children().text("");
-};
-
-const showCompanyRecordSuccess = (data) => {
-  $(".notification-container").children().text("");
-  $(".content").children().remove();
-  store.lastShowCompanyData = data;
-  data.company.company_page = true;
-  store.companyPage = data.company.company_page;
-  let companyDetails = displayCompanyDetails({
-    company: data.company
-  });
-  let jobDetails = displayJobDetails({
-    job: store.createJobData.job
-  });
-  $(".content").append(companyDetails);
-  $(".content").append(jobDetails);
-  $(".dashboard-home-btn-company-page").remove();
-  $(".current").attr("data-current-company-id",store.currentCompanyId);
-  $(".current").attr("data-current-job-id",store.currentJobId);
-};
-
-const showCompanyRecordFailure = () => {
-  console.log('showCompanyRecordFailure failure');
-};
-
-const createJobSuccess = () => {
-  $(".form-error").text("");
-  $(".notification-container").children().text("");
-  $(".success-alert").text("Job Successfully Created");
-  $(".content").children().remove();
-
-  companiesApi.showCompany()
-    .done(showCompanyRecordSuccess)
-    .fail(showCompanyRecordFailure);
-};
-
-const createJobFailure = () => {
-  $(".notification-container").children().text("");
-  $("#create-job-error").text("Error creating job. Please check if all required fields are entered and number values fall within the listed range.");
-};
-
-const deleteJobSuccess = () => {
-  $(".notification-container").children().text("");
-  companiesApi.showCompany()
-    .done(companiesUi.showCompanyRecordSuccess)
-    .fail(companiesUi.showCompanyRecordSuccess);
-};
-
-const deleteJobFailure = () => {
-  $(".notification-container").children().text("");
-};
-
-const updateJobSuccess = (data) => {
-  $(".notification-container").children().text("");
-  console.log("update success");
-  store.currentJobId = data.job.id;
-  $(".content").children().remove();
-  let jobDetails = displayJobDetails({
-    job: data.job
-  });
-  $('.content').append(jobDetails);
-  $(".current").attr("data-current-company-id", store.currentCompanyId);
-  $(".current").attr("data-current-job-id",store.currentJobId);
-
-};
-
-const showCompanyFailureJobPage = function() {
   console.log('failure');
 };
-
-const updateJobFailure = () => {
+//
+const showCommunicationCreateForm = () => {
   $(".notification-container").children().text("");
-  $("#update-job-error").text("Error updating job. Please check if all required fields are entered and number values fall within the listed range.");
+  $(".content").children().remove();
+  let showCreateCommunicationForm = displayCommunicationCreateForm();
+  $('.content').append(showCreateCommunicationForm);
+};
+
+const updateFormGenerator = function() {
+  $(".notification-container").children().text("");
+  $(".content").children().remove();
+
+  let data = store.lastShowCommunicationData;
+
+  let editCommunication = displayEditCommunication({
+    communication: data.communication
+  });
+  $('.content').append(editCommunication);
+  // dashboardLogic.tagCheckboxUpdate(category);
+
+
+
+  // $(".associate-reminder-with-communication-container").attr("current-communication-id", store.currentCommunicationId);
+  //
+  // let contactRefId = parseInt($("#associate-reminder-with-company").attr("data-current-contact-id"));
+  //
+  //
+  // if (companyId > 0) {
+  //   console.log("true");
+  //   // $("#associate-reminder-with-company").prop("checked", true);
+  //   $("#associate-reminder-with-company").click();
+  //   // $(".display-job-title").append('<div class="form-group"><label>Associate Reminder With Specific Job?</label><div class="form-group associate-reminder-with-job-container"><span>Check Box for Yes</span><input id="associate-reminder-with-job" type="checkbox" value=""></div></div>');
+  // }
+
+};
+
+const getCommunicationFailure = () => {
+  $(".notification-container").children().text("");
+  console.log('get communication failure');
+};
+
+const createCommunicationSuccess = () => {
+  $(".form-error").text("");
+  $(".notification-container").children().text("");
+  $(".content").children().remove();
+  $(".success-alert").text("Communication Has Been Successfully Created");
+
+  let showCommunicationDetails = displayCommunicationDetails({
+    communication: store.createCommunicationData.communication
+  });
+  $(".content").append(showCommunicationDetails);
+  $(".current").attr("data-current-communication-id", store.currentCommunicationId);
+};
+
+const deleteCommunicationSuccess = () => {
+  $(".notification-container").children().text("");
+  console.log('delete success');
+  communicationsApi.getCommunications()
+    .done(getCommunicationSuccess)
+    .fail(getCommunicationFailure);
+};
+
+const deleteCommunicationFailure = () => {
+  $(".notification-container").children().text("");
+  console.log('delete fail');
+};
+
+const updateCommunicationSuccess = (data) => {
+  $(".notification-container").children().text("");
+  $(".success-alert").text("Communication Has Been Successfully Updated");
+  store.currentCommunicationId = data.communication.id;
+  $(".content").children().remove();
+  communicationsApi.showCommunication()
+    .done(showCommunicationRecordSuccess)
+    .fail(showCommunicationRecordFailure);
+};
+
+const displayCommunicationDropdownSuccess = function(data) {
+  $(".notification-container").children().text("");
+
+  let companyOptionDisplay = displayCommunicationOptions({
+    communications: data.communications
+  });
+
+  let dataUpdateFormVal = parseInt($("#update-reminder-form").attr("data-update-form"));
+
+  $('.associate-reminder-with-communication-container').append(companyOptionDisplay);
+
+  if (dataUpdateFormVal === 1) {
+    let currentCommunicationId = store.currentCommunicationId;
+    let valueString = '#select-option-communication-name option[value=' + currentCommunicationId + ']';
+    $(valueString).prop('selected', true);
+  }
 };
 
 module.exports = {
-  getJobSuccess,
-  getJobFailure,
-  showJobSuccess,
-  showJobFailure,
-  createJobSuccess,
-  createJobFailure,
-  updateJobSuccess,
-  updateJobFailure,
-  deleteJobSuccess,
-  deleteJobFailure,
-  generateCreateForm,
-  generateUpdateForm,
-  generateUpdateFormFailure,
-  showCompanySuccessJobPage,
-  showCompanyFailureJobPage,
+  getCommunicationSuccess,
+  showCommunicationRecordSuccess,
+  deleteCommunicationSuccess,
+  deleteCommunicationFailure,
+  updateFormGenerator,
+  showCommunicationCreateForm,
+  getCommunicationFailure,
+  updateCommunicationSuccess,
+  // updateCommunicationFailure,
+  showCommunicationRecordFailure,
+  createCommunicationSuccess,
+  displayCommunicationDropdownSuccess,
+  displayCommunicationOptions,
+  getReminderSuccess,
+  // getReminderSuccess,
 };

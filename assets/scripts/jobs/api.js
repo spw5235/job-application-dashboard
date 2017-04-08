@@ -3,11 +3,11 @@
 const config = require('../config');
 const store = require('../store');
 
-// Jobs API
+// Communications API
 
-const getJobs = function() {
+const getCommunications = function() {
   return $.ajax({
-    url: config.apiOrigin + '/companies/' + store.currentCompanyId + '/jobs',
+    url: config.apiOrigin + '/communications/',
     method: 'GET',
     headers: {
       Authorization: 'Token token=' + store.user.token,
@@ -15,9 +15,9 @@ const getJobs = function() {
   });
 };
 
-const getJobsById = function(id) {
+const showCommunication = function() {
   return $.ajax({
-    url: config.apiOrigin + '/companies/' + id + '/jobs',
+    url: config.apiOrigin + '/communications/' + store.currentCommunicationId,
     method: 'GET',
     headers: {
       Authorization: 'Token token=' + store.user.token,
@@ -25,29 +25,9 @@ const getJobsById = function(id) {
   });
 };
 
-const getJobsDropdown = function(id) {
+const createCommunication = function(data) {
   return $.ajax({
-    url: config.apiOrigin + '/companies/' + id + '/jobs',
-    method: 'GET',
-    headers: {
-      Authorization: 'Token token=' + store.user.token,
-    },
-  });
-};
-
-const showJob = function() {
-  return $.ajax({
-    url: config.apiOrigin + '/jobs/' + store.currentJobId,
-    method: 'GET',
-    headers: {
-      Authorization: 'Token token=' + store.user.token,
-    },
-  });
-};
-
-const createJob = function(data) {
-  return $.ajax({
-    url: config.apiOrigin + '/companies/' + store.currentCompanyId + '/jobs',
+    url: config.apiOrigin + '/communications/',
     method: 'POST',
     headers: {
       Authorization: 'Token token=' + store.user.token,
@@ -56,9 +36,9 @@ const createJob = function(data) {
   });
 };
 
-const deleteJob = function() {
+const deleteCommunication = function(id) {
   return $.ajax({
-    url: config.apiOrigin + '/jobs/' + store.currentJobId,
+    url: config.apiOrigin + '/communications/' + id,
     method: 'DELETE',
     headers: {
       Authorization: 'Token token=' + store.user.token,
@@ -66,31 +46,9 @@ const deleteJob = function() {
   });
 };
 
-const updateJobManual = function(title, posting_date, post_url, salary, responsibility, requirement, deadline, comment) {
+const updateCommunication = function(data) {
   return $.ajax({
-    url: config.apiOrigin + '/jobs/' + store.currentJobId,
-    method: 'PATCH',
-    headers: {
-      Authorization: 'Token token=' + store.user.token,
-    },
-    data: {
-      job: {
-        title: title,
-        posting_date: posting_date,
-        post_url: post_url,
-        salary: salary,
-        responsibility: responsibility,
-        requirement: requirement,
-        deadline: deadline,
-        comment: comment
-      }
-    }
-  });
-};
-
-const updateJob = function(data) {
-  return $.ajax({
-    url: config.apiOrigin + '/jobs/' + store.currentJobId,
+    url: config.apiOrigin + '/communications/' + store.currentCommunicationId,
     method: 'PATCH',
     headers: {
       Authorization: 'Token token=' + store.user.token,
@@ -100,12 +58,9 @@ const updateJob = function(data) {
 };
 
 module.exports = {
-  createJob,
-  getJobs,
-  showJob,
-  updateJob,
-  deleteJob,
-  updateJobManual,
-  getJobsDropdown,
-  getJobsById,
+  getCommunications,
+  createCommunication,
+  deleteCommunication,
+  showCommunication,
+  updateCommunication,
 };

@@ -1,143 +1,119 @@
 'use strict';
-const jobsApi = require('./api');
-const jobsUi = require('./ui');
+const communicationsApi = require('./api');
+const communicationsUi = require('./ui');
 const getFormFields = require('../../../lib/get-form-fields');
 const store = require('../store');
-// const companiesApi = require('../companies/api');
-// const companiesUi = require('../companies/ui');
+const dashboardLogic = require('../dashboard/logic');
 
-// const logic = require('./logic');
+// Communication EVENTS
 
-// SETTING EVENTS
-
-// const onGetJobs = function(event) {
-//   event.preventDefault();
-//   store.currentCompanyId = $(this).attr("data-current-company-id");
-//   jobsApi.getJobs()
-//     .done(jobsUi.getJobSuccess)
-//     .fail(jobsUi.getJobFailure);
-// };
-//
-
-const onShowJob = function(event) {
+const onGetCommunications = function(event) {
   event.preventDefault();
-  store.currentCompanyId = $(this).attr("data-current-company-id");
-  store.currentJobId = $(this).attr("data-current-job-id");
-  jobsApi.showJob()
-    .done(jobsUi.showJobSuccess)
-    .fail(jobsUi.showJobFailure);
+  communicationsApi.getCommunications()
+    .done(communicationsUi.getCommunicationSuccess)
+    .fail(communicationsUi.getCommunicationFailure);
 };
-//
-const onCreateJob = function(event) {
+
+const onShowCommunicationRecord = function(event) {
   event.preventDefault();
-  store.currentCompanyId = $("#create-job-btn").attr("data-current-company-id");
+  store.currentCommunicationId = $(this).attr("data-current-communication-id");
+  communicationsApi.showCommunication()
+    .done(communicationsUi.showCommunicationRecordSuccess)
+    .fail(communicationsUi.showCommunicationRecordFailure);
+};
+
+const onEditCommunication = function(event) {
+  event.preventDefault();
+  store.currentCommunicationId = $(this).attr("data-current-communication-id");
+  communicationsUi.updateFormGenerator();
+
+  let category = "contact-category";
+
+  dashboardLogic.tagCheckboxUpdate(category);
+
+};
+
+const onCreateCommunication = function(event) {
+  event.preventDefault();
   let data = getFormFields(event.target);
-  store.createJobData = data;
-  jobsApi.createJob(data)
+  store.createCommunicationData = data;
+  store.lastShowCommunicationData = data;
+
+  let submittedRefId = $("#select-option-contact-category").val();
+
+  data.communication.contact_ref_id = submittedRefId;
+
+  let communicationTextSelect = $("#select-option-contact-category option[value=" + submittedRefId + "]").text();
+
+  data.communication.contact_ref_name = communicationTextSelect;
+
+  communicationsApi.createCommunication(data)
     .then((response) => {
-      store.currentJobId = response.job.id;
-      return store.currentJobId;
+      store.currentCommunicationId = response.communication.id;
+      return store.currentCommunicationId;
     })
-    .done(jobsUi.createJobSuccess)
-    .fail(jobsUi.createJobFailure);
+    .done(communicationsUi.createCommunicationSuccess)
+    .fail(communicationsUi.createCommunicationFailure);
 };
 
-const onDeleteJob = function(event) {
+const onDeleteCommunication = function(event) {
   event.preventDefault();
-  store.currentJobId= $("#job-record-delete").attr("data-current-job-id");
-  store.currentCompanyId = $("#job-record-delete").attr("data-current-company-id");
-  jobsApi.deleteJob()
-    .done(jobsUi.deleteJobSuccess)
-    .fail(jobsUi.deleteJobFailure);
+  store.currentCommunicationId= $(this).attr("data-current-communication-id");
+  communicationsApi.deleteCommunication(store.currentCommunicationId)
+    .done(communicationsUi.deleteCommunicationSuccess)
+    .fail(communicationsUi.deleteCommunicationFailure);
 };
 
-// const onUpdateJob = function(event) {
-//   event.preventDefault();
-//   let data = getFormFields(event.target);
-//   jobsApi.updateJob(data)
-//     .done(jobsUi.updateJobSuccess)
-//     .fail(jobsUi.updateJobFailure);
-// };
-
-const onUpdateJobManual = function(event) {
+const onUpdateCommunication = function(event) {
   event.preventDefault();
-  let title = $(".job-title").val();
-  let postingDate = $(".posting-date").val();
-  let postUrl = $(".post-url").val();
-  let salary = $(".salary").val();
-  let responsibility = $(".responsiblity").val();
-  let requirement = $(".requirement").val();
-  let deadline = $(".deadline").val();
-  let comment = $(".comment").val();
+  let data = getFormFields(event.target);
+  let category = "contact-category";
+  let categoryId = dashboardLogic.determineTagId(category);
 
+  data.communication.contact_ref_id = categoryId;
+  data.communication.contact_ref_name = dashboardLogic.determineTagText(category, categoryId);
 
-  jobsApi.updateJobManual(title, postingDate, postUrl, salary, responsibility, requirement, deadline, comment)
-    .done(jobsUi.updateJobSuccess)
-    .fail(jobsUi.updateJobFailure);
-};
-//
-// // Calculates total time of job
-//
-// const totalTime = function(numberOfIntervalsEntry, intervalLengthEntry) {
-//   let totalTimeinSeconds = numberOfIntervalsEntry * intervalLengthEntry;
-//   let totalTimeinMins = totalTimeinSeconds / 60;
-//
-//   if (totalTimeinSeconds % 60 === 0) {
-//     $("#total-job-time-m").text(totalTimeinMins);
-//     $("#total-job-time-s").text("0");
-//   } else {
-//     let totalMinsFloor = Math.floor(totalTimeinMins);
-//     $("#total-job-time-m").text(totalMinsFloor);
-//     let secondsRemainder = totalTimeinSeconds % 60;
-//     $("#total-job-time-s").text(secondsRemainder);
-//   }
-// };
-//
-// const totalTimeCalculator = function() {
-//   let numberOfIntervalsEntry = $("#interval-number-entry").val();
-//   let intervalLengthEntry = $("#interval-length-entry").val();
-//   // alert(intervalLengthEntry);
-//   $(".number-of-intervals-entry").text(numberOfIntervalsEntry);
-//   $(".length-of-intervals-entry").text(intervalLengthEntry);
-//   totalTime(numberOfIntervalsEntry, intervalLengthEntry);
-// };
-
-const onGenerateCreateForm = function(event) {
-  event.preventDefault();
-  store.currentCompanyId = $(this).attr("data-current-company-id");
-  console.log(store.currentCompanyId);
-  jobsUi.generateCreateForm();
+  communicationsApi.updateCommunication(data)
+    .done(communicationsUi.updateCommunicationSuccess)
+    .fail(communicationsUi.updateCommunicationFailure);
 };
 
-const onEditJob = function(event) {
+const onShowCommunicationCreateForm = function(event) {
   event.preventDefault();
-  store.currentCompanyId = $(this).attr("data-current-company-id");
-  store.currentJobId = $(this).attr("data-current-job-id");
-  jobsApi.showJob()
-    .done(jobsUi.generateUpdateForm)
-    .fail(jobsUi.generateUpdateFormFailure);
+  communicationsUi.showCommunicationCreateForm();
+};
+
+const onSelectCommunicationDropdown = function(event) {
+  event.preventDefault();
+  let tagCategory = $(this).attr("class");
+  dashboardLogic.determineApiRequest(tagCategory);
+};
+
+const onDisplayCommunicationDropdown = function(event) {
+  event.preventDefault();
+  let isUpdateForm;
+  let checkboxDivId = $(this).attr("id");
+  let tagCategory = $(this).attr("class");
+  let updateFormStatus = $(".general-form-container").attr("data-update-form");
+  updateFormStatus = parseInt(updateFormStatus);
+  if (updateFormStatus === 1) {
+    isUpdateForm = true;
+  } else {
+    isUpdateForm = false;
+  }
+  dashboardLogic.tagCheckboxClicked(tagCategory, checkboxDivId);
 };
 
 const addHandlers = () => {
-  $('.content').on('click', '#dashboard-new-job-btn-company', onGenerateCreateForm);
-  // $('#delete-job-form').on('submit', onDeleteJob);
-  // $('#get-jobs-form').on('submit', onGetJobs);
-  // $('#show-job-form').on('submit', onShowJob);
-  // $('.content').on('submit', '#new-job-form', onCreateJob);
-  // $('#update-job-form').on('submit', onUpdateJob);
-  // $('.content').on('keyup', '#interval-number-entry', totalTimeCalculator);
-  // $('.content').on('keyup', '#interval-length-entry', totalTimeCalculator);
-  // $('#interval-number-entry').on('keyup', totalTimeCalculator);
-  // $('#interval-length-entry').on('keyup', totalTimeCalculator);
-  // $('.content').on('click', '#company-record-create-job', onGenerateCreateForm);
-  $('.content').on('submit', '#new-job-form', onCreateJob);
-  // $('.content').on('click', '#company-record-view-jobs', onGetJobs);
-  $('.content').on('click', '.view-job-details-btn', onShowJob);
-  $('.content').on('click', '#job-record-btn-edit', onEditJob);
-  $('.content').on('submit', '#update-job-form', onUpdateJobManual);
-  $('.content').on('click', '#job-record-delete', onDeleteJob);
-  // $('.content').on('click', '#create-job-company-btn', onGenerateCreateForm);
-
+  $('.content').on('submit', '#new-communication-form', onCreateCommunication);
+  $('.content').on('submit', '#update-communication-form', onUpdateCommunication);
+  $('.content').on('click', '#communication-record-btn-edit', onEditCommunication);
+  $('.content').on('click', '#generate-create-communication-btn', onShowCommunicationCreateForm);
+  $('.content').on('click', '.dashboard-communication-record-btn', onShowCommunicationRecord);
+  $('.content').on('click', '#get-communications-btn', onGetCommunications);
+  $('.content').on('click', '#communication-record-delete', onDeleteCommunication);
+  $('.content').on('change', '#tag-contact-to-communication', onDisplayCommunicationDropdown);
+  $('.content').on('change', '#select-option-contact-category', onSelectCommunicationDropdown);
 };
 
 module.exports = {

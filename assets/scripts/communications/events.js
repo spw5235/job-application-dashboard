@@ -22,10 +22,6 @@ const onShowCommunicationRecord = function(event) {
     .fail(communicationsUi.showCommunicationRecordFailure);
 };
 
-
-
-
-
 const onEditCommunication = function(event) {
   event.preventDefault();
   store.currentCommunicationId = $(this).attr("data-current-communication-id");
@@ -34,7 +30,6 @@ const onEditCommunication = function(event) {
   let category = "contact-category";
 
   dashboardLogic.tagCheckboxUpdate(category);
-
 
 };
 
