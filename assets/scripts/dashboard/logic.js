@@ -4,6 +4,18 @@ const store = require('../store');
 const contactsApi = require('../contacts/api');
 const displayContactOptions = require('../templates/contact/option-dropdown-contacts.handlebars');
 
+const determineTagId = function(category) {
+  let idSelected = $("#select-option-" + category).val();
+  console.log(idSelected);
+  return idSelected;
+};
+
+const determineTagText = function(category, id) {
+  let communicationTextSelected = $("#select-option-" + category + " option[value=" + id + "]").text();
+  console.log(communicationTextSelected);
+  return communicationTextSelected;
+};
+
 // Communications API
 
 // const determineTagText = function(category, selectAttribute) {
@@ -124,4 +136,6 @@ module.exports = {
   tagCheckboxClicked,
   determineApiRequest,
   tagCheckboxUpdate,
+  determineTagText,
+  determineTagId,
 };

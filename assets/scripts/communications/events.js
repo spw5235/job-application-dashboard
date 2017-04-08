@@ -72,8 +72,12 @@ const onDeleteCommunication = function(event) {
 const onUpdateCommunication = function(event) {
   event.preventDefault();
   let data = getFormFields(event.target);
-  data.communication.company_ref_id = parseInt($("#select-option-company-name").val());
-  data.communication.job_ref_id = parseInt($("#select-option-job-title").val());
+  let category = "contact-category";
+  let categoryId = dashboardLogic.determineTagId(category);
+
+  data.communication.contact_ref_id = categoryId;
+  data.communication.contact_ref_name = dashboardLogic.determineTagText(category, categoryId);
+
   communicationsApi.updateCommunication(data)
     .done(communicationsUi.updateCommunicationSuccess)
     .fail(communicationsUi.updateCommunicationFailure);
@@ -108,7 +112,7 @@ const onDisplayCommunicationDropdown = function(event) {
 
 const addHandlers = () => {
   $('.content').on('submit', '#new-communication-form', onCreateCommunication);
-  // $('.content').on('submit', '#update-communication-form', onUpdateCommunication);
+  $('.content').on('submit', '#update-communication-form', onUpdateCommunication);
   $('.content').on('click', '#communication-record-btn-edit', onEditCommunication);
   $('.content').on('click', '#generate-create-communication-btn', onShowCommunicationCreateForm);
   $('.content').on('click', '.dashboard-communication-record-btn', onShowCommunicationRecord);
