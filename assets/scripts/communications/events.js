@@ -63,7 +63,7 @@ const onCreateCommunication = function(event) {
 
 const onDeleteCommunication = function(event) {
   event.preventDefault();
-  store.currentCommunicationId= $("#communication-record-delete").attr("data-current-communication-id");
+  store.currentCommunicationId= $(this).attr("data-current-communication-id");
   communicationsApi.deleteCommunication(store.currentCommunicationId)
     .done(communicationsUi.deleteCommunicationSuccess)
     .fail(communicationsUi.deleteCommunicationFailure);
@@ -109,7 +109,6 @@ const onDisplayCommunicationDropdown = function(event) {
   dashboardLogic.tagCheckboxClicked(tagCategory, checkboxDivId);
 };
 
-
 const addHandlers = () => {
   $('.content').on('submit', '#new-communication-form', onCreateCommunication);
   $('.content').on('submit', '#update-communication-form', onUpdateCommunication);
@@ -117,11 +116,9 @@ const addHandlers = () => {
   $('.content').on('click', '#generate-create-communication-btn', onShowCommunicationCreateForm);
   $('.content').on('click', '.dashboard-communication-record-btn', onShowCommunicationRecord);
   $('.content').on('click', '#get-communications-btn', onGetCommunications);
-  // $('.content').on('click', '#communication-record-delete', onDeleteCommunication);
-
+  $('.content').on('click', '#communication-record-delete', onDeleteCommunication);
   $('.content').on('change', '#tag-contact-to-communication', onDisplayCommunicationDropdown);
   $('.content').on('change', '#select-option-contact-category', onSelectCommunicationDropdown);
-  // $('.content').on('click', '#job-back-communication-overview', onShowCommunicationRecord);
 };
 
 module.exports = {
