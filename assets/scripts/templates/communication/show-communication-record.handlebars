@@ -1,0 +1,87 @@
+<h1>Communication Overview</h1>
+
+<h2 class="communication-name-header" data-current-communication-name="{{communication.id}}">{{communication.full_name}}</h2>
+
+<h3>Communication Details</h3>
+<table class="table communication-record-table table-hover">
+  <tbody>
+    <tr>
+      <td class="communication-record-first-name">
+        Communication First Name:
+      </td>
+      <td class="display-communication-first-name">
+        {{communication.first_name}}
+      </td>
+    </tr>
+    <tr>
+      <td class="communication-record-last-name">
+        Communication Last Name:
+      </td>
+      <td class="display-communication-last-name">
+        {{communication.last_name}}
+      </td>
+    </tr>
+    <tr>
+      <td class="company-name">
+        Communication Company Name:
+      </td>
+      <td class="display-communication-company-name">
+        {{communication.company_name}}
+      </td>
+    </tr>
+    <tr>
+      <td class="communication-job-title">
+        Job Title:
+      </td>
+      <td class="display-communication-job-title">
+        {{communication.job_title}}
+      </td>
+    </tr>
+    <tr>
+      <td class="communication-record-email">
+        Communication Email:
+      </td>
+      <td class="display-communication-email">
+        {{communication.email}}
+      </td>
+    </tr>
+    <tr>
+      <td class="communication-record-phone">
+        Communication Phone:
+      </td>
+      <td class="display-communication-phone">
+        {{communication.phone}}
+      </td>
+    </tr>
+    <tr>
+      <td class="communication-record-website">
+        Communication Website:
+      </td>
+      <td class="display-communication-note">
+        {{communication.website}}
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2"class="communication-record-title communication-record-note">
+        Communication Notes:
+      </td>
+      <td colspan="2"class="display-communication-notes">
+        {{communication.notes}}
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="dashboard-communication-btn-container">
+  <div class="communication-record-btn-options">
+    <button id="communication-record-btn-edit" type="button" class="btn btn-warning current" data-current-communication-id="{{communication.id}}" data-current-company-id="{{communication.company_ref_id}}" data-current-job-id="{{communication.job_ref_id}}" data-current-document-id="{{communication.document_ref_id}}">Edit Communication Record</button>
+    <button id="communication-record-delete" type="button" class="btn btn-danger current" data-current-communication-id="{{communication.id}}">Delete Communication Record</button>
+  </div>
+</div>
+
+<div class="dashboard-container">
+  <button id="dashboard-home-btn" type="button" class="btn btn-primary dashboard-home-btn-communication-page">View Dashboard</button>
+  <button id="dashboard-new-job-btn-communication" type="button" class="btn btn-success dashboard-home-btn-communication-page" data-current-communication-id="{{communication.id}}" data-type-communication-page="{{communication.communication_page}}">Create Job</button>
+</div>
+
+<div class="filter-show-job-container"></div>

@@ -9,6 +9,7 @@ const reminderEvents = require('./reminders/events.js');
 const dashboardEvents = require('./dashboard/events.js');
 const documentEvents = require('./documents/events.js');
 const contactEvents = require('./contacts/events.js');
+const communicationEvents = require('./communications/events.js');
 
 $(() => {
   authEvents.addHandlers();
@@ -18,6 +19,7 @@ $(() => {
   reminderEvents.addHandlers();
   documentEvents.addHandlers();
   contactEvents.addHandlers();
+  communicationEvents.addHandlers();
   $(".credentials-container").show();
 
 });

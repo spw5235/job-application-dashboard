@@ -1,0 +1,74 @@
+<div class="update-communication-form-container form-container">
+<form class="form communication-form reminder-form general-form-class" id="update-communication-form" name="update-communication-form" data-update-form="1">
+  <fieldset>
+    <legend>Update Communication Form</legend>
+    <p id="update-communication-error" class="warning form-error"></p>
+    <p>All fields are <u>optional</u> unless otherwise indicated</p>
+
+    <div class="form-group">
+      <label>First Name (required)</label>
+      <input class="form-control required-field" name="communication[first_name]" placeholder="Communication First Name" type="text" value={{communication.first_name}}>
+    </div>
+
+    <div class="form-group">
+      <label>First Name (required)</label>
+      <input class="form-control required-field" name="communication[last_name]" placeholder="Communication Last Name" type="text" value={{communication.last_name}}>
+    </div>
+
+    <div class="form-group">
+      <label>Nickname</label>
+      <input class="form-control required-field" name="communication[nickname]" placeholder="Communication Nickname" type="text" value={{communication.nickname}}>
+    </div>
+
+    <div class="form-group">
+      <label>Company Name</label>
+      <input class="form-control required-field" name="communication[company_name]" placeholder="Communication Company Name" type="text" value={{communication.company_name}}>
+    </div>
+
+    <div class="form-group">
+      <label>Job Title</label>
+      <input class="form-control required-field" name="communication[job_title]" placeholder="Communication Job Title" type="text" value={{communication.job_title}}>
+    </div>
+
+    <div class="form-group">
+      <label>Email</label>
+      <input class="form-control required-field" name="communication[email]" placeholder="Communication Email" type="text" value={{communication.email}}>
+    </div>
+
+    <div class="form-group">
+      <label>Phone</label>
+      <input class="form-control required-field" name="communication[phone]" placeholder="Communication Phone" type="text" value={{communication.phone}}>
+    </div>
+
+    <div class="form-group">
+      <label>Website</label>
+      <input class="form-control required-field" name="communication[website]" placeholder="Communication Website" type="text" value={{communication.website}}>
+    </div>
+
+    <div class="form-group">
+      <label>Communication Notes</label>
+      <textarea class="form-control field-input note-input" name="communication[doctext]" placeholder="Communication Notes">{{communication.notes}}</textarea>
+    </div>
+
+    <div id="associate-with-job-company" class="form-group">
+      <label>Tag Communication to a Company?</label>
+      <div class="form-group associate-reminder-with-company-container">
+        <span>Check Box for Yes</span>
+          <input id="associate-reminder-with-company" type="checkbox" value="" data-current-communication-id="{{communication.id}}" data-current-company-id="{{communication.company_ref_id}}" data-current-job-id="{{communication.job_ref_id}}" data-current-document-id="{{communication.document_ref_id}}">
+      </div>
+    </div>
+
+    <div class="form-group display-company-names"></div>
+    <div class="form-group display-job-title"></div>
+
+    <div class="form-group">
+      <input class="btn btn-success submit-btn current" name="submit" id="submit-communication-update-btn" type="submit" value="Submit">
+    </div>
+  </fieldset>
+</form>
+<br><br>
+<div class="dashboard-container">
+  <button id="dashboard-home-btn" type="button" class="btn btn-primary">View Dashboard</button>
+  <button id="dashboard-new-job-btn" type="button" class="btn btn-success">Create Session</button>
+</div>
+</div>

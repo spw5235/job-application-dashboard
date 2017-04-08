@@ -1,0 +1,40 @@
+<h1>Communication Dashboard</h1>
+
+<table class="table communication-summary-table table-hover">
+  <thead>
+    <tr>
+      <th>Full Name</th>
+      <th>Company Name</th>
+      <th>Communication Email</th>
+      <th>Communication Phone</th>
+      <th>View Record</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each communications as |communication|}}
+      <tr>
+        <td class="display-communication-full-name">
+          {{communication.full_name}}
+        </td>
+        <td class="display-communication-company-name">
+          {{communication.company_name}}
+        </td>
+        <td class="display-communication-email">
+          {{communication.email}}
+        </td>
+        <td class="display-communication-email">
+          {{communication.phone}}
+        </td>
+        <td class="display-communication-submit">
+          <button type="button" class="btn btn-info btn-sm dashboard-communication-record-btn" data-current-communication-id="{{communication.id}}" data-current-company-id="{{communication.company_ref_id}}" data-current-job-id="{{communication.job_ref_id}}" data-current-document-id="{{communication.document_ref_id}}">View Communication</button>
+        </td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>
+<br><br>
+<div class="dashboard-container">
+  <button id="dashboard-home-btn" type="button" class="btn btn-primary">View Dashboard</button>
+  <button id="dashboard-new-job-btn" type="button" class="btn btn-success">Create Job</button>
+  <button id="dashboard-new-job-btn-company" type="button" class="btn btn-success dashboard-home-btn-company-page" data-current-company-id="{{company.id}}">Create Job</button>
+</div>

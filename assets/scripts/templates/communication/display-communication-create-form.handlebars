@@ -1,0 +1,9 @@
+<div id="communication-select-options">
+  <label>Communication Name Selection:</label>
+  <select id="select-option-communication-name" class="form-control">
+      <option class="form-control blank-option" placeholder="Blank" type="text" value="0"></option>
+      {{#each communications as |communication|}}
+        <option class="form-control option-company-name" name="reminder[company_name]" placeholder="reminder Type" type="text" data-company-id="{{company.id}}" data-company-name="{{company.name}}" value="{{communication.id}}">{{communication.full_name}}</option>
+      {{/each}}
+  </select>
+</div>
