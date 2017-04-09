@@ -16,6 +16,22 @@ const displayCompanyOptions = require('../templates/company/option-dropdown-comp
 //   }
 // };
 
+const removeDuplicateRows = function ($table) {
+  function getVisibleRowText($row){
+      return $row.find('td:visible').text().toLowerCase();
+  }
+
+  $table.find('tr').each(function(index, row){
+      let $row = $(row);
+      $row.nextAll('tr').each(function(index, next){
+          let $next = $(next);
+          if (getVisibleRowText($next) === getVisibleRowText($row)) {
+            $next.remove();
+          }
+      });
+  });
+};
+
 const determineTagText = function(category, id) {
   let communicationTextSelected = $("#select-option-" + category + " option[value=" + id + "]").text();
   console.log(communicationTextSelected);
@@ -157,4 +173,5 @@ module.exports = {
   tagCheckboxUpdate,
   determineTagText,
   calcStoreDefaultVals,
+  removeDuplicateRows,
 };

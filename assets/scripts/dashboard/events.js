@@ -2,6 +2,7 @@
 
 // const store = require('../store');
 const displayNewJobDash = require('../templates/dashboard/new-job-home.handlebars');
+const displayDashboardHome = require('../templates/dashboard/dashboard-home.handlebars')
 const companiesApi = require('../companies/api');
 const dashboardUi = require('./ui');
 // const displayJobCreateForm = require('../templates/job/new-job-form.handlebars');
@@ -30,10 +31,17 @@ const onExistingCompany = function(event) {
 //   $(".current").attr("data-current-company-id", store.currentCompanyId);
 // };
 
+const onShowDashboard = function() {
+  $('.content').children().remove();
+  let showDashboardHome = displayDashboardHome();
+  $('.content').append(showDashboardHome);
+};
+
 const addHandlers = () => {
   // $('.content').on('click', '#dashboard-new-job-btn', onShowCreateDash)
   $('.content').on('click', '#dashboard-new-job-btn', onShowCreateDash);
   $('.content').on('click', '#new-job-existing-company', onExistingCompany);
+  $('.content').on('click', '#dashboard-home-btn', onShowDashboard);
   // $('.content').on('click', '.dashboard-existing-create-btn', onCreateFromExisting);
 };
 
