@@ -8,6 +8,11 @@
       <p>All fields are <u>optional</u> unless otherwise indicated</p>
 
       <div class="form-group">
+        <label>Company Name</label>
+        <input class="form-control" name="job[company_name]" placeholder="Company Name" type="text">
+      </div>
+
+      <div class="form-group">
         <label>Job Title</label>
         <input id="job-date-create-field" class="form-control" name="job[title]" placeholder="Job Title" type="text">
       </div>
@@ -43,19 +48,9 @@
       </div>
 
       <div class="form-group">
-        <label>Job Comment</label>
-        <input name="job[comment]" class="form-control" placeholder="Comment" type="text">
+        <label>Job Notes</label>
+        <textarea id ="job-notes-input" class="form-control field-input note-input" name="job[note]" placeholder="Job Notes" type="textarea"></textarea>
       </div>
-
-      <div class="form-group">
-        <label>Tag this job to an existing company?</label>
-        <div class="form-group tag-company-to-job-container">
-          <span>Check Box for Yes</span>
-            <input id="tag-company-to-job" class="company-category" type="checkbox" value="">
-        </div>
-      </div>
-
-      <div class="form-group display-companies-dropdown"></div>
 
       <div class="form-group">
         <input class="btn btn-success submit-btn current" name="submit" id="create-job-btn" type="submit" value="Submit">

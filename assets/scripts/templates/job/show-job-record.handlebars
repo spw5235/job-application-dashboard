@@ -1,12 +1,29 @@
 <h1>Job Overview</h1>
 
-<h2 class="job-name-header" data-current-job-name="{{job.id}}">{{job.company_ref_name}}</h2>
+<!-- <h2 class="job-name-header" data-current-job-name="{{job.id}}">{{job.company_ref_name}}</h2> -->
 
 <h3>Job Details</h3>
 <table class="table job-record-table table-hover">
   <tbody>
     <tr>
-      <td class="job-record-title job-record-school">
+      <td class="job-record-company-name">
+        Company Name:
+      </td>
+      <td class="display-job-school">
+        {{job.company_name}}
+      </td>
+    </tr>
+    <tr>
+      <td class="job-record-title job-record-grade">
+        Job Title:
+      </td>
+      <td class="display-job-grade">
+        {{job.title}}
+      </td>
+    </tr>
+    <tr>
+    <tr>
+      <td class="job-record-title">
         Deadline:
       </td>
       <td class="display-job-school">
@@ -23,10 +40,26 @@
     </tr>
     <tr>
       <td class="job-record-title job-record-teacher">
+        Posting Date
+      </td>
+      <td class="display-job-teacher">
+        {{job.posting_date}}
+      </td>
+    </tr>
+    <tr>
+      <td class="job-record-title job-record-teacher">
+        Job Post Url
+      </td>
+      <td class="display-job-teacher">
+        {{job.post_url}}
+      </td>
+    </tr>
+    <tr>
+      <td class="job-record-title job-record-teacher">
         Job Responsibilities
       </td>
       <td class="display-job-teacher">
-        {{job.responsibilities}}
+        {{job.responsibility}}
       </td>
     </tr>
     <tr>
@@ -38,11 +71,11 @@
       </td>
     </tr>
     <tr>
-      <td class="job-record-title job-record-grade">
-        Job Comments:
+      <td class="job-record-note">
+        Job Note:
       </td>
       <td class="display-job-grade">
-        {{job.comment}}
+        {{job.note}}
       </td>
     </tr>
   </tbody>

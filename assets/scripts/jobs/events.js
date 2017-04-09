@@ -36,18 +36,8 @@ const onCreateJob = function(event) {
   store.createJobData = data;
   store.lastShowJobData = data;
 
-  let category = "company-category";
-  let categoryId = $(".select-option-value").val();
-
-  if ( categoryId === undefined ) {
-    data.job.company_ref_id = 0;
-  } else {
-    data.job.company_ref_id = parseInt(categoryId);
-  }
-
-  data.job.company_ref_name = dashboardLogic.determineTagText(category, categoryId);
-
-  console.log('createjobapi data');
+  data.job.note = $("#job-notes-input").val();
+  console.log(data.job.note);
   console.log(data);
   jobsApi.createJob(data)
     // .then((response) => {
@@ -71,16 +61,16 @@ const onEditJob = function(event) {
 const onUpdateJob = function(event) {
   event.preventDefault();
   let data = getFormFields(event.target);
-  let category = "company-category";
-  let categoryId = $(".select-option-value").val();
-
-  if ( categoryId === undefined ) {
-    data.job.company_ref_id = 0;
-  } else {
-    data.job.company_ref_id = parseInt(categoryId);
-  }
-
-  data.job.company_name = dashboardLogic.determineTagText(category, categoryId);
+  // let category = "company-category";
+  // let categoryId = $(".select-option-value").val();
+  //
+  // if ( categoryId === undefined ) {
+  //   data.job.company_ref_id = 0;
+  // } else {
+  //   data.job.company_ref_id = parseInt(categoryId);
+  // }
+  //
+  // data.job.company_name = dashboardLogic.determineTagText(category, categoryId);
 
   jobsApi.updateJob(data)
     .done(jobsUi.updateJobSuccess)
@@ -123,6 +113,7 @@ const addHandlers = () => {
   $('.content').on('click', '#job-record-delete', onDeleteJob);
   $('.content').on('change', '#tag-company-to-job', onDisplayJobDropdown);
   $('.content').on('change', '#select-option-company-category', onSelectJobDropdown);
+  $('.content').on('click', '#dashboard-new-job-btn', onShowJobCreateForm);
 };
 
 module.exports = {
