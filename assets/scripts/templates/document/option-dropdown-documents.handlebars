@@ -1,0 +1,9 @@
+<div id="tag-document-to-communication-select" class="tag-select-container">
+  <label>Document Name Selection:</label>
+  <select id="select-option-document-category" class="form-control select-option-value">
+      <option class="form-control blank-option" placeholder="Blank" type="text" value="0"></option>
+      {{#each documents as |document|}}
+        <option class="form-control option-company-name" name="document[company_name]" placeholder="reminder Type" type="text" data-document-id="{{document.id}}" data-document-name="{{document.company_name}}" value="{{document.id}}">{{document.company_name}}</option>
+      {{/each}}
+  </select>
+</div>

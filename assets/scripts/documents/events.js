@@ -3,6 +3,7 @@ const documentsApi = require('./api');
 const documentsUi = require('./ui');
 const getFormFields = require('../../../lib/get-form-fields');
 const store = require('../store');
+const dashboardLogic = require('../dashboard/logic');
 
 // Document EVENTS
 
@@ -21,10 +22,12 @@ const onShowDocumentRecord = function(event) {
     .fail(documentsUi.showDocumentRecordFailure);
 };
 
-const onEditDocument = function(event) {
+const onDeleteDocument = function(event) {
   event.preventDefault();
-  store.currentDocumentId = $(this).attr("data-current-document-id");
-  documentsUi.updateFormGenerator();
+  store.currentDocumentId= $(this).attr("data-current-document-id");
+  documentsApi.deleteDocument(store.currentDocumentId)
+    .done(documentsUi.deleteDocumentSuccess)
+    .fail(documentsUi.deleteDocumentFailure);
 };
 
 const onCreateDocument = function(event) {
@@ -33,31 +36,34 @@ const onCreateDocument = function(event) {
   store.createDocumentData = data;
   store.lastShowDocumentData = data;
 
-  data.document.company_ref_id = $("#select-option-company-name").val();
-  data.document.job_ref_id= $("#select-option-job-title").val();
+  let docTypeSelectVal = $("#document-type-select").val();
 
-  documentsApi.createDocument(data)
-    .then((response) => {
-      store.currentDocumentId = response.document.id;
-      return store.currentDocumentId;
-    })
-    .done(documentsUi.createDocumentSuccess)
-    .fail(documentsUi.createDocumentFailure);
+  if (docTypeSelectVal === "Other") {
+    data.document.doctype = $("#doc-type-other-text").val();
+  } else {
+    data.document.doctype = $("#document-type-select").val();
+  }
+
+  console.log(data);
+  // documentsApi.createDocument(data)
+  //   .done(documentsUi.createDocumentSuccess)
+  //   .fail(documentsUi.createDocumentFailure);
 };
 
-const onDeleteDocument = function(event) {
+const onEditDocument = function(event) {
   event.preventDefault();
-  store.currentDocumentId= $("#document-record-delete").attr("data-current-document-id");
-  documentsApi.deleteDocument(store.currentDocumentId)
-    .done(documentsUi.deleteDocumentSuccess)
-    .fail(documentsUi.deleteDocumentFailure);
+  store.currentDocumentId = $(this).attr("data-current-document-id");
+  documentsUi.updateFormGenerator();
+
+  let category = "company-category";
+
+  dashboardLogic.tagCheckboxUpdate(category);
 };
 
 const onUpdateDocument = function(event) {
   event.preventDefault();
   let data = getFormFields(event.target);
-  data.document.company_ref_id = parseInt($("#select-option-company-name").val());
-  data.document.job_ref_id = parseInt($("#select-option-job-title").val());
+
   documentsApi.updateDocument(data)
     .done(documentsUi.updateDocumentSuccess)
     .fail(documentsUi.updateDocumentFailure);
@@ -68,75 +74,44 @@ const onShowDocumentCreateForm = function(event) {
   documentsUi.showDocumentCreateForm();
 };
 
+const onSelectDocumentDropdown = function(event) {
+  event.preventDefault();
+  let tagCategory = $(this).attr("class");
+  dashboardLogic.determineApiRequest(tagCategory);
+};
 
-//
-//
-// const onDisplayCompanyDropdown = function() {
-//
-//   // let isUpdateForm = $(".reminder-form").attr("data-update-form");
-//
-//   let isCompanyChecked = $("#associate-document-with-company").prop("checked");
-//
-//   if (!isCompanyChecked) {
-//     store.selectedCompanyId = 0;
-//     store.selectedCompanyName = "";
-//   }
-//
-//   if (this.checked) {
-//     let currentReminderCompanyId = $("#associate-document-with-company").attr("data-current-company-id");
-//
-//     if ( currentReminderCompanyId === 0 ) {
-//       $("#company-select-options").remove();
-//       $("#job-select-options").remove();
-//       $(".display-job-title").children().remove();
-//       return;
-//     }
-//
-//     companiesApi.getCompanies()
-//       .done(remindersUi.displayCompanyDropdownSuccess)
-//       .fail(remindersUi.displayCompanyDropdownFail);
-//   } else {
-//     $("associate-reminder-with-company").val(0);
-//     $("#company-select-options").remove();
-//     $("#job-select-options").remove();
-//     $(".display-job-title").children().remove();
-//     $(".association-job-insert").remove();
-//   }
-//
-//   let selectedVal = $("#select-option-company-name").val();
-//   let selectedValInt = parseInt(selectedVal);
-//
-//   if (selectedValInt > 0) {
-//       $("#company-select-options").append('<div class="form-group"><label>Associate Reminder With Specific Job?</label><div class="form-group associate-reminder-with-job-container"><span>Check Box for Yes</span><input id="associate-reminder-with-job" type="checkbox" value=""></div></div>');
-//   }
-// };
-//
-// const onSelectOptionCompanyVal = function() {
-//   let obtainVal = $(this).val();
-//
-//   if (obtainVal === 0 || obtainVal === "0") {
-//     let valueString = '#select-option-job-title option[value=0]';
-//     $(valueString).prop('selected',true);
-//     store.selectedCompanyId = 0;
-//     store.selectedCompanyName = "";
-//     // $("#job-select-options").remove();
-//     // store.selectedJobId = 0;
-//     // store.selectedJobTitle = 0;
-//     $("#associate-reminder-with-job").prop("checked", false);
-//     $(".association-job-insert").remove();
-//   }
-//
-//   let obtainValString = '#select-option-company-name option[value="' + obtainVal + '"]';
-//   let companyName = $(obtainValString).text();
-//
-//   store.selectedCompanyId = obtainVal;
-//   store.selectedCompanyName = companyName;
-//
-//   if (obtainVal > 0) {
-//     $("#company-select-options").append('<div class="form-group association-job-insert"><label>Associate Reminder With Specific Job?</label><div class="form-group associate-reminder-with-job-container"><span>Check Box for Yes</span><input id="associate-reminder-with-job" type="checkbox" value=""></div></div>');
-//   }
-// };
+const hideShowDoctypeOtherField = function(event) {
+  event.preventDefault();
+  let documentOtherHtml = $('<div class="doc-type-other-container"><label class="doc-type-other">Document Type Other Description</label><input id="doc-type-other-text" class="form-control required-field doc-type-other" name="document[doctype]" placeholder="Document Type Description" type="text"></div>');
+  let selectorValue = $("#document-type-select").val();
 
+  if ( selectorValue === "Other" ) {
+    $(".doc-type").append(documentOtherHtml);
+  } else {
+    $(".doc-type-other-container").remove();
+  }
+};
+
+const onDisplayDocumentDropdown = function(event) {
+  event.preventDefault();
+
+  let thisCheckBoxStatus = $(this).is(':checked');
+
+  if (!thisCheckBoxStatus) {
+    $(this).parent().children(".tag-select-container").remove();
+  }
+  let isUpdateForm;
+  let checkboxDivId = $(this).attr("id");
+  let tagCategory = $(this).attr("class");
+  let updateFormStatus = $(".general-form-container").attr("data-update-form");
+  updateFormStatus = parseInt(updateFormStatus);
+  if (updateFormStatus === 1) {
+    isUpdateForm = true;
+  } else {
+    isUpdateForm = false;
+  }
+  dashboardLogic.tagCheckboxClicked(tagCategory, checkboxDivId);
+};
 
 const addHandlers = () => {
   $('.content').on('submit', '#new-document-form', onCreateDocument);
@@ -146,10 +121,10 @@ const addHandlers = () => {
   $('.content').on('click', '.dashboard-document-record-btn', onShowDocumentRecord);
   $('.content').on('click', '#get-documents-btn', onGetDocuments);
   $('.content').on('click', '#document-record-delete', onDeleteDocument);
-
-  // $('.content').on('change', '#associate-document-with-company', onDisplayCompanyDropdown);
-  // $('.content').on('change', '#select-option-company-name', onSelectOptionCompanyVal);
-  // $('.content').on('click', '#job-back-document-overview', onShowDocumentRecord);
+  $('.content').on('change', '#tag-company-to-document', onDisplayDocumentDropdown);
+  $('.content').on('change', '#select-option-company-category', onSelectDocumentDropdown);
+  $('.content').on('click', '#dashboard-new-document-btn', onShowDocumentCreateForm);
+  $('.content').on('change', '#document-type-select', hideShowDoctypeOtherField);
 };
 
 module.exports = {

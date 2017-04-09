@@ -1,8 +1,6 @@
 <div class="create-document-form-container form-container form-group">
   <h1>Create a Document</h1>
 
-  <p>Please note, in order to create a job, you must first create a document record.</p>
-
   <form class="form document-form" id="new-document-form" name="new-document-form">
     <fieldset>
       <!-- <legend>Create Document Form</legend> -->
@@ -10,9 +8,14 @@
       <p>All fields are <u>optional</u> unless otherwise indicated</p>
 
 
-      <div class="form-group">
+      <div class="form-group doc-type">
         <label>Document Type (required)</label>
-        <input class="form-control required-field" name="document[doctype]" placeholder="Document Type" type="text">
+        <select class="form-control" id="document-type-select">
+            <option class="form-control required-field" name="document[doctype]" placeholder="Document Type" type="text" value="Resume">Resume</option>
+            <option class="form-control required-field" name="document[doctype]" placeholder="Document Type" type="text" value="Cover Letter">Cover Letter</option>
+            <option class="form-control required-field" name="document[doctype]" placeholder="Document Type" type="text" value="Email">Email</option>
+            <option class="form-control required-field" name="document[doctype]" placeholder="Document Type" type="text" value="Other">Other</option>
+        </select>
       </div>
 
       <div class="form-group">
@@ -35,25 +38,13 @@
         <textarea class="form-control field-input note-input" name="document[doctext]" placeholder="Document Text"></textarea>
       </div>
 
-      <div id="associate-with-job-company" class="form-group">
+      <div id="associate-with-document-company" class="form-group">
         <label>Associate Reminder With Company?</label>
-        <div class="form-group associate-reminder-with-company-container">
-          <span>Check Box for Yes</span>
-            <input id="associate-reminder-with-company" type="checkbox" value="">
-        </div>
-      </div>
-
-      <div class="form-group display-company-names"></div>
-      <div class="form-group display-job-title"></div>
-      <!-- <div id="associate-document-with-company" class="form-group">
-        <label>Associate Document With Company?</label>
         <div class="form-group associate-document-with-company-container">
           <span>Check Box for Yes</span>
             <input id="associate-document-with-company" type="checkbox" value="">
         </div>
       </div>
-
-      <div class="form-group display-company-names"></div> -->
 
       <div class="form-group">
         <input class="btn btn-success submit-btn current" name="submit" id="create-document-btn" type="submit" value="Submit">

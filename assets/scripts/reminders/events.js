@@ -135,6 +135,8 @@ const onDisplayReminderDropdown = function(event) {
 
   if (!thisCheckBoxStatus) {
     $(this).parent().children(".tag-select-container").remove();
+  } else {
+
   }
 
   let isUpdateForm;
