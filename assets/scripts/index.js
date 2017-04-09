@@ -3,7 +3,6 @@
 const setAPIOrigin = require('../../lib/set-api-origin');
 const config = require('./config');
 const authEvents = require('./auth/events.js');
-const companyEvents = require('./companies/events.js');
 const jobEvents = require('./jobs/events.js');
 const reminderEvents = require('./reminders/events.js');
 const dashboardEvents = require('./dashboard/events.js');
@@ -13,7 +12,6 @@ const communicationEvents = require('./communications/events.js');
 
 $(() => {
   authEvents.addHandlers();
-  companyEvents.addHandlers();
   dashboardEvents.addHandlers();
   jobEvents.addHandlers();
   reminderEvents.addHandlers();

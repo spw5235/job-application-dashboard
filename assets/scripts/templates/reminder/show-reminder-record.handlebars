@@ -1,6 +1,6 @@
-<h1>Reminder</h1>
+<h1>Reminder Overview</h1>
 
-<h2 class="reminder-name-header" data-current-reminder-name="{{reminder.name}}">{{reminder.name}}</h2>
+<h2 class="reminder-name-header" data-current-reminder-name="{{reminder.id}}">{{reminder.full_name}}</h2>
 
 <h3>Reminder Details</h3>
 <table class="table reminder-record-table table-hover">
@@ -39,10 +39,18 @@
     </tr>
     <tr>
       <td class="reminder-record-title reminder-archive">
-        Archived:
+        Linked Company:
       </td>
       <td class="display-reminder-note">
-        {{reminder.archive}}
+        {{reminder.job_name}}
+      </td>
+    </tr>
+    <tr>
+      <td class="reminder-record-title reminder-archive">
+        Linked Contacts:
+      </td>
+      <td class="display-reminder-note">
+        {{reminder.contact_name}}
       </td>
     </tr>
   </tbody>
@@ -50,7 +58,7 @@
 
 <div class="dashboard-reminder-btn-container">
   <div class="reminder-record-btn-options">
-    <button id="reminder-record-btn-edit" type="button" class="btn btn-warning current" data-current-reminder-id="{{reminder.id}}" data-current-company-id="{{reminder.company_ref_id}}" data-current-job-id="{{reminder.job_ref_id}}" data-current-contact-id="">Edit Reminder Record</button>
+    <button id="reminder-record-btn-edit" type="button" class="btn btn-warning current" data-current-reminder-id="{{reminder.id}}" data-current-company-id="{{reminder.company_ref_id}}" data-current-job-id="{{reminder.job_ref_id}}" data-current-document-id="{{reminder.document_ref_id}}">Edit Reminder Record</button>
     <button id="reminder-record-delete" type="button" class="btn btn-danger current" data-current-reminder-id="{{reminder.id}}">Delete Reminder Record</button>
   </div>
 </div>
@@ -59,3 +67,5 @@
   <button id="dashboard-home-btn" type="button" class="btn btn-primary dashboard-home-btn-reminder-page">View Dashboard</button>
   <button id="dashboard-new-job-btn-reminder" type="button" class="btn btn-success dashboard-home-btn-reminder-page" data-current-reminder-id="{{reminder.id}}" data-type-reminder-page="{{reminder.reminder_page}}">Create Job</button>
 </div>
+
+<div class="filter-show-job-container"></div>

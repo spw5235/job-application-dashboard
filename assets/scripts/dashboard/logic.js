@@ -1,10 +1,10 @@
 'use strict';
 
 const store = require('../store');
-const contactsApi = require('../contacts/api');
-const companyApi = require('../companies/api');
 const displayContactOptions = require('../templates/contact/option-dropdown-contacts.handlebars');
-const displayCompanyOptions = require('../templates/company/option-dropdown-companies.handlebars');
+const contactsApi = require('../contacts/api');
+const jobApi = require('../jobs/api');
+const displayJobOptions = require('../templates/job/option-dropdown-jobs.handlebars');
 
 // const determineTagId = function(category, id) {
 //   let communicationTextSelected = $("#select-option-" + category + " option[value=" + id + "]").text();
@@ -32,6 +32,12 @@ const removeDuplicateRows = function ($table) {
   });
 };
 
+const preselectDefault = function(divId, defaultVal) {
+  let selectText = $(divId + " option[value=" + defaultVal + "]");
+  console.log();
+  $(selectText).prop('selected', true);
+};
+
 const determineTagText = function(category, id) {
   let communicationTextSelected = $("#select-option-" + category + " option[value=" + id + "]").text();
   console.log(communicationTextSelected);
@@ -43,9 +49,9 @@ const determineTagText = function(category, id) {
 // const determineTagText = function(category, selectAttribute) {
 //   const currentSelectIdText = '#select-option-' + category;
 //   const currentId = $(currentSelectIdText).attr(selectAttribute);
-//   // let currentId = $("#associate-reminder-with-company").attr("data-current-job-id");
+//   // let currentId = $("#associate-reminder-with-job").attr("data-current-job-id");
 //   //
-//   // $("#associate-reminder-with-company").val(currentId);
+//   // $("#associate-reminder-with-job").val(currentId);
 //   //
 //   // let valueString = '#select-option-job-title option[value=' + currentReminderJobId + ']';
 //   //
@@ -67,9 +73,9 @@ const displayDropdownSuccess = function(data) {
     dataToAppend = displayContactOptions({
       contacts: data.contacts
     });
-  } else if (category === "company-category") {
-    dataToAppend = displayCompanyOptions({
-      companies: data.companies
+  } else if (category === "job-category") {
+    dataToAppend = displayJobOptions({
+      jobs: data.jobs
     });
   }
 
@@ -103,8 +109,8 @@ const determineApiRequest = function(category, isUpdate, checkboxId) {
       contactsApi.getContacts()
         .done(displayDropdownSuccess)
         .fail(displayDropdownFail);
-    } else if ( category === "company-category" ) {
-      companyApi.getCompanies()
+    } else if ( category === "job-category" ) {
+      jobApi.getJobs()
         .done(displayDropdownSuccess)
         .fail(displayDropdownFail);
     }
@@ -113,17 +119,17 @@ const determineApiRequest = function(category, isUpdate, checkboxId) {
 
 const calcStoreDefaultVals = function(category) {
   let isContactCategory = (category === "contact-category");
-  let isCompanyCategory = (category === "contact-category");
+  let isJobCategory = (category === "contact-category");
   if (isContactCategory) {
     store.selectedContactId = 0;
     store.selectedContactName = "";
-  } else if ( isCompanyCategory ) {
-    store.selectedCompanyId = 0;
-    store.selectedCompanyName = "";
+  } else if ( isJobCategory ) {
+    store.selectedJobId = 0;
+    store.selectedJobName = "";
   }
   let dropdownContainer = "#" + store.currentInputId + "-select";
   console.log(dropdownContainer);
-  $(".select-option-value").val(0)
+  $(".select-option-value").val(0);
   $(dropdownContainer).remove();
   return;
 };
@@ -158,7 +164,7 @@ const tagCheckboxUpdate = function(category) {
   store.currentUpdateInputId = checkboxIdVal;
   const isExistingId = parseInt($(checkboxId).val());
 
-  console.log('tagcheckboxupdate');
+  console.log(category);
   console.log(isExistingId);
   if ( isExistingId > 0 ) {
     determineApiRequest(category, isUpdate, checkboxId);
@@ -174,4 +180,5 @@ module.exports = {
   determineTagText,
   calcStoreDefaultVals,
   removeDuplicateRows,
+  preselectDefault,
 };

@@ -1,0 +1,9 @@
+<div id="reminder-select-options">
+  <label>Reminder Name Selection:</label>
+  <select id="select-option-reminder-name" class="form-control">
+      <option class="form-control blank-option" placeholder="Blank" type="text" value="0"></option>
+      {{#each reminders as |reminder|}}
+        <option class="form-control option-company-name" name="reminder[job_name]" placeholder="reminder Type" type="text" data-company-id="{{company.id}}" data-company-name="{{company.name}}" value="{{reminder.id}}">{{reminder.full_name}}</option>
+      {{/each}}
+  </select>
+</div>

@@ -61,16 +61,6 @@ const onEditJob = function(event) {
 const onUpdateJob = function(event) {
   event.preventDefault();
   let data = getFormFields(event.target);
-  // let category = "company-category";
-  // let categoryId = $(".select-option-value").val();
-  //
-  // if ( categoryId === undefined ) {
-  //   data.job.company_ref_id = 0;
-  // } else {
-  //   data.job.company_ref_id = parseInt(categoryId);
-  // }
-  //
-  // data.job.company_name = dashboardLogic.determineTagText(category, categoryId);
 
   jobsApi.updateJob(data)
     .done(jobsUi.updateJobSuccess)
@@ -90,6 +80,12 @@ const onSelectJobDropdown = function(event) {
 
 const onDisplayJobDropdown = function(event) {
   event.preventDefault();
+
+  let thisCheckBoxStatus = $(this).is(':checked');
+
+  if (!thisCheckBoxStatus) {
+    $(this).parent().children(".tag-select-container").remove();
+  }
   let isUpdateForm;
   let checkboxDivId = $(this).attr("id");
   let tagCategory = $(this).attr("class");

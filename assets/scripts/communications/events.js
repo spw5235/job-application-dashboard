@@ -99,6 +99,12 @@ const onSelectCommunicationDropdown = function(event) {
 
 const onDisplayCommunicationDropdown = function(event) {
   event.preventDefault();
+  let thisCheckBoxStatus = $(this).is(':checked');
+
+  if (!thisCheckBoxStatus) {
+    $(this).parent().children(".tag-select-container").remove();
+  }
+
   let isUpdateForm;
   let checkboxDivId = $(this).attr("id");
   let tagCategory = $(this).attr("class");
