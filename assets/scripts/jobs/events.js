@@ -42,16 +42,18 @@ const onCreateJob = function(event) {
   if ( categoryId === undefined ) {
     data.job.company_ref_id = 0;
   } else {
-    data.job.company_ref_id = categoryId;
+    data.job.company_ref_id = parseInt(categoryId);
   }
 
   data.job.company_ref_name = dashboardLogic.determineTagText(category, categoryId);
 
+  console.log('createjobapi data');
+  console.log(data);
   jobsApi.createJob(data)
-    .then((response) => {
-      store.currentJobId = response.job.id;
-      return store.currentJobId;
-    })
+    // .then((response) => {
+    //   store.currentJobId = response.job.id;
+    //   return store.currentJobId;
+    // })
     .done(jobsUi.createJobSuccess)
     .fail(jobsUi.createJobFailure);
 };
@@ -64,7 +66,6 @@ const onEditJob = function(event) {
   let category = "company-category";
 
   dashboardLogic.tagCheckboxUpdate(category);
-
 };
 
 const onUpdateJob = function(event) {
@@ -76,10 +77,10 @@ const onUpdateJob = function(event) {
   if ( categoryId === undefined ) {
     data.job.company_ref_id = 0;
   } else {
-    data.job.company_ref_id = categoryId;
+    data.job.company_ref_id = parseInt(categoryId);
   }
 
-  data.job.company_ref_name = dashboardLogic.determineTagText(category, categoryId);
+  data.job.company_name = dashboardLogic.determineTagText(category, categoryId);
 
   jobsApi.updateJob(data)
     .done(jobsUi.updateJobSuccess)

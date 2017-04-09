@@ -47,8 +47,6 @@ const displayDropdownSuccess = function(data) {
   let dataToAppend;
   let category = store.apiRequestCategory;
 
-  console.log('sdfadsf');
-  console.log(category);
   if (category === "contact-category") {
     dataToAppend = displayContactOptions({
       contacts: data.contacts
@@ -138,6 +136,8 @@ const tagCheckboxUpdate = function(category) {
   const checkboxIdText = "." + category;
   const checkboxIdVal = $(checkboxIdText).attr("id");
   const checkboxId = "#" + checkboxIdVal;
+
+  console.log(checkboxId);
 
   store.currentUpdateInputId = checkboxIdVal;
   const isExistingId = parseInt($(checkboxId).val());

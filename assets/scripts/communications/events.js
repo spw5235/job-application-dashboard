@@ -42,7 +42,7 @@ const onCreateCommunication = function(event) {
   if ( categoryId === undefined ) {
     data.communication.contact_ref_id = 0;
   } else {
-    data.communication.contact_ref_id = categoryId;
+    data.communication.contact_ref_id = parseInt(categoryId);
   }
 
   data.communication.contact_ref_name = dashboardLogic.determineTagText(category, categoryId);

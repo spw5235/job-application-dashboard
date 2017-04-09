@@ -63,7 +63,9 @@ const getJobFailure = () => {
 };
 
 const createJobSuccess = (data) => {
+  console.log('job success data');
   console.log(data);
+  store.currentJobId = data.job.id;
   $(".form-error").text("");
   $(".notification-container").children().text("");
   $(".content").children().remove();

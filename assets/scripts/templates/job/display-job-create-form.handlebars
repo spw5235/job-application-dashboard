@@ -3,7 +3,7 @@
   <select id="select-option-job-name" class="form-control">
       <option class="form-control blank-option" placeholder="Blank" type="text" value="0"></option>
       {{#each jobs as |job|}}
-        <option class="form-control option-company-name" name="reminder[company_name]" placeholder="reminder Type" type="text" data-company-id="{{company.id}}" data-company-name="{{company.name}}" value="{{job.id}}">{{job.full_name}}</option>
+        <option class="form-control option-company-name" name="job[company_name]" placeholder="reminder Type" type="text" data-company-id="{{company.id}}" data-company-name="{{company.name}}" value="{{job.id}}">{{job.full_name}}</option>
       {{/each}}
   </select>
 </div>
