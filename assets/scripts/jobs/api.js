@@ -3,11 +3,11 @@
 const config = require('../config');
 const store = require('../store');
 
-// Communications API
+// Jobs API
 
-const getCommunications = function() {
+const getJobs = function() {
   return $.ajax({
-    url: config.apiOrigin + '/communications/',
+    url: config.apiOrigin + '/jobs/',
     method: 'GET',
     headers: {
       Authorization: 'Token token=' + store.user.token,
@@ -15,9 +15,9 @@ const getCommunications = function() {
   });
 };
 
-const showCommunication = function() {
+const showJob = function() {
   return $.ajax({
-    url: config.apiOrigin + '/communications/' + store.currentCommunicationId,
+    url: config.apiOrigin + '/jobs/' + store.currentJobId,
     method: 'GET',
     headers: {
       Authorization: 'Token token=' + store.user.token,
@@ -25,9 +25,9 @@ const showCommunication = function() {
   });
 };
 
-const createCommunication = function(data) {
+const createJob = function(data) {
   return $.ajax({
-    url: config.apiOrigin + '/communications/',
+    url: config.apiOrigin + '/jobs/',
     method: 'POST',
     headers: {
       Authorization: 'Token token=' + store.user.token,
@@ -36,9 +36,9 @@ const createCommunication = function(data) {
   });
 };
 
-const deleteCommunication = function(id) {
+const deleteJob = function(id) {
   return $.ajax({
-    url: config.apiOrigin + '/communications/' + id,
+    url: config.apiOrigin + '/jobs/' + id,
     method: 'DELETE',
     headers: {
       Authorization: 'Token token=' + store.user.token,
@@ -46,9 +46,9 @@ const deleteCommunication = function(id) {
   });
 };
 
-const updateCommunication = function(data) {
+const updateJob = function(data) {
   return $.ajax({
-    url: config.apiOrigin + '/communications/' + store.currentCommunicationId,
+    url: config.apiOrigin + '/jobs/' + store.currentJobId,
     method: 'PATCH',
     headers: {
       Authorization: 'Token token=' + store.user.token,
@@ -58,9 +58,9 @@ const updateCommunication = function(data) {
 };
 
 module.exports = {
-  getCommunications,
-  createCommunication,
-  deleteCommunication,
-  showCommunication,
-  updateCommunication,
+  getJobs,
+  createJob,
+  deleteJob,
+  showJob,
+  updateJob,
 };

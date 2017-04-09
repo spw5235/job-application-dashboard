@@ -2,13 +2,19 @@
 
 const store = require('../store');
 const contactsApi = require('../contacts/api');
+const companyApi = require('../companies/api');
 const displayContactOptions = require('../templates/contact/option-dropdown-contacts.handlebars');
+const displayCompanyOptions = require('../templates/contact/option-dropdown-contacts.handlebars');
 
-const determineTagId = function(category) {
-  let idSelected = $("#select-option-" + category).val();
-  console.log(idSelected);
-  return idSelected;
-};
+// const determineTagId = function(category, id) {
+//   let communicationTextSelected = $("#select-option-" + category + " option[value=" + id + "]").text();
+//   let idSelected = $("#select-option-" + category).val();
+//   if ( communicationTextSelected === "" ) {
+//     return idSelected;
+//   } else {
+//     return idSelected;
+//   }
+// };
 
 const determineTagText = function(category, id) {
   let communicationTextSelected = $("#select-option-" + category + " option[value=" + id + "]").text();
@@ -45,17 +51,21 @@ const displayDropdownSuccess = function(data) {
     dataToAppend = displayContactOptions({
       contacts: data.contacts
     });
+  } else if (category === "company-category") {
+    dataToAppend = displayCompanyOptions({
+      companies: data.companies
+    });
   }
 
   $(classAppend).append(dataToAppend);
 
-  let isUpdateForm = parseInt($("#update-communication-form").attr("data-update-form"));
+  let isUpdateForm = parseInt($(".general-form-class").attr("data-update-form"));
 
   if (isUpdateForm === 1) {
-    let divIdSelector = "#" + store.currentUpdateInputId;
-    let idValue = parseInt($(divIdSelector).val());
-    let communicationTextSelect = '#select-option-' + category + ' option[value=' + idValue + ']';
-    $(communicationTextSelect).prop('selected', true);
+  let divIdSelector = "#" + store.currentUpdateInputId;
+  let idValue = parseInt($(divIdSelector).val());
+  let communicationTextSelect = '#select-option-' + category + ' option[value=' + idValue + ']';
+  $(communicationTextSelect).prop('selected', true);
 
   } else {
     return;
@@ -69,14 +79,16 @@ const determineApiRequest = function(category, isUpdate, checkboxId) {
 
   let checkDivId = checkboxId;
   store.apiRequestCategory = category;
-  if (category === "contact-category") {
-    if (isUpdate) {
-      $(checkDivId).click();
-      // contactsApi.getContacts()
-      //   .done(displayDropdownSuccess)
-      //   .fail(displayDropdownFail);
-    } else {
+
+  if (isUpdate) {
+    $(checkDivId).click();
+  } else {
+    if (category === "contact-category") {
       contactsApi.getContacts()
+        .done(displayDropdownSuccess)
+        .fail(displayDropdownFail);
+    } else if ( category === "company-category" ) {
+      companyApi.getCompanies()
         .done(displayDropdownSuccess)
         .fail(displayDropdownFail);
     }
@@ -85,13 +97,19 @@ const determineApiRequest = function(category, isUpdate, checkboxId) {
 
 const calcStoreDefaultVals = function(category) {
   let isContactCategory = (category === "contact-category");
+  let isCompanyCategory = (category === "contact-category");
   if (isContactCategory) {
     store.selectedContactId = 0;
     store.selectedContactName = "";
+  } else if ( isCompanyCategory ) {
+    store.selectedCompanyId = 0;
+    store.selectedCompanyName = "";
   }
   let dropdownContainer = "#" + store.currentInputId + "-select";
   console.log(dropdownContainer);
+  $(".select-option-value").val(0)
   $(dropdownContainer).remove();
+  return;
 };
 
 
@@ -129,7 +147,6 @@ const tagCheckboxUpdate = function(category) {
   } else {
     calcStoreDefaultVals(category);
   }
-  // tagCheckboxClickedUpdate(category, isBoxChecked);
 };
 
 module.exports = {
@@ -137,5 +154,5 @@ module.exports = {
   determineApiRequest,
   tagCheckboxUpdate,
   determineTagText,
-  determineTagId,
+  calcStoreDefaultVals,
 };

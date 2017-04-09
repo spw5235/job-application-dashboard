@@ -1,31 +1,31 @@
 'use strict';
-const communicationsApi = require('./api');
-const communicationsUi = require('./ui');
+const jobsApi = require('./api');
+const jobsUi = require('./ui');
 const getFormFields = require('../../../lib/get-form-fields');
 const store = require('../store');
 const dashboardLogic = require('../dashboard/logic');
 
-// Communication EVENTS
+// Job EVENTS
 
-const onGetCommunications = function(event) {
+const onGetJobs = function(event) {
   event.preventDefault();
-  communicationsApi.getCommunications()
-    .done(communicationsUi.getCommunicationSuccess)
-    .fail(communicationsUi.getCommunicationFailure);
+  jobsApi.getJobs()
+    .done(jobsUi.getJobSuccess)
+    .fail(jobsUi.getJobFailure);
 };
 
-const onShowCommunicationRecord = function(event) {
+const onShowJobRecord = function(event) {
   event.preventDefault();
-  store.currentCommunicationId = $(this).attr("data-current-communication-id");
-  communicationsApi.showCommunication()
-    .done(communicationsUi.showCommunicationRecordSuccess)
-    .fail(communicationsUi.showCommunicationRecordFailure);
+  store.currentJobId = $(this).attr("data-current-job-id");
+  jobsApi.showJob()
+    .done(jobsUi.showJobRecordSuccess)
+    .fail(jobsUi.showJobRecordFailure);
 };
 
-const onEditCommunication = function(event) {
+const onEditJob = function(event) {
   event.preventDefault();
-  store.currentCommunicationId = $(this).attr("data-current-communication-id");
-  communicationsUi.updateFormGenerator();
+  store.currentJobId = $(this).attr("data-current-job-id");
+  jobsUi.updateFormGenerator();
 
   let category = "contact-category";
 
@@ -33,63 +33,63 @@ const onEditCommunication = function(event) {
 
 };
 
-const onCreateCommunication = function(event) {
+const onCreateJob = function(event) {
   event.preventDefault();
   let data = getFormFields(event.target);
-  store.createCommunicationData = data;
-  store.lastShowCommunicationData = data;
+  store.createJobData = data;
+  store.lastShowJobData = data;
 
   let submittedRefId = $("#select-option-contact-category").val();
 
-  data.communication.contact_ref_id = submittedRefId;
+  data.job.contact_ref_id = submittedRefId;
 
-  let communicationTextSelect = $("#select-option-contact-category option[value=" + submittedRefId + "]").text();
+  let jobTextSelect = $("#select-option-contact-category option[value=" + submittedRefId + "]").text();
 
-  data.communication.contact_ref_name = communicationTextSelect;
+  data.job.contact_ref_name = jobTextSelect;
 
-  communicationsApi.createCommunication(data)
+  jobsApi.createJob(data)
     .then((response) => {
-      store.currentCommunicationId = response.communication.id;
-      return store.currentCommunicationId;
+      store.currentJobId = response.job.id;
+      return store.currentJobId;
     })
-    .done(communicationsUi.createCommunicationSuccess)
-    .fail(communicationsUi.createCommunicationFailure);
+    .done(jobsUi.createJobSuccess)
+    .fail(jobsUi.createJobFailure);
 };
 
-const onDeleteCommunication = function(event) {
+const onDeleteJob = function(event) {
   event.preventDefault();
-  store.currentCommunicationId= $(this).attr("data-current-communication-id");
-  communicationsApi.deleteCommunication(store.currentCommunicationId)
-    .done(communicationsUi.deleteCommunicationSuccess)
-    .fail(communicationsUi.deleteCommunicationFailure);
+  store.currentJobId= $(this).attr("data-current-job-id");
+  jobsApi.deleteJob(store.currentJobId)
+    .done(jobsUi.deleteJobSuccess)
+    .fail(jobsUi.deleteJobFailure);
 };
 
-const onUpdateCommunication = function(event) {
+const onUpdateJob = function(event) {
   event.preventDefault();
   let data = getFormFields(event.target);
-  let category = "contact-category";
-  let categoryId = dashboardLogic.determineTagId(category);
+  let category = "company-category";
+  let categoryId = $(".select-option-value").val();
 
-  data.communication.contact_ref_id = categoryId;
-  data.communication.contact_ref_name = dashboardLogic.determineTagText(category, categoryId);
+  data.job.company_name = dashboardLogic.determineTagText(category, categoryId);
+  data.job.company_ref_id = categoryId;
 
-  communicationsApi.updateCommunication(data)
-    .done(communicationsUi.updateCommunicationSuccess)
-    .fail(communicationsUi.updateCommunicationFailure);
+  jobsApi.updateCommunication(data)
+    .done(jobsUi.updateJobSuccess)
+    .fail(jobsUi.updateJobFailure);
 };
 
-const onShowCommunicationCreateForm = function(event) {
+const onShowJobCreateForm = function(event) {
   event.preventDefault();
-  communicationsUi.showCommunicationCreateForm();
+  jobsUi.showJobCreateForm();
 };
 
-const onSelectCommunicationDropdown = function(event) {
+const onSelectJobDropdown = function(event) {
   event.preventDefault();
   let tagCategory = $(this).attr("class");
   dashboardLogic.determineApiRequest(tagCategory);
 };
 
-const onDisplayCommunicationDropdown = function(event) {
+const onDisplayJobDropdown = function(event) {
   event.preventDefault();
   let isUpdateForm;
   let checkboxDivId = $(this).attr("id");
@@ -105,15 +105,15 @@ const onDisplayCommunicationDropdown = function(event) {
 };
 
 const addHandlers = () => {
-  $('.content').on('submit', '#new-communication-form', onCreateCommunication);
-  $('.content').on('submit', '#update-communication-form', onUpdateCommunication);
-  $('.content').on('click', '#communication-record-btn-edit', onEditCommunication);
-  $('.content').on('click', '#generate-create-communication-btn', onShowCommunicationCreateForm);
-  $('.content').on('click', '.dashboard-communication-record-btn', onShowCommunicationRecord);
-  $('.content').on('click', '#get-communications-btn', onGetCommunications);
-  $('.content').on('click', '#communication-record-delete', onDeleteCommunication);
-  $('.content').on('change', '#tag-contact-to-communication', onDisplayCommunicationDropdown);
-  $('.content').on('change', '#select-option-contact-category', onSelectCommunicationDropdown);
+  $('.content').on('submit', '#new-job-form', onCreateJob);
+  $('.content').on('submit', '#update-job-form', onUpdateJob);
+  $('.content').on('click', '#job-record-btn-edit', onEditJob);
+  $('.content').on('click', '#generate-create-job-btn', onShowJobCreateForm);
+  $('.content').on('click', '.dashboard-job-record-btn', onShowJobRecord);
+  $('.content').on('click', '#get-jobs-btn', onGetJobs);
+  $('.content').on('click', '#job-record-delete', onDeleteJob);
+  $('.content').on('change', '#tag-contact-to-job', onDisplayJobDropdown);
+  $('.content').on('change', '#select-option-contact-category', onSelectJobDropdown);
 };
 
 module.exports = {

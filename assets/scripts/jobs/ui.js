@@ -1,22 +1,22 @@
 'use strict';
 
 const store = require('../store');
-const displayEditCommunication = require('../templates/communication/update-communication-form.handlebars');
-const displayCommunicationDashboard = require('../templates/communication/get-communications.handlebars');
+const displayEditJob = require('../templates/job/update-job-form.handlebars');
+const displayJobDashboard = require('../templates/job/get-jobs.handlebars');
 const displayReminderDashboard = require('../templates/reminder/get-reminders.handlebars');
-// const displayReminderDashboardCommunicationPage = require('../templates/reminder/get-reminders-communication.handlebars');
-const displayCommunicationDetails = require('../templates/communication/show-communication-record.handlebars');
-const displayCommunicationCreateForm = require('../templates/communication/create-communication.handlebars');
+// const displayReminderDashboardJobPage = require('../templates/reminder/get-reminders-job.handlebars');
+const displayJobDetails = require('../templates/job/show-job-record.handlebars');
+const displayJobCreateForm = require('../templates/job/create-job.handlebars');
 // const displayJobsTable = require('../templates/job/get-jobs.handlebars');
 // const displayShowJobTable = require('../templates/job/show-job.handlebars');
-const communicationsApi = require('./api');
+const jobsApi = require('./api');
 // const jobsApi = require('../jobs/api');
 // const remindersApi = require('../reminders/api');
-const displayCommunicationOptions = require('../templates/communication/display-communication-create-form.handlebars');
+const displayJobOptions = require('../templates/job/display-job-create-form.handlebars');
 const dashboardLogic = require('../dashboard/logic');
 
 const getReminderSuccess = (data) => {
-  // let insertCompId = store.currentCommunicationId;
+  // let insertCompId = store.currentJobId;
   let reminderDashboard = displayReminderDashboard({
     reminders: data.reminders
     // insert: insertCompId
@@ -26,58 +26,58 @@ const getReminderSuccess = (data) => {
 
 };
 
-const getCommunicationSuccess = (data) => {
+const getJobSuccess = (data) => {
   $(".notification-container").children().text("");
-  store.communicationDataForEdit = data;
+  store.jobDataForEdit = data;
 
   $(".content").children().remove();
 
-  let communicationDashboard = displayCommunicationDashboard({
-    communications: data.communications
+  let jobDashboard = displayJobDashboard({
+    jobs: data.jobs
   });
 
-  $('.content').append(communicationDashboard);
+  $('.content').append(jobDashboard);
 
 };
 
-const showCommunicationRecordSuccess = (data) => {
+const showJobRecordSuccess = (data) => {
   $(".notification-container").children().text("");
   $(".content").children().remove();
-  store.lastShowCommunicationData = data;
+  store.lastShowJobData = data;
 
-  let communicationDetails = displayCommunicationDetails({
-    communication: data.communication
+  let jobDetails = displayJobDetails({
+    job: data.job
   });
-  $('.content').append(communicationDetails);
+  $('.content').append(jobDetails);
 };
 
-const showCommunicationRecordFailure = () => {
+const showJobRecordFailure = () => {
   $(".notification-container").children().text("");
   console.log('failure');
 };
 //
-const showCommunicationCreateForm = () => {
+const showJobCreateForm = () => {
   $(".notification-container").children().text("");
   $(".content").children().remove();
-  let showCreateCommunicationForm = displayCommunicationCreateForm();
-  $('.content').append(showCreateCommunicationForm);
+  let showCreateJobForm = displayJobCreateForm();
+  $('.content').append(showCreateJobForm);
 };
 
 const updateFormGenerator = function() {
   $(".notification-container").children().text("");
   $(".content").children().remove();
 
-  let data = store.lastShowCommunicationData;
+  let data = store.lastShowJobData;
 
-  let editCommunication = displayEditCommunication({
-    communication: data.communication
+  let editJob = displayEditJob({
+    job: data.job
   });
-  $('.content').append(editCommunication);
+  $('.content').append(editJob);
   // dashboardLogic.tagCheckboxUpdate(category);
 
 
 
-  // $(".associate-reminder-with-communication-container").attr("current-communication-id", store.currentCommunicationId);
+  // $(".associate-reminder-with-job-container").attr("current-job-id", store.currentJobId);
   //
   // let contactRefId = parseInt($("#associate-reminder-with-company").attr("data-current-contact-id"));
   //
@@ -91,79 +91,79 @@ const updateFormGenerator = function() {
 
 };
 
-const getCommunicationFailure = () => {
+const getJobFailure = () => {
   $(".notification-container").children().text("");
-  console.log('get communication failure');
+  console.log('get job failure');
 };
 
-const createCommunicationSuccess = () => {
+const createJobSuccess = () => {
   $(".form-error").text("");
   $(".notification-container").children().text("");
   $(".content").children().remove();
-  $(".success-alert").text("Communication Has Been Successfully Created");
+  $(".success-alert").text("Job Has Been Successfully Created");
 
-  let showCommunicationDetails = displayCommunicationDetails({
-    communication: store.createCommunicationData.communication
+  let showJobDetails = displayJobDetails({
+    job: store.createJobData.job
   });
-  $(".content").append(showCommunicationDetails);
-  $(".current").attr("data-current-communication-id", store.currentCommunicationId);
+  $(".content").append(showJobDetails);
+  $(".current").attr("data-current-job-id", store.currentJobId);
 };
 
-const deleteCommunicationSuccess = () => {
+const deleteJobSuccess = () => {
   $(".notification-container").children().text("");
   console.log('delete success');
-  communicationsApi.getCommunications()
-    .done(getCommunicationSuccess)
-    .fail(getCommunicationFailure);
+  jobsApi.getJobs()
+    .done(getJobSuccess)
+    .fail(getJobFailure);
 };
 
-const deleteCommunicationFailure = () => {
+const deleteJobFailure = () => {
   $(".notification-container").children().text("");
   console.log('delete fail');
 };
 
-const updateCommunicationSuccess = (data) => {
+const updateJobSuccess = (data) => {
   $(".notification-container").children().text("");
-  $(".success-alert").text("Communication Has Been Successfully Updated");
-  store.currentCommunicationId = data.communication.id;
+  $(".success-alert").text("Job Has Been Successfully Updated");
+  store.currentJobId = data.job.id;
   $(".content").children().remove();
-  communicationsApi.showCommunication()
-    .done(showCommunicationRecordSuccess)
-    .fail(showCommunicationRecordFailure);
+  jobsApi.showJob()
+    .done(showJobRecordSuccess)
+    .fail(showJobRecordFailure);
 };
 
-const displayCommunicationDropdownSuccess = function(data) {
+const displayJobDropdownSuccess = function(data) {
   $(".notification-container").children().text("");
 
-  let companyOptionDisplay = displayCommunicationOptions({
-    communications: data.communications
+  let companyOptionDisplay = displayJobOptions({
+    jobs: data.jobs
   });
 
   let dataUpdateFormVal = parseInt($("#update-reminder-form").attr("data-update-form"));
 
-  $('.associate-reminder-with-communication-container').append(companyOptionDisplay);
+  $('.associate-reminder-with-job-container').append(companyOptionDisplay);
 
   if (dataUpdateFormVal === 1) {
-    let currentCommunicationId = store.currentCommunicationId;
-    let valueString = '#select-option-communication-name option[value=' + currentCommunicationId + ']';
+    let currentJobId = store.currentJobId;
+    let valueString = '#select-option-job-name option[value=' + currentJobId + ']';
     $(valueString).prop('selected', true);
   }
 };
 
 module.exports = {
-  getCommunicationSuccess,
-  showCommunicationRecordSuccess,
-  deleteCommunicationSuccess,
-  deleteCommunicationFailure,
+  getJobSuccess,
+  showJobRecordSuccess,
+  deleteJobSuccess,
+  deleteJobFailure,
   updateFormGenerator,
-  showCommunicationCreateForm,
-  getCommunicationFailure,
-  updateCommunicationSuccess,
-  // updateCommunicationFailure,
-  showCommunicationRecordFailure,
-  createCommunicationSuccess,
-  displayCommunicationDropdownSuccess,
-  displayCommunicationOptions,
+  showJobCreateForm,
+  getJobFailure,
+  updateJobSuccess,
+  // updateJobFailure,
+  showJobRecordFailure,
+  createJobSuccess,
+  displayJobDropdownSuccess,
+  displayJobOptions,
   getReminderSuccess,
   // getReminderSuccess,
 };

@@ -1,57 +1,68 @@
-<div class="update-jobs-form-container">
-  <form class="form jobs-form" id="update-job-form" name="update-job-form">
-    <fieldset>
-      <legend>Update Job Form</legend>
-      <p id="update-job-error" class="warning form-error"></p>
-      <p>All fields are <u>optional</u> unless otherwise indicated</p>
-      <div class="form-group">
-        <label>Job Title</label>
-        <input class="form-control required-field job-title" name="job[title]" placeholder="Job Title" type="text" value="{{job.title}}">
-      </div>
+<div class="update-job-form-container form-container">
+<form class="form job-form reminder-form general-form-class" id="update-job-form" name="update-job-form" data-update-form="1">
+  <fieldset>
+    <legend>Update Job Form</legend>
+    <p id="update-job-error" class="warning form-error"></p>
+    <p>All fields are <u>optional</u> unless otherwise indicated</p>
 
-      <div class="form-group">
-        <label>Posting Date</label>
-        <input class="form-control required-field posting-date" name="job[posting_date]" placeholder="Date Posted" type="date" value="{{job.posting_date}}">
-      </div>
+    <div class="form-group">
+      <label>Job Title</label>
+      <input class="form-control required-field job-title" name="job[title]" placeholder="Job Title" type="text" value="{{job.title}}">
+    </div>
 
-      <div class="form-group">
-        <label>Post Websile URL</label>
-        <input class="form-control post-url" name="job[post_url]" placeholder="Post Website Link" type="text" value="{{job.post_url}}">
-      </div>
+    <div class="form-group">
+      <label>Posting Date</label>
+      <input class="form-control required-field posting-date" name="job[posting_date]" placeholder="Date Posted" type="date" value="{{job.posting_date}}">
+    </div>
 
-      <div class="form-group">
-        <label>Salary</label>
-        <input class="form-control salary" name="job[salary]" placeholder="Salary" type="text" value="{{job.post_url}}">
-      </div>
+    <div class="form-group">
+      <label>Post Websile URL</label>
+      <input class="form-control post-url" name="job[post_url]" placeholder="Post Website Link" type="text" value="{{job.post_url}}">
+    </div>
 
-      <div class="form-group">
-        <label>Responsibilities</label>
-        <textarea class="form-control field-input responsibility" name="job[responsibility]" placeholder="Job Responsibilities" type="textarea" value="{{job.responsibility}}"></textarea>
-      </div>
+    <div class="form-group">
+      <label>Salary</label>
+      <input class="form-control salary" name="job[salary]" placeholder="Salary" type="text" value="{{job.post_url}}">
+    </div>
 
-      <div class="form-group">
-        <label>Requirement</label>
-        <textarea class="form-control field-input requirement" name="job[requirement]" placeholder="Job Requirements" type="textarea" value="{{job.requirement}}"></textarea>
-      </div>
+    <div class="form-group">
+      <label>Responsibilities</label>
+      <textarea class="form-control field-input responsibility" name="job[responsibility]" placeholder="Job Responsibilities" type="textarea" value="{{job.responsibility}}"></textarea>
+    </div>
 
-      <div class="form-group">
-        <label>Deadline</label>
-        <input class="form-control deadline" name="job[deadline]" placeholder="Deadline Date" type="date" value="{{job.deadline}}">
-      </div>
+    <div class="form-group">
+      <label>Requirement</label>
+      <textarea class="form-control field-input requirement" name="job[requirement]" placeholder="Job Requirements" type="textarea" value="{{job.requirement}}"></textarea>
+    </div>
 
-      <div class="form-group">
-        <label>Job Notes</label>
-        <textarea class="form-control field-input comment" form="update-job-form" name="job[comment]" placeholder="Job Notes" type="text" value="{{job.comment}}"></textarea>
-      </div>
+    <div class="form-group">
+      <label>Deadline</label>
+      <input class="form-control deadline" name="job[deadline]" placeholder="Deadline Date" type="date" value="{{job.deadline}}">
+    </div>
 
-      <div class="form-group">
-        <input name="submit" class="btn btn-success submit-btn current" type="submit" value="Submit Update" data-current-job-id="" data-current-job-id="{{job.id}}">
+    <div class="form-group">
+      <label>Job Notes</label>
+      <textarea class="form-control field-input comment" form="update-job-form" name="job[comment]" placeholder="Job Notes" type="text" value="{{job.comment}}"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label>Tag this job to an existing contact?</label>
+      <div class="form-group tag-contact-to-job-container">
+        <span>Check Box for Yes</span>
+          <input id="tag-contact-to-job" class="contact-category" type="checkbox" value="{{job.contact_ref_id}}" data-update-category-id={{job.contact_ref_id}}>
       </div>
-    </fieldset>
-  </form>
-  <br><br>
-  <div class="dashboard-container">
-    <button id="dashboard-home-btn" type="button" class="btn btn-primary">View Dashboard</button>
-    <button id="dashboard-new-job-btn" type="button" class="btn btn-success">Create Job</button>
-  </div>
-  </div>
+    </div>
+
+    <div class="form-group display-contacts-dropdown"></div>
+
+    <div class="form-group">
+      <input class="btn btn-success submit-btn current" name="submit" id="submit-job-update-btn" type="submit" value="Submit">
+    </div>
+  </fieldset>
+</form>
+<br><br>
+<div class="dashboard-container">
+  <button id="dashboard-home-btn" type="button" class="btn btn-primary">View Dashboard</button>
+  <button id="dashboard-new-job-btn" type="button" class="btn btn-success">Create Session</button>
+</div>
+</div>

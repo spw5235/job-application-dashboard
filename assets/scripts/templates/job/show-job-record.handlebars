@@ -1,0 +1,63 @@
+<h1>Job Overview</h1>
+
+<h2 class="job-name-header" data-current-job-name="{{job.id}}">{{job.full_name}}</h2>
+
+<h3>Job Details</h3>
+<table class="table job-record-table table-hover">
+  <tbody>
+    <tr>
+      <td class="job-record-title job-record-school">
+        Deadline:
+      </td>
+      <td class="display-job-school">
+        {{job.deadline}}
+      </td>
+    </tr>
+    <tr>
+      <td class="job-record-title job-record-school">
+        Salary:
+      </td>
+      <td class="display-job-school">
+        {{job.salary}}
+      </td>
+    </tr>
+    <tr>
+      <td class="job-record-title job-record-teacher">
+        Job Responsibilities
+      </td>
+      <td class="display-job-teacher">
+        {{job.responsibilities}}
+      </td>
+    </tr>
+    <tr>
+      <td class="job-record-title job-record-grade">
+        Job Requirements:
+      </td>
+      <td class="display-job-grade">
+        {{job.requirement}}
+      </td>
+    </tr>
+    <tr>
+      <td class="job-record-title job-record-grade">
+        Job Comments:
+      </td>
+      <td class="display-job-grade">
+        {{job.comment}}
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="dashboard-job-btn-container">
+  <div class="job-record-btn-options">
+    <button id="job-record-btn-edit" type="button" class="btn btn-warning current" data-current-job-id="{{job.id}}" data-current-company-id="{{job.company_ref_id}}" data-current-job-id="{{job.job_ref_id}}" data-current-document-id="{{job.document_ref_id}}">Edit Job Record</button>
+    <button id="job-record-delete" type="button" class="btn btn-danger current" data-current-job-id="{{job.id}}">Delete Job Record</button>
+  </div>
+</div>
+
+<div class="dashboard-container">
+  <button id="dashboard-home-btn" type="button" class="btn btn-primary dashboard-home-btn-job-page">View Dashboard</button>
+  <button id="dashboard-new-job-btn-job" type="button" class="btn btn-success dashboard-home-btn-job-page" data-current-job-id="{{job.id}}" data-type-job-page="{{job.job_page}}">Create Job</button>
+</div>
+
+<div class="filter-show-job-container"></div>

@@ -39,13 +39,27 @@ const onCreateCommunication = function(event) {
   store.createCommunicationData = data;
   store.lastShowCommunicationData = data;
 
-  let submittedRefId = $("#select-option-contact-category").val();
+  // let submittedRefId = $("#select-option-contact-category").val();
+  //
+  // data.communication.contact_ref_id = submittedRefId;
+  //
+  // let communicationTextSelect = $("#select-option-contact-category option[value=" + submittedRefId + "]").text();
+  //
+  // data.communication.contact_ref_name = communicationTextSelect;
 
-  data.communication.contact_ref_id = submittedRefId;
 
-  let communicationTextSelect = $("#select-option-contact-category option[value=" + submittedRefId + "]").text();
 
-  data.communication.contact_ref_name = communicationTextSelect;
+  let category = "contact-category";
+  let categoryId = $(".select-option-value").val();
+
+  data.communication.contact_ref_name = dashboardLogic.determineTagText(category, categoryId);
+  data.communication.contact_ref_id = categoryId;
+
+  if (dashboardLogic.calcStoreDefaultVals(category) === true) {
+    data.communication.contact_ref_name = "";
+    data.communication.contact_ref_id = 0;
+    console.log('it works');
+  }
 
   communicationsApi.createCommunication(data)
     .then((response) => {
@@ -68,9 +82,14 @@ const onUpdateCommunication = function(event) {
   event.preventDefault();
   let data = getFormFields(event.target);
   let category = "contact-category";
-  let categoryId = dashboardLogic.determineTagId(category);
+  let categoryId = $(".select-option-value").val();
 
-  data.communication.contact_ref_id = categoryId;
+  if ( categoryId === undefined ) {
+    data.communication.contact_ref_id = 0;
+  } else {
+    data.communication.contact_ref_id = categoryId;
+  }
+
   data.communication.contact_ref_name = dashboardLogic.determineTagText(category, categoryId);
 
   communicationsApi.updateCommunication(data)

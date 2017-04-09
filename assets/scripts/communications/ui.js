@@ -96,14 +96,15 @@ const getCommunicationFailure = () => {
   console.log('get communication failure');
 };
 
-const createCommunicationSuccess = () => {
+const createCommunicationSuccess = (data) => {
+  console.log(data);
   $(".form-error").text("");
   $(".notification-container").children().text("");
   $(".content").children().remove();
   $(".success-alert").text("Communication Has Been Successfully Created");
 
   let showCommunicationDetails = displayCommunicationDetails({
-    communication: store.createCommunicationData.communication
+    communication: data.communication
   });
   $(".content").append(showCommunicationDetails);
   $(".current").attr("data-current-communication-id", store.currentCommunicationId);
@@ -127,6 +128,7 @@ const updateCommunicationSuccess = (data) => {
   $(".success-alert").text("Communication Has Been Successfully Updated");
   store.currentCommunicationId = data.communication.id;
   $(".content").children().remove();
+  console.log(data);
   communicationsApi.showCommunication()
     .done(showCommunicationRecordSuccess)
     .fail(showCommunicationRecordFailure);
