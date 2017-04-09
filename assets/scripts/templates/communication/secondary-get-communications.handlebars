@@ -1,0 +1,28 @@
+<h1>Secondary Table Contact</h1>
+
+<table class="table secondary-table table-hover">
+  <thead>
+    <tr>
+      <th>Contact Name</th>
+      <th>View Record</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each communications as |communication|}}
+      <tr>
+        <td class="display-communication-full-name">
+          {{communication.contact_ref_name}}
+        </td>
+        <td class="display-communication-submit">
+          <button type="button" class="btn btn-info btn-sm view-secondary-btn" data-secondary-data-contact-category="{{communication.contact_ref_id}}" data-current-communication-id="{{communication.id}}" data-current-company-id="{{communication.company_ref_id}}" data-current-job-id="{{communication.job_ref_id}}" data-current-document-id="{{communication.document_ref_id}}">View Communication</button>
+        </td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>
+<br><br>
+<div class="dashboard-container">
+  <button id="dashboard-home-btn" type="button" class="btn btn-primary">View Dashboard</button>
+  <button id="dashboard-new-job-btn" type="button" class="btn btn-success">Create Job</button>
+  <button id="dashboard-new-job-btn-company" type="button" class="btn btn-success dashboard-home-btn-company-page" data-current-company-id="{{company.id}}">Create Job</button>
+</div>
