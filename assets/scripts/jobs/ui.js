@@ -3,28 +3,9 @@
 const store = require('../store');
 const displayEditJob = require('../templates/job/update-job-form.handlebars');
 const displayJobDashboard = require('../templates/job/get-jobs.handlebars');
-const displayReminderDashboard = require('../templates/reminder/get-reminders.handlebars');
-// const displayReminderDashboardJobPage = require('../templates/reminder/get-reminders-job.handlebars');
 const displayJobDetails = require('../templates/job/show-job-record.handlebars');
 const displayJobCreateForm = require('../templates/job/create-job.handlebars');
-// const displayJobsTable = require('../templates/job/get-jobs.handlebars');
-// const displayShowJobTable = require('../templates/job/show-job.handlebars');
 const jobsApi = require('./api');
-// const jobsApi = require('../jobs/api');
-// const remindersApi = require('../reminders/api');
-const displayJobOptions = require('../templates/job/display-job-create-form.handlebars');
-const dashboardLogic = require('../dashboard/logic');
-
-const getReminderSuccess = (data) => {
-  // let insertCompId = store.currentJobId;
-  let reminderDashboard = displayReminderDashboard({
-    reminders: data.reminders
-    // insert: insertCompId
-  });
-
-  $('.content').append(reminderDashboard);
-
-};
 
 const getJobSuccess = (data) => {
   $(".notification-container").children().text("");
@@ -55,7 +36,7 @@ const showJobRecordFailure = () => {
   $(".notification-container").children().text("");
   console.log('failure');
 };
-//
+
 const showJobCreateForm = () => {
   $(".notification-container").children().text("");
   $(".content").children().remove();
@@ -73,21 +54,6 @@ const updateFormGenerator = function() {
     job: data.job
   });
   $('.content').append(editJob);
-  // dashboardLogic.tagCheckboxUpdate(category);
-
-
-
-  // $(".associate-reminder-with-job-container").attr("current-job-id", store.currentJobId);
-  //
-  // let contactRefId = parseInt($("#associate-reminder-with-company").attr("data-current-contact-id"));
-  //
-  //
-  // if (companyId > 0) {
-  //   console.log("true");
-  //   // $("#associate-reminder-with-company").prop("checked", true);
-  //   $("#associate-reminder-with-company").click();
-  //   // $(".display-job-title").append('<div class="form-group"><label>Associate Reminder With Specific Job?</label><div class="form-group associate-reminder-with-job-container"><span>Check Box for Yes</span><input id="associate-reminder-with-job" type="checkbox" value=""></div></div>');
-  // }
 
 };
 
@@ -96,14 +62,15 @@ const getJobFailure = () => {
   console.log('get job failure');
 };
 
-const createJobSuccess = () => {
+const createJobSuccess = (data) => {
+  console.log(data);
   $(".form-error").text("");
   $(".notification-container").children().text("");
   $(".content").children().remove();
   $(".success-alert").text("Job Has Been Successfully Created");
 
   let showJobDetails = displayJobDetails({
-    job: store.createJobData.job
+    job: data.job
   });
   $(".content").append(showJobDetails);
   $(".current").attr("data-current-job-id", store.currentJobId);
@@ -127,27 +94,10 @@ const updateJobSuccess = (data) => {
   $(".success-alert").text("Job Has Been Successfully Updated");
   store.currentJobId = data.job.id;
   $(".content").children().remove();
+  console.log(data);
   jobsApi.showJob()
     .done(showJobRecordSuccess)
     .fail(showJobRecordFailure);
-};
-
-const displayJobDropdownSuccess = function(data) {
-  $(".notification-container").children().text("");
-
-  let companyOptionDisplay = displayJobOptions({
-    jobs: data.jobs
-  });
-
-  let dataUpdateFormVal = parseInt($("#update-reminder-form").attr("data-update-form"));
-
-  $('.associate-reminder-with-job-container').append(companyOptionDisplay);
-
-  if (dataUpdateFormVal === 1) {
-    let currentJobId = store.currentJobId;
-    let valueString = '#select-option-job-name option[value=' + currentJobId + ']';
-    $(valueString).prop('selected', true);
-  }
 };
 
 module.exports = {
@@ -159,11 +109,6 @@ module.exports = {
   showJobCreateForm,
   getJobFailure,
   updateJobSuccess,
-  // updateJobFailure,
   showJobRecordFailure,
   createJobSuccess,
-  displayJobDropdownSuccess,
-  displayJobOptions,
-  getReminderSuccess,
-  // getReminderSuccess,
 };

@@ -22,15 +22,12 @@ const onShowCommunicationRecord = function(event) {
     .fail(communicationsUi.showCommunicationRecordFailure);
 };
 
-const onEditCommunication = function(event) {
+const onDeleteCommunication = function(event) {
   event.preventDefault();
-  store.currentCommunicationId = $(this).attr("data-current-communication-id");
-  communicationsUi.updateFormGenerator();
-
-  let category = "contact-category";
-
-  dashboardLogic.tagCheckboxUpdate(category);
-
+  store.currentCommunicationId= $(this).attr("data-current-communication-id");
+  communicationsApi.deleteCommunication(store.currentCommunicationId)
+    .done(communicationsUi.deleteCommunicationSuccess)
+    .fail(communicationsUi.deleteCommunicationFailure);
 };
 
 const onCreateCommunication = function(event) {
@@ -39,27 +36,16 @@ const onCreateCommunication = function(event) {
   store.createCommunicationData = data;
   store.lastShowCommunicationData = data;
 
-  // let submittedRefId = $("#select-option-contact-category").val();
-  //
-  // data.communication.contact_ref_id = submittedRefId;
-  //
-  // let communicationTextSelect = $("#select-option-contact-category option[value=" + submittedRefId + "]").text();
-  //
-  // data.communication.contact_ref_name = communicationTextSelect;
-
-
-
   let category = "contact-category";
   let categoryId = $(".select-option-value").val();
 
-  data.communication.contact_ref_name = dashboardLogic.determineTagText(category, categoryId);
-  data.communication.contact_ref_id = categoryId;
-
-  if (dashboardLogic.calcStoreDefaultVals(category) === true) {
-    data.communication.contact_ref_name = "";
+  if ( categoryId === undefined ) {
     data.communication.contact_ref_id = 0;
-    console.log('it works');
+  } else {
+    data.communication.contact_ref_id = categoryId;
   }
+
+  data.communication.contact_ref_name = dashboardLogic.determineTagText(category, categoryId);
 
   communicationsApi.createCommunication(data)
     .then((response) => {
@@ -70,12 +56,15 @@ const onCreateCommunication = function(event) {
     .fail(communicationsUi.createCommunicationFailure);
 };
 
-const onDeleteCommunication = function(event) {
+const onEditCommunication = function(event) {
   event.preventDefault();
-  store.currentCommunicationId= $(this).attr("data-current-communication-id");
-  communicationsApi.deleteCommunication(store.currentCommunicationId)
-    .done(communicationsUi.deleteCommunicationSuccess)
-    .fail(communicationsUi.deleteCommunicationFailure);
+  store.currentCommunicationId = $(this).attr("data-current-communication-id");
+  communicationsUi.updateFormGenerator();
+
+  let category = "contact-category";
+
+  dashboardLogic.tagCheckboxUpdate(category);
+
 };
 
 const onUpdateCommunication = function(event) {

@@ -4,7 +4,7 @@ const store = require('../store');
 const contactsApi = require('../contacts/api');
 const companyApi = require('../companies/api');
 const displayContactOptions = require('../templates/contact/option-dropdown-contacts.handlebars');
-const displayCompanyOptions = require('../templates/contact/option-dropdown-contacts.handlebars');
+const displayCompanyOptions = require('../templates/company/option-dropdown-companies.handlebars');
 
 // const determineTagId = function(category, id) {
 //   let communicationTextSelected = $("#select-option-" + category + " option[value=" + id + "]").text();
@@ -47,6 +47,8 @@ const displayDropdownSuccess = function(data) {
   let dataToAppend;
   let category = store.apiRequestCategory;
 
+  console.log('sdfadsf');
+  console.log(category);
   if (category === "contact-category") {
     dataToAppend = displayContactOptions({
       contacts: data.contacts
@@ -138,9 +140,9 @@ const tagCheckboxUpdate = function(category) {
   const checkboxId = "#" + checkboxIdVal;
 
   store.currentUpdateInputId = checkboxIdVal;
-  console.log(checkboxId);
   const isExistingId = parseInt($(checkboxId).val());
 
+  console.log('tagcheckboxupdate');
   console.log(isExistingId);
   if ( isExistingId > 0 ) {
     determineApiRequest(category, isUpdate, checkboxId);

@@ -22,15 +22,12 @@ const onShowJobRecord = function(event) {
     .fail(jobsUi.showJobRecordFailure);
 };
 
-const onEditJob = function(event) {
+const onDeleteJob = function(event) {
   event.preventDefault();
-  store.currentJobId = $(this).attr("data-current-job-id");
-  jobsUi.updateFormGenerator();
-
-  let category = "contact-category";
-
-  dashboardLogic.tagCheckboxUpdate(category);
-
+  store.currentJobId= $(this).attr("data-current-job-id");
+  jobsApi.deleteJob(store.currentJobId)
+    .done(jobsUi.deleteJobSuccess)
+    .fail(jobsUi.deleteJobFailure);
 };
 
 const onCreateJob = function(event) {
@@ -39,13 +36,16 @@ const onCreateJob = function(event) {
   store.createJobData = data;
   store.lastShowJobData = data;
 
-  let submittedRefId = $("#select-option-contact-category").val();
+  let category = "company-category";
+  let categoryId = $(".select-option-value").val();
 
-  data.job.contact_ref_id = submittedRefId;
+  if ( categoryId === undefined ) {
+    data.job.company_ref_id = 0;
+  } else {
+    data.job.company_ref_id = categoryId;
+  }
 
-  let jobTextSelect = $("#select-option-contact-category option[value=" + submittedRefId + "]").text();
-
-  data.job.contact_ref_name = jobTextSelect;
+  data.job.company_ref_name = dashboardLogic.determineTagText(category, categoryId);
 
   jobsApi.createJob(data)
     .then((response) => {
@@ -56,12 +56,15 @@ const onCreateJob = function(event) {
     .fail(jobsUi.createJobFailure);
 };
 
-const onDeleteJob = function(event) {
+const onEditJob = function(event) {
   event.preventDefault();
-  store.currentJobId= $(this).attr("data-current-job-id");
-  jobsApi.deleteJob(store.currentJobId)
-    .done(jobsUi.deleteJobSuccess)
-    .fail(jobsUi.deleteJobFailure);
+  store.currentJobId = $(this).attr("data-current-job-id");
+  jobsUi.updateFormGenerator();
+
+  let category = "company-category";
+
+  dashboardLogic.tagCheckboxUpdate(category);
+
 };
 
 const onUpdateJob = function(event) {
@@ -70,10 +73,15 @@ const onUpdateJob = function(event) {
   let category = "company-category";
   let categoryId = $(".select-option-value").val();
 
-  data.job.company_name = dashboardLogic.determineTagText(category, categoryId);
-  data.job.company_ref_id = categoryId;
+  if ( categoryId === undefined ) {
+    data.job.company_ref_id = 0;
+  } else {
+    data.job.company_ref_id = categoryId;
+  }
 
-  jobsApi.updateCommunication(data)
+  data.job.company_ref_name = dashboardLogic.determineTagText(category, categoryId);
+
+  jobsApi.updateJob(data)
     .done(jobsUi.updateJobSuccess)
     .fail(jobsUi.updateJobFailure);
 };
@@ -112,8 +120,8 @@ const addHandlers = () => {
   $('.content').on('click', '.dashboard-job-record-btn', onShowJobRecord);
   $('.content').on('click', '#get-jobs-btn', onGetJobs);
   $('.content').on('click', '#job-record-delete', onDeleteJob);
-  $('.content').on('change', '#tag-contact-to-job', onDisplayJobDropdown);
-  $('.content').on('change', '#select-option-contact-category', onSelectJobDropdown);
+  $('.content').on('change', '#tag-company-to-job', onDisplayJobDropdown);
+  $('.content').on('change', '#select-option-company-category', onSelectJobDropdown);
 };
 
 module.exports = {

@@ -1,9 +1,0 @@
-<div id="tag-contact-to-company-select">
-  <label>Company Name Selection:</label>
-  <select id="select-option-company-category" class="form-control">
-      <option class="form-control blank-option" placeholder="Blank" type="text" value="0"></option>
-      {{#each companies as |company|}}
-        <option class="form-control option-company-name" name="company[company_name]" placeholder="reminder Type" type="text" data-company-id="{{company.id}}" data-company-name="{{company.name}}" value="{{company.id}}">{{company.name}}</option>
-      {{/each}}
-  </select>
-</div>
