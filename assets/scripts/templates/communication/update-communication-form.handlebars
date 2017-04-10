@@ -10,9 +10,15 @@
       <input class="form-control required-field communication-date" name="communication[c_date]" value="{{communication.c_date}}" placeholder="Communication Date" type="date">
     </div>
 
-    <div class="form-group">
-      <label>Communication Method</label>
-      <input class="form-control required-field communication-method" name="communication[c_method]" value="{{communication.c_method}}" placeholder="Communication Method" type="text">
+    <div class="form-group c-method">
+      <label>Communication Method (required)</label>
+      <select class="form-control" id="communication-method-select" data-current-c-method="{{communication.c_method}}">
+          <option class="form-control required-field" name="communication[c_method]" placeholder="Communication Method" type="text" value="Email">Email</option>
+          <option class="form-control required-field" name="communication[c_method]" placeholder="Communication Method" type="text" value="Phone">Phone</option>
+          <option class="form-control required-field" name="communication[c_method]" placeholder="Communication Method" type="text" value="Linkedin">LinkedIn</option>
+          <option class="form-control required-field" name="communication[c_method]" placeholder="Communication Method" type="text" value="Meeting">Meeting</option>
+          <option class="form-control required-field" name="communication[c_method]" placeholder="Communication Method" type="text" value="Other">Other</option>
+      </select>
     </div>
 
     <div class="form-group">

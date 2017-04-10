@@ -23,7 +23,7 @@
     </tr>
     <tr>
       <td class="company-name">
-        Communication Menthod
+        Communication Method
       </td>
       <td class="display-communication-company-name">
         {{communication.c_method}}
@@ -46,11 +46,13 @@
       </td>
     </tr>
     <tr>
-      <td class="communication-record-phone">
-        Communication Link:
+      <td class="c-url-link">
+        Communication Url Link
+        <br>
+        Example: http://gmail.com/12343:
       </td>
       <td class="display-communication-phone">
-        {{communication.c_link}}
+          <a id="communication-text-link-url" class="url-text" href="{{communication.c_link}}" target="_blank" data-communication-c-link="{{communication.c_link}}">Link</a>
       </td>
     </tr>
     <tr>

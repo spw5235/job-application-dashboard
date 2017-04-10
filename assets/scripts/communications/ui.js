@@ -6,8 +6,6 @@ const displayCommunicationDashboard = require('../templates/communication/get-co
 const displayCommunicationDetails = require('../templates/communication/show-communication-record.handlebars');
 const displayCommunicationCreateForm = require('../templates/communication/create-communication.handlebars');
 const displaySecondaryCommunicationContact = require('../templates/communication/secondary-get-communications-contacts.handlebars');
-
-
 const communicationsApi = require('./api');
 const dashboardLogic = require('../dashboard/logic');
 
@@ -24,13 +22,13 @@ const getCommunicationSuccess = (data) => {
 
   $('.content').append(communicationDashboard);
 
-  let secondaryCommunicationContact = displaySecondaryCommunicationContact({
-    communications: data.communications
-  });
-
-  $('.content').append(secondaryCommunicationContact);
-
-  dashboardLogic.removeDuplicateRows($('.secondary-table'));
+  // let secondaryCommunicationContact = displaySecondaryCommunicationContact({
+  //   communications: data.communications
+  // });
+  //
+  // $('.content').append(secondaryCommunicationContact);
+  //
+  // dashboardLogic.removeDuplicateRows($('.secondary-table'));
 
 };
 
@@ -43,6 +41,12 @@ const showCommunicationRecordSuccess = (data) => {
     communication: data.communication
   });
   $('.content').append(communicationDetails);
+
+  let urlVal = $("#communication-text-link-url").attr("href");
+  let urlShortenText = dashboardLogic.urlArrIdentifier(urlVal);
+  console.log(urlShortenText);
+  // let urlText = dashboardLogic.shortDisplayedUrl(urlType, urlVal);
+  $("#communication-text-link-url").text(urlShortenText);
 };
 
 const showCommunicationRecordFailure = () => {
@@ -67,6 +71,27 @@ const updateFormGenerator = function() {
     communication: data.communication
   });
   $('.content').append(editCommunication);
+
+  let divId = "#communication-method-select";
+  let currentCMethod = $("#communication-method-select").attr("data-current-c-method");
+  let communicationOtherHtml = $('<div class="c-method-other-container"><label class="c-method-other">Document Type Other Description</label><input id="c-method-other-text" class="form-control required-field c-method-other" name="document[doctype]" placeholder="Document Type Description" type="text"></div>');
+
+  console.log(currentCMethod);
+
+  let isDefaultCMethod = dashboardLogic.isDefaultCMethod(currentCMethod);
+
+  console.log(isDefaultCMethod);
+
+  if (isDefaultCMethod) {
+    $(".c-method-other-container").remove();
+    dashboardLogic.preselectDefault(divId, currentCMethod);
+    // $('#communication-method-select option[value="' + currentCMethod + '"]').prop('selected', true);
+  } else {
+    $(".c-method").append(communicationOtherHtml);
+    $("#communication-method-select option[value=Other]").prop('selected', true);
+    $("#c-method-other-text").val(currentCMethod);
+  }
+
 
 };
 

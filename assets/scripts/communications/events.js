@@ -35,17 +35,27 @@ const onCreateCommunication = function(event) {
   let data = getFormFields(event.target);
   store.createCommunicationData = data;
   store.lastShowCommunicationData = data;
+  //
+  // let category = "contact-category";
+  // let categoryId = $(".select-option-value").val();
+  //
+  // if ( categoryId === undefined ) {
+  //   data.communication.contact_ref_id = 0;
+  // } else {
+  //   data.communication.contact_ref_id = parseInt(categoryId);
+  // }
+  //
+  // data.communication.contact_ref_name = dashboardLogic.determineTagText(category, categoryId);
+  //
 
-  let category = "contact-category";
-  let categoryId = $(".select-option-value").val();
+  let cMethodSelectVal = $("#communication-method-select").val();
 
-  if ( categoryId === undefined ) {
-    data.communication.contact_ref_id = 0;
+  console.log(cMethodSelectVal);
+  if (cMethodSelectVal === "Other") {
+    data.communication.c_method = $("#c-method-other-text").val();
   } else {
-    data.communication.contact_ref_id = parseInt(categoryId);
+    data.communication.c_method = $("#communication-method-select").val();
   }
-
-  data.communication.contact_ref_name = dashboardLogic.determineTagText(category, categoryId);
 
   communicationsApi.createCommunication(data)
     .then((response) => {
@@ -61,26 +71,35 @@ const onEditCommunication = function(event) {
   store.currentCommunicationId = $(this).attr("data-current-communication-id");
   communicationsUi.updateFormGenerator();
 
-  let category = "contact-category";
-
-  dashboardLogic.tagCheckboxUpdate(category);
+  // let category = "contact-category";
+  //
+  // dashboardLogic.tagCheckboxUpdate(category);
 
 };
 
 const onUpdateCommunication = function(event) {
   event.preventDefault();
   let data = getFormFields(event.target);
-  let category = "contact-category";
-  let categoryId = $(".select-option-value").val();
+  // let category = "contact-category";
+  // let categoryId = $(".select-option-value").val();
+  //
+  // if ( categoryId === undefined ) {
+  //   data.communication.contact_ref_id = 0;
+  // } else {
+  //   data.communication.contact_ref_id = categoryId;
+  // }
+  //
+  // data.communication.contact_ref_name = dashboardLogic.determineTagText(category, categoryId);
 
-  if ( categoryId === undefined ) {
-    data.communication.contact_ref_id = 0;
+  let cMethodSelectVal = $("#communication-method-select").val();
+  console.log(cMethodSelectVal);
+  if (cMethodSelectVal === "Other") {
+    data.communication.c_method = $("#c-method-other-text").val();
   } else {
-    data.communication.contact_ref_id = categoryId;
+    data.communication.c_method = $("#communication-method-select").val();
   }
 
-  data.communication.contact_ref_name = dashboardLogic.determineTagText(category, categoryId);
-
+  console.log(data);
   communicationsApi.updateCommunication(data)
     .done(communicationsUi.updateCommunicationSuccess)
     .fail(communicationsUi.updateCommunicationFailure);
@@ -118,6 +137,18 @@ const onDisplayCommunicationDropdown = function(event) {
   dashboardLogic.tagCheckboxClicked(tagCategory, checkboxDivId);
 };
 
+const hideShowDoctypeOtherField = function(event) {
+  event.preventDefault();
+  let documentOtherHtml = $('<div class="c-method-other-container"><label class="c-method-other">Document Type Other Description</label><input id="c-method-other-text" class="form-control required-field c-method-other" name="document[doctype]" placeholder="Document Type Description" type="text"></div>');
+  let selectorValue = $("#communication-method-select").val();
+
+  if ( selectorValue === "Other" ) {
+    $(".c-method").append(documentOtherHtml);
+  } else {
+    $(".c-method-other-container").remove();
+  }
+};
+
 const addHandlers = () => {
   $('.content').on('submit', '#new-communication-form', onCreateCommunication);
   $('.content').on('submit', '#update-communication-form', onUpdateCommunication);
@@ -128,6 +159,7 @@ const addHandlers = () => {
   $('.content').on('click', '#communication-record-delete', onDeleteCommunication);
   $('.content').on('change', '#tag-contact-to-communication', onDisplayCommunicationDropdown);
   $('.content').on('change', '#select-option-contact-category', onSelectCommunicationDropdown);
+  $('.content').on('change', '#communication-method-select', hideShowDoctypeOtherField);
 };
 
 module.exports = {

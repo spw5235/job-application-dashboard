@@ -16,11 +16,58 @@ const displayJobOptions = require('../templates/job/option-dropdown-jobs.handleb
 //   }
 // };
 
+const shortDisplayedUrl = function(urlType, urlVal) {
+  let splitUrl = urlVal.split(urlType);
+  let revisedUrl = splitUrl[0] + urlType + "/...";
+  return revisedUrl;
+};
+
+const urlArrIdentifier = function(url) {
+  let possibleDomains = [".com", ".net", ".org", ".biz", ".info", ".gov", ".edu"];
+  let urlSplit;
+  let splitContent;
+  let tempArrayItem;
+  for ( let i = 0 ; i < possibleDomains.length; i++ ) {
+    tempArrayItem = possibleDomains[i].toString();
+    splitContent = '"' + tempArrayItem + '"';
+    urlSplit = url.split(possibleDomains[i]);
+    console.log(urlSplit);
+
+    if (urlSplit.length > 1) {
+      let revisedUrl = urlSplit[0] + possibleDomains[i] + "/...";
+      return revisedUrl;
+      //
+      // console.log(urlSplit);
+      // // let domainType = possibleDomains[i];
+      // // shortDisplayedUrl(urlSplit, domainType);
+      // console.log(possibleDomains[i]);
+      // return possibleDomains[i];
+    }
+  }
+};
+
+const isDefaultCMethod = function (currentCMethod) {
+
+  let compareDocType = currentCMethod.toString();
+
+  let defaultValues = ["Email", "Phone", "Linkedin", "Meeting", "Other"];
+
+  for ( let i = 0; i < defaultValues.length; i++ ) {
+    let defaultValString = defaultValues[i].toString();
+    if (defaultValString === compareDocType) {
+      console.log('true');
+      return true;
+    }
+  }
+
+  return false;
+};
+
 const isDefaultDocType = function (currentDocType) {
 
   let compareDocType = currentDocType.toString();
 
-  let defaultValues = ["Email", "Resume", "Cover Letter"];
+  let defaultValues = ["Resume", "Cover Letter"];
 
   for ( let i = 0; i < defaultValues.length; i++ ) {
     let defaultValString = defaultValues[i].toString();
@@ -200,4 +247,7 @@ module.exports = {
   removeDuplicateRows,
   preselectDefault,
   isDefaultDocType,
+  isDefaultCMethod,
+  urlArrIdentifier,
+  shortDisplayedUrl,
 };

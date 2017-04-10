@@ -41,13 +41,10 @@ const onCreateContact = function(event) {
   data.contact.company_ref_id = $("#select-option-company-name").val();
   data.contact.job_ref_id= $("#select-option-job-title").val();
 
+  data.contact.note = $("#contact-notes-input").val();
 
   console.log(data);
   contactsApi.createContact(data)
-    .then((response) => {
-      store.currentContactId = response.contact.id;
-      return store.currentContactId;
-    })
     .done(contactsUi.createContactSuccess)
     .fail(contactsUi.createContactFailure);
 };
@@ -65,6 +62,8 @@ const onUpdateContact = function(event) {
   let data = getFormFields(event.target);
   data.contact.company_ref_id = parseInt($("#select-option-company-name").val());
   data.contact.job_ref_id = parseInt($("#select-option-job-title").val());
+  data.contact.note = $("#contact-notes-input").val();
+  console.log(data);
   contactsApi.updateContact(data)
     .done(contactsUi.updateContactSuccess)
     .fail(contactsUi.updateContactFailure);

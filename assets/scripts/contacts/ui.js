@@ -93,7 +93,10 @@ const getContactFailure = () => {
   console.log('get contact failure');
 };
 
-const createContactSuccess = () => {
+const createContactSuccess = (data) => {
+  console.log("createsucces");
+  console.log(data);
+  store.currentContactId = data.contact.id;
   $(".form-error").text("");
   $(".notification-container").children().text("");
   $(".content").children().remove();
@@ -120,6 +123,8 @@ const deleteContactFailure = () => {
 };
 
 const updateContactSuccess = (data) => {
+  console.log("updatesuccess");
+  console.log(data);
   $(".notification-container").children().text("");
   $(".success-alert").text("Contact Has Been Successfully Updated");
   store.currentContactId = data.contact.id;
