@@ -6,6 +6,7 @@ const displayDocumentDashboard = require('../templates/document/get-documents.ha
 const displayDocumentDetails = require('../templates/document/show-document-record.handlebars');
 const displayDocumentCreateForm = require('../templates/document/create-document.handlebars');
 const documentsApi = require('./api');
+const dashboardLogic = require('../dashboard/logic');
 
 const getDocumentSuccess = (data) => {
   $(".notification-container").children().text("");
@@ -55,6 +56,26 @@ const updateFormGenerator = function() {
   });
   $('.content').append(editDocument);
 
+  let divId = "#document-type-select";
+  let currentDocType = $("#document-type-select").attr("data-current-doc-type");
+  let documentOtherHtml = $('<div class="doc-type-other-container"><label class="doc-type-other">Document Type Other Description</label><input id="doc-type-other-text" class="form-control required-field doc-type-other" name="document[doctype]" placeholder="Document Type Description" type="text"></div>');
+
+  console.log(currentDocType);
+
+  let isDefaultDocType = dashboardLogic.isDefaultDocType(currentDocType);
+
+
+  console.log(isDefaultDocType);
+
+  if (isDefaultDocType) {
+    $(".doc-type-other-container").remove();
+    dashboardLogic.preselectDefault(divId, currentDocType);
+    // $('#document-type-select option[value="' + currentDocType + '"]').prop('selected', true);
+  } else {
+    $(".doc-type").append(documentOtherHtml);
+    $("#document-type-select option[value=Other]").prop('selected', true);
+    $("#doc-type-other-text").val(currentDocType);
+  }
 };
 
 const getDocumentFailure = () => {

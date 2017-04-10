@@ -16,6 +16,23 @@ const displayJobOptions = require('../templates/job/option-dropdown-jobs.handleb
 //   }
 // };
 
+const isDefaultDocType = function (currentDocType) {
+
+  let compareDocType = currentDocType.toString();
+
+  let defaultValues = ["Email", "Resume", "Cover Letter"];
+
+  for ( let i = 0; i < defaultValues.length; i++ ) {
+    let defaultValString = defaultValues[i].toString();
+    if (defaultValString === compareDocType) {
+      console.log('true');
+      return true;
+    }
+  }
+
+  return false;
+};
+
 const removeDuplicateRows = function ($table) {
   function getVisibleRowText($row){
       return $row.find('td:visible').text().toLowerCase();
@@ -33,8 +50,9 @@ const removeDuplicateRows = function ($table) {
 };
 
 const preselectDefault = function(divId, defaultVal) {
-  let selectText = $(divId + " option[value=" + defaultVal + "]");
-  console.log();
+  console.log(defaultVal);
+
+  let selectText = $(divId + ' option[value="' + defaultVal + '"]');
   $(selectText).prop('selected', true);
 };
 
@@ -181,4 +199,5 @@ module.exports = {
   calcStoreDefaultVals,
   removeDuplicateRows,
   preselectDefault,
+  isDefaultDocType,
 };

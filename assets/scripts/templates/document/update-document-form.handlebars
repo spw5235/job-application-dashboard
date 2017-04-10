@@ -6,23 +6,28 @@
     <p>All fields are <u>optional</u> unless otherwise indicated</p>
 
     <div class="form-group">
-      <label>Document Name (required)</label>
+      <label>Document Date</label>
       <input class="form-control required-field" name="document[docdate]" placeholder="Document Date" type="date" value="{{document.docdate}}">
     </div>
 
-    <div class="form-group">
-      <label>Document Type</label>
-      <input class="form-control required-field" name="document[doctype]" placeholder="Document Type" type="text" value="{{document.doctype}}">
-    </div>
-
-    <div class="form-group">
-      <label>Document Website (url)</label>
-      <input class="form-control" name="document[docurl]" placeholder="url" type="text" value="{{document.docurl}}">
+    <div class="form-group doc-type">
+      <label>Document Type (required)</label>
+      <select class="form-control" id="document-type-select" data-current-doc-type="{{document.doctype}}">
+          <option class="form-control required-field" name="document[doctype]" placeholder="Document Type" type="text" value="Resume">Resume</option>
+          <option class="form-control required-field" name="document[doctype]" placeholder="Document Type" type="text" value="Cover Letter">Cover Letter</option>
+          <option class="form-control required-field" name="document[doctype]" placeholder="Document Type" type="text" value="Email">Email</option>
+          <option class="form-control required-field" name="document[doctype]" placeholder="Document Type" type="text" value="Other">Other</option>
+      </select>
     </div>
 
     <div class="form-group">
       <label>Document Subject (required)</label>
       <input class="form-control" name="document[docsubject]" placeholder="Subject" type="text" value="{{document.docsubject}}">
+    </div>
+
+    <div class="form-group">
+      <label>Document Website (url)</label>
+      <input class="form-control" name="document[docurl]" placeholder="url" type="text" value="{{document.docurl}}">
     </div>
 
     <div class="form-group">

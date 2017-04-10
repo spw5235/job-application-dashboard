@@ -7,6 +7,10 @@
       <p id="create-document-error" class="warning form-error"></p>
       <p>All fields are <u>optional</u> unless otherwise indicated</p>
 
+      <div class="form-group">
+        <label>Document Date</label>
+        <input class="form-control required-field" name="document[docdate]" placeholder="Document Date" type="date">
+      </div>
 
       <div class="form-group doc-type">
         <label>Document Type (required)</label>
@@ -19,18 +23,13 @@
       </div>
 
       <div class="form-group">
-        <label>Document Date</label>
-        <input class="form-control required-field" name="document[docdate]" placeholder="Document Date" type="date">
+        <label>Document Subject (required)</label>
+        <input class="form-control required-field" name="document[docsubject]" placeholder="Document Subject" type="text">
       </div>
 
       <div class="form-group">
         <label>Document Url</label>
         <input class="form-control required-field" name="document[docurl]" placeholder="Document Link" type="text">
-      </div>
-
-      <div class="form-group">
-        <label>Document Subject (required)</label>
-        <input class="form-control required-field" name="document[docsubject]" placeholder="Document Subject" type="text">
       </div>
 
       <div class="form-group">

@@ -44,14 +44,14 @@ const onCreateDocument = function(event) {
     data.document.doctype = $("#document-type-select").val();
   }
 
-  console.log(data);
-  // documentsApi.createDocument(data)
-  //   .done(documentsUi.createDocumentSuccess)
-  //   .fail(documentsUi.createDocumentFailure);
+  documentsApi.createDocument(data)
+    .done(documentsUi.createDocumentSuccess)
+    .fail(documentsUi.createDocumentFailure);
 };
 
 const onEditDocument = function(event) {
   event.preventDefault();
+  store.currentDocType = $("#document-record-btn-edit").attr("data-current-doc-type");
   store.currentDocumentId = $(this).attr("data-current-document-id");
   documentsUi.updateFormGenerator();
 
@@ -63,6 +63,14 @@ const onEditDocument = function(event) {
 const onUpdateDocument = function(event) {
   event.preventDefault();
   let data = getFormFields(event.target);
+
+  let docTypeSelectVal = $("#document-type-select").val();
+
+  if (docTypeSelectVal === "Other") {
+    data.document.doctype = $("#doc-type-other-text").val();
+  } else {
+    data.document.doctype = $("#document-type-select").val();
+  }
 
   documentsApi.updateDocument(data)
     .done(documentsUi.updateDocumentSuccess)

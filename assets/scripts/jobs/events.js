@@ -38,12 +38,7 @@ const onCreateJob = function(event) {
 
   data.job.note = $("#job-notes-input").val();
   console.log(data.job.note);
-  console.log(data);
   jobsApi.createJob(data)
-    // .then((response) => {
-    //   store.currentJobId = response.job.id;
-    //   return store.currentJobId;
-    // })
     .done(jobsUi.createJobSuccess)
     .fail(jobsUi.createJobFailure);
 };
