@@ -109,20 +109,6 @@ const determineTagText = function(category, id) {
   return communicationTextSelected;
 };
 
-// Communications API
-
-// const determineTagText = function(category, selectAttribute) {
-//   const currentSelectIdText = '#select-option-' + category;
-//   const currentId = $(currentSelectIdText).attr(selectAttribute);
-//   // let currentId = $("#associate-reminder-with-job").attr("data-current-job-id");
-//   //
-//   // $("#associate-reminder-with-job").val(currentId);
-//   //
-//   // let valueString = '#select-option-job-title option[value=' + currentReminderJobId + ']';
-//   //
-//   // $(valueString).prop('selected',true);
-// }
-
 const displayDropdownFail = function() {
   console.log('fail');
 };
@@ -134,6 +120,7 @@ const displayDropdownSuccess = function(data) {
   let dataToAppend;
   let category = store.apiRequestCategory;
 
+  console.log(category);
   if (category === "contact-category") {
     dataToAppend = displayContactOptions({
       contacts: data.contacts
@@ -209,6 +196,105 @@ const tagCheckboxClickedCreate = function(category, isBoxChecked) {
   }
 };
 
+
+const determineRadioApiRequest = function(category, isUpdate, checkboxId) {
+  console.log(category);
+  console.log(isUpdate);
+
+  let checkDivId = checkboxId;
+  store.apiRequestCategory = category;
+
+  if (isUpdate) {
+    $(checkDivId).click();
+  } else {
+    if (category === "contact-category") {
+      contactsApi.getContacts()
+        .done(displayDropdownSuccess)
+        .fail(displayDropdownFail);
+    } else if ( category === "job-category" ) {
+      jobApi.getJobs()
+        .done(displayDropdownSuccess)
+        .fail(displayDropdownFail);
+    }
+  }
+};
+
+
+
+const calcStoreRadioDefaultVals = function(category) {
+  let isContactCategory = (category === "contact-category");
+  let isJobCategory = (category === "job-category");
+  if (isContactCategory) {
+    store.selectedContactId = 0;
+    store.selectedContactName = "";
+  } else if ( isJobCategory ) {
+    store.selectedJobId = 0;
+    store.selectedJobName = "";
+  }
+  let dropdownContainer = "." + store.currentRadioCategory + "-select";
+  console.log(dropdownContainer);
+  $(".select-option-value").val(0);
+  $(dropdownContainer).remove();
+  return;
+};
+
+const tagRadioActivatedCreate = function(category, radioValue) {
+  let isUpdate = false;
+  let radioVal = parseInt(radioValue);
+  if (radioVal === 0) {
+    calcStoreRadioDefaultVals(category);
+  } else {
+    determineRadioApiRequest(category, isUpdate);
+  }
+};
+
+const tagRadioActivated = function(radioCategory, radioValue, formCategory) {
+  let nonLinkLabelVal;
+  let nameVal;
+  store.classAppend = "." + radioCategory + "-radio-container";
+  let selectContainer = "." + radioCategory + "-select-container";
+  // store.currentInputClass = "." + radioCategory;
+  store.currentRadioCategory = radioCategory;
+  store.currentRadioVal = radioValue;
+
+  console.log(store.radioClassAppend);
+  console.log(store.currentRadioCategory);
+
+  let radioVal = parseInt(radioValue);
+
+  if (formCategory === "contact") {
+    nameVal = 'contact[company_name]';
+  }
+
+  if (radioCategory === "job-category") {
+    nonLinkLabelVal = "Company Name";
+  }
+
+  let valueId = "select-option-" + radioCategory;
+
+  let nonLinkPlaceholder = "Please Enter The " + nonLinkLabelVal;
+  let nonLinkContainerHtml = '<div class="form-group non-linked-val-container"></div>';
+  let nonLinkLabelHtml = '<label>' + nonLinkLabelVal + '</label>';
+  let inputClass = '<input id="' + valueId + '" class="form-control required-field non-linked-val" name="' + nameVal + '" placeholder="' + nonLinkPlaceholder + '" type="text">';
+
+  console.log(radioVal);
+  console.log(nonLinkLabelVal);
+  console.log(nameVal);
+
+  if (radioVal === 0) {
+    console.log('radioval0');
+    $(selectContainer).remove();
+    $(".append-nonlink").append(nonLinkContainerHtml);
+    $(".non-linked-val-container").append(nonLinkLabelHtml);
+    $(".non-linked-val-container").append(inputClass);
+  } else {
+    console.log('radioval1');
+    tagRadioActivatedCreate(radioCategory, radioValue);
+    $(".append-nonlink").children().remove();
+  }
+
+};
+
 const tagCheckboxClicked = function(category, inputId) {
   const inputidString = "#" + inputId;
   const isBoxChecked = $(inputidString).prop("checked");
@@ -250,4 +336,5 @@ module.exports = {
   isDefaultCMethod,
   urlArrIdentifier,
   shortDisplayedUrl,
+  tagRadioActivated,
 };
