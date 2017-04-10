@@ -41,6 +41,7 @@ const addHandlers = () => {
   $('.content').on('click', '#dashboard-new-job-btn', onShowCreateDash);
   // $('.content').on('click', '#new-job-existing-company', onExistingCompany);
   $('.content').on('click', '#dashboard-home-btn', onShowDashboard);
+  $('#dashboard-home-btn').on('click', onShowDashboard);
   // $('.content').on('click', '.dashboard-existing-create-btn', onCreateFromExisting);
 };
 

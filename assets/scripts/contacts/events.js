@@ -81,7 +81,8 @@ const addHandlers = () => {
   $('.content').on('click', '#contact-record-btn-edit', onEditContact);
   $('.content').on('click', '#generate-create-contact-btn', onShowContactCreateForm);
   $('.content').on('click', '.dashboard-contact-record-btn', onShowContactRecord);
-  $('.content').on('click', '#get-contacts-btn', onGetContacts);
+  // $('.content').on('click', '#get-contacts-btn', onGetContacts);
+  $('#get-contacts-btn').on('click', onGetContacts);
   $('.content').on('click', '#contact-record-delete', onDeleteContact);
 
   // $('.content').on('change', '#associate-contact-with-company', onDisplayCompanyDropdown);

@@ -155,7 +155,8 @@ const addHandlers = () => {
   $('.content').on('click', '#communication-record-btn-edit', onEditCommunication);
   $('.content').on('click', '#generate-create-communication-btn', onShowCommunicationCreateForm);
   $('.content').on('click', '.dashboard-communication-record-btn', onShowCommunicationRecord);
-  $('.content').on('click', '#get-communications-btn', onGetCommunications);
+  // $('.content').on('click', '#get-communications-btn', onGetCommunications);
+  $('#get-communications-btn').on('click', onGetCommunications);
   $('.content').on('click', '#communication-record-delete', onDeleteCommunication);
   $('.content').on('change', '#tag-contact-to-communication', onDisplayCommunicationDropdown);
   $('.content').on('change', '#select-option-contact-category', onSelectCommunicationDropdown);

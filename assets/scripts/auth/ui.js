@@ -3,6 +3,7 @@
 const displayDashboard = require('../templates/dashboard/dashboard-home.handlebars');
 
 const signInSuccess = function() {
+  $(".nav-main-container").show();
   $(".notification-container").children().text("");
   $(".success-alert").text("You have successfully signed-in");
   $('#sign-in').hide();
@@ -36,6 +37,7 @@ const signUpFailure = function() {
 };
 
 const signOutSuccess = function() {
+  $(".nav-main-container").hide();
   $(".notification-container").children().text("");
   $(".success-alert").text("You have successfully signed-out.  Please sign-in to continue");
   $('.content').children().remove();
@@ -44,6 +46,7 @@ const signOutSuccess = function() {
   $("#sign-out").css("visibility", "hidden");
   $("#change-password").css("visibility", "hidden");
   $(".form-clear").val('');
+  $(".nav-main-container").hide();
 };
 
 const signOutFailure = function() {

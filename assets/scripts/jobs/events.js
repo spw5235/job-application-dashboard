@@ -101,6 +101,7 @@ const addHandlers = () => {
   $('.content').on('click', '#generate-create-job-btn', onShowJobCreateForm);
   $('.content').on('click', '.dashboard-job-record-btn', onShowJobRecord);
   $('.content').on('click', '#get-jobs-btn', onGetJobs);
+  $('#get-jobs-btn').on('click', onGetJobs);
   $('.content').on('click', '#job-record-delete', onDeleteJob);
   $('.content').on('change', '#tag-company-to-job', onDisplayJobDropdown);
   $('.content').on('change', '#select-option-company-category', onSelectJobDropdown);

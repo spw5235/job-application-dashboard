@@ -128,6 +128,7 @@ const addHandlers = () => {
   $('.content').on('click', '#generate-create-document-btn', onShowDocumentCreateForm);
   $('.content').on('click', '.dashboard-document-record-btn', onShowDocumentRecord);
   $('.content').on('click', '#get-documents-btn', onGetDocuments);
+  $('#get-documents-btn').on('click', onGetDocuments);
   $('.content').on('click', '#document-record-delete', onDeleteDocument);
   $('.content').on('change', '#tag-company-to-document', onDisplayDocumentDropdown);
   $('.content').on('change', '#select-option-company-category', onSelectDocumentDropdown);
