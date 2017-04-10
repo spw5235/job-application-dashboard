@@ -12,6 +12,20 @@ const onShowCreateDash = function(event) {
   let showCreateDashHome = displayNewJobDash();
   $('.content').append(showCreateDashHome);
 };
+
+const onAdjustActiveNav = function(event) {
+  event.preventDefault();
+  //reset classes
+  $('.homepage-category').removeClass("active");
+  $('.nav-tab-btn').removeClass("target-nav");
+
+
+  $(this).addClass("active");
+  $(this).children(".nav-tab-btn").addClass("target-nav");
+  // $(this).children("a").addClass("btn-info");
+  // let thisDiv = $(this).attr("id");
+
+};
 //
 // const onExistingCompany = function(event) {
 //   event.preventDefault();
@@ -42,6 +56,7 @@ const addHandlers = () => {
   // $('.content').on('click', '#new-job-existing-company', onExistingCompany);
   $('.content').on('click', '#dashboard-home-btn', onShowDashboard);
   $('#dashboard-home-btn').on('click', onShowDashboard);
+  $(".nav-main-container ul li").on('click', onAdjustActiveNav);
   // $('.content').on('click', '.dashboard-existing-create-btn', onCreateFromExisting);
 };
 
