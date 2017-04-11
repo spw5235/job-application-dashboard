@@ -46,5 +46,4 @@ module.exports = {
   getExistingFailure,
   getSampleFailure,
   getSampleSuccess,
-  // jobDropdownDataResults,
 };

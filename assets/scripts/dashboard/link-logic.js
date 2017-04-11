@@ -3,28 +3,13 @@
 // const store = require('../store');
 // const contactsApi = require('../contacts/api');
 const jobsApi = require('../jobs/api');
+const store = require('../store');
+const displayJobOptions = require('../templates/link/contact-form-job-link.handlebars');
 // const communicationsApi = require('../communications/api');
 // const documentsApi = require('../documents/api');
 // const remindersApi = require('../reminders/api');
 
 // const contactsUi = require('../contacts/ui');
-
-const insertFailure = function() {
-  console.log('failure');
-};
-
-const jobDropdownDataResults = (data) => {
-  console.log(data);
-};
-
-const showDropOptionsCreatePage = function(formCategory, listCategory) {
-  if (listCategory === "job" && formCategory ==="contact") {
-    jobsApi.getJobs()
-      .done(jobDropdownDataResults)
-      .fail(insertFailure);
-  }
-};
-
 const linkClassIdGen = function(formCategory, listCategory) {
 
   let appendingDivIdTxt = "display-radio-drop-" + listCategory;
@@ -59,6 +44,39 @@ const linkClassIdGen = function(formCategory, listCategory) {
   // $(appendingDivId).attr("id", selectContainerIdDefTxt);
   // $(selectElement).attr("id", selectElDivIdText);
   // $(optionElement).addClass(addOptionClass);
+};
+
+const insertFailure = function() {
+  console.log('failure');
+};
+
+const jobDropdownDataResults = (data) => {
+  console.log(data);
+  let listCategory = store.currentListCategory;
+  let formCategory = store.currentFormCategory;
+  let containerAppendId = "#" + "display-radio-drop-" + listCategory;
+
+  console.log(listCategory);
+  console.log(formCategory);
+
+  if (listCategory === "job" && formCategory === "contact") {
+    let jobDataDropdown = displayJobOptions({
+      jobs: data.jobs
+    });
+
+    $(containerAppendId).append(jobDataDropdown);
+  }
+  linkClassIdGen(formCategory, listCategory);
+};
+
+const showDropOptionsCreatePage = function(formCategory, listCategory) {
+  store.currentListCategory = listCategory;
+  store.currentFormCategory = formCategory;
+  if (listCategory === "job" && formCategory ==="contact") {
+    jobsApi.getJobs()
+      .done(jobDropdownDataResults)
+      .fail(insertFailure);
+  }
 };
 
 const radioClassIdNameGen = function(formCategory, listCategory) {
