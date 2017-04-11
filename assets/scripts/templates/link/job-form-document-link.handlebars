@@ -1,0 +1,8 @@
+<div class="select-container">
+  <select class="select-element">
+    <option class="form-control blank-option" placeholder="Blank" type="text" value="-1">Click to Select</option>
+    {{#each jobs as |job|}}
+      <option class="form-control option-element" name="job[document_ref_text]" type="text" data-form-category-id="{{job.id}}" data-list-ref-text="{{job.document_ref_text}}" data-list-ref-id="{{job.document_ref_id}}" value="{{job.document_ref_id}}">{{job.document_ref_text}}</option>
+    {{/each}}
+</select>
+</div>

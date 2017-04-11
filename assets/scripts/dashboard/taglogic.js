@@ -56,7 +56,7 @@ const radioClassIdNameGen = function(formCategory, listCategory) {
   $(formCategoryNameSelector).attr("id", formCategoryNameTxt);
   $(listCategoryNameSelector).attr("id", listCategoryNameTxt);
   $(radioInputClassSelector).addClass(radioInputClassTxt);
-  $(radioNameSelector).attr(radioNameTxt);
+  $(radioNameSelector).attr("name", radioNameTxt);
   $(radioDropContainerSelector).attr("id", radioDropContainerTxt);
 };
 

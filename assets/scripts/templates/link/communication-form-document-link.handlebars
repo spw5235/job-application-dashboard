@@ -1,0 +1,8 @@
+<div class="select-container">
+  <select class="select-element">
+    <option class="form-control blank-option" placeholder="Blank" type="text" value="-1">Click to Select</option>
+    {{#each communications as |communication|}}
+      <option class="form-control option-element" name="communication[document_ref_text]" type="text" data-form-category-id="{{communication.id}}" data-list-ref-text="{{communication.document_ref_text}}" data-list-ref-id="{{communication.document_ref_id}}" value="{{communication.document_ref_id}}">{{communication.document_ref_text}}</option>
+    {{/each}}
+</select>
+</div>
