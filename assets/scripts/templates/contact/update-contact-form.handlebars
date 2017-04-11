@@ -1,74 +1,84 @@
 <div class="update-contact-form-container form-container contact-page group-category">
-<form class="form contact-form reminder-form" id="update-contact-form" name="update-contact-form" data-update-form="1">
-  <fieldset>
-    <legend>Update Contact Form</legend>
-    <p id="update-contact-error" class="warning form-error"></p>
-    <p>All fields are <u>optional</u> unless otherwise indicated</p>
+  <form class="form contact-form reminder-form" id="update-contact-form" name="update-contact-form" data-update-form="1">
+    <fieldset>
+      <legend>Update Contact Form</legend>
+      <p id="update-contact-error" class="warning form-error"></p>
+      <p>All fields are <u>optional</u> unless otherwise indicated</p>
 
-    <div class="form-group">
-      <label>First Name (required)</label>
-      <input class="form-control required-field" name="contact[first_name]" placeholder="Contact First Name" type="text" value={{contact.first_name}}>
-    </div>
-
-    <div class="form-group">
-      <label>First Name (required)</label>
-      <input class="form-control required-field" name="contact[last_name]" placeholder="Contact Last Name" type="text" value={{contact.last_name}}>
-    </div>
-
-    <div class="form-group">
-      <label>Nickname</label>
-      <input class="form-control required-field" name="contact[nickname]" placeholder="Contact Nickname" type="text" value={{contact.nickname}}>
-    </div>
-
-    <div class="form-group">
-      <label>Company Name</label>
-      <input class="form-control required-field" name="contact[company_name]" placeholder="Contact Company Name" type="text" value={{contact.company_name}}>
-    </div>
-
-    <div class="form-group">
-      <label>Job Title</label>
-      <input class="form-control required-field" name="contact[job_title]" placeholder="Contact Job Title" type="text" value={{contact.job_title}}>
-    </div>
-
-    <div class="form-group">
-      <label>Email</label>
-      <input class="form-control required-field" name="contact[email]" placeholder="Contact Email" type="text" value={{contact.email}}>
-    </div>
-
-    <div class="form-group">
-      <label>Phone</label>
-      <input class="form-control required-field" name="contact[phone]" placeholder="Contact Phone" type="text" value={{contact.phone}}>
-    </div>
-
-    <div class="form-group">
-      <label>Website</label>
-      <input class="form-control required-field" name="contact[website]" placeholder="Contact Website" type="text" value={{contact.website}}>
-    </div>
-
-    <div class="form-group">
-      <label>Contact Notes</label>
-      <textarea class="form-control field-input note-input" name="contact[doctext]" placeholder="Contact Notes">{{contact.notes}}</textarea>
-    </div>
-
-    <div id="associate-with-job-company" class="form-group">
-      <label>Tag Contact to a Company?</label>
-      <div class="form-group associate-reminder-with-company-container">
-        <span>Check Box for Yes</span>
-          <input id="associate-reminder-with-company" type="checkbox" value="" data-current-contact-id="{{contact.id}}" data-current-company-id="{{contact.company_ref_id}}" data-current-job-id="{{contact.job_ref_id}}" data-current-document-id="{{contact.document_ref_id}}">
+      <div class="form-group">
+        <label>First Name (required)</label>
+        <input class="form-control required-field" name="contact[first_name]" placeholder="Contact First Name" type="text" value= {{contact.first_name}}>
       </div>
-    </div>
 
-    <div class="form-group display-company-names"></div>
-    <div class="form-group display-job-title"></div>
+      <div class="form-group">
+        <label>Last Name (required)</label>
+        <input class="form-control required-field" name="contact[last_name]" placeholder="Contact Last Name" type="text" value= {{contact.last_name}}>
+      </div>
 
-    <div class="form-group">
-      <input class="btn btn-success submit-btn current" name="submit" id="submit-contact-update-btn" type="submit" value="Submit">
-    </div>
-  </fieldset>
-</form>
-<br><br>
-<div class="dashboard-container">
-  <button id="dashboard-home-btn" type="button" class="btn btn-primary">View Dashboard</button>
-  <button id="dashboard-new-job-btn" type="button" class="btn btn-success">Create Session</button>
-</div>
+      <div class="form-group">
+        <label>Nickname</label>
+        <input class="form-control required-field" name="contact[nickname]" placeholder="Contact Nickname" type="text" value= {{contact.nickname}}>
+      </div>
+
+      <div class="form-group job-category-radio-container current-value-update-page">
+        <label>Current Company Association:</label>
+        <div class="update-radio-link-value-status-container">
+          <p>The company currently associated with this contact is <span class="job-category-update-radio-text"></span>{{contact.company_name}}</p>
+          <p>Link Status: <span class="job-category-tag-status" data-current-job-ref-id="{{contact.job_ref_id}}">Not Linked</span></p>
+        </div>
+      </div>
+
+      <div>
+        <div class="job-category-update-link-container form-group">
+          <label>Would you like to update the company or create a link?</label>
+          <div class="form-group">
+            <span>Check Box for Yes</span>
+            <input id="job-category-update-link" type="checkbox" value="">
+          </div>
+        </div>
+        <div class="form-group job-category-radio-container update-radio-container-btn">
+          <label>Tag this contact to an existing company?</label>
+          <label><input class="job-category" type="radio" name="job-category-radio" value="1">Yes</label>
+          <label><input class="job-category" type="radio" name="job-category-radio" value="0">No</label>
+        </div>
+      </div>
+
+      <div class="form-group append-nonlink"></div>
+      <div class="form-group display-jobs-dropdown"></div>
+
+      <div class="form-group">
+        <label>Job Title</label>
+        <input class="form-control required-field" name="contact[job_title]" placeholder="Contact Job Title" type="text" value= {{contact.job_title}}>
+      </div>
+
+      <div class="form-group">
+        <label>Email</label>
+        <input class="form-control required-field" name="contact[email]" placeholder="Contact Email" type="text" value= {{contact.email}}>
+      </div>
+
+      <div class="form-group">
+        <label>Phone</label>
+        <input class="form-control required-field" name="contact[phone]" placeholder="Contact Phone" type="text" value= {{contact.phone}}>
+      </div>
+
+      <div class="form-group">
+        <label>Website</label>
+        <input class="form-control required-field" name="contact[website]" placeholder="Contact Website" type="text" value= {{contact.website}}>
+      </div>
+
+      <div class="form-group">
+        <label>Contact Notes</label>
+        <textarea class="form-control field-input note-input" name="contact[doctext]" placeholder="Contact Notes">{{contact.notes}}</textarea>
+      </div>
+
+      <div class="form-group">
+        <input class="btn btn-success submit-btn current" name="submit" id="submit-contact-update-btn" type="submit" value="Submit">
+      </div>
+    </fieldset>
+  </form>
+  <br><br>
+  <div class="dashboard-container">
+    <button id="dashboard-home-btn" type="button" class="btn btn-primary">View Dashboard</button>
+    <button id="dashboard-new-job-btn" type="button" class="btn btn-success">Create Session</button>
+  </div>
 </div>

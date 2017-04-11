@@ -4,6 +4,7 @@
 const displayNewJobDash = require('../templates/dashboard/new-job-home.handlebars');
 const displayDashboardHome = require('../templates/dashboard/dashboard-home.handlebars')
 const dashboardUi = require('./ui');
+const jobsApi = require('../jobs/api');
 // const displayJobCreateForm = require('../templates/job/new-job-form.handlebars');
 
 const onShowCreateDash = function(event) {
@@ -50,6 +51,15 @@ const onShowDashboard = function() {
   $('.content').append(showDashboardHome);
 };
 
+const onSampleRun = function(event) {
+  event.preventDefault();
+  jobsApi.getJobs()
+    .done(dashboardUi.getSampleSuccess)
+    .fail(dashboardUi.getSampleFailure);
+}
+
+
+
 const addHandlers = () => {
   // $('.content').on('click', '#dashboard-new-job-btn', onShowCreateDash)
   $('.content').on('click', '#dashboard-new-job-btn', onShowCreateDash);
@@ -57,6 +67,7 @@ const addHandlers = () => {
   $('.content').on('click', '#dashboard-home-btn', onShowDashboard);
   $('#dashboard-home-btn').on('click', onShowDashboard);
   $(".nav-main-container ul li").on('click', onAdjustActiveNav);
+  $(".content").on('click', "#sample-html", onSampleRun);
   // $('.content').on('click', '.dashboard-existing-create-btn', onCreateFromExisting);
 };
 

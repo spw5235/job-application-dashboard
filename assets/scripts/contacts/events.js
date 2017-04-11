@@ -25,6 +25,9 @@ const onShowContactRecord = function(event) {
 const onEditContact = function(event) {
   event.preventDefault();
   store.currentContactId = $(this).attr("data-current-contact-id");
+  store.currentCompanyNameRef = $(this).attr("data-current-company-name");
+  store.currentJobRefId = $(this).attr("data-current-job-ref-id");
+
   contactsUi.updateFormGenerator();
 };
 
@@ -93,10 +96,14 @@ const onUpdateContact = function(event) {
   data.contact.company_ref_id = parseInt($("#select-option-company-name").val());
   data.contact.job_ref_id = parseInt($("#select-option-job-title").val());
   data.contact.note = $("#contact-notes-input").val();
+
+  let category = "job-category";
+  let refIdVal = dashboardLogic.obtainRefIdVal(category);
+  let refTexVal = dashboardLogic.obtainRefTextVal(category);
   console.log(data);
-  contactsApi.updateContact(data)
-    .done(contactsUi.updateContactSuccess)
-    .fail(contactsUi.updateContactFailure);
+  // contactsApi.updateContact(data)
+  //   .done(contactsUi.updateContactSuccess)
+  //   .fail(contactsUi.updateContactFailure);
 };
 
 const onShowContactCreateForm = function(event) {
@@ -143,6 +150,16 @@ const onDisplayJobDropdown = function(event) {
   dashboardLogic.tagRadioActivated(tagCategory, radioValue, formCategory);
 };
 
+const onHideShowUpdateOptions = function() {
+  let jobUpdateChecked = $(this).prop("checked");
+  let radioButtonContainer = $(this).parent().parent().parent().children(".update-radio-container-btn");
+  console.log(jobUpdateChecked);
+  if ( jobUpdateChecked ) {
+    $(radioButtonContainer).show();
+  } else {
+    $(radioButtonContainer).hide();
+  }
+};
 
 const addHandlers = () => {
   $('.content').on('submit', '#new-contact-form', onCreateContact);
@@ -155,6 +172,7 @@ const addHandlers = () => {
   $('.content').on('click', '#contact-record-delete', onDeleteContact);
   $('.content').on('change', '.job-category', onDisplayJobDropdown);
   $('.content').on('change', '#select-option-job-category', onSelectJobDropdown);
+  $('.content').on('change', "#job-category-update-link", onHideShowUpdateOptions);
 
   // $('.content').on('change', '#associate-contact-with-company', onDisplayCompanyDropdown);
   // $('.content').on('change', '#select-option-company-name', onSelectOptionCompanyVal);

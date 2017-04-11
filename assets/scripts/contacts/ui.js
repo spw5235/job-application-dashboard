@@ -73,17 +73,30 @@ const updateFormGenerator = function() {
   });
   $('.content').append(editContact);
 
-  $(".associate-reminder-with-contact-container").attr("current-contact-id", store.currentContactId);
-  $(".associate-reminder-with-contact-container").attr("current-job", store.currentJobId);
+  // Template Information
 
-  let companyId = parseInt($("#associate-reminder-with-company").attr("data-current-company-id"));
+  let updateCategory = "job-category";
 
 
-  if (companyId > 0) {
-    console.log("true");
-    // $("#associate-reminder-with-company").prop("checked", true);
-    $("#associate-reminder-with-company").click();
-    // $(".display-job-title").append('<div class="form-group"><label>Associate Reminder With Specific Job?</label><div class="form-group associate-reminder-with-job-container"><span>Check Box for Yes</span><input id="associate-reminder-with-job" type="checkbox" value=""></div></div>');
+  // $(".job-category-radio-container input[type=radio]").attr('disabled', true);
+
+  let jobRefId = parseInt($(".job-category-tag-status").attr("data-current-job-ref-id"));
+
+  if (jobRefId > 0) {
+    $(".job-category-tag-status").text("Linked");
+  }
+
+  let updateFormStatus = parseInt($("#update-contact-form").attr("data-update-form"));
+
+
+  if ( updateFormStatus === 1) {
+    let categoryText = "." + updateCategory + "-radio-container ";
+    $(categoryText).show();
+
+    $(".update-radio-container-btn").hide();
+
+    // let radioContainerClass = "." + updateCategory + "-radio-container";
+    // $(radioContainerClass).hide();
   }
 
 };

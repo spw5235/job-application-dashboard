@@ -324,6 +324,23 @@ const tagCheckboxUpdate = function(category) {
   }
 };
 
+
+const obtainRefIdVal = function(category) {
+  let checkboxSelectedClass = "." + category + "-update-link-container input[type=checkbox]";
+  let isCheckboxSelected = $(checkboxSelectedClass).is(':checked');
+
+  if (isCheckboxSelected) {
+
+  }
+};
+
+const obtainRefTextVal = function(category) {
+  if (category === "job-category") {
+
+  }
+
+}
+
 module.exports = {
   tagCheckboxClicked,
   determineApiRequest,
@@ -337,4 +354,6 @@ module.exports = {
   urlArrIdentifier,
   shortDisplayedUrl,
   tagRadioActivated,
+  obtainRefIdVal,
+  obtainRefTextVal,
 };

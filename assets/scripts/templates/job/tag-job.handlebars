@@ -1,0 +1,8 @@
+  <div class="select-container">
+    <select class="select-element">
+      <option class="form-control blank-option" placeholder="Blank" type="text" value="-1">Click to Select</option>
+      {{#each jobs as |job|}}
+        <option class="form-control option-element" name="job[company_name]" placeholder="reminder Type" type="text" data-job-id="{{job.id}}" data-job-name="{{job.company_name}}" value="{{job.id}}">{{job.company_name}}</option>
+      {{/each}}
+  </select>
+  </div>
