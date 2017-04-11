@@ -31,7 +31,9 @@ const getSampleSuccess = (data) => {
 
   let formCategory = "contact";
   let listCategory = "job";
-  tagLogic.IdClassGenTagHandlebars(formCategory, listCategory);
+  tagLogic.linkClassIdGen(formCategory, listCategory);
+
+  // tagLogic.radioClassIdNameGen(formCategory, listCategory);
 
 };
 

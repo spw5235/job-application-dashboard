@@ -3,8 +3,10 @@
 // const store = require('../store');
 const displayNewJobDash = require('../templates/dashboard/new-job-home.handlebars');
 const displayDashboardHome = require('../templates/dashboard/dashboard-home.handlebars')
+const displayRadioJob = require('../templates/job/radio-job.handlebars')
 const dashboardUi = require('./ui');
 const jobsApi = require('../jobs/api');
+const tagLogic = require('./taglogic');
 // const displayJobCreateForm = require('../templates/job/new-job-form.handlebars');
 
 const onShowCreateDash = function(event) {
@@ -56,7 +58,16 @@ const onSampleRun = function(event) {
   jobsApi.getJobs()
     .done(dashboardUi.getSampleSuccess)
     .fail(dashboardUi.getSampleFailure);
-}
+};
+
+const onSampleRadio = function(event) {
+  event.preventDefault();
+  let showRadio = displayRadioJob();
+  $("#job-category-radio-container").append(showRadio);
+  let formCategory = "contact";
+  let listCategory = "job";
+  tagLogic.radioClassIdNameGen(formCategory, listCategory);
+};
 
 
 
@@ -68,6 +79,7 @@ const addHandlers = () => {
   $('#dashboard-home-btn').on('click', onShowDashboard);
   $(".nav-main-container ul li").on('click', onAdjustActiveNav);
   $(".content").on('click', "#sample-html", onSampleRun);
+  $('.content').on('click', '#sample-radio', onSampleRadio);
   // $('.content').on('click', '.dashboard-existing-create-btn', onCreateFromExisting);
 };
 
