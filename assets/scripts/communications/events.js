@@ -58,10 +58,6 @@ const onCreateCommunication = function(event) {
   }
 
   communicationsApi.createCommunication(data)
-    .then((response) => {
-      store.currentCommunicationId = response.communication.id;
-      return store.currentCommunicationId;
-    })
     .done(communicationsUi.createCommunicationSuccess)
     .fail(communicationsUi.createCommunicationFailure);
 };

@@ -4,15 +4,13 @@ const store = require('../store');
 const displayEditContact = require('../templates/contact/update-contact-form.handlebars');
 const displayContactDashboard = require('../templates/contact/get-contacts.handlebars');
 const displayReminderDashboard = require('../templates/reminder/get-reminders.handlebars');
-// const displayReminderDashboardContactPage = require('../templates/reminder/get-reminders-contact.handlebars');
 const displayContactDetails = require('../templates/contact/show-contact-record.handlebars');
 const displayContactCreateForm = require('../templates/contact/create-contact.handlebars');
-// const displayJobsTable = require('../templates/job/get-jobs.handlebars');
-// const displayShowJobTable = require('../templates/job/show-job.handlebars');
+// const displayRadioButtonsTemplate = require('../templates/contact/create-contact.handlebars');
 const contactsApi = require('./api');
-// const jobsApi = require('../jobs/api');
-// const remindersApi = require('../reminders/api');
-const displayContactOptions = require('../templates/contact/display-contact-create-form.handlebars');
+const displayRadioButtonsTemplate = require('../templates/form-template/radio-btn-template.handlebars');
+const displayContactOptions = require('../templates/contact/option-dropdown-contacts.handlebars');
+const linkLogic = require('../dashboard/link-logic');
 
 const getReminderSuccess = (data) => {
   // let insertCompId = store.currentContactId;
@@ -60,6 +58,14 @@ const showContactCreateForm = () => {
   $(".content").children().remove();
   let showCreateContactForm = displayContactCreateForm();
   $('.content').append(showCreateContactForm);
+
+  // Radio Template - Job
+  let radioTemplate = displayRadioButtonsTemplate();
+  $("#job-category-radio-container").append(radioTemplate);
+
+  let formCategory = "contact";
+  let listCategory = "job";
+  linkLogic.radioClassIdNameGen(formCategory, listCategory);
 };
 
 const updateFormGenerator = function() {

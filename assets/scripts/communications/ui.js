@@ -33,9 +33,9 @@ const getCommunicationSuccess = (data) => {
 };
 
 const showCommunicationRecordSuccess = (data) => {
+  store.currentCommunicationId = data.communication.id;
   $(".notification-container").children().text("");
   $(".content").children().remove();
-  store.lastShowCommunicationData = data;
 
   let communicationDetails = displayCommunicationDetails({
     communication: data.communication

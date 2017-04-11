@@ -3,10 +3,10 @@
 // const store = require('../store');
 const displayNewJobDash = require('../templates/dashboard/new-job-home.handlebars');
 const displayDashboardHome = require('../templates/dashboard/dashboard-home.handlebars')
-const displayRadioJob = require('../templates/job/radio-job.handlebars')
+// const displayRadioJob = require('../templates/job/radio-job.handlebars')
 const dashboardUi = require('./ui');
 const jobsApi = require('../jobs/api');
-const tagLogic = require('./taglogic');
+const linkLogic = require('./link-logic');
 // const displayJobCreateForm = require('../templates/job/new-job-form.handlebars');
 
 const onShowCreateDash = function(event) {
@@ -66,7 +66,7 @@ const onSampleRadio = function(event) {
   $("#job-category-radio-container").append(showRadio);
   let formCategory = "contact";
   let listCategory = "job";
-  tagLogic.radioClassIdNameGen(formCategory, listCategory);
+  linkLogic.radioClassIdNameGen(formCategory, listCategory);
 };
 
 

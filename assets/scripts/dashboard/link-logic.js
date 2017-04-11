@@ -4,24 +4,43 @@
 
 const linkClassIdGen = function(formCategory, listCategory) {
 
-  let appendingDivIdTxt = listCategory + '-dropdown-in-' + formCategory +"-form";
+  let appendingDivIdTxt = "display-radio-drop-" + listCategory;
+
   let appendingDivId = "#" + appendingDivIdTxt;
 
   let selectContainerIdDefTxt = formCategory + "-select-container-" + listCategory;
-  let categoryIdent = appendingDivId + " .category-identifier";
-  $(categoryIdent).attr("id", selectContainerIdDefTxt);
 
-  let selectElDivIdText = formCategory + "-category-select-" + listCategory;
-  let selectElement = appendingDivId + " .select-element";
-  $(selectElement).attr("id", selectElDivIdText);
+  let selectContainerSelector = appendingDivId + " .select-container";
 
-  let optionElement = appendingDivId + " .option-element";
-  let addOptionClass = formCategory + "-option-" + listCategory;
-  $(optionElement).addClass(addOptionClass);
+  $(selectContainerSelector).attr("id", selectContainerIdDefTxt);
+
+  let selectContainerSelectorId = "#" + selectContainerIdDefTxt;
+  let selectElementSelector = selectContainerSelectorId + " .select-element";
+  let selectElementTxt = "select-element-" + listCategory;
+
+  $(selectElementSelector).attr("id", selectElementTxt);
+
+
+  // Option Vals
+
+
+
+  // let categoryIdent = appendingDivId + " .category-identifier";
+
+
+  // let selectElDivIdText = formCategory + "-category-select-" + listCategory;
+  // // let selectElement = appendingDivId + " .select-element";
+  //
+  // let optionElement = appendingDivId + " .option-element";
+  // let addOptionClass = formCategory + "-option-" + listCategory;
+  //
+  // // $(categoryIdent).attr("id", selectContainerIdDefTxt);
+  // $(appendingDivId).attr("id", selectContainerIdDefTxt);
+  // $(selectElement).attr("id", selectElDivIdText);
+  // $(optionElement).addClass(addOptionClass);
 };
 
 const radioClassIdNameGen = function(formCategory, listCategory) {
-
   let appendingDivIdTxt = listCategory + "-category-radio-container";
   let appendingDivId = "#" + appendingDivIdTxt;
 
@@ -46,15 +65,20 @@ const radioClassIdNameGen = function(formCategory, listCategory) {
   let radioInputClassTxt = listCategory + "-category";
 
   let radioNameTxt = listCategory + "-category-radio";
-  let radioNameSelector = "." + "radioInputClassTxt";
+  let radioNameSelector = "." + radioInputClassTxt;
 
   let radioDropContainerTxt = "display-radio-drop-" + listCategory;
   let radioDropContainerSelector = "#" + radioGroupContainerTxt + " .display-radio-drop";
 
+  let formCategoryNameId = "#" + formCategoryNameTxt;
+  let listCategoryNameId = "#" + listCategoryNameTxt;
+
   $(radioGroupContainerSelector).attr("id", radioGroupContainerTxt);
   $(radioBtnContainerSelector).attr("id", radioBtnContainerTxt);
   $(formCategoryNameSelector).attr("id", formCategoryNameTxt);
+  $(formCategoryNameId).text(formCategory);
   $(listCategoryNameSelector).attr("id", listCategoryNameTxt);
+  $(listCategoryNameId).text(listCategory);
   $(radioInputClassSelector).addClass(radioInputClassTxt);
   $(radioNameSelector).attr("name", radioNameTxt);
   $(radioDropContainerSelector).attr("id", radioDropContainerTxt);

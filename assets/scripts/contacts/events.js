@@ -4,7 +4,8 @@ const contactsUi = require('./ui');
 const getFormFields = require('../../../lib/get-form-fields');
 const store = require('../store');
 const dashboardLogic = require('../dashboard/logic');
-
+const jobOptions = require("../templates/link/contact-form-job-link.handlebars")
+const linkLogic = require('../dashboard/link-logic');
 // Contact EVENTS
 
 const onGetContacts = function(event) {
@@ -56,25 +57,25 @@ const onCreateContact = function(event) {
 
   /// Radio
 
-  let isNumber = parseInt(jobSelectionId);
-
-
-  if (isNumber === 0) {
-    data.contact.job_ref_id = isNumber;
-    data.contact.company_name = dashboardLogic.determineTagText(category, jobSelectionId);
-  } else if ( isNumber > 0 ) {
-    data.contact.job_ref_id = isNumber;
-    data.contact.company_name = dashboardLogic.determineTagText(category, jobSelectionId);
-  } else {
-    data.contact.job_ref_id = 0;
-    data.contact.company_name = jobSelectionId;
-  }
-
-  if (data.contact.company_name === undefined) {
-    data.contact.company_name = "";
-  } else if (data.contact.company_name === "Click to Select") {
-    data.contact.company_name = "";
-  }
+  // let isNumber = parseInt(jobSelectionId);
+  //
+  //
+  // if (is kNumber === 0) {
+  //   data.contact.job_ref_id = isNumber;
+  //   data.contact.company_name = dashboardLogic.determineTagText(category, jobSelectionId);
+  // } else if ( isNumber > 0 ) {
+  //   data.contact.job_ref_id = isNumber;
+  //   data.contact.company_name = dashboardLogic.determineTagText(category, jobSelectionId);
+  // } else {
+  //   data.contact.job_ref_id = 0;
+  //   data.contact.company_name = jobSelectionId;
+  // }
+  //
+  // if (data.contact.company_name === undefined) {
+  //   data.contact.company_name = "";
+  // } else if (data.contact.company_name === "Click to Select") {
+  //   data.contact.company_name = "";
+  // }
 
   console.log(data);
   contactsApi.createContact(data)
@@ -114,40 +115,59 @@ const onShowContactCreateForm = function(event) {
 const onSelectJobDropdown = function(event) {
   event.preventDefault();
   let tagCategory = $(this).attr("class");
-  dashboardLogic.determineApiRequest(tagCategory);
+  // let formCategory = "contact";
+  // let listCategory = "job";
+  //
+  // let availableJobOptions = jobOptions();
+  // $("#display-radio-drop-job").append(availableJobOptions);
+  //
+  // linkLogic.linkClassIdGen(formCategory, listCategory);
+  // dashboardLogic.determineApiRequest(tagCategory);
 };
 
 const onDisplayJobDropdown = function(event) {
   event.preventDefault();
-  let thisCheckBoxStatus = $(this).is(':checked');
 
-  let thisRadioStatus = parseInt($(this).val());
 
-  if (thisRadioStatus === 0) {
-
-  }
-
-  if (!thisCheckBoxStatus) {
-    $(this).parent().children(".tag-select-container").remove();
-  }
-
-  let isUpdateForm;
-  // let radioDivName = $(this).attr("name");
-  let tagCategory = $(this).attr("class");
-  let radioValue = $(this).val();
   let formCategory = "contact";
+  let listCategory = "job";
 
-  console.log(tagCategory);
-  console.log(radioValue);
+  let availableJobOptions = jobOptions();
+  $("#display-radio-drop-job").append(availableJobOptions);
 
-  let updateFormStatus = $(".general-form-container").attr("data-update-form");
-  updateFormStatus = parseInt(updateFormStatus);
-  if (updateFormStatus === 1) {
-    isUpdateForm = true;
-  } else {
-    isUpdateForm = false;
-  }
-  dashboardLogic.tagRadioActivated(tagCategory, radioValue, formCategory);
+  linkLogic.linkClassIdGen(formCategory, listCategory);
+
+
+  //
+  // let thisCheckBoxStatus = $(this).is(':checked');
+  //
+  // let thisRadioStatus = parseInt($(this).val());
+  //
+  // if (thisRadioStatus === 0) {
+  //
+  // }
+  //
+  // if (!thisCheckBoxStatus) {
+  //   $(this).parent().children(".tag-select-container").remove();
+  // }
+  //
+  // let isUpdateForm;
+  // // let radioDivName = $(this).attr("name");
+  // let tagCategory = $(this).attr("class");
+  // let radioValue = $(this).val();
+  // let formCategory = "contact";
+  //
+  // console.log(tagCategory);
+  // console.log(radioValue);
+  //
+  // let updateFormStatus = $(".general-form-container").attr("data-update-form");
+  // updateFormStatus = parseInt(updateFormStatus);
+  // if (updateFormStatus === 1) {
+  //   isUpdateForm = true;
+  // } else {
+  //   isUpdateForm = false;
+  // }
+  // dashboardLogic.tagRadioActivated(tagCategory, radioValue, formCategory);
 };
 
 const onHideShowUpdateOptions = function() {
