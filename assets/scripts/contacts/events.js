@@ -129,10 +129,25 @@ const onDisplayJobDropdown = function(event) {
   event.preventDefault();
   let formCategory = "contact";
   let listCategory = "job";
-  //
+
+  // let altContainerSelect = "#" + formCategory + "-ref-text-alt-" + listCategory + "-container";
+  // let linkContainerSelect = "#" + formCategory + "-select-container-" + listCategory;
+  let linkContainerSelect = ".display-dropdown-" + listCategory;
   // linkLogic.linkClassIdGen(formCategory, listCategory);
   // // linkLogic.showDropOptionsCreatePage(formCategory, listCategory);
-  linkLogic.showDropOptionsCreatePage(formCategory, listCategory);
+  let altFormContainer = ".display-alt-" + listCategory;
+  let selectVal = parseInt($(this).val());
+  console.log(selectVal);
+
+  if (selectVal === 1) {
+    $(altFormContainer).children().remove();
+    linkLogic.showDropOptionsCreatePage(formCategory, listCategory);
+    linkLogic.linkClassIdGen(formCategory, listCategory);
+  } else {
+    $(linkContainerSelect).children().remove();
+    linkLogic.altOptionAppend(formCategory, listCategory);
+    linkLogic.altLinkClassIdGen(formCategory, listCategory);
+  }
   // let data = store.dropDownOptionData;
   // console.log(data);
   //
