@@ -6,7 +6,6 @@ const displayContactDashboard = require('../templates/contact/get-contacts.handl
 const displayReminderDashboard = require('../templates/reminder/get-reminders.handlebars');
 const displayContactDetails = require('../templates/contact/show-contact-record.handlebars');
 const displayContactCreateForm = require('../templates/contact/create-contact.handlebars');
-// const displayRadioButtonsTemplate = require('../templates/contact/create-contact.handlebars');
 const contactsApi = require('./api');
 const displayRadioButtonsTemplate = require('../templates/form-template/radio-btn-template.handlebars');
 const displayContactOptions = require('../templates/contact/option-dropdown-contacts.handlebars');
@@ -53,6 +52,7 @@ const showContactRecordFailure = () => {
   console.log('failure');
 };
 //
+
 const showContactCreateForm = () => {
   $(".notification-container").children().text("");
   $(".content").children().remove();
@@ -171,6 +171,10 @@ const displayContactDropdownSuccess = function(data) {
   }
 };
 
+const dropDownData = function(data) {
+  console.log(data);
+};
+
 module.exports = {
   getContactSuccess,
   showContactRecordSuccess,
@@ -186,5 +190,6 @@ module.exports = {
   displayContactDropdownSuccess,
   displayContactOptions,
   getReminderSuccess,
+  dropDownData,
   // getReminderSuccess,
 };

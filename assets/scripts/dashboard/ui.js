@@ -37,7 +37,6 @@ const getSampleSuccess = (data) => {
 
 };
 
-
 const getSampleFailure = function() {
   console.log("failure");
 };
@@ -47,4 +46,5 @@ module.exports = {
   getExistingFailure,
   getSampleFailure,
   getSampleSuccess,
+  // jobDropdownDataResults,
 };

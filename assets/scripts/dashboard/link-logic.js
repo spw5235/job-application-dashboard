@@ -1,6 +1,29 @@
 'use strict';
 
 // const store = require('../store');
+// const contactsApi = require('../contacts/api');
+const jobsApi = require('../jobs/api');
+// const communicationsApi = require('../communications/api');
+// const documentsApi = require('../documents/api');
+// const remindersApi = require('../reminders/api');
+
+// const contactsUi = require('../contacts/ui');
+
+const insertFailure = function() {
+  console.log('failure');
+};
+
+const jobDropdownDataResults = (data) => {
+  console.log(data);
+};
+
+const showDropOptionsCreatePage = function(formCategory, listCategory) {
+  if (listCategory === "job" && formCategory ==="contact") {
+    jobsApi.getJobs()
+      .done(jobDropdownDataResults)
+      .fail(insertFailure);
+  }
+};
 
 const linkClassIdGen = function(formCategory, listCategory) {
 
@@ -19,15 +42,13 @@ const linkClassIdGen = function(formCategory, listCategory) {
   let selectElementTxt = "select-element-" + listCategory;
 
   $(selectElementSelector).attr("id", selectElementTxt);
-
-
   // Option Vals
-
-
-
+  //
+  //
+  //
   // let categoryIdent = appendingDivId + " .category-identifier";
-
-
+  //
+  //
   // let selectElDivIdText = formCategory + "-category-select-" + listCategory;
   // // let selectElement = appendingDivId + " .select-element";
   //
@@ -45,7 +66,6 @@ const radioClassIdNameGen = function(formCategory, listCategory) {
   let appendingDivId = "#" + appendingDivIdTxt;
 
   let radioGroupContainerTxt = listCategory + "-radio-group-container";
-  // let RadioGroupContainerId = "#" + RadioGroupContainerTxt;
 
   let radioGroupContainerSelector = appendingDivId + " .radio-group-container";
 
@@ -85,6 +105,7 @@ const radioClassIdNameGen = function(formCategory, listCategory) {
 };
 
 module.exports = {
-  linkClassIdGen,
   radioClassIdNameGen,
+  linkClassIdGen,
+  showDropOptionsCreatePage,
 };

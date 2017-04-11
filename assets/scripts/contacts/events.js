@@ -4,7 +4,7 @@ const contactsUi = require('./ui');
 const getFormFields = require('../../../lib/get-form-fields');
 const store = require('../store');
 const dashboardLogic = require('../dashboard/logic');
-const jobOptions = require("../templates/link/contact-form-job-link.handlebars")
+const jobOptions = require("../templates/link/contact-form-job-link.handlebars");
 const linkLogic = require('../dashboard/link-logic');
 // Contact EVENTS
 
@@ -127,17 +127,17 @@ const onSelectJobDropdown = function(event) {
 
 const onDisplayJobDropdown = function(event) {
   event.preventDefault();
-
-
   let formCategory = "contact";
   let listCategory = "job";
-
-  let availableJobOptions = jobOptions();
-  $("#display-radio-drop-job").append(availableJobOptions);
-
-  linkLogic.linkClassIdGen(formCategory, listCategory);
-
-
+  //
+  // linkLogic.linkClassIdGen(formCategory, listCategory);
+  // // linkLogic.showDropOptionsCreatePage(formCategory, listCategory);
+  linkLogic.showDropOptionsCreatePage(formCategory, listCategory);
+  // let data = store.dropDownOptionData;
+  // console.log(data);
+  //
+  // let availableJobOptions = jobOptions();
+  // $("#display-radio-drop-job").append(availableJobOptions);
   //
   // let thisCheckBoxStatus = $(this).is(':checked');
   //

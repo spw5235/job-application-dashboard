@@ -66,7 +66,7 @@ const onSampleRadio = function(event) {
   $("#job-category-radio-container").append(showRadio);
   let formCategory = "contact";
   let listCategory = "job";
-  linkLogic.radioClassIdNameGen(formCategory, listCategory);
+  // linkLogic.radioClassIdNameGen(formCategory, listCategory);
 };
 
 
