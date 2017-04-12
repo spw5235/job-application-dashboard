@@ -1,9 +1,84 @@
 <div class="create-communication-form-container form-container form-group communication-page group-category">
   <h1>Create a Communication</h1>
 
-  <form class="form communication-form general-form-class" id="new-communication-form" name="new-communication-form">
+  <form class="form communication-form" id="new-communication-form" name="new-communication-form">
     <fieldset>
       <!-- <legend>Create Communication Form</legend> -->
+      <p id="create-communication-error" class="warning form-error"></p>
+      <p>All fields are <u>optional</u> unless otherwise indicated</p>
+
+      <div class="form-group">
+        <label>Communication Date</label>
+        <input class="form-control required-field communication-date" name="communication[c_date]" placeholder="Communication Date" type="date">
+      </div>
+
+      <div class="form-group c-method">
+        <label>Communication Method (required)</label>
+        <select class="form-control" id="communication-method-select">
+            <option class="form-control required-field" name="communication[c_method]" placeholder="Communication Method" type="text" value="Email">Email</option>
+            <option class="form-control required-field" name="communication[c_method]" placeholder="Communication Method" type="text" value="Phone">Phone</option>
+            <option class="form-control required-field" name="communication[c_method]" placeholder="Communication Method" type="text" value="Linkedin">LinkedIn</option>
+            <option class="form-control required-field" name="communication[c_method]" placeholder="Communication Method" type="text" value="Meeting">Meeting</option>
+            <option class="form-control required-field" name="communication[c_method]" placeholder="Communication Method" type="text" value="Other">Other</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Communication Subject</label>
+        <input class="form-control required-field communication-subject" name="communication[c_subject]" placeholder="Communication Subject" type="text">
+      </div>
+
+      <div class="form-group">
+        <label>Communication Details</label>
+        <textarea class="form-control field-input communication-details" name="communication[c_details]" placeholder="Communication Details"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>Communication Link</label>
+        <input class="form-control required-field" name="communication[c_link]" placeholder="Communication Link" type="text">
+      </div>
+
+      <div class="form-group">
+        <label>Communication Notes</label>
+        <textarea id="#communication-notes-input" class="form-control field-input communication-notes" name="communication[c_notes]" placeholder="Communication Notes"></textarea>
+      </div>
+
+      <div id="job-category-radio-container"></div>
+
+      <div class="display-dropdown-job"></div>
+      <div class="display-alt-job"></div>
+
+      <div class="form-group append-nonlink"></div>
+      <div class="form-group display-jobs-dropdown"></div>
+
+      <div class="form-group">
+        <input class="btn btn-success submit-btn current" name="submit" id="create-communication-btn" type="submit" value="Submit">
+      </div>
+    </fieldset>
+  </form>
+  <br><br>
+  <div class="dashboard-container">
+    <button id="dashboard-home-btn" type="button" class="btn btn-primary">View Dashboard</button>
+  </div>
+</div>
+
+<!--
+
+
+
+
+
+
+
+
+
+
+<div class="create-communication-form-container form-container form-group communication-page group-category">
+  <h1>Create a Communication</h1>
+
+  <form class="form communication-form general-form-class" id="new-communication-form" name="new-communication-form">
+    <fieldset>
+
       <p id="create-communication-error" class="warning form-error"></p>
       <p>All fields are <u>optional</u> unless otherwise indicated</p>
 
@@ -44,14 +119,14 @@
       </div>
 
       <div class="form-group">
-        <label>Tag this communication to an existing contact?</label>
-        <div class="form-group tag-contact-to-communication-container">
+        <label>Tag this communication to an existing communication?</label>
+        <div class="form-group tag-communication-to-communication-container">
           <span>Check Box for Yes</span>
-            <input id="tag-contact-to-communication" class="contact-category" type="checkbox" value="">
+            <input id="tag-communication-to-communication" class="communication-category" type="checkbox" value="">
         </div>
       </div>
 
-      <div class="form-group display-contacts-dropdown"></div>
+      <div class="form-group display-communications-dropdown"></div>
 
       <div class="form-group">
         <input class="btn btn-success submit-btn current" name="submit" id="create-communication-btn" type="submit" value="Submit">
@@ -62,4 +137,4 @@
   <div class="dashboard-container">
     <button id="dashboard-home-btn" type="button" class="btn btn-primary">View Dashboard</button>
   </div>
-</div>
+</div> -->

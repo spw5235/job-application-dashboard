@@ -106,6 +106,7 @@ const addHandlers = () => {
   $('.content').on('change', '#tag-company-to-job', onDisplayJobDropdown);
   $('.content').on('change', '#select-option-company-category', onSelectJobDropdown);
   $('.content').on('click', '#dashboard-new-job-btn', onShowJobCreateForm);
+  // $('.content').on('change', '.job-category', onDisplayJobDropdown);
 };
 
 module.exports = {

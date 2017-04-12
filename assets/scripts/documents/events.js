@@ -170,7 +170,7 @@ const addHandlers = () => {
   $('.content').on('click', '.dashboard-document-record-btn', onShowDocumentRecord);
   $('#get-documents-btn').on('click', onGetDocuments);
   $('.content').on('click', '#document-record-delete', onDeleteDocument);
-  $('.content').on('change', '.job-category', onDisplayJobDropdown);
+  // $('.content').on('change', '.job-category', onDisplayJobDropdown);
   $('.content').on('change', "#job-update-link", onHideShowUpdateOptions);
   $('.content').on('change', '.update-job', onDisplayJobDropdown);
 };

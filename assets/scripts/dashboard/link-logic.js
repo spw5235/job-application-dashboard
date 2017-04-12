@@ -3,27 +3,36 @@
 const jobsApi = require('../jobs/api');
 const store = require('../store');
 const displayJobOptions =  require('../templates/link/contact-form-job-link.handlebars');
-const displayJobAltOption = require('../templates/alt-link/contact-form-job-alt-link.handlebars');
+const displayJobContactAltOption = require('../templates/alt-link/contact-form-job-alt-link.handlebars');
+const displayJobCommunicationAltOption = require('../templates/alt-link/communication-form-job-alt-link.handlebars');
 
 const altOptionAppend = function(formCategory, listCategory) {
   let displayAltInput;
   console.log(formCategory);
   console.log(listCategory);
   if (formCategory === "contact" && listCategory === "job") {
-    displayAltInput = displayJobAltOption();
+    displayAltInput = displayJobContactAltOption();
+  } else if (formCategory === "communication" && listCategory === "job") {
+    displayAltInput = displayJobCommunicationAltOption();
   }
 
   $(".display-alt-job").append(displayAltInput);
 };
 
 const obtainOptionVal = function(listCategory) {
+  console.log(listCategory);
   let alternativeEntrySelector = "#alt-input-entry-" + listCategory;
   let alternativeEntryVal = $(alternativeEntrySelector).val();
   let valueSelector = "#select-element-" + listCategory;
-
+  let isRadioCheckedTxt = "#" + listCategory + "-radio-btns-container input";
+  let isRadioChecked = $(isRadioCheckedTxt).prop("checked");
+  console.log(alternativeEntryVal);
   if ( alternativeEntryVal === undefined ) {
-
-    return parseInt($(valueSelector).val());
+    if (!isRadioChecked) {
+      return 0;
+    } else {
+      return parseInt($(valueSelector).val());
+    }
   } else {
 
     return 0;

@@ -157,7 +157,7 @@ const addHandlers = () => {
   $('.content').on('click', '.view-reminder-record-btn', onShowReminderRecord);
   $('#get-reminders-btn').on('click', onGetReminders);
   $('.content').on('click', '#reminder-record-delete', onDeleteReminder);
-  $('.content').on('change', '.job-category', onDisplayJobDropdown);
+  // $('.content').on('change', '.job-category', onDisplayJobDropdown);
   $('.content').on('change', "#job-update-link", onHideShowUpdateOptions);
   $('.content').on('change', '.update-job', onDisplayJobDropdown);
 };

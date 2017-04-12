@@ -17,10 +17,10 @@
     </tr>
     <tr>
       <td class="communication-record-last-name">
-        Communication Contact Name:
+        Communication Communication Name:
       </td>
       <td class="display-communication-last-name">
-        {{communication.contact_ref_name}}
+        {{communication.communication_ref_name}}
       </td>
     </tr>
     <tr>
@@ -70,7 +70,7 @@
 
 <div class="dashboard-communication-btn-container">
   <div class="communication-record-btn-options">
-    <button id="communication-record-btn-edit" type="button" class="btn btn-warning current" data-current-communication-id="{{communication.id}}" data-current-company-id="{{communication.company_ref_id}}" data-current-job-id="{{communication.job_ref_id}}" data-current-document-id="{{communication.document_ref_id}}">Edit Communication Record</button>
+    <button id="communication-record-btn-edit" type="button" class="btn btn-warning current" data-current-communication-id="{{communication.id}}" data-current-job-ref-text="{{communication.job_ref_text}}" data-current-job-ref-id="{{communication.job_ref_id}}">Edit Communication Record</button>
     <button id="communication-record-delete" type="button" class="btn btn-danger current" data-current-communication-id="{{communication.id}}">Delete Communication Record</button>
   </div>
 </div>
