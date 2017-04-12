@@ -16,6 +16,29 @@ const getReminderSuccess = (data) => {
 
   $(".content").children().remove();
 
+  console.log(data);
+
+  let remindersArr = data.reminders;
+
+  for (let i = 0; i < remindersArr.length; i++ ) {
+    let unavailable = "N/A";
+    let currArrayRefText = (remindersArr[i].job_ref_text);
+    let currArrayReminderDate = (remindersArr[i].reminder_date);
+    let currArrayReminderDetails = (remindersArr[i].reminder_details);
+
+    if (currArrayRefText === "" || currArrayRefText === null) {
+      console.log('true');
+      remindersArr[i].job_ref_text = unavailable;
+    }
+    if (currArrayReminderDate === "" || currArrayReminderDate === null) {
+      remindersArr[i].reminder_date = unavailable;
+      console.log(currArrayReminderDate);
+    }
+    if (currArrayReminderDetails === "" || currArrayReminderDetails === null) {
+      remindersArr[i].reminder_details = unavailable;
+    }
+  }
+
   let reminderDashboard = displayReminderDashboard({
     reminders: data.reminders
   });
@@ -109,7 +132,7 @@ const createReminderSuccess = (data) => {
   $(".success-alert").text("Reminder Has Been Successfully Created");
   console.log(data);
 
-  data.reminder.reminder_type = $("#reminder-type-select").val();
+  // data.reminder.reminder_type = $("#reminder-type-select").val();
 
   console.log(data);
   let showReminderDetails = displayReminderDetails({
@@ -117,6 +140,7 @@ const createReminderSuccess = (data) => {
   });
 
   $(".content").append(showReminderDetails);
+  $("#reminder-record-btn-edit").attr("data-current-reminder-type", data.reminder.reminder_type);
   $(".current").attr("data-current-reminder-id", store.currentReminderId);
 };
 

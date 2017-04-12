@@ -16,6 +16,25 @@ const getDocumentSuccess = (data) => {
 
   $(".content").children().remove();
 
+  let dataArr = data.documents;
+
+  for (let i = 0; i < dataArr.length; i++ ) {
+    let unavailable = "N/A";
+    let currArrayOptOne = (dataArr[i].docdate);
+    let currArrayOptTwo = (dataArr[i].docsubject);
+    let currArrayOptThree = (dataArr[i].docurl);
+
+    if (currArrayOptOne === "" || currArrayOptOne === null) {
+      dataArr[i].docdate = unavailable;
+    }
+    if (currArrayOptTwo === "" || currArrayOptTwo === null) {
+      dataArr[i].docsubject = unavailable;
+    }
+    if (currArrayOptThree === "" || currArrayOptThree === null) {
+      dataArr[i].docurl = unavailable;
+    }
+  }
+
   let documentDashboard = displayDocumentDashboard({
     documents: data.documents
   });

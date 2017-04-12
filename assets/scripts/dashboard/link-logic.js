@@ -6,6 +6,19 @@ const displayJobOptions =  require('../templates/link/contact-form-job-link.hand
 const displayJobContactAltOption = require('../templates/alt-link/contact-form-job-alt-link.handlebars');
 const displayJobCommunicationAltOption = require('../templates/alt-link/communication-form-job-alt-link.handlebars');
 
+// const replaceEmptyCellsWithNA = function(dataArray, tableColumn) {
+//   for (let i = 0; i < dataArray.length; i++ ) {
+//     let currentArryIndex = dataArray[i];
+//     let currArrayTxtVal = (currentArryIndex[tableColumn]);
+//     console.log(currArrayTxtVal)
+//     if (currArrayTxtVal === "") {
+//       return "NA";
+//     } else {
+//       console.log(false);
+//     }
+//   }
+// };
+
 const altOptionAppend = function(formCategory, listCategory) {
   let displayAltInput;
   console.log(formCategory);
@@ -187,4 +200,5 @@ module.exports = {
   obtainOptionVal,
   obtainOptionText,
   preselectDefault,
+  // replaceEmptyCellsWithNA
 };

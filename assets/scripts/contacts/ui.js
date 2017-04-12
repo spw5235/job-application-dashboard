@@ -16,6 +16,26 @@ const getContactSuccess = (data) => {
 
   $(".content").children().remove();
 
+  console.log(data);
+  let dataArr = data.contacts;
+
+  for (let i = 0; i < dataArr.length; i++ ) {
+    let unavailable = "N/A";
+    let currArrayOptOne = (dataArr[i].job_ref_text);
+    let currArrayOptTwo = (dataArr[i].email);
+    let currArrayOptThree = (dataArr[i].phone);
+
+    if (currArrayOptOne === "" || currArrayOptOne === null) {
+      dataArr[i].job_ref_text = unavailable;
+    }
+    if (currArrayOptTwo === "" || currArrayOptTwo === null) {
+      dataArr[i].email = unavailable;
+    }
+    if (currArrayOptThree === "" || currArrayOptThree === null) {
+      dataArr[i].phone = unavailable;
+    }
+  }
+
   let contactDashboard = displayContactDashboard({
     contacts: data.contacts
   });

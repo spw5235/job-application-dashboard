@@ -16,6 +16,27 @@ const getCommunicationSuccess = (data) => {
 
   $(".content").children().remove();
 
+  console.log(data);
+
+  let communicationsArr = data.communications;
+
+  for (let i = 0; i < communicationsArr.length; i++ ) {
+    let unavailable = "N/A";
+    let currArrayRefText = (communicationsArr[i].job_ref_text);
+    let currArrayDate = (communicationsArr[i].c_date);
+    let currArraySubject = (communicationsArr[i].c_subject);
+
+    if (currArrayRefText === "" || currArrayRefText === null) {
+      communicationsArr[i].job_ref_text = unavailable;
+    }
+    if (currArrayDate === "" || currArrayDate === null) {
+      communicationsArr[i].c_date = unavailable;
+    }
+    if (currArraySubject === "" || currArraySubject === null) {
+      communicationsArr[i].c_subject = unavailable;
+    }
+  }
+
   let communicationDashboard = displayCommunicationDashboard({
     communications: data.communications
   });

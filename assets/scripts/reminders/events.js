@@ -37,8 +37,6 @@ const onEditReminder = function(event) {
 const onCreateReminder = function(event) {
   event.preventDefault();
   let data = getFormFields(event.target);
-  store.createReminderData = data;
-  store.lastShowReminderData = data;
 
   let listCategory = "job";
 
@@ -56,7 +54,11 @@ const onCreateReminder = function(event) {
   delete data["job-category-radio"];
 
   data.reminder.reminder_type = $("#reminder-type-select").val();
-
+  console.log(data.reminder.reminder_type);
+  console.log('remindert');
+  store.createReminderData = data;
+  store.lastShowReminderData = data;
+  console.log(data);
   remindersApi.createReminder(data)
     .done(remindersUi.createReminderSuccess)
     .fail(remindersUi.createReminderFailure);
