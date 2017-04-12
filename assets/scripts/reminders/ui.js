@@ -90,6 +90,9 @@ const generateUpdateForm = function(listCategory, formCategory) {
     $(currentRefTextValTxt).text("N/A");
   }
 
+  let preselectVal = store.currentReminderType;
+  let preselectDiv = "#reminder-type-select";
+  linkLogic.preselectDefault(preselectDiv, preselectVal);
 };
 
 const getReminderFailure = () => {
@@ -99,16 +102,20 @@ const getReminderFailure = () => {
 
 const createReminderSuccess = (data) => {
   console.log("createsucces");
-  console.log(data);
   store.currentReminderId = data.reminder.id;
   $(".form-error").text("");
   $(".notification-container").children().text("");
   $(".content").children().remove();
   $(".success-alert").text("Reminder Has Been Successfully Created");
+  console.log(data);
 
+  data.reminder.reminder_type = $("#reminder-type-select").val();
+
+  console.log(data);
   let showReminderDetails = displayReminderDetails({
-    reminder: store.createReminderData.reminder
+    reminder: data.reminder
   });
+
   $(".content").append(showReminderDetails);
   $(".current").attr("data-current-reminder-id", store.currentReminderId);
 };

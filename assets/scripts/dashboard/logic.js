@@ -102,7 +102,7 @@
 //   let selectText = $(divId + ' option[value="' + defaultVal + '"]');
 //   $(selectText).prop('selected', true);
 // };
-//
+
 // const determineTagText = function(category, id) {
 //   let communicationTextSelected = $("#select-option-" + category + " option[value=" + id + "]").text();
 //   console.log(communicationTextSelected);

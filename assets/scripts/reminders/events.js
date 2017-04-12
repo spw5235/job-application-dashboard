@@ -26,6 +26,7 @@ const onEditReminder = function(event) {
   store.currentReminderId = $(this).attr("data-current-reminder-id");
   store.currentJobRefId = $(this).attr("data-current-job-ref-id");
   store.currentJobRefText = $(this).attr("data-current-job-ref-text");
+  store.currentReminderType = $(this).attr("data-current-reminder-type");
 
   // Template
   let formCategory = "reminder";
@@ -38,8 +39,6 @@ const onCreateReminder = function(event) {
   let data = getFormFields(event.target);
   store.createReminderData = data;
   store.lastShowReminderData = data;
-
-  data.reminder.reminder_type = $("#reminder-type-select").val();
 
   let listCategory = "job";
 
@@ -55,7 +54,9 @@ const onCreateReminder = function(event) {
   }
 
   delete data["job-category-radio"];
-  console.log(data);
+
+  data.reminder.reminder_type = $("#reminder-type-select").val();
+
   remindersApi.createReminder(data)
     .done(remindersUi.createReminderSuccess)
     .fail(remindersUi.createReminderFailure);
@@ -103,6 +104,7 @@ const onUpdateReminder = function(event) {
     data.reminder.job_ref_text = store.currentJobRefText;
   }
 
+  data.reminder.reminder_type = $("#reminder-type-select").val();
   remindersApi.updateReminder(data)
     .done(remindersUi.updateReminderSuccess)
     .fail(remindersUi.updateReminderFailure);

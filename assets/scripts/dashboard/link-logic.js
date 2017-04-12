@@ -155,6 +155,18 @@ const radioClassIdNameGen = function(formCategory, listCategory) {
   $(radioDropContainerSelector).attr("id", radioDropContainerTxt);
 };
 
+
+const preselectDefault = function(divId, defaultVal) {
+  console.log(defaultVal);
+  console.log(divId);
+
+  let selectText = $(divId + ' option[value="' + defaultVal + '"]');
+
+  console.log(selectText);
+  $(selectText).prop('selected', true);
+};
+
+
 module.exports = {
   radioClassIdNameGen,
   // linkClassIdGen,
@@ -165,4 +177,5 @@ module.exports = {
   jobDropdownDataResults,
   obtainOptionVal,
   obtainOptionText,
+  preselectDefault,
 };
