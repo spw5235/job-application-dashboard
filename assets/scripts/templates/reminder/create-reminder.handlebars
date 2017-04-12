@@ -1,9 +1,64 @@
+<div class="create-reminder-form-container form-container form-group reminder-page group-category">
+  <h1>Create a Reminder</h1>
+
+  <form class="form reminder-form" id="new-reminder-form" name="new-reminder-form">
+    <fieldset>
+      <p id="create-reminder-error" class="warning form-error"></p>
+      <p>All fields are <u>optional</u> unless otherwise indicated</p>
+
+      <div class="form-group">
+        <label>Reminder Type (required)</label>
+        <select class="form-control" id="reminder-type-select">
+            <option class="form-control required-field" name="reminder[reminder_type]" placeholder="reminder Type" type="text" value="Action">Action Required</option>
+            <option class="form-control required-field" name="reminder[reminder_type]" placeholder="reminder Type" type="text" value="Pending">Pending</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Reminder Subject (required)</label>
+        <input class="form-control required-field" name="reminder[reminder_subject]" placeholder="Subject" type="text">
+      </div>
+
+      <div class="form-group">
+        <label>Reminder Details</label>
+        <textarea class="form-control field-input reminder-details" name="reminder[reminder_details]" type="text" placeholder="Reminder Details"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>Reminder Notification Date</label>
+        <input class="form-control field-input" name="reminder[reminder_date]" placeholder="Date" type="date">
+      </div>
+
+      <div id="job-category-radio-container"></div>
+
+      <div class="display-dropdown-job"></div>
+      <div class="display-alt-job"></div>
+
+      <div class="form-group append-nonlink"></div>
+      <div class="form-group display-jobs-dropdown"></div>
+
+      <div class="form-group">
+        <input class="btn btn-success submit-btn current" name="submit" id="create-reminder-btn" type="submit" value="Submit">
+      </div>
+    </fieldset>
+  </form>
+  <br><br>
+  <div class="dashboard-container">
+    <button id="dashboard-home-btn" type="button" class="btn btn-primary">View Dashboard</button>
+  </div>
+</div>
+<!--
+
+
+
+
+
 <div class="create-reminder-form-container form-container form-group">
   <h1>Create a Reminder</h1>
 
   <form class="form reminder-form general-form-class" id="new-reminder-form" name="new-reminder-form">
     <fieldset>
-      <!-- <legend>Create Reminder Form</legend> -->
+
       <p id="create-reminder-error" class="warning form-error"></p>
       <p>All fields are <u>optional</u> unless otherwise indicated</p>
 
@@ -59,4 +114,4 @@
   <div class="dashboard-container">
     <button id="dashboard-home-btn" type="button" class="btn btn-primary">View Dashboard</button>
   </div>
-</div>
+</div> -->
