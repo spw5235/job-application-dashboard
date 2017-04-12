@@ -51,7 +51,6 @@ const showContactRecordFailure = () => {
   $(".notification-container").children().text("");
   console.log('failure');
 };
-//
 
 const showContactCreateForm = () => {
   $(".notification-container").children().text("");
@@ -105,6 +104,12 @@ const updateFormGenerator = function() {
     // $(radioContainerClass).hide();
   }
 
+  let currentRefTextVal = $("#job-category-update-radio-text").val();
+
+  if (currentRefTextVal === "") {
+    $("#job-category-update-radio-text").text("N/A");
+  }
+
 };
 
 const getContactFailure = () => {
@@ -144,13 +149,18 @@ const deleteContactFailure = () => {
 const updateContactSuccess = (data) => {
   console.log("updatesuccess");
   console.log(data);
-  $(".notification-container").children().text("");
-  $(".success-alert").text("Contact Has Been Successfully Updated");
+
   store.currentContactId = data.contact.id;
+  $(".form-error").text("");
+  $(".notification-container").children().text("");
   $(".content").children().remove();
-  contactsApi.showContact()
-    .done(showContactRecordSuccess)
-    .fail(showContactRecordFailure);
+  $(".success-alert").text("Contact Has Been Successfully Updated");
+
+  let showContactDetails = displayContactDetails({
+    contact: store.createContactData.contact
+  });
+  $(".content").append(showContactDetails);
+  $(".current").attr("data-current-contact-id", store.currentContactId);
 };
 
 const displayContactDropdownSuccess = function(data) {
@@ -184,12 +194,10 @@ module.exports = {
   showContactCreateForm,
   getContactFailure,
   updateContactSuccess,
-  // updateContactFailure,
   showContactRecordFailure,
   createContactSuccess,
   displayContactDropdownSuccess,
   displayContactOptions,
   getReminderSuccess,
   dropDownData,
-  // getReminderSuccess,
 };

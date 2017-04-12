@@ -26,9 +26,7 @@ const onShowContactRecord = function(event) {
 const onEditContact = function(event) {
   event.preventDefault();
   store.currentContactId = $(this).attr("data-current-contact-id");
-  store.currentCompanyNameRef = $(this).attr("data-current-company-name");
   store.currentJobRefId = $(this).attr("data-current-job-ref-id");
-
   contactsUi.updateFormGenerator();
 };
 
@@ -44,38 +42,23 @@ const onCreateContact = function(event) {
 
   data.contact.full_name = fullName;
 
-  let jobSelectionId = $("#select-option-job-category").val();
-  // data.contact.job_ref_id= jobSelectionId;
-
   data.contact.notes = $("#contact-notes-input").val();
 
-  let category = "job-category";
+  let listCategory = "job";
 
-  // let jobName = dashboardLogic.determineTagText(category, jobSelectionId);
+  let submitValue = linkLogic.obtainOptionVal(listCategory);
 
-  // data.contact.company_name = jobName;
+  data.contact.job_ref_id = submitValue;
 
-  /// Radio
 
-  // let isNumber = parseInt(jobSelectionId);
-  //
-  //
-  // if (is kNumber === 0) {
-  //   data.contact.job_ref_id = isNumber;
-  //   data.contact.company_name = dashboardLogic.determineTagText(category, jobSelectionId);
-  // } else if ( isNumber > 0 ) {
-  //   data.contact.job_ref_id = isNumber;
-  //   data.contact.company_name = dashboardLogic.determineTagText(category, jobSelectionId);
-  // } else {
-  //   data.contact.job_ref_id = 0;
-  //   data.contact.company_name = jobSelectionId;
-  // }
-  //
-  // if (data.contact.company_name === undefined) {
-  //   data.contact.company_name = "";
-  // } else if (data.contact.company_name === "Click to Select") {
-  //   data.contact.company_name = "";
-  // }
+  let submitText = linkLogic.obtainOptionText(listCategory);
+  data.contact.job_ref_text = submitText;
+
+
+  if (submitValue === -1) {
+    data.contact.job_ref_id = 0;
+    data.contact.job_ref_text = "";
+  }
 
   console.log(data);
   contactsApi.createContact(data)
@@ -94,17 +77,44 @@ const onDeleteContact = function(event) {
 const onUpdateContact = function(event) {
   event.preventDefault();
   let data = getFormFields(event.target);
-  data.contact.company_ref_id = parseInt($("#select-option-company-name").val());
-  data.contact.job_ref_id = parseInt($("#select-option-job-title").val());
-  data.contact.note = $("#contact-notes-input").val();
 
-  let category = "job-category";
-  let refIdVal = dashboardLogic.obtainRefIdVal(category);
-  let refTexVal = dashboardLogic.obtainRefTextVal(category);
+  store.createContactData = data;
+  store.lastShowContactData = data;
+
+  let firstName = $(".contact-first-name").val().trim();
+  let lastName = $(".contact-last-name").val().trim();
+  let fullName = firstName + " " + lastName;
+
+  data.contact.full_name = fullName;
+
+  data.contact.notes = $("#contact-notes-input").val();
+
+  let listCategory = "job";
+
+  let refUpdatedDiv = "#" + listCategory + "-category-update-link";
+
+  let isRefBeingUpdated = $(refUpdatedDiv).prop("checked");
+
+  if (isRefBeingUpdated) {
+    let submitValue = linkLogic.obtainOptionVal(listCategory);
+
+    data.contact.job_ref_id = submitValue;
+
+
+    let submitText = linkLogic.obtainOptionText(listCategory);
+    data.contact.job_ref_text = submitText;
+
+
+    if (submitValue === -1) {
+      data.contact.job_ref_id = 0;
+      data.contact.job_ref_text = "";
+    }
+  }
+
   console.log(data);
-  // contactsApi.updateContact(data)
-  //   .done(contactsUi.updateContactSuccess)
-  //   .fail(contactsUi.updateContactFailure);
+  contactsApi.updateContact(data)
+    .done(contactsUi.updateContactSuccess)
+    .fail(contactsUi.updateContactFailure);
 };
 
 const onShowContactCreateForm = function(event) {
@@ -125,6 +135,15 @@ const onSelectJobDropdown = function(event) {
   // dashboardLogic.determineApiRequest(tagCategory);
 };
 
+// const onDisplayJobDropdownUpdate = function(event) {
+//   event.preventDefault();
+//   let formCategory = "contact";
+//   let listCategory = "job";
+//
+//   let linkContainerSelect = ".display-dropdown-" + listCategory;
+//   let altFormContainer = ".display-alt-" + listCategory;
+// }
+
 const onDisplayJobDropdown = function(event) {
   event.preventDefault();
   let formCategory = "contact";
@@ -142,11 +161,11 @@ const onDisplayJobDropdown = function(event) {
   if (selectVal === 1) {
     $(altFormContainer).children().remove();
     linkLogic.showDropOptionsCreatePage(formCategory, listCategory);
-    linkLogic.linkClassIdGen(formCategory, listCategory);
+    // linkLogic.linkClassIdGen(formCategory, listCategory);
   } else {
     $(linkContainerSelect).children().remove();
     linkLogic.altOptionAppend(formCategory, listCategory);
-    linkLogic.altLinkClassIdGen(formCategory, listCategory);
+    // linkLogic.altLinkClassIdGen(formCategory, listCategory);
   }
   // let data = store.dropDownOptionData;
   // console.log(data);
@@ -208,7 +227,7 @@ const addHandlers = () => {
   $('.content').on('change', '.job-category', onDisplayJobDropdown);
   $('.content').on('change', '#select-option-job-category', onSelectJobDropdown);
   $('.content').on('change', "#job-category-update-link", onHideShowUpdateOptions);
-
+  $('.content').on('change', '.update-job-category', onDisplayJobDropdown);
   // $('.content').on('change', '#associate-contact-with-company', onDisplayCompanyDropdown);
   // $('.content').on('change', '#select-option-company-name', onSelectOptionCompanyVal);
   // $('.content').on('click', '#job-back-contact-overview', onShowContactRecord);

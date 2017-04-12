@@ -12,69 +12,99 @@ const displayJobAltOption = require('../templates/alt-link/contact-form-job-alt-
 
 // const contactsUi = require('../contacts/ui');
 
-const altLinkClassIdGen = function(formCategory, listCategory) {
-  // let appendingDivIdTxt = "display-radio-drop-" + listCategory;
-  // let appendingDivId = "#" + appendingDivIdTxt;
-
-  let containerIdTxt = formCategory + "-ref-text-alt-" + listCategory + "-container";
-
-  let altContainerSelector = appendingDivId + " .alt-container";
-
-  let altContainerSelect = "#" + listCategory + "-radio-group-container .alt-container";
-
-  $(altContainerSelect).attr("id", containerIdTxt);
-
-  let containerId = "#" + containerIdTxt;
-
-  let labelSelectorTxt = containerId + " .alt-label";
-  let labelIdTxt = "alt-label-" + listCategory;
-
-  $(labelSelectorTxt).attr("id", labelIdTxt);
-
-  let labelId = "#" + labelIdTxt;
-  $(labelId).text(listCategory);
-
-  let altInputIdTxt = "alt-input-entry-" + listCategory;
-  $(altContainerSelector).attr("id", altInputIdTxt);
-
-  let altInputId = "#" + altInputIdTxt;
-
-  let nameVal = formCategory + "[" + listCategory + "_ref_text]";
-  $(altInputId).attr("name", nameVal);
-
-  let placeholderText = "Enter the custom " + listCategory + " text here";
-  $(altInputId).attr("placeholder", placeholderText);
-
-};
+// const altLinkClassIdGen = function(formCategory, listCategory) {
+//   // let appendingDivIdTxt = "display-radio-drop-" + listCategory;
+//   // let appendingDivId = "#" + appendingDivIdTxt;
+//
+//   let containerIdTxt = formCategory + "-ref-text-alt-" + listCategory + "-container";
+//
+//   let altContainerSelector = appendingDivId + " .alt-container";
+//
+//   let altContainerSelect = "#" + listCategory + "-radio-group-container .alt-container";
+//
+//   $(altContainerSelect).attr("id", containerIdTxt);
+//
+//   let containerId = "#" + containerIdTxt;
+//
+//   let labelSelectorTxt = containerId + " .alt-label";
+//   let labelIdTxt = "alt-label-" + listCategory;
+//
+//   $(labelSelectorTxt).attr("id", labelIdTxt);
+//
+//   let labelId = "#" + labelIdTxt;
+//   $(labelId).text(listCategory);
+//
+//   let altInputIdTxt = "alt-input-entry-" + listCategory;
+//   $(altContainerSelector).attr("id", altInputIdTxt);
+//
+//   let altInputId = "#" + altInputIdTxt;
+//
+//   let nameVal = formCategory + "[" + listCategory + "_ref_text]";
+//   $(altInputId).attr("name", nameVal);
+//
+//   let placeholderText = "Enter the custom " + listCategory + " text here";
+//   $(altInputId).attr("placeholder", placeholderText);
+//
+// };
 
 const altOptionAppend = function(formCategory, listCategory) {
   let altFormContainer = ".display-alt-" + listCategory;
   // let containerAppendId = "#" + listCategory + "-radio-group-container";
   let displayAltInput;
+  console.log(formCategory);
+  console.log(listCategory);
   if (formCategory === "contact" && listCategory === "job") {
     displayAltInput = displayJobAltOption();
   }
 
-  $(altFormContainer).append(displayAltInput);
-  altLinkClassIdGen(formCategory, listCategory);
+  $(".display-alt-job").append(displayAltInput);
+  // altLinkClassIdGen(formCategory, listCategory);
 };
 
-const linkClassIdGen = function(formCategory, listCategory) {
-  let appendingDivIdTxt = "display-radio-drop-" + listCategory;
+const obtainOptionVal = function(listCategory) {
+  let alternativeEntrySelector = "#alt-input-entry-" + listCategory;
+  let alternativeEntryVal = $(alternativeEntrySelector).val();
+  let valueSelector = "#select-element-" + listCategory;
 
-  let appendingDivId = "#" + appendingDivIdTxt;
+  if ( alternativeEntryVal === undefined ) {
+    return parseInt($(valueSelector).val());
+  } else {
+    return 0;
+  }
+};
 
-  let selectContainerIdDefTxt = formCategory + "-select-container-" + listCategory;
 
-  let selectContainerSelector = appendingDivId + " .select-container";
+const obtainOptionText = function(listCategory) {
+  let textInputDiv = "#alt-input-entry-" + listCategory;
+  let alternativeEntrySelector = "#alt-input-entry-" + listCategory;
+  let alternativeEntryVal = $(alternativeEntrySelector).val();
+  let valueSelector = "#select-element-" + listCategory;
+  let linkValue = $(valueSelector).val();
 
-  $(selectContainerSelector).attr("id", selectContainerIdDefTxt);
+  if ( alternativeEntryVal === undefined ) {
+    let textValueSelectDiv = valueSelector + " option[value=" + linkValue + "]";
+    return $(textValueSelectDiv).text();
+  } else {
+    return $(textInputDiv).val();
+  }
+};
 
-  let selectContainerSelectorId = "#" + selectContainerIdDefTxt;
-  let selectElementSelector = selectContainerSelectorId + " .select-element";
-  let selectElementTxt = "select-element-" + listCategory;
-
-  $(selectElementSelector).attr("id", selectElementTxt);
+// const linkClassIdGen = function(formCategory, listCategory) {
+//   let appendingDivIdTxt = "display-radio-drop-" + listCategory;
+//
+//   let appendingDivId = "#" + appendingDivIdTxt;
+//
+//   let selectContainerIdDefTxt = formCategory + "-select-container-" + listCategory;
+//
+//   let selectContainerSelector = appendingDivId + " .select-container";
+//
+//   $(selectContainerSelector).attr("id", selectContainerIdDefTxt);
+//
+//   let selectContainerSelectorId = "#" + selectContainerIdDefTxt;
+//   let selectElementSelector = selectContainerSelectorId + " .select-element";
+//   let selectElementTxt = "select-element-" + listCategory;
+//
+//   $(selectElementSelector).attr("id", selectElementTxt);
   // Option Vals
   //
   //
@@ -92,7 +122,7 @@ const linkClassIdGen = function(formCategory, listCategory) {
   // $(appendingDivId).attr("id", selectContainerIdDefTxt);
   // $(selectElement).attr("id", selectElDivIdText);
   // $(optionElement).addClass(addOptionClass);
-};
+// };
 
 const insertFailure = function() {
   console.log('failure');
@@ -113,7 +143,7 @@ const jobDropdownDataResults = (data) => {
   }
 
   $(containerAppendId).append(dataDropdown);
-  linkClassIdGen(formCategory, listCategory);
+  // linkClassIdGen(formCategory, listCategory);
 };
 
 const showDropOptionsCreatePage = function(formCategory, listCategory) {
@@ -171,8 +201,12 @@ const radioClassIdNameGen = function(formCategory, listCategory) {
 
 module.exports = {
   radioClassIdNameGen,
-  linkClassIdGen,
+  // linkClassIdGen,
   showDropOptionsCreatePage,
-  altLinkClassIdGen,
+  // altLinkClassIdGen,
   altOptionAppend,
+  insertFailure,
+  jobDropdownDataResults,
+  obtainOptionVal,
+  obtainOptionText,
 };

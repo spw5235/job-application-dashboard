@@ -3,7 +3,7 @@
 const store = require('../store');
 const displayExistingCompanies = require('../templates/dashboard/existing-company.handlebars');
 // const displaySample = require('../templates/job/tag-job.handlebars');
-const linkLogic = require('./link-logic');
+// const linkLogic = require('./link-logic');
 
 // Company UI
 
@@ -31,9 +31,9 @@ const getSampleSuccess = (data) => {
 
   let formCategory = "contact";
   let listCategory = "job";
-  linkLogic.linkClassIdGen(formCategory, listCategory);
+  // linkLogic.linkClassIdGen(formCategory, listCategory);
 
-  // linkLogic.radioClassIdNameGen(formCategory, listCategory);
+  linkLogic.radioClassIdNameGen(formCategory, listCategory);
 
 };
 
