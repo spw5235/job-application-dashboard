@@ -3,8 +3,6 @@ const contactsApi = require('./api');
 const contactsUi = require('./ui');
 const getFormFields = require('../../../lib/get-form-fields');
 const store = require('../store');
-const dashboardLogic = require('../dashboard/logic');
-const jobOptions = require("../templates/link/contact-form-job-link.handlebars");
 const linkLogic = require('../dashboard/link-logic');
 // Contact EVENTS
 
@@ -27,7 +25,9 @@ const onEditContact = function(event) {
   event.preventDefault();
   store.currentContactId = $(this).attr("data-current-contact-id");
   store.currentJobRefId = $(this).attr("data-current-job-ref-id");
+  store.currentJobRefText = $(this).attr("data-current-job-ref-text");
 
+  // Template
   let formCategory = "contact";
   let listCategory = "job";
   contactsUi.generateUpdateForm(listCategory, formCategory);
@@ -63,7 +63,6 @@ const onCreateContact = function(event) {
     data.contact.job_ref_text = "";
   }
 
-  console.log(data);
   contactsApi.createContact(data)
     .done(contactsUi.createContactSuccess)
     .fail(contactsUi.createContactFailure);
@@ -127,95 +126,36 @@ const onShowContactCreateForm = function(event) {
   contactsUi.showContactCreateForm();
 };
 
-const onSelectJobDropdown = function(event) {
-  event.preventDefault();
-  let tagCategory = $(this).attr("class");
-  // let formCategory = "contact";
-  // let listCategory = "job";
-  //
-  // let availableJobOptions = jobOptions();
-  // $("#display-radio-drop-job").append(availableJobOptions);
-  //
-  // linkLogic.linkClassIdGen(formCategory, listCategory);
-  // dashboardLogic.determineApiRequest(tagCategory);
-};
-
-// const onDisplayJobDropdownUpdate = function(event) {
-//   event.preventDefault();
-//   let formCategory = "contact";
-//   let listCategory = "job";
-//
-//   let linkContainerSelect = ".display-dropdown-" + listCategory;
-//   let altFormContainer = ".display-alt-" + listCategory;
-// }
-
 const onDisplayJobDropdown = function(event) {
   event.preventDefault();
   let formCategory = "contact";
   let listCategory = "job";
 
-  // let altContainerSelect = "#" + formCategory + "-ref-text-alt-" + listCategory + "-container";
-  // let linkContainerSelect = "#" + formCategory + "-select-container-" + listCategory;
   let linkContainerSelect = ".display-dropdown-" + listCategory;
-  // linkLogic.linkClassIdGen(formCategory, listCategory);
-  // // linkLogic.showDropOptionsCreatePage(formCategory, listCategory);
+
   let altFormContainer = ".display-alt-" + listCategory;
   let selectVal = parseInt($(this).val());
-  console.log(selectVal);
 
   if (selectVal === 1) {
     $(altFormContainer).children().remove();
     linkLogic.showDropOptionsCreatePage(formCategory, listCategory);
-    // linkLogic.linkClassIdGen(formCategory, listCategory);
   } else {
     $(linkContainerSelect).children().remove();
     linkLogic.altOptionAppend(formCategory, listCategory);
-    // linkLogic.altLinkClassIdGen(formCategory, listCategory);
   }
-  // let data = store.dropDownOptionData;
-  // console.log(data);
-  //
-  // let availableJobOptions = jobOptions();
-  // $("#display-radio-drop-job").append(availableJobOptions);
-  //
-  // let thisCheckBoxStatus = $(this).is(':checked');
-  //
-  // let thisRadioStatus = parseInt($(this).val());
-  //
-  // if (thisRadioStatus === 0) {
-  //
-  // }
-  //
-  // if (!thisCheckBoxStatus) {
-  //   $(this).parent().children(".tag-select-container").remove();
-  // }
-  //
-  // let isUpdateForm;
-  // // let radioDivName = $(this).attr("name");
-  // let tagCategory = $(this).attr("class");
-  // let radioValue = $(this).val();
-  // let formCategory = "contact";
-  //
-  // console.log(tagCategory);
-  // console.log(radioValue);
-  //
-  // let updateFormStatus = $(".general-form-container").attr("data-update-form");
-  // updateFormStatus = parseInt(updateFormStatus);
-  // if (updateFormStatus === 1) {
-  //   isUpdateForm = true;
-  // } else {
-  //   isUpdateForm = false;
-  // }
-  // dashboardLogic.tagRadioActivated(tagCategory, radioValue, formCategory);
 };
 
 const onHideShowUpdateOptions = function() {
-  let jobUpdateChecked = $(this).prop("checked");
+  let isUpdateChecked = $(this).prop("checked");
   let radioButtonContainer = $(this).parent().parent().parent().children(".update-radio-container-btn");
-  console.log(jobUpdateChecked);
-  if ( jobUpdateChecked ) {
+  console.log(isUpdateChecked);
+  if ( isUpdateChecked ) {
+    $(".job-radio-container input").prop("checked", false);
     $(radioButtonContainer).show();
   } else {
+    $(".job-radio-container input").prop("checked", false);
+    $("#contact-ref-text-alt-job-container").remove();
+    $(".display-dropdown-job").children().remove();
     $(radioButtonContainer).hide();
   }
 };
@@ -226,16 +166,11 @@ const addHandlers = () => {
   $('.content').on('click', '#contact-record-btn-edit', onEditContact);
   $('.content').on('click', '#generate-create-contact-btn', onShowContactCreateForm);
   $('.content').on('click', '.dashboard-contact-record-btn', onShowContactRecord);
-  // $('.content').on('click', '#get-contacts-btn', onGetContacts);
   $('#get-contacts-btn').on('click', onGetContacts);
   $('.content').on('click', '#contact-record-delete', onDeleteContact);
   $('.content').on('change', '.job-category', onDisplayJobDropdown);
-  $('.content').on('change', '#select-option-job-category', onSelectJobDropdown);
   $('.content').on('change', "#job-update-link", onHideShowUpdateOptions);
   $('.content').on('change', '.update-job', onDisplayJobDropdown);
-  // $('.content').on('change', '#associate-contact-with-company', onDisplayCompanyDropdown);
-  // $('.content').on('change', '#select-option-company-name', onSelectOptionCompanyVal);
-  // $('.content').on('click', '#job-back-contact-overview', onShowContactRecord);
 };
 
 module.exports = {
