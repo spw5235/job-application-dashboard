@@ -69,8 +69,7 @@ const generateUpdateForm = function(listCategory, formCategory) {
   $('.content').append(editContact);
 
   let listLinkStatusSelector = "." + listCategory + "-tag-status";
-  let statusDataAttr = "data-current-" + listCategory + "-ref-id";
-  let listRefId = parseInt($(listLinkStatusSelector).attr(statusDataAttr));
+  let listRefId = store.currentJobRefId;
 
   if (listRefId > 0) {
     $(listLinkStatusSelector).text("Linked");

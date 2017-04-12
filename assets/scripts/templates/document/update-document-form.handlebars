@@ -1,4 +1,93 @@
 <div class="update-document-form-container form-container document-page group-category">
+  <form class="form document-form reminder-form" id="update-document-form" name="update-document-form" data-update-form="1">
+    <fieldset>
+      <legend>Update Document Form</legend>
+      <p id="update-document-error" class="warning form-error"></p>
+      <p>All fields are <u>optional</u> unless otherwise indicated</p>
+
+      <div class="form-group">
+        <label>Document Date</label>
+        <input class="form-control required-field" name="document[docdate]" placeholder="Document Date" type="date" value="{{document.docdate}}">
+      </div>
+
+      <div class="form-group doc-type">
+        <label>Document Type (required)</label>
+        <select class="form-control" id="document-type-select" data-current-doc-type="{{document.doctype}}">
+            <option class="form-control required-field" name="document[doctype]" placeholder="Document Type" type="text" value="Resume">Resume</option>
+            <option class="form-control required-field" name="document[doctype]" placeholder="Document Type" type="text" value="Cover Letter">Cover Letter</option>
+            <option class="form-control required-field document-doctype" name="document[doctype]" placeholder="Document Type" type="text" value="Application Questions">Application Questions</option>
+            <option class="form-control required-field" name="document[doctype]" placeholder="Document Type" type="text" value="Other">Other</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Document Subject (required)</label>
+        <input class="form-control" name="document[docsubject]" placeholder="Subject" type="text" value="{{document.docsubject}}">
+      </div>
+
+      <div class="form-group">
+        <label>Document Website (url)</label>
+        <input class="form-control" name="document[docurl]" placeholder="url" type="text" value="{{document.docurl}}">
+      </div>
+
+      <div class="form-group">
+        <label>Document Text</label>
+        <textarea class="form-control field-input note-input" name="document[doctext]" placeholder="Document Text">{{document.doctext}}</textarea>
+      </div>
+
+      <div class="form-group job-radio-container current-value-update-page">
+        <label>Current Company Association:</label>
+        <div class="update-radio-link-value-status-container">
+          <p>The company currently associated with this document is: <span class="job-update-radio-text">{{document.job_ref_text}}</span></p>
+          <p>Link Status: <span class="job-tag-status" data-current-ref-id="{{document.job_ref_id}}">Not Linked</span></p>
+        </div>
+      </div>
+
+      <div>
+        <div class="job-update-link-container form-group">
+          <label>Would you like to update the document's company?</label>
+          <div class="form-group">
+            <span>Check Box for Yes</span>
+            <input id="job-update-link" type="checkbox" value="">
+          </div>
+        </div>
+        <div class="form-group job-radio-container update-radio-container-btn">
+          <label>Will this updated company be tagged to the document?</label>
+          <label><input class="job-category" type="radio" name="job-radio" value="1">Yes</label>
+          <label><input class="job-category" type="radio" name="job-radio" value="0">No</label>
+        </div>
+      </div>
+
+      <div class="form-group display-alt-job"></div>
+      <div class="form-group display-dropdown-job"></div>
+
+      <div class="form-group">
+        <input class="btn btn-success submit-btn current" name="submit" id="submit-document-update-btn" type="submit" value="Submit" data-current-ref-id="{{document.job_ref_id}}" data-current-ref-text="{{document.job_ref_text}}">
+      </div>
+    </fieldset>
+  </form>
+  <br><br>
+  <div class="dashboard-container">
+    <button id="dashboard-home-btn" type="button" class="btn btn-primary">View Dashboard</button>
+    <button id="dashboard-new-job-btn" type="button" class="btn btn-success">Create Session</button>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
+<div class="update-document-form-container form-container document-page group-category">
 <form class="form document-form reminder-form general-form-class" id="update-document-form" name="update-document-form" data-update-form="1">
   <fieldset>
     <legend>Update Document Form</legend>
@@ -44,4 +133,4 @@
   <button id="dashboard-home-btn" type="button" class="btn btn-primary">View Dashboard</button>
   <button id="dashboard-new-document-btn" type="button" class="btn btn-success">Create Session</button>
 </div>
-</div>
+</div> -->

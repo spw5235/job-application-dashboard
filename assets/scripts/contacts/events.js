@@ -97,8 +97,6 @@ const onUpdateContact = function(event) {
 
   let isRefBeingUpdated = $(refUpdatedDiv).prop("checked");
 
-  console.log(isRefBeingUpdated);
-
   if (isRefBeingUpdated) {
     console.log('isref true');
     let submitValue = linkLogic.obtainOptionVal(listCategory);
@@ -114,6 +112,10 @@ const onUpdateContact = function(event) {
       data.contact.job_ref_id = 0;
       data.contact.job_ref_text = "";
     }
+  } else {
+    data.contact.job_ref_id = parseInt(store.currentJobRefId);
+    data.contact.job_ref_text = store.currentJobRefText;
+    console.log(store.currentJobRefId);
   }
 
   contactsApi.updateContact(data)

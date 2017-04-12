@@ -1,9 +1,85 @@
+
+
+
+
+
+
+
+
+
+
+
 <div class="create-document-form-container form-container form-group document-page group-category">
   <h1>Create a Document</h1>
 
   <form class="form document-form" id="new-document-form" name="new-document-form">
     <fieldset>
-      <!-- <legend>Create Document Form</legend> -->
+      <p id="create-document-error" class="warning form-error"></p>
+      <p>All fields are <u>optional</u> unless otherwise indicated</p>
+
+      <div class="form-group">
+        <label>Document Date</label>
+        <input class="form-control required-field" name="document[docdate]" placeholder="Document Date" type="date">
+      </div>
+
+      <div class="form-group doc-type">
+        <label>Document Type (required)</label>
+        <select class="form-control" id="document-type-select">
+            <option class="form-control required-field document-doctype" name="document[doctype]" placeholder="Document Type" type="text" value="Resume">Resume</option>
+            <option class="form-control required-field document-doctype" name="document[doctype]" placeholder="Document Type" type="text" value="Cover Letter">Cover Letter</option>
+            <option class="form-control required-field document-doctype" name="document[doctype]" placeholder="Document Type" type="text" value="Application Questions">Application Questions</option>
+            <option class="form-control required-field document-doctype" name="document[doctype]" placeholder="Document Type" type="text" value="Other">Other</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Document Subject (required)</label>
+        <input class="form-control required-field" name="document[docsubject]" placeholder="Document Subject" type="text">
+      </div>
+
+      <div class="form-group">
+        <label>Document Url</label>
+        <input class="form-control required-field" name="document[docurl]" placeholder="Document Link" type="text">
+      </div>
+
+      <div class="form-group">
+        <label>Document Text</label>
+        <textarea class="form-control field-input note-input" name="document[doctext]" placeholder="Document Text"></textarea>
+      </div>
+
+      <div id="job-category-radio-container"></div>
+
+      <div class="display-dropdown-job"></div>
+      <div class="display-alt-job"></div>
+
+      <div class="form-group append-nonlink"></div>
+      <div class="form-group display-jobs-dropdown"></div>
+
+      <div class="form-group">
+        <input class="btn btn-success submit-btn current" name="submit" id="create-document-btn" type="submit" value="Submit">
+      </div>
+    </fieldset>
+  </form>
+  <br><br>
+  <div class="dashboard-container">
+    <button id="dashboard-home-btn" type="button" class="btn btn-primary">View Dashboard</button>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+<!--
+<div class="create-document-form-container form-container form-group document-page group-category">
+  <h1>Create a Document</h1>
+
+  <form class="form document-form" id="new-document-form" name="new-document-form">
+    <fieldset>
       <p id="create-document-error" class="warning form-error"></p>
       <p>All fields are <u>optional</u> unless otherwise indicated</p>
 
@@ -54,3 +130,4 @@
     <button id="dashboard-home-btn" type="button" class="btn btn-primary">View Dashboard</button>
   </div>
 </div>
+-->
