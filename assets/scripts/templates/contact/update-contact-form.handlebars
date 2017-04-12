@@ -20,26 +20,26 @@
         <input class="form-control required-field" name="contact[nickname]" placeholder="Contact Nickname" type="text" value= {{contact.nickname}}>
       </div>
 
-      <div class="form-group job-category-radio-container current-value-update-page">
+      <div class="form-group job-radio-container current-value-update-page">
         <label>Current Company Association:</label>
         <div class="update-radio-link-value-status-container">
-          <p>The company currently associated with this contact is <span class="job-category-update-radio-text"></span>{{contact.job_ref_text}}</p>
-          <p>Link Status: <span class="job-category-tag-status" data-current-job-ref-id="{{contact.job_ref_id}}">Not Linked</span></p>
+          <p>The company currently associated with this contact is <span class="job-update-radio-text"></span>{{contact.job_ref_text}}</p>
+          <p>Link Status: <span class="job-tag-status" data-current-job-ref-id="{{contact.job_ref_id}}">Not Linked</span></p>
         </div>
       </div>
 
       <div>
-        <div class="job-category-update-link-container form-group">
+        <div class="job-update-link-container form-group">
           <label>Would you like to update the contact's company?</label>
           <div class="form-group">
             <span>Check Box for Yes</span>
-            <input id="job-category-update-link" type="checkbox" value="">
+            <input id="job-update-link" type="checkbox" value="">
           </div>
         </div>
-        <div class="form-group job-category-radio-container update-radio-container-btn">
+        <div class="form-group job-radio-container update-radio-container-btn">
           <label>Will this updated company be tagged to the contact?</label>
-          <label><input class="job-category" type="radio" name="job-category-radio" value="1">Yes</label>
-          <label><input class="job-category" type="radio" name="job-category-radio" value="0">No</label>
+          <label><input class="job-category" type="radio" name="job-radio" value="1">Yes</label>
+          <label><input class="job-category" type="radio" name="job-radio" value="0">No</label>
         </div>
       </div>
 

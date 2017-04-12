@@ -27,7 +27,10 @@ const onEditContact = function(event) {
   event.preventDefault();
   store.currentContactId = $(this).attr("data-current-contact-id");
   store.currentJobRefId = $(this).attr("data-current-job-ref-id");
-  contactsUi.updateFormGenerator();
+
+  let formCategory = "contact";
+  let listCategory = "job";
+  contactsUi.generateUpdateForm(listCategory, formCategory);
 };
 
 const onCreateContact = function(event) {
@@ -91,11 +94,14 @@ const onUpdateContact = function(event) {
 
   let listCategory = "job";
 
-  let refUpdatedDiv = "#" + listCategory + "-category-update-link";
+  let refUpdatedDiv = "#" + listCategory + "-update-link";
 
   let isRefBeingUpdated = $(refUpdatedDiv).prop("checked");
 
+  console.log(isRefBeingUpdated);
+
   if (isRefBeingUpdated) {
+    console.log('isref true');
     let submitValue = linkLogic.obtainOptionVal(listCategory);
 
     data.contact.job_ref_id = submitValue;
@@ -111,7 +117,6 @@ const onUpdateContact = function(event) {
     }
   }
 
-  console.log(data);
   contactsApi.updateContact(data)
     .done(contactsUi.updateContactSuccess)
     .fail(contactsUi.updateContactFailure);
@@ -226,8 +231,8 @@ const addHandlers = () => {
   $('.content').on('click', '#contact-record-delete', onDeleteContact);
   $('.content').on('change', '.job-category', onDisplayJobDropdown);
   $('.content').on('change', '#select-option-job-category', onSelectJobDropdown);
-  $('.content').on('change', "#job-category-update-link", onHideShowUpdateOptions);
-  $('.content').on('change', '.update-job-category', onDisplayJobDropdown);
+  $('.content').on('change', "#job-update-link", onHideShowUpdateOptions);
+  $('.content').on('change', '.update-job', onDisplayJobDropdown);
   // $('.content').on('change', '#associate-contact-with-company', onDisplayCompanyDropdown);
   // $('.content').on('change', '#select-option-company-name', onSelectOptionCompanyVal);
   // $('.content').on('click', '#job-back-contact-overview', onShowContactRecord);

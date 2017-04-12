@@ -67,7 +67,56 @@ const showContactCreateForm = () => {
   linkLogic.radioClassIdNameGen(formCategory, listCategory);
 };
 
-const updateFormGenerator = function() {
+
+
+const generateUpdateForm = function(listCategory, formCategory) {
+  $(".notification-container").children().text("");
+  $(".content").children().remove();
+
+  let data = store.lastShowContactData;
+
+  let editContact = displayEditContact({
+    contact: data.contact
+  });
+  $('.content').append(editContact);
+
+  let listLinkStatusSelector = "." + listCategory + "-tag-status";
+  let statusDataAttr = "data-current-" + listCategory + "-ref-id";
+  let listRefId = parseInt($(listLinkStatusSelector).attr(statusDataAttr));
+
+  if (listRefId > 0) {
+    $(listLinkStatusSelector).text("Linked");
+  }
+
+  let updateFormId = "#update-" + formCategory + "-form";
+  let updateFormStatus = parseInt($(updateFormId).attr("data-update-form"));
+
+  if ( updateFormStatus === 1) {
+    let categoryText = "." + listCategory + "-radio-container ";
+    $(categoryText).show();
+    $(".update-radio-container-btn").hide();
+  }
+
+  let currentRefTextValTxt = "." + listCategory + "-update-radio-text";
+
+  let currentRefTextVal = $(currentRefTextValTxt).val();
+
+  if (currentRefTextVal === "") {
+    $(currentRefTextVal).text("N/A");
+  }
+
+};
+
+
+
+
+
+
+
+
+
+
+const updateFormGenerator = function(listCategory, formCategory) {
   $(".notification-container").children().text("");
   $(".content").children().remove();
 
@@ -80,9 +129,6 @@ const updateFormGenerator = function() {
 
   // Template Information
 
-  let updateCategory = "job-category";
-
-
   // $(".job-category-radio-container input[type=radio]").attr('disabled', true);
 
   let jobRefId = parseInt($(".job-category-tag-status").attr("data-current-job-ref-id"));
@@ -91,11 +137,12 @@ const updateFormGenerator = function() {
     $(".job-category-tag-status").text("Linked");
   }
 
+  let updateFormId = "#update-" + formCategory + "-form";
   let updateFormStatus = parseInt($("#update-contact-form").attr("data-update-form"));
 
 
   if ( updateFormStatus === 1) {
-    let categoryText = "." + updateCategory + "-radio-container ";
+    let categoryText = "." + listCategory + "-radio-container ";
     $(categoryText).show();
 
     $(".update-radio-container-btn").hide();
@@ -200,4 +247,5 @@ module.exports = {
   displayContactOptions,
   getReminderSuccess,
   dropDownData,
+  generateUpdateForm,
 };
