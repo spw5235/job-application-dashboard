@@ -1,6 +1,8 @@
 'use strict';
 
 const displayDashboard = require('../templates/dashboard/dashboard-home.handlebars');
+const jobsApi = require('../jobs/api');
+const jobsUi = require('../jobs/ui');
 
 const signInSuccess = function() {
   $(".nav-main-container").show();
@@ -11,9 +13,13 @@ const signInSuccess = function() {
   $("#sign-out").css("visibility", "visible");
   $("#change-password").css("visibility", "visible");
   $(".content").children().remove();
-  let dashboardHome = displayDashboard();
-  $('.content').append(dashboardHome);
+  // let dashboardHome = displayDashboard();
+  // $('.content').append(dashboardHome);
   $(".form-clear").val('');
+  $(".homepage-content").hide();
+  jobsApi.getJobs()
+    .done(jobsUi.getJobSuccess)
+    .fail(jobsUi.getJobFailure);
 };
 
 const signInFailure = function() {
@@ -47,6 +53,7 @@ const signOutSuccess = function() {
   $("#change-password").css("visibility", "hidden");
   $(".form-clear").val('');
   $(".nav-main-container").hide();
+  $(".homepage-content").show();
 };
 
 const signOutFailure = function() {
