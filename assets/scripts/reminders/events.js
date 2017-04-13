@@ -4,6 +4,7 @@ const remindersUi = require('./ui');
 const getFormFields = require('../../../lib/get-form-fields');
 const store = require('../store');
 const linkLogic = require('../dashboard/link-logic');
+const displayReminderDetails = require('../templates/reminder/show-reminder-record.handlebars');
 // Reminder EVENTS
 
 const onGetReminders = function(event) {
@@ -20,6 +21,19 @@ const onShowReminderRecord = function(event) {
     .done(remindersUi.showReminderRecordSuccess)
     .fail(remindersUi.showReminderRecordFailure);
 };
+
+// const onSummaryShowReminder = function(event) {
+//   event.preventDefault();
+//   store.currentReminderId = (this).attr("data-reminder-id");
+//   store.lastShowReminderData = data;
+//
+//   $(".content").children().remove();
+//
+//   let reminderDetails = displayReminderDetails({
+//     reminder: data.reminder
+//   });
+//   $('.content').append(reminderDetails);
+// }
 
 const onEditReminder = function(event) {
   event.preventDefault();
@@ -162,6 +176,7 @@ const addHandlers = () => {
   // $('.content').on('change', '.job-category', onDisplayJobDropdown);
   $('.content').on('change', "#job-update-link", onHideShowUpdateOptions);
   $('.content').on('change', '.update-job', onDisplayJobDropdown);
+  // $('.content').on('submit', '.view-secondary-reminder-record-btn', onSummaryShowReminder);
 };
 
 module.exports = {
