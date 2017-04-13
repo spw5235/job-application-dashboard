@@ -193,6 +193,20 @@ const onDisplayJobDropdown = function(event) {
   }
 };
 
+const onHideShowCreateOptions = function() {
+  let isUpdateChecked = $(this).prop("checked");
+  console.log(isUpdateChecked);
+  if ( isUpdateChecked ) {
+    $(".job-radio-container input").prop("checked", false);
+    $("#job-category-radio-container").show();
+  } else {
+    $(".job-radio-container input").prop("checked", false);
+    $("#contact-ref-text-alt-job-container").remove();
+    $(".display-dropdown-job").children().remove();
+    $("#job-category-radio-container").hide();
+  }
+};
+
 const onHideShowUpdateOptions = function() {
   let isUpdateChecked = $(this).prop("checked");
   let radioButtonContainer = $(this).parent().parent().parent().children(".update-radio-container-btn");
@@ -219,6 +233,7 @@ const addHandlers = () => {
   // $('.content').on('change', '.job-category', onDisplayJobDropdown);
   $('.content').on('change', "#job-update-link", onHideShowUpdateOptions);
   $('.content').on('change', '.update-job', onDisplayJobDropdown);
+  $('.content').on('change', "#job-create-link", onHideShowCreateOptions);
   // $('.content').on('submit', '.view-secondary-reminder-record-btn', onSummaryShowReminder);
 };
 
