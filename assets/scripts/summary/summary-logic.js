@@ -16,6 +16,9 @@ const initiateJobSummaryTables = function(jobId) {
   summaryApi.getContacts()
     .done(summaryUi.contactsSummarySuccess)
     .fail(summaryUi.summaryFailure);
+  summaryApi.getCommunications()
+    .done(summaryUi.communicationsSummarySuccess)
+    .fail(summaryUi.summaryFailure);
 };
 
 const removeDuplicateRows = function ($table) {

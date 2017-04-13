@@ -4,6 +4,7 @@ const store = require('../store');
 const displayRemindersSummary = require('../templates/summary-table/reminders-summary.handlebars');
 const displayDocumentsSummary = require('../templates/summary-table/documents-summary.handlebars');
 const displayContactsSummary = require('../templates/summary-table/contacts-summary.handlebars');
+const displayCommunicationsSummary = require('../templates/summary-table/communications-summary.handlebars');
 // const displayEditJob = require('../templates/job/update-job-form.handlebars');
 // const displayJobDashboard = require('../templates/job/get-jobs.handlebars');
 // const displayJobDetails = require('../templates/job/show-job-record.handlebars');
@@ -89,12 +90,37 @@ const contactsSummarySuccess = (data) => {
     });
     $(".contacts-summary-table-container").append(contactsSummaryTable);
   }
-
 };
+
+const communicationsSummarySuccess = (data) => {
+  let jobId = parseInt(store.masterJobId);
+
+  let reminderSummaryObject = {
+    communications: []
+  };
+
+  let returnedData = data.communications;
+  for (let i = 0; i < returnedData.length; i++) {
+    let jobIdForArray = returnedData[i].job_ref_id;
+    if (jobIdForArray === jobId) {
+      reminderSummaryObject.communications.push(returnedData[i]);
+    }
+  }
+
+  let newObjectLength = reminderSummaryObject.communications.length;
+
+  if (newObjectLength > 0) {
+    let communicationsSummaryTable = displayCommunicationsSummary({
+      communications: reminderSummaryObject.communications
+    });
+    $(".communications-summary-table-container").append(communicationsSummaryTable);
+  }
+}
 
 module.exports = {
   remindersSummarySuccess,
   documentsSummarySuccess,
   summaryFailure,
-  contactsSummarySuccess
+  contactsSummarySuccess,
+  communicationsSummarySuccess
 };
