@@ -73,6 +73,7 @@ const showDocumentCreateForm = () => {
   $("#" + listCategory + "-category-radio-container").append(radioTemplate);
 
   linkLogic.radioClassIdNameGen(formCategory, listCategory);
+  $("#job-category-radio-container").hide();
 };
 
 
