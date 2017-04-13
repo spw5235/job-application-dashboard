@@ -68,11 +68,9 @@ const onCreateReminder = function(event) {
   delete data["job-category-radio"];
 
   data.reminder.reminder_type = $("#reminder-type-select").val();
-  console.log(data.reminder.reminder_type);
-  console.log('remindert');
+  data.reminder.reminder_details = $("#reminder-details-field").val();
   store.createReminderData = data;
   store.lastShowReminderData = data;
-  console.log(data);
   remindersApi.createReminder(data)
     .done(remindersUi.createReminderSuccess)
     .fail(remindersUi.createReminderFailure);
@@ -90,37 +88,82 @@ const onUpdateReminder = function(event) {
   event.preventDefault();
   let data = getFormFields(event.target);
 
+  let prevJobRefId = store.currentJobRefId;
+  let prevJobRefText = store.currentJobRefText;
+  let isRefBeingUpdated = $("#job-update-link").prop("checked");
+  let isRadioNoChecked = $("#job-radio-no").prop("checked");
+  let isRadioYesChecked = $("#job-radio-yes").prop("checked");
+  let isEitherRadioChecked = $("#job-radio-no").prop("checked") || $("#job-radio-yes").prop("checked");
+
+  if (isRefBeingUpdated) {
+
+    if (isEitherRadioChecked) {
+      if (isRadioNoChecked) {
+        if ( $("#alt-input-entry-job").val() === "") {
+          data.reminder.job_ref_text = prevJobRefText;
+          data.reminder.job_ref_id = prevJobRefId;
+        } else {
+          data.reminder.job_ref_text = $("#alt-input-entry-job").val();
+          data.reminder.job_ref_id = 0;
+        }
+      } else if (isRadioYesChecked) {
+        let jobRefIdSelected = parseInt($("#select-element-job").val());
+        if (jobRefIdSelected === -1) {
+          data.reminder.job_ref_id = prevJobRefId;
+          data.reminder.job_ref_text = prevJobRefText;
+        } else {
+          let jobRefIdSelected = $("#select-element-job").val();
+          let textValueSelectDiv =  "#select-element-job option[value=" + jobRefIdSelected + "]";
+          data.reminder.job_ref_id = jobRefIdSelected;
+          data.reminder.job_ref_text = $(textValueSelectDiv).text();
+        }
+      }
+    } else {
+      data.reminder.job_ref_text = prevJobRefText;
+      data.reminder.job_ref_id = prevJobRefId;
+    }
+  } else {
+    data.reminder.job_ref_text = prevJobRefText;
+    data.reminder.job_ref_id = prevJobRefId;
+  }
+
+  if (data.reminder.job_ref_text === "Click to Select") {
+    data.reminder.job_ref_text = prevJobRefText;
+    data.reminder.job_ref_id = prevJobRefId;
+  }
+
+  // let listCategory = "job";
+  //
+  // let refUpdatedDiv = "#" + listCategory + "-update-link";
+  //
+  // let isRefBeingUpdated = $(refUpdatedDiv).prop("checked");
+  //
+  // console.log(isRefBeingUpdated);
+  //
+  // if (isRefBeingUpdated) {
+  //   let submitValue = linkLogic.obtainOptionVal(listCategory);
+  //
+  //   data.reminder.job_ref_id = submitValue;
+  //
+  //
+  //   let submitText = linkLogic.obtainOptionText(listCategory);
+  //   data.reminder.job_ref_text = submitText;
+  //
+  //
+  //   if (submitValue === -1) {
+  //     data.reminder.job_ref_id = 0;
+  //     data.reminder.job_ref_text = "";
+  //   }
+  // } else {
+  //   data.reminder.job_ref_id = parseInt(store.currentJobRefId);
+  //   data.reminder.job_ref_text = store.currentJobRefText;
+  // }
+
+  data.reminder.reminder_type = $("#reminder-type-select").val();
+  data.reminder.reminder_details = $("#reminder-details-field").val();
   store.createReminderData = data;
   store.lastShowReminderData = data;
 
-  let listCategory = "job";
-
-  let refUpdatedDiv = "#" + listCategory + "-update-link";
-
-  let isRefBeingUpdated = $(refUpdatedDiv).prop("checked");
-
-  console.log(isRefBeingUpdated);
-
-  if (isRefBeingUpdated) {
-    let submitValue = linkLogic.obtainOptionVal(listCategory);
-
-    data.reminder.job_ref_id = submitValue;
-
-
-    let submitText = linkLogic.obtainOptionText(listCategory);
-    data.reminder.job_ref_text = submitText;
-
-
-    if (submitValue === -1) {
-      data.reminder.job_ref_id = 0;
-      data.reminder.job_ref_text = "";
-    }
-  } else {
-    data.reminder.job_ref_id = parseInt(store.currentJobRefId);
-    data.reminder.job_ref_text = store.currentJobRefText;
-  }
-
-  data.reminder.reminder_type = $("#reminder-type-select").val();
   remindersApi.updateReminder(data)
     .done(remindersUi.updateReminderSuccess)
     .fail(remindersUi.updateReminderFailure);

@@ -26,6 +26,7 @@ const onEditDocument = function(event) {
   store.currentDocumentId = $(this).attr("data-current-document-id");
   store.currentJobRefId = $(this).attr("data-current-job-ref-id");
   store.currentJobRefText = $(this).attr("data-current-job-ref-text");
+  store.currentDocumentType = $(this).attr("data-current-doc-type");
 
   // Template
   let formCategory = "document";
@@ -62,7 +63,14 @@ const onCreateDocument = function(event) {
     data.document.job_ref_text = "";
   }
 
+  data.document.doctype = $("#document-type-select").val();
+  data.document.doctext = $("#doctext-field").val();
+
   // delete data.document["job-category-radio"];
+
+  store.createDocumentData = data;
+  store.lastShowDocumentData = data;
+
   documentsApi.createDocument(data)
     .done(documentsUi.createDocumentSuccess)
     .fail(documentsUi.createDocumentFailure);
@@ -80,43 +88,93 @@ const onUpdateDocument = function(event) {
   event.preventDefault();
   let data = getFormFields(event.target);
 
-  store.createDocumentData = data;
-  store.lastShowDocumentData = data;
-
-  let docTypeSelectVal = $("#document-type-select").val();
-
-  if (docTypeSelectVal === "Other") {
-    data.document.doctype = $("#doc-type-other-text").val();
-  } else {
-    data.document.doctype = $("#document-type-select").val();
-  }
-
-  let listCategory = "job";
-
-  let refUpdatedDiv = "#" + listCategory + "-update-link";
-
-  let isRefBeingUpdated = $(refUpdatedDiv).prop("checked");
-
-  console.log(isRefBeingUpdated);
+  let prevJobRefId = store.currentJobRefId;
+  let prevJobRefText = store.currentJobRefText;
+  let isRefBeingUpdated = $("#job-update-link").prop("checked");
+  let isRadioNoChecked = $("#job-radio-no").prop("checked");
+  let isRadioYesChecked = $("#job-radio-yes").prop("checked");
+  let isEitherRadioChecked = $("#job-radio-no").prop("checked") || $("#job-radio-yes").prop("checked");
 
   if (isRefBeingUpdated) {
-    let submitValue = linkLogic.obtainOptionVal(listCategory);
 
-    data.document.job_ref_id = submitValue;
-
-
-    let submitText = linkLogic.obtainOptionText(listCategory);
-    data.document.job_ref_text = submitText;
-
-
-    if (submitValue === -1) {
-      data.document.job_ref_id = 0;
-      data.document.job_ref_text = "";
+    if (isEitherRadioChecked) {
+      if (isRadioNoChecked) {
+        if ( $("#alt-input-entry-job").val() === "") {
+          data.document.job_ref_text = prevJobRefText;
+          data.document.job_ref_id = prevJobRefId;
+        } else {
+          data.document.job_ref_text = $("#alt-input-entry-job").val();
+          data.document.job_ref_id = 0;
+        }
+      } else if (isRadioYesChecked) {
+        let jobRefIdSelected = parseInt($("#select-element-job").val());
+        if (jobRefIdSelected === -1) {
+          data.document.job_ref_id = prevJobRefId;
+          data.document.job_ref_text = prevJobRefText;
+        } else {
+          let jobRefIdSelected = $("#select-element-job").val();
+          let textValueSelectDiv =  "#select-element-job option[value=" + jobRefIdSelected + "]";
+          data.document.job_ref_id = jobRefIdSelected;
+          data.document.job_ref_text = $(textValueSelectDiv).text();
+        }
+      }
+    } else {
+      data.document.job_ref_text = prevJobRefText;
+      data.document.job_ref_id = prevJobRefId;
     }
   } else {
-    data.document.job_ref_id = parseInt(store.currentJobRefId);
-    data.document.job_ref_text = store.currentJobRefText;
+    data.document.job_ref_text = prevJobRefText;
+    data.document.job_ref_id = prevJobRefId;
   }
+
+  if (data.document.job_ref_text === "Click to Select") {
+    data.document.job_ref_text = prevJobRefText;
+    data.document.job_ref_id = prevJobRefId;
+  }
+
+  // store.createDocumentData = data;
+  // store.lastShowDocumentData = data;
+  //
+  // let docTypeSelectVal = $("#document-type-select").val();
+  //
+  // if (docTypeSelectVal === "Other") {
+  //   data.document.doctype = $("#doc-type-other-text").val();
+  // } else {
+  //   data.document.doctype = $("#document-type-select").val();
+  // }
+  //
+  // let listCategory = "job";
+  //
+  // let refUpdatedDiv = "#" + listCategory + "-update-link";
+  //
+  // let isRefBeingUpdated = $(refUpdatedDiv).prop("checked");
+  //
+  // console.log(isRefBeingUpdated);
+  //
+  // if (isRefBeingUpdated) {
+  //   let submitValue = linkLogic.obtainOptionVal(listCategory);
+  //
+  //   data.document.job_ref_id = submitValue;
+  //
+  //
+  //   let submitText = linkLogic.obtainOptionText(listCategory);
+  //   data.document.job_ref_text = submitText;
+  //
+  //
+  //   if (submitValue === -1) {
+  //     data.document.job_ref_id = 0;
+  //     data.document.job_ref_text = "";
+  //   }
+  // } else {
+  //   data.document.job_ref_id = parseInt(store.currentJobRefId);
+  //   data.document.job_ref_text = store.currentJobRefText;
+  // }
+
+  data.document.doctype = $("#document-type-select").val();
+  data.document.doctext = $("#doctext-field").val();
+
+  store.createDocumentData = data;
+  store.lastShowDocumentData = data;
 
   documentsApi.updateDocument(data)
     .done(documentsUi.updateDocumentSuccess)

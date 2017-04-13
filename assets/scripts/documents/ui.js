@@ -90,7 +90,7 @@ const generateUpdateForm = function(listCategory, formCategory) {
   let listLinkStatusSelector = "." + listCategory + "-tag-status";
   let listRefId = parseInt(store.currentJobRefId);
 
-  console.log(listRefId);
+
   if (listRefId > 0) {
     $(listLinkStatusSelector).text("Linked");
   }
@@ -109,6 +109,10 @@ const generateUpdateForm = function(listCategory, formCategory) {
   if (store.currentJobRefText === "") {
     $(currentRefTextValTxt).text("N/A");
   }
+
+  let preselectVal = store.currentDocumentType;
+  let preselectDiv = "#document-type-select";
+  linkLogic.preselectDefault(preselectDiv, preselectVal);
 
 };
 
@@ -147,7 +151,7 @@ const deleteDocumentFailure = () => {
 };
 
 const updateDocumentSuccess = (data) => {
-
+  console.log(data);
   store.currentDocumentId = data.document.id;
   $(".form-error").text("");
   $(".notification-container").children().text("");

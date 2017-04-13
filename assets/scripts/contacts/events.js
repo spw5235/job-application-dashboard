@@ -36,8 +36,6 @@ const onEditContact = function(event) {
 const onCreateContact = function(event) {
   event.preventDefault();
   let data = getFormFields(event.target);
-  store.createContactData = data;
-  store.lastShowContactData = data;
 
   let firstName = $(".contact-first-name").val().trim();
   let lastName = $(".contact-last-name").val().trim();
@@ -66,6 +64,8 @@ const onCreateContact = function(event) {
   data.contact.notes = $("#contact-notes-input").val();
 
   console.log(data);
+  store.createContactData = data;
+  store.lastShowContactData = data;
   contactsApi.createContact(data)
     .done(contactsUi.createContactSuccess)
     .fail(contactsUi.createContactFailure);
@@ -82,9 +82,6 @@ const onDeleteContact = function(event) {
 const onUpdateContact = function(event) {
   event.preventDefault();
   let data = getFormFields(event.target);
-
-  store.createContactData = data;
-  store.lastShowContactData = data;
 
   let firstName = $(".contact-first-name").val().trim();
   let lastName = $(".contact-last-name").val().trim();
@@ -136,10 +133,10 @@ const onUpdateContact = function(event) {
       data.contact.job_ref_id = prevJobRefId;
     }
 
-    store.createContactData = data;
-    store.lastShowContactData = data;
-
 data.contact.notes = $("#contact-notes-input").val();
+
+store.createContactData = data;
+store.lastShowContactData = data;
 
 contactsApi.updateContact(data)
   .done(contactsUi.updateContactSuccess)

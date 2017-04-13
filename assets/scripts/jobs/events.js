@@ -41,6 +41,8 @@ const onCreateJob = function(event) {
 
   data.job.notes = $("#job-notes-input").val();
 
+  store.createJobData = data;
+  store.lastShowJobData = data;
   jobsApi.createJob(data)
     .done(jobsUi.createJobSuccess)
     .fail(jobsUi.createJobFailure);
@@ -62,6 +64,9 @@ const onUpdateJob = function(event) {
   store.lastShowJobData = data;
 
   data.job.notes = $("#job-notes-input").val();
+
+  store.createJobData = data;
+  store.lastShowJobData = data;
 
   jobsApi.updateJob(data)
     .done(jobsUi.updateJobSuccess)

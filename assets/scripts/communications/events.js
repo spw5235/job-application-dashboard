@@ -36,8 +36,6 @@ const onEditCommunication = function(event) {
 const onCreateCommunication = function(event) {
   event.preventDefault();
   let data = getFormFields(event.target);
-  store.createCommunicationData = data;
-  store.lastShowCommunicationData = data;
 
   let listCategory = "job";
 
@@ -55,6 +53,10 @@ const onCreateCommunication = function(event) {
 
   data.communication.c_method = $("#communication-method-select").val();
   data.communication.c_notes = $("#communication-notes-input").val();
+
+  store.createCommunicationData = data;
+  store.lastShowCommunicationData = data;
+
   communicationsApi.createCommunication(data)
     .done(communicationsUi.createCommunicationSuccess)
     .fail(communicationsUi.createCommunicationFailure);
