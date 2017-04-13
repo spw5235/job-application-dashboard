@@ -49,6 +49,7 @@ const showCommunicationRecordSuccess = (data) => {
   $(".notification-container").children().text("");
   $(".content").children().remove();
   store.lastShowCommunicationData = data;
+  store.lastShowCommunicationMethod = data.communication.c_method;
 
   let communicationDetails = displayCommunicationDetails({
     communication: data.communication
@@ -81,7 +82,7 @@ const showCommunicationCreateForm = () => {
 const generateUpdateForm = function(listCategory, formCategory) {
   $(".notification-container").children().text("");
   $(".content").children().remove();
-
+// data-current-c-method
   let data = store.lastShowCommunicationData;
 
   let editCommunication = displayEditCommunication({
@@ -110,6 +111,13 @@ const generateUpdateForm = function(listCategory, formCategory) {
   if (store.currentJobRefText === "") {
     $(currentRefTextValTxt).text("N/A");
   }
+
+  let defaultval = data.communication.c_method;
+
+  let selectText = $('#communication-method-select option[value="' + defaultval + '"]');
+
+  console.log(selectText);
+  $(selectText).prop('selected', true);
 
 };
 
@@ -291,7 +299,7 @@ module.exports = {
 //
 //   if (isDefaultCMethod) {
 //     $(".c-method-other-container").remove();
-//     dashboardLogic.preselectDefault(divId, currentCMethod);
+    // dashboardLogic.preselectDefault(divId, currentCMethod);
 //     // $('#communication-method-select option[value="' + currentCMethod + '"]').prop('selected', true);
 //   } else {
 //     $(".c-method").append(communicationOtherHtml);

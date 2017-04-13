@@ -74,23 +74,22 @@ const onUpdateCommunication = function(event) {
 
   let prevJobRefId = store.currentJobRefId;
   let prevJobRefText = store.currentJobRefText;
-
-  console.log(prevJobRefId);
-  console.log(prevJobRefText);
-
-
   let isRefBeingUpdated = $("#job-update-link").prop("checked");
   let isRadioNoChecked = $("#job-radio-no").prop("checked");
   let isRadioYesChecked = $("#job-radio-yes").prop("checked");
   let isEitherRadioChecked = $("#job-radio-no").prop("checked") || $("#job-radio-yes").prop("checked");
 
-
   if (isRefBeingUpdated) {
 
     if (isEitherRadioChecked) {
       if (isRadioNoChecked) {
-        data.communication.job_ref_text = $("#alt-input-entry-job").val();
-        data.communication.job_ref_id = 0;
+        if ( $("#alt-input-entry-job").val() === "") {
+          data.communication.job_ref_text = prevJobRefText;
+          data.communication.job_ref_id = prevJobRefId;
+        } else {
+          data.communication.job_ref_text = $("#alt-input-entry-job").val();
+          data.communication.job_ref_id = 0;
+        }
       } else if (isRadioYesChecked) {
         let jobRefIdSelected = parseInt($("#select-element-job").val());
         if (jobRefIdSelected === -1) {
@@ -117,6 +116,7 @@ const onUpdateCommunication = function(event) {
     data.communication.job_ref_id = prevJobRefId;
   }
   data.communication.c_notes = $("#communication-notes-input").val();
+  data.communication.c_method = $("#communication-method-select").val();
 
   store.createCommunicationData = data;
   store.lastShowCommunicationData = data;

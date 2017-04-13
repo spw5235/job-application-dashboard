@@ -92,37 +92,54 @@ const onUpdateContact = function(event) {
 
   data.contact.full_name = fullName;
 
-  let isRefBeingUpdated = $("#job-update-link").prop("checked");
-  let isRadioNoChecked = $("#job-radio-no").prop("checked");
-  let isRadioYesChecked = $("#job-radio-yes").prop("checked");
-  let isEitherRadioChecked = $("#job-radio-no").prop("checked") || $("#job-radio-yes").prop("checked");
+    let prevJobRefId = store.currentJobRefId;
+    let prevJobRefText = store.currentJobRefText;
+    let isRefBeingUpdated = $("#job-update-link").prop("checked");
+    let isRadioNoChecked = $("#job-radio-no").prop("checked");
+    let isRadioYesChecked = $("#job-radio-yes").prop("checked");
+    let isEitherRadioChecked = $("#job-radio-no").prop("checked") || $("#job-radio-yes").prop("checked");
 
+    if (isRefBeingUpdated) {
 
-  if (isRefBeingUpdated) {
-
-    if (isEitherRadioChecked) {
-      if (isRadioNoChecked) {
-        data.contact.job_ref_text = $("#alt-input-entry-job").val();
-        data.contact.job_ref_id = 0;
-      } else if (isRadioYesChecked) {
-        let jobRefIdSelected = $("#select-element-job").val();
-        if (jobRefIdSelected === -1) {
-          data.contact.job_ref_id = 0;
-          data.contact.job_ref_text = "";
-        } else {
-          let jobRefIdSelected = $("#select-element-job").val();
-          let textValueSelectDiv =  "#select-element-job option[value=" + jobRefIdSelected + "]";
-          data.contact.job_ref_id = jobRefIdSelected;
-          data.contact.job_ref_text = $(textValueSelectDiv).text();
+      if (isEitherRadioChecked) {
+        if (isRadioNoChecked) {
+          if ( $("#alt-input-entry-job").val() === "") {
+            data.contact.job_ref_text = prevJobRefText;
+            data.contact.job_ref_id = prevJobRefId;
+          } else {
+            data.contact.job_ref_text = $("#alt-input-entry-job").val();
+            data.contact.job_ref_id = 0;
+          }
+        } else if (isRadioYesChecked) {
+          let jobRefIdSelected = parseInt($("#select-element-job").val());
+          if (jobRefIdSelected === -1) {
+            data.contact.job_ref_id = prevJobRefId;
+            data.contact.job_ref_text = prevJobRefText;
+          } else {
+            let jobRefIdSelected = $("#select-element-job").val();
+            let textValueSelectDiv =  "#select-element-job option[value=" + jobRefIdSelected + "]";
+            data.contact.job_ref_id = jobRefIdSelected;
+            data.contact.job_ref_text = $(textValueSelectDiv).text();
+          }
         }
+      } else {
+        data.contact.job_ref_text = prevJobRefText;
+        data.contact.job_ref_id = prevJobRefId;
       }
+    } else {
+      data.contact.job_ref_text = prevJobRefText;
+      data.contact.job_ref_id = prevJobRefId;
     }
-  }
+
+    if (data.contact.job_ref_text === "Click to Select") {
+      data.contact.job_ref_text = prevJobRefText;
+      data.contact.job_ref_id = prevJobRefId;
+    }
+
+    store.createContactData = data;
+    store.lastShowContactData = data;
 
 data.contact.notes = $("#contact-notes-input").val();
-
-console.log(data.contact.job_ref_id);
-console.log(data.contact.job_ref_text);
 
 contactsApi.updateContact(data)
   .done(contactsUi.updateContactSuccess)
