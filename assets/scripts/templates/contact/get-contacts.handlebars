@@ -23,18 +23,19 @@
         <td class="display-contact-email">
           {{contact.email}}
         </td>
-        <td class="display-contact-email">
+        <td class="display-contact-phone">
           {{contact.phone}}
         </td>
         <td class="display-contact-submit">
-          <button type="button" class="btn btn-info btn-sm dashboard-contact-record-btn" data-current-contact-id="{{contact.id}}" data-current-company-id="{{contact.company_ref_id}}" data-current-job-id="{{contact.job_ref_id}}" data-current-document-id="{{contact.document_ref_id}}">View Contact</button>
+          <button type="button" class="btn btn-info btn-sm dashboard-contact-record-btn" data-current-contact-id ="{{contact.id}}" data-current-job-ref-id="{{contact.job_ref_id}}" data-current-job-ref-text="{{contact.job_ref_text}}">View Contact</button>
         </td>
       </tr>
     {{/each}}
   </tbody>
 </table>
 <br><br>
-  <div class="dashboard-container">
-    <button id="generate-create-contact-btn" type="button" class="btn btn-success">Create Contact</button>
-  </div>
+<div class="dashboard-container">
+  <button id="dashboard-new-contact-btn" type="button" class="btn btn-success">Create Contact</button>
+</div>
+
 </div>

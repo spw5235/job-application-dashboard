@@ -39,8 +39,6 @@ const onCreateCommunication = function(event) {
   store.createCommunicationData = data;
   store.lastShowCommunicationData = data;
 
-  data.communication.notes = $("#communication-notes-input").val();
-
   let listCategory = "job";
 
   let submitValue = linkLogic.obtainOptionVal(listCategory);
@@ -56,6 +54,7 @@ const onCreateCommunication = function(event) {
   }
 
   data.communication.c_method = $("#communication-method-select").val();
+  data.communication.c_notes = $("#communication-notes-input").val();
   communicationsApi.createCommunication(data)
     .done(communicationsUi.createCommunicationSuccess)
     .fail(communicationsUi.createCommunicationFailure);
@@ -73,56 +72,52 @@ const onUpdateCommunication = function(event) {
   event.preventDefault();
   let data = getFormFields(event.target);
 
-  data.communication.notes = $("#communication-notes-input").val();
+  let prevJobRefId = store.currentJobRefId;
+  let prevJobRefText = store.currentJobRefText;
 
-  let listCategory = "job";
+  console.log(prevJobRefId);
+  console.log(prevJobRefText);
 
-  let refUpdatedDiv = "#" + listCategory + "-update-link";
 
-  let isRefBeingUpdated = $(refUpdatedDiv).prop("checked");
+  let isRefBeingUpdated = $("#job-update-link").prop("checked");
+  let isRadioNoChecked = $("#job-radio-no").prop("checked");
+  let isRadioYesChecked = $("#job-radio-yes").prop("checked");
+  let isEitherRadioChecked = $("#job-radio-no").prop("checked") || $("#job-radio-yes").prop("checked");
 
-  let selectSelector = "#select-element-" + listCategory;
-  let selectSelectorVal = $(selectSelector).val();
-  let submitValue = linkLogic.obtainOptionVal(listCategory);
-  let isSelectorEmpty = (selectSelectorVal === -1);
 
   if (isRefBeingUpdated) {
-    console.log('isref true');
 
-    data.communication.job_ref_id = submitValue;
-
-
-    let submitText = linkLogic.obtainOptionText(listCategory);
-    data.communication.job_ref_text = submitText;
-
-
-    if (submitValue === -1) {
-      data.communication.job_ref_id = 0;
-      data.communication.job_ref_text = "";
+    if (isEitherRadioChecked) {
+      if (isRadioNoChecked) {
+        data.communication.job_ref_text = $("#alt-input-entry-job").val();
+        data.communication.job_ref_id = 0;
+      } else if (isRadioYesChecked) {
+        let jobRefIdSelected = parseInt($("#select-element-job").val());
+        if (jobRefIdSelected === -1) {
+          data.communication.job_ref_id = prevJobRefId;
+          data.communication.job_ref_text = prevJobRefText;
+        } else {
+          let jobRefIdSelected = $("#select-element-job").val();
+          let textValueSelectDiv =  "#select-element-job option[value=" + jobRefIdSelected + "]";
+          data.communication.job_ref_id = jobRefIdSelected;
+          data.communication.job_ref_text = $(textValueSelectDiv).text();
+        }
+      }
+    } else {
+      data.communication.job_ref_text = prevJobRefText;
+      data.communication.job_ref_id = prevJobRefId;
     }
   } else {
-    data.communication.job_ref_id = parseInt(store.currentJobRefId);
-    data.communication.job_ref_text = store.currentJobRefText;
-    console.log(store.currentJobRefId);
-  }
-
-  let radioContainer = $(".update-radio-container-btn input").prop("checked");
-  let optionSelector = "#select-element-" + listCategory;
-
-  console.log(isRefBeingUpdated);
-  console.log(radioContainer);
-  console.log(!isSelectorEmpty);
-  if (isRefBeingUpdated && radioContainer && !isSelectorEmpty) {
-    console.log('true');
-    data.communication.job_ref_text = linkLogic.obtainOptionText(listCategory);
-    data.communication.job_ref_id = parseInt($(selectSelector).val());
+    data.communication.job_ref_text = prevJobRefText;
+    data.communication.job_ref_id = prevJobRefId;
   }
 
   if (data.communication.job_ref_text === "Click to Select") {
-    data.communication.job_ref_text = "";
+    data.communication.job_ref_text = prevJobRefText;
+    data.communication.job_ref_id = prevJobRefId;
   }
+  data.communication.c_notes = $("#communication-notes-input").val();
 
-  console.log(data);
   store.createCommunicationData = data;
   store.lastShowCommunicationData = data;
   communicationsApi.updateCommunication(data)

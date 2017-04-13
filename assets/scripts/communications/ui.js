@@ -148,6 +148,7 @@ const deleteCommunicationFailure = () => {
 };
 
 const updateCommunicationSuccess = (data) => {
+  console.log(data);
 
   store.currentCommunicationId = data.communication.id;
   $(".form-error").text("");

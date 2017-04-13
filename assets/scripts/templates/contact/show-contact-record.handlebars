@@ -8,7 +8,7 @@
 <table class="table contact-record-table table-hover">
   <tbody>
     <tr>
-      <td class="contact-record-first-name">
+      <td class="contact-record-first-name-header">
         Contact First Name:
       </td>
       <td class="display-contact-first-name">
@@ -16,7 +16,7 @@
       </td>
     </tr>
     <tr>
-      <td class="contact-record-last-name">
+      <td class="contact-record-last-name-header">
         Contact Last Name:
       </td>
       <td class="display-contact-last-name">
@@ -24,7 +24,7 @@
       </td>
     </tr>
     <tr>
-      <td class="company-name">
+      <td class="contact-record-company-name-header">
         Contact Company Name:
       </td>
       <td class="display-contact-company-name">
@@ -79,10 +79,6 @@
     <button id="contact-record-btn-edit" type="button" class="btn btn-warning current" data-current-contact-id="{{contact.id}}" data-current-job-ref-text="{{contact.job_ref_text}}" data-current-job-ref-id="{{contact.job_ref_id}}">Edit Contact Record</button>
     <button id="contact-record-delete" type="button" class="btn btn-danger current" data-current-contact-id="{{contact.id}}">Delete Contact Record</button>
   </div>
-</div>
-
-<div class="dashboard-container">
-  <button id="dashboard-home-btn" type="button" class="btn btn-primary dashboard-home-btn-contact-page">View Dashboard</button>
 </div>
 
 <div class="filter-show-job-container"></div>

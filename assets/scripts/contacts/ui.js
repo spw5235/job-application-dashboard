@@ -53,6 +53,7 @@ const showContactRecordSuccess = (data) => {
     contact: data.contact
   });
   $('.content').append(contactDetails);
+  console.log('show suc');
 };
 
 const showContactRecordFailure = () => {

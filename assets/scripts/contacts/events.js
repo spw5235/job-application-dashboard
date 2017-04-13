@@ -63,6 +63,9 @@ const onCreateContact = function(event) {
     data.contact.job_ref_text = "";
   }
 
+  data.contact.notes = $("#contact-notes-input").val();
+
+  console.log(data);
   contactsApi.createContact(data)
     .done(contactsUi.createContactSuccess)
     .fail(contactsUi.createContactFailure);
@@ -70,7 +73,7 @@ const onCreateContact = function(event) {
 
 const onDeleteContact = function(event) {
   event.preventDefault();
-  store.currentContactId= $("#contact-record-delete").attr("data-current-contact-id");
+  store.currentContactId = $("#contact-record-delete").attr("data-current-contact-id");
   contactsApi.deleteContact(store.currentContactId)
     .done(contactsUi.deleteContactSuccess)
     .fail(contactsUi.deleteContactFailure);
@@ -89,38 +92,41 @@ const onUpdateContact = function(event) {
 
   data.contact.full_name = fullName;
 
-  data.contact.notes = $("#contact-notes-input").val();
+  let isRefBeingUpdated = $("#job-update-link").prop("checked");
+  let isRadioNoChecked = $("#job-radio-no").prop("checked");
+  let isRadioYesChecked = $("#job-radio-yes").prop("checked");
+  let isEitherRadioChecked = $("#job-radio-no").prop("checked") || $("#job-radio-yes").prop("checked");
 
-  let listCategory = "job";
-
-  let refUpdatedDiv = "#" + listCategory + "-update-link";
-
-  let isRefBeingUpdated = $(refUpdatedDiv).prop("checked");
 
   if (isRefBeingUpdated) {
-    console.log('isref true');
-    let submitValue = linkLogic.obtainOptionVal(listCategory);
 
-    data.contact.job_ref_id = submitValue;
-
-
-    let submitText = linkLogic.obtainOptionText(listCategory);
-    data.contact.job_ref_text = submitText;
-
-
-    if (submitValue === -1) {
-      data.contact.job_ref_id = 0;
-      data.contact.job_ref_text = "";
+    if (isEitherRadioChecked) {
+      if (isRadioNoChecked) {
+        data.contact.job_ref_text = $("#alt-input-entry-job").val();
+        data.contact.job_ref_id = 0;
+      } else if (isRadioYesChecked) {
+        let jobRefIdSelected = $("#select-element-job").val();
+        if (jobRefIdSelected === -1) {
+          data.contact.job_ref_id = 0;
+          data.contact.job_ref_text = "";
+        } else {
+          let jobRefIdSelected = $("#select-element-job").val();
+          let textValueSelectDiv =  "#select-element-job option[value=" + jobRefIdSelected + "]";
+          data.contact.job_ref_id = jobRefIdSelected;
+          data.contact.job_ref_text = $(textValueSelectDiv).text();
+        }
+      }
     }
-  } else {
-    data.contact.job_ref_id = parseInt(store.currentJobRefId);
-    data.contact.job_ref_text = store.currentJobRefText;
-    console.log(store.currentJobRefId);
   }
 
-  contactsApi.updateContact(data)
-    .done(contactsUi.updateContactSuccess)
-    .fail(contactsUi.updateContactFailure);
+data.contact.notes = $("#contact-notes-input").val();
+
+console.log(data.contact.job_ref_id);
+console.log(data.contact.job_ref_text);
+
+contactsApi.updateContact(data)
+  .done(contactsUi.updateContactSuccess)
+  .fail(contactsUi.updateContactFailure);
 };
 
 const onShowContactCreateForm = function(event) {
@@ -151,7 +157,7 @@ const onHideShowUpdateOptions = function() {
   let isUpdateChecked = $(this).prop("checked");
   let radioButtonContainer = $(this).parent().parent().parent().children(".update-radio-container-btn");
   console.log(isUpdateChecked);
-  if ( isUpdateChecked ) {
+  if (isUpdateChecked) {
     $(".job-radio-container input").prop("checked", false);
     $(radioButtonContainer).show();
   } else {
@@ -166,7 +172,7 @@ const addHandlers = () => {
   $('.content').on('submit', '#new-contact-form', onCreateContact);
   $('.content').on('submit', '#update-contact-form', onUpdateContact);
   $('.content').on('click', '#contact-record-btn-edit', onEditContact);
-  $('.content').on('click', '#generate-create-contact-btn', onShowContactCreateForm);
+  $('.content').on('click', '#dashboard-new-contact-btn', onShowContactCreateForm);
   $('.content').on('click', '.dashboard-contact-record-btn', onShowContactRecord);
   $('#get-contacts-btn').on('click', onGetContacts);
   $('.content').on('click', '#contact-record-delete', onDeleteContact);

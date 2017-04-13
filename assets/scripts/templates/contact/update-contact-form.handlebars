@@ -38,8 +38,8 @@
         </div>
         <div class="form-group job-radio-container update-radio-container-btn">
           <label>Will this updated company be tagged to the contact?</label>
-          <label><input class="job-category" type="radio" name="job-radio" value="1">Yes</label>
-          <label><input class="job-category" type="radio" name="job-radio" value="0">No</label>
+          <label><input id="job-radio-yes" class="job-category" type="radio" name="job-radio" value="1">Yes</label>
+          <label><input id="job-radio-no" class="job-category" type="radio" name="job-radio" value="0">No</label>
         </div>
       </div>
 
@@ -68,7 +68,7 @@
 
       <div class="form-group">
         <label>Contact Notes</label>
-        <textarea class="form-control field-input note-input" name="contact[doctext]" placeholder="Contact Notes">{{contact.notes}}</textarea>
+        <textarea id="contact-notes-input" class="form-control field-input note-input" name="contact[notes]" placeholder="Contact Notes">{{contact.notes}}</textarea>
       </div>
 
       <div class="form-group">
