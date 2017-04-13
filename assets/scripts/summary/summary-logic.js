@@ -9,7 +9,13 @@ const initiateJobSummaryTables = function(jobId) {
   store.masterJobId = jobId;
   summaryApi.getReminders()
     .done(summaryUi.remindersSummarySuccess)
-    .fail(summaryUi.remindersSummaryFail);
+    .fail(summaryUi.summaryFailure);
+  summaryApi.getDocuments()
+    .done(summaryUi.documentsSummarySuccess)
+    .fail(summaryUi.summaryFailure);
+  summaryApi.getContacts()
+    .done(summaryUi.contactsSummarySuccess)
+    .fail(summaryUi.summaryFailure);
 };
 
 const removeDuplicateRows = function ($table) {
