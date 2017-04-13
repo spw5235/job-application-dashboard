@@ -1,9 +1,9 @@
-<h1>Secondary Table Contact</h1>
+<h3>Linked Reminders</h3>
 
 <table class="table secondary-table table-hover">
   <thead>
     <tr>
-      <th>Contact Name</th>
+      <th>Reminder Subject</th>
       <th>View Record</th>
     </tr>
   </thead>
@@ -11,10 +11,10 @@
     {{#each reminders as |reminder|}}
       <tr>
         <td class="display-reminder-full-name">
-          {{reminder.contact_ref_name}}
+          {{reminder.reminder_subject}}
         </td>
         <td class="display-reminder-submit">
-          <button type="button" class="btn btn-info btn-sm view-secondary-btn" data-secondary-data-contact-category="{{reminder.contact_ref_id}}" data-current-reminder-id="{{reminder.id}}" data-current-company-id="{{reminder.company_ref_id}}" data-current-job-id="{{reminder.job_ref_id}}" data-current-document-id="{{reminder.document_ref_id}}">View Reminder</button>
+          <button type="button" class="btn btn-info btn-sm view-secondary-btn" data-reminder-id="{{reminder.id}}" data-current-job-id="{{reminder.job_ref_id}}" data-current-job-text="{{reminder.job_ref_text}}">View Reminder</button>
         </td>
       </tr>
     {{/each}}

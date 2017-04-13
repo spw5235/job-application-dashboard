@@ -6,8 +6,10 @@ const displayJobDashboard = require('../templates/job/get-jobs.handlebars');
 const displayJobDetails = require('../templates/job/show-job-record.handlebars');
 const displayJobCreateForm = require('../templates/job/create-job.handlebars');
 const jobsApi = require('./api');
+const summaryLogic = require('../summary/summary-logic');
 
 const getJobSuccess = (data) => {
+  console.log(data);
   $(".notification-container").children().text("");
   store.jobDataForEdit = data;
 
@@ -37,10 +39,11 @@ const getJobSuccess = (data) => {
   });
 
   $('.content').append(jobDashboard);
-
 };
 
 const showJobRecordSuccess = (data) => {
+  console.log('show');
+  console.log(data);
   $(".notification-container").children().text("");
   $(".content").children().remove();
   store.lastShowJobData = data;
@@ -49,6 +52,9 @@ const showJobRecordSuccess = (data) => {
     job: data.job
   });
   $('.content').append(jobDetails);
+
+  // Summary Table reminders
+  summaryLogic.initiateJobSummaryTables(data.job.id);
 };
 
 const showJobRecordFailure = () => {
