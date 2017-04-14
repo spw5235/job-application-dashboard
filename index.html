@@ -1,21 +1,23 @@
 <!DOCTYPE html>
 <html>
-    <head>
-      <title>Job Application Dashboard</title>
-      <meta name="viewport" content="width=device-width, initial-scale=1">
 
-      <!-- Do not add `link` tags unless you know what you are doing -->
-      <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+<head>
+  <title>Job Application Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-      <!-- Do not add `script` tags unless you know what you are doing -->
-      <script src="public/vendor.js" type="text/javascript" charset="utf-8" defer></script>
-      <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
-    </head>
-    <body class="container-fluid" style="display: none">
+  <!-- Do not add `link` tags unless you know what you are doing -->
+  <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
 
-      <div class="credentials-container">
-  <div class="btn-group" id="sign-up">
-      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+  <!-- Do not add `script` tags unless you know what you are doing -->
+  <script src="public/vendor.js" type="text/javascript" charset="utf-8" defer></script>
+  <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
+</head>
+
+<body class="container-fluid" style="display: none">
+
+  <div class="credentials-container">
+    <div class="btn-group" id="sign-up">
+      <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         Sign Up
       </button>
       <div class="dropdown-menu">
@@ -44,7 +46,7 @@
     </div>
 
     <div class="btn-group" id="sign-in">
-      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         Sign In
       </button>
       <div class="dropdown-menu">
@@ -66,50 +68,52 @@
         </form>
       </div>
     </div>
+
     <div class="btn-group" id="change-password">
-      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         Change Password
       </button>
-      <div class="dropdown-menu changepw-dropdown">
+      <div class="dropdown-menu">
         <form class="auth">
-          <p class="failure changepw-failure"></p>
-          <p class="success changepw-success"></p>
+          <p class="failure signup-failure"></p>
+          <p class="success signup-success"></p>
           <fieldset>
-            <label class="old">
-                  Old password
-                  <input type="password" name="passwords[old]" class="form-clear old-password">
-            </label>
-
-            <label class="new">
-                  New password
-                  <input type="password" name="passwords[new]" class="form-clear new-password">
-            </label>
-
-            <input type="submit" class="btn btn-default" name="submit" value="Change Password">
-          </fieldset>
+      			<legend>Change Password</legend>
+            <p class="field-description" type="password">Old Password</p>
+            <input name="passwords[old]" class="form-clear" type="password" placeholder="Old Password" type="password">
+            <p class="field-description">New Password</p>
+            <input name="passwords[new]" class="form-clear" placeholder="New Password" type="password">
+            <br>
+            <input name="submit" class="btn btn-default" type="submit" value="Change Password">
+      		</fieldset>
         </form>
       </div>
     </div>
 
-    <div class="btn-group sign-out" role="group" aria-label="...">
-      <form id="sign-out">
-          <button type="submit" class="btn btn-danger">Sign Out</button>
+    <div class="btn-group" id="sign-out">
+      <!-- <input name="submit" class="btn btn-danger" type="submit" value="Sign-Out"> -->
+      <button type="button" class="btn btn-danger">
+        Sign-Out
+      </button>
+    </div>
+
+    <!-- <div class="btn-group" id="sign-out">
+      <form class="auth">
+        <input name="submit" class="btn btn-danger" type="submit" value="Sign-Out">
       </form>
-      <p class="failure signout-failure"></p>
-      <p class="success signout-success"></p>
-    </div>
+    </div> -->
 
-  <div class="clearfix"></div>
-  <div class="notification-container">
-    <div class="processing"></div>
-    <div class="success-alert">
+    <div class="clearfix"></div>
+    <div class="notification-container">
+      <div class="processing"></div>
+      <div class="success-alert">
 
-    </div>
-    <div class="failure-alert">
+      </div>
+      <div class="failure-alert">
 
+      </div>
     </div>
   </div>
-</div>
 
   <div class="clearfix"></div>
 
@@ -126,41 +130,40 @@
   </fieldset>
 </form> -->
 
-<div class="nav-main-container">
-  <ul class="nav nav-tabs nav-justified top-nav">
-    <li id="jobs-homepage" class="homepage-category active">
-      <a id="get-jobs-btn" class="nav-tab-btn" href="#">Jobs</a>
-    </li>
-  <li id="reminders-homepage" class="homepage-category">
-    <a id="get-reminders-btn" class="nav-tab-btn" href="#">Reminders</a>
-  </li>
-  <li id="contacts-homepage" class="homepage-category">
-    <a id="get-contacts-btn" class="nav-tab-btn" href="#">Contacts</a>
-  </li>
-  <li id="communications-homepage" class="homepage-category">
-    <a id="get-communications-btn" class="nav-tab-btn" href="#">Communications</a>
-  </li>
-  <li id="documents-homepage" class="homepage-category">
-    <a id="get-documents-btn" class="nav-tab-btn" href="#">Documents</a>
-  </li>
-</ul>
-</div>
+  <div class="nav-main-container">
+    <ul class="nav nav-tabs nav-justified top-nav">
+      <li id="jobs-homepage" class="homepage-category active">
+        <a id="get-jobs-btn" class="nav-tab-btn" href="#">Jobs</a>
+      </li>
+      <li id="reminders-homepage" class="homepage-category">
+        <a id="get-reminders-btn" class="nav-tab-btn" href="#">Reminders</a>
+      </li>
+      <li id="contacts-homepage" class="homepage-category">
+        <a id="get-contacts-btn" class="nav-tab-btn" href="#">Contacts</a>
+      </li>
+      <li id="communications-homepage" class="homepage-category">
+        <a id="get-communications-btn" class="nav-tab-btn" href="#">Communications</a>
+      </li>
+      <li id="documents-homepage" class="homepage-category">
+        <a id="get-documents-btn" class="nav-tab-btn" href="#">Documents</a>
+      </li>
+    </ul>
+  </div>
 
   <div class="homepage-content">
     <div class="dashboard-description-container dashboard-page">
       <h2>Job App Dashboard</h2>
       <p>Job App Dashboard is composed of five sections:</p>
 
-        <ol>
-          <li>Reminders</li>
-          <li>Jobs</li>
-          <li>Contacts</li>
-          <li>Communications</li>
-          <li>Documents</li>
-        </ol>
+      <ol>
+        <li>Reminders</li>
+        <li>Jobs</li>
+        <li>Contacts</li>
+        <li>Communications</li>
+        <li>Documents</li>
+      </ol>
 
-        <p>Each section handles a specific portion of the job application process.  View
-        each section using the menu above to get more information about the apps capabilities.</p>
+      <p>Each section handles a specific portion of the job application process. View each section using the menu above to get more information about the apps capabilities.</p>
 
     </div>
   </div>
@@ -168,5 +171,6 @@
   <div class="content">
   </div>
   <br><br><br><br><br><br>
-    </body>
+</body>
+
 </html>

@@ -23,20 +23,16 @@ const blinkNotify = function(div, status) {
 
 const signInSuccess = function() {
   $("#processing").remove();
-  // $(".signin-success").text("Processing...").fadeOut(300);
-
+  $("#change-password").show();
   $(".nav-main-container").show();
   $(".notification-container").children().text("");
   $(".success-alert").text("You have successfully signed-in");
   $('#sign-in').hide();
   $('#sign-up').hide();
-  $("#sign-out").css("visibility", "visible");
-  $("#change-password").css("visibility", "visible");
   $(".content").children().remove();
-  // let dashboardHome = displayDashboard();
-  // $('.content').append(dashboardHome);
   $(".form-clear").val('');
   $(".homepage-content").hide();
+  $("#sign-out").show();
   jobsApi.getJobs()
     .done(jobsUi.getJobSuccess)
     .fail(jobsUi.getJobFailure);
@@ -73,8 +69,6 @@ const signOutSuccess = function() {
   $('.content').children().remove();
   $("#sign-up").show();
   $("#sign-in").show();
-  $("#sign-out").css("visibility", "hidden");
-  $("#change-password").css("visibility", "hidden");
   $(".form-clear").val('');
   $(".nav-main-container").hide();
   $(".homepage-content").show();

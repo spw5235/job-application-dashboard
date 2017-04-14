@@ -19,7 +19,6 @@ $(() => {
   contactEvents.addHandlers();
   communicationEvents.addHandlers();
   $("body").show();
-
 });
 
 $(() => {

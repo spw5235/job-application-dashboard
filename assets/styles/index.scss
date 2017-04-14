@@ -1,8 +1,15 @@
 $icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
 @import '~bootstrap-sass/assets/stylesheets/bootstrap';
 
-.sign-out {
-  height: 33px;
+#sign-out {
+  float:left;
+  margin-left: 5px;
+  display: none;
+}
+
+#change-password {
+  float:left;
+  display: none;
 }
 
 .nav-main-container {
@@ -15,4 +22,9 @@ $icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
 
 .top-nav {
   margin-top: 20px;
+}
+
+.credentials .btn-group > .btn, .btn-group-vertical > .btn {
+  position: relative;
+  float: left;
 }
