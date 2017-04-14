@@ -18,7 +18,7 @@ $(() => {
   documentEvents.addHandlers();
   contactEvents.addHandlers();
   communicationEvents.addHandlers();
-  $(".credentials-container").show();
+  $("body").show();
 
 });
 
