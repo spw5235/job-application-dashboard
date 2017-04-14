@@ -4,7 +4,27 @@ const displayDashboard = require('../templates/dashboard/dashboard-home.handleba
 const jobsApi = require('../jobs/api');
 const jobsUi = require('../jobs/ui');
 
+const blinkNotify = function(div, status) {
+  let blinkHtml = '<div id="processing">Processing...</div>';
+  $(div).append(blinkHtml);
+
+  const blinkAnimation = function() {
+    $("#processing").fadeIn(300);
+    $("#processing").fadeOut(500);
+  };
+
+  if (status === "start") {
+    console.log('start is true');
+    setInterval(blinkAnimation, 0);
+  } else {
+    clearInterval(blinkAnimation);
+  }
+};
+
 const signInSuccess = function() {
+  $("#processing").remove();
+  // $(".signin-success").text("Processing...").fadeOut(300);
+
   $(".nav-main-container").show();
   $(".notification-container").children().text("");
   $(".success-alert").text("You have successfully signed-in");
@@ -23,11 +43,13 @@ const signInSuccess = function() {
 };
 
 const signInFailure = function() {
+  $("#processing").remove();
   $(".notification-container").children().text("");
   $('.signin-failure').text('Failed sign-in attempt. User email may not exist and/or passwords may not match').show(0).delay(4000).slideUp(500);
 };
 
 const signUpSuccess = function() {
+  $("#processing").remove();
   $(".signup-failure").text("");
   $(".notification-container").children().text("");
   let transferEmail = $("#sign-up .signup-email").val();
@@ -38,11 +60,13 @@ const signUpSuccess = function() {
 };
 
 const signUpFailure = function() {
+  $("#processing").remove();
   $(".notification-container").children().text("");
   $(".signup-failure").slideDown(300).text("Sign-up error. Please ensure that you are using a valid email and passwords match.");
 };
 
 const signOutSuccess = function() {
+  $("#processing").remove();
   $(".nav-main-container").hide();
   $(".notification-container").children().text("");
   $(".success-alert").text("You have successfully signed-out.  Please sign-in to continue");
@@ -57,18 +81,21 @@ const signOutSuccess = function() {
 };
 
 const signOutFailure = function() {
+  $("#processing").remove();
   $(".notification-container").children().text("");
   $(".failure-alert").text("Error: You have not successfully signed-out.  Please close your browser");
   $('.content').children().remove();
 };
 
 const cpSuccess = function() {
+  $("#processing").remove();
   $(".notification-container").children().text("");
   $("#change-password").removeClass("open");
   $(".success-alert").text("Your password has been successfully changed");
 };
 
 const cpFailure = function() {
+  $("#processing").remove();
   $('.changepw-failure').text('Change password attempt failed. Make sure you correctly entered your original password.').show(0).delay(5000).slideUp(500);
 };
 
@@ -81,4 +108,5 @@ module.exports = {
   signOutFailure,
   cpSuccess,
   cpFailure,
+  blinkNotify,
 };

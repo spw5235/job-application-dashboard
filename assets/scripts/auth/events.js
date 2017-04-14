@@ -9,6 +9,8 @@ const store = require('../store');
 
 const onSignIn = function(event) {
   event.preventDefault();
+  let div = ".signin-success";
+  uiAuth.blinkNotify(div, "start");
   let data = getFormFields(event.target);
   apiAuth.signIn(data)
     .then((response) => {
@@ -21,6 +23,8 @@ const onSignIn = function(event) {
 
 const onSignUp = function(event) {
   event.preventDefault();
+  let div = ".signup-success";
+  uiAuth.blinkNotify(div, "start");
   let data = getFormFields(event.target);
 
   let passwordOne = data.credentials.password;
@@ -43,6 +47,8 @@ const onSignUp = function(event) {
 
 const onSignOut = function(event) {
   event.preventDefault();
+  let div = ".signout-success";
+  uiAuth.blinkNotify(div, "start");
   let data = getFormFields(event.target);
   apiAuth.signOut(data)
     .done(uiAuth.signOutSuccess)
@@ -51,6 +57,8 @@ const onSignOut = function(event) {
 
 const onChangePassword = function(event) {
   event.preventDefault();
+  let div = ".changepw-success";
+  uiAuth.blinkNotify(div, "start");
   let data = getFormFields(event.target);
 
   if ( $(".new-password").val() === "" ) {

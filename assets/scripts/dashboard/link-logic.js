@@ -6,6 +6,21 @@ const displayJobOptions =  require('../templates/link/contact-form-job-link.hand
 const displayJobContactAltOption = require('../templates/alt-link/contact-form-job-alt-link.handlebars');
 const displayJobCommunicationAltOption = require('../templates/alt-link/communication-form-job-alt-link.handlebars');
 
+// const blinkNotification = function() {
+//   $(".signin-success").text("Processing...");
+//   $(".signin-success").fadeIn(300);
+//   $(".signin-success").fadeOut(500);
+// };
+//
+// const startBlink = function() {
+//   setInterval(blinkNotification, 0);
+// };
+//
+// const endBlink = function() {
+//   clearInterval(startBlink);
+// };
+
+
 // const replaceEmptyCellsWithNA = function(dataArray, tableColumn) {
 //   for (let i = 0; i < dataArray.length; i++ ) {
 //     let currentArryIndex = dataArray[i];
