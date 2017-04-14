@@ -12,6 +12,8 @@ const onSignIn = function(event) {
   let div = ".signin-success";
   uiAuth.blinkNotify(div, "start");
   let data = getFormFields(event.target);
+  console.log('signindata');
+  console.log(data);
   apiAuth.signIn(data)
     .then((response) => {
       store.user = response.user;
@@ -26,7 +28,10 @@ const onSignUp = function(event) {
   let div = ".signup-success";
   uiAuth.blinkNotify(div, "start");
   let data = getFormFields(event.target);
-
+  console.log("sign-updata");
+  console.log(data);
+  store.signUpEmail = data.credentials.email;
+  store.signUpPassword = data.credentials.password;
   let passwordOne = data.credentials.password;
   let passwordOneLength = passwordOne.split("").length;
   let passwordTwo = data.credentials.password_confirmation;

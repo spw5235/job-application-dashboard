@@ -3,6 +3,8 @@
 const displayDashboard = require('../templates/dashboard/dashboard-home.handlebars');
 const jobsApi = require('../jobs/api');
 const jobsUi = require('../jobs/ui');
+const apiAuth = require('./api');
+const store = require('../store');
 
 const blinkNotify = function(div, status) {
   let blinkHtml = '<div id="processing">Processing...</div>';
@@ -45,14 +47,35 @@ const signInFailure = function() {
 };
 
 const signUpSuccess = function() {
-  $("#processing").remove();
-  $(".signup-failure").text("");
-  $(".notification-container").children().text("");
-  let transferEmail = $("#sign-up .signup-email").val();
-  $("#sign-in .signin-email").val(transferEmail);
-  $("#sign-up").removeClass("open");
-  $("#sign-in").addClass("open");
-  $(".signin-success").slideDown(300).text("You have successfully signed-up.  Please sign-in to continue").delay(3500).slideUp(300);
+  let data = {
+    credentials: {
+        email: "blank",
+        password: "blank"
+      }
+  };
+
+  data.credentials.email = store.signUpEmail;
+  data.credentials.password = store.signUpPassword;
+
+  console.log('signupsuccessdata');
+  console.log(data);
+
+  apiAuth.signIn(data)
+    .then((response) => {
+      store.user = response.user;
+      return store.user;
+    })
+    .done(signInSuccess)
+    .catch(signInFailure);
+
+  // $("#processing").remove();
+  // $(".signup-failure").text("");
+  // $(".notification-container").children().text("");
+  // let transferEmail = $("#sign-up .signup-email").val();
+  // $("#sign-in .signin-email").val(transferEmail);
+  // $("#sign-up").removeClass("open");
+  // $("#sign-in").addClass("open");
+  // $(".signin-success").slideDown(300).text("You have successfully signed-up.  Please sign-in to continue").delay(3500).slideUp(300);
 };
 
 const signUpFailure = function() {
@@ -72,6 +95,8 @@ const signOutSuccess = function() {
   $(".form-clear").val('');
   $(".nav-main-container").hide();
   $(".homepage-content").show();
+  $("#sign-out").hide();
+  $("#change-password").hide();
 };
 
 const signOutFailure = function() {
