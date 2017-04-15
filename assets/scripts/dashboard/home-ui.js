@@ -73,11 +73,6 @@ const showCommunicationDashTable = (data) => {
 
 };
 
-
-
-
-
-
 const todaysDate = function() {
   let d = new Date();
   let month = d.getMonth()+1;
