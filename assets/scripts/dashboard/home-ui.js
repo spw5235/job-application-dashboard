@@ -36,6 +36,7 @@ const isItUpcoming = function(today, deadline) {
 };
 
 const showJobDashTable = (data) => {
+  $('.content').children().remove();
 
   let newDataObject = {
     jobs: []
@@ -65,9 +66,6 @@ const showJobDashTable = (data) => {
     }
   }
 
-  console.log(newDataObject);
-    // let newObjectLength = reminderSummaryObject.reminders.length;
-    //
     if (newDataObject.jobs.length > 0) {
       let jobDashTable = displayJobsHome({
         jobs: newDataObject.jobs

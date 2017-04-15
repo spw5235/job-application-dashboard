@@ -1,7 +1,7 @@
 'use strict';
 
 const jobsApi = require('../jobs/api');
-const jobsUi = require('../jobs/ui');
+// const jobsUi = require('../jobs/ui');
 const apiAuth = require('./api');
 const store = require('../store');
 const dashboardHomeUi = require('../dashboard/home-ui');

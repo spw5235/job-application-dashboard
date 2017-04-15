@@ -3,6 +3,8 @@ const apiAuth = require('./api');
 const uiAuth = require('./ui');
 const getFormFields = require('../../../lib/get-form-fields');
 const store = require('../store');
+const dashboardHomeUi = require('../dashboard/home-ui');
+const jobsApi = require('../jobs/api');
 // const logic = require('./logic');
 
 // LOGIN EVENTS
@@ -79,11 +81,18 @@ const onChangePassword = function(event) {
     .fail(uiAuth.failure);
 };
 
+const viewDash = function() {
+  jobsApi.getJobs()
+    .done(dashboardHomeUi.showJobDashTable)
+    .fail(dashboardHomeUi.homeFailure);
+};
+
 const addHandlers = () => {
   $('#sign-up').on('submit', onSignUp);
   $('#sign-in').on('submit', onSignIn);
   $('#change-password').on('submit', onChangePassword);
   $('#sign-out button').on('click', onSignOut);
+  $('#get-dash-btn').on('click', viewDash);
 };
 
 module.exports = {
