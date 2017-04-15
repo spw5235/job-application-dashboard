@@ -2,7 +2,6 @@
 
 const jobsApi = require('../jobs/api');
 const homeUi = require('./home-ui');
-const remindersApi = require('../reminders/api');
 
 // LOGIN EVENTS
 

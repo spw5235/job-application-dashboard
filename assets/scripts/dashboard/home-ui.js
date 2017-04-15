@@ -1,8 +1,8 @@
 'use strict';
 
 const displayJobsHome = require('../templates/dashboard/jobs-home.handlebars');
+const displayRemindersHome = require('../templates/dashboard/reminders-home.handlebars');
 const store = require('../store');
-const displayReminderDashboard = require('../templates/reminder/get-reminders.handlebars');
 const remindersApi = require('../reminders/api');
 
 
@@ -126,7 +126,7 @@ const showRemindersDashTable = (data) => {
 
   data = emptyRemindersObject;
 
-  let reminderDashboard = displayReminderDashboard({
+  let reminderDashboard = displayRemindersHome({
     reminders: data.reminders
   });
 

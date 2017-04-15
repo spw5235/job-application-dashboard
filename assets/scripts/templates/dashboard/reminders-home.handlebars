@@ -1,0 +1,46 @@
+<h3>Upcoming Reminders</h3>
+<table class="table reminder-summary-table table-hover">
+  <table id="reminder-summary-table" class="table reminder-summary-table table-hover">
+    <thead>
+      <tr>
+        <th data-field="date" data-sortable="true" data-sort-name="_date_data" data-sorter="monthSorter">
+          <div class="notification-date">Notification Date</div>
+        </th>
+        <th data-field="name" data-sortable="true">
+          <div class="company-name">Company Name</div>
+        </th>
+        <th data-field="reminder" data-sortable="true">
+          <div class="th-inner sortable both desc">Reminder Type</div>
+        </th>
+        <th data-field="subject" data-sortable="true">
+          <div class="reminder-subject">Reminder Subject</div>
+        </th>
+        <th>View Record</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each reminders as |reminder|}}
+        <tr>
+          <td class="display-reminder-url">
+            {{reminder.reminder_date}}
+          </td>
+          <td class="display-company-name get-reminders-job-ref-text">
+              {{reminder.job_ref_text}}
+          </td>
+          <td class="display-reminder-name">
+            {{reminder.reminder_type}}
+          </td>
+          <td class="display-reminder-location">
+            {{reminder.reminder_subject}}
+          </td>
+          <td class="display-reminder-submit">
+            <button type="button" class="btn btn-info btn-sm view-reminder-record-btn" data-current-reminder-id="{{reminder.id}}" data-contact-id="{{reminder.contact_ref_id}}">View Reminder</button>
+          </td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+<br>
+<div class="dashboard-container">
+  <button id="generate-create-reminder-btn" type="button" class="btn btn-success">Create Reminder</button>
+</div>
