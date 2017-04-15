@@ -1,6 +1,10 @@
 'use strict';
 
 const displayJobsHome = require('../templates/dashboard/jobs-home.handlebars');
+const store = require('../store');
+const displayReminderDashboard = require('../templates/reminder/get-reminders.handlebars');
+
+
 
 const todaysDate = function() {
   let d = new Date();
@@ -92,9 +96,16 @@ const determineRemindersLength = function(data) {
 };
 
 const addDateToNum = function(data) {
+
+  const sortNumber = function(a, b) {
+    return a - b;
+  };
+
   let newReminderDataObject = {
     reminders: []
   };
+
+  let numIdArr = [];
 
   let remindersData = data.reminders;
   const remindersDataLength = data.reminders.length;
@@ -104,23 +115,80 @@ const addDateToNum = function(data) {
     let isNull = (data.reminders[i].reminder_date === null);
 
     if (!isNull) {
-      let currentDateToNum = convertDateToNum(currentRemindersDate);
-      remindersData[i].date_to_num = currentDateToNum;
+      let currentDateToNum = convertDateToNum(currentRemindersDate).toString();
+      let currentId = data.reminders[i].id.toString();
+
+      let currentDateToNumDecimal = parseFloat(currentDateToNum + "." + currentId);
+
+      numIdArr.push(currentDateToNumDecimal);
+      remindersData[i].date_to_num = currentDateToNumDecimal;
       newReminderDataObject.reminders.push(remindersData[i]);
     }
   }
+
+  store.numIdReminderArr = numIdArr.sort(sortNumber);
+
   return newReminderDataObject;
 };
 
-const idArray = function(data) {
+const generateEmptyReminders = function(length) {
+  let newReminderDataObject = {
+    reminders: []
+  };
 
+  for (let i = 0; i < length; i++) {
+    let emptyObject = {};
+    emptyObject.order_num = i;
+    newReminderDataObject.reminders[i] = emptyObject;
+  }
 
-}
+  return newReminderDataObject;
+};
+
 
 const showRemindersDashTable = (data) => {
   // const maxCount = determineRemindersLength(data);
+
   data = addDateToNum(data);
-  console.log(data);
+  let dataLength = data.reminders.length;
+
+  let emptyRemindersObject = generateEmptyReminders(dataLength);
+
+  let numIdArr = store.numIdReminderArr;
+
+  for (let i = 0; i < numIdArr.length; i++) {
+    let numIdToString = numIdArr[i].toString();
+    let splitId = numIdToString.split(".");
+    let splitIdToNum = parseInt(splitId[1]);
+    emptyRemindersObject.reminders[i].id = splitIdToNum;
+  }
+
+  for (let i = 0; i < emptyRemindersObject.reminders.length; i++) {
+    let currentEmptyData = emptyRemindersObject.reminders[i];
+    let emptyDataId = emptyRemindersObject.reminders[i].id;
+
+    for (let j = 0; j < data.reminders.length; j++) {
+      if (data.reminders[j].id === emptyDataId) {
+        currentEmptyData.reminder_date = data.reminders[j].reminder_date;
+        currentEmptyData.job_ref_text = data.reminders[j].job_ref_text;
+        currentEmptyData.reminder_type = data.reminders[j].reminder_type;
+        currentEmptyData.reminder_subject = data.reminders[j].reminder_subject;
+      }
+    }
+  }
+
+  console.log(emptyRemindersObject);
+
+  data = emptyRemindersObject;
+
+  let reminderDashboard = displayReminderDashboard({
+    reminders: data.reminders
+  });
+
+  $('.content').append(reminderDashboard);
+
+  // let sortedNumId = store.numIdReminderArr;
+  // console.log(sortedNumId);
 
   // let remindersData = data.reminders;
   // const remindersDataLength = data.reminders.length;
