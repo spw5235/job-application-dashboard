@@ -1,10 +1,10 @@
 'use strict';
 
-const displayDashboard = require('../templates/dashboard/dashboard-home.handlebars');
 const jobsApi = require('../jobs/api');
 const jobsUi = require('../jobs/ui');
 const apiAuth = require('./api');
 const store = require('../store');
+const dashboardHomeUi = require('../dashboard/home-ui');
 
 const blinkNotify = function(div, status) {
   let blinkHtml = '<div id="processing">Processing...</div>';
@@ -36,8 +36,8 @@ const signInSuccess = function() {
   $(".homepage-content").hide();
   $("#sign-out").show();
   jobsApi.getJobs()
-    .done(jobsUi.getJobSuccess)
-    .fail(jobsUi.getJobFailure);
+    .done(dashboardHomeUi.showJobDashTable)
+    .fail(dashboardHomeUi.homeFailure);
 };
 
 const signInFailure = function() {

@@ -1,0 +1,30 @@
+<h3>Upcoming Job Deadlines</h3>
+
+<table class="table job-summary-table table-hover">
+  <thead>
+    <tr>
+      <th>Company Name</th>
+      <th>Job Deadline</th>
+      <th>View Record</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each jobs as |job|}}
+    <tr>
+      <td class="display-company-name">
+        {{job.company_name}}
+      </td>
+      <td class="display-job-deadline">
+        {{job.deadline}}
+      </td>
+      <td>
+        <button type="button" class="btn btn-info btn-sm dashboard-job-record-btn" data-current-job-id="{{job.id}}">View Job </button>
+      </td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>
+<br><br>
+<div class="dashboard-container">
+  <button id="dashboard-new-job-btn" type="button" class="btn btn-success">Create Job</button>
+</div>

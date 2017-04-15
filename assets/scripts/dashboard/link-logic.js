@@ -6,34 +6,6 @@ const displayJobOptions =  require('../templates/link/contact-form-job-link.hand
 const displayJobContactAltOption = require('../templates/alt-link/contact-form-job-alt-link.handlebars');
 const displayJobCommunicationAltOption = require('../templates/alt-link/communication-form-job-alt-link.handlebars');
 
-// const blinkNotification = function() {
-//   $(".signin-success").text("Processing...");
-//   $(".signin-success").fadeIn(300);
-//   $(".signin-success").fadeOut(500);
-// };
-//
-// const startBlink = function() {
-//   setInterval(blinkNotification, 0);
-// };
-//
-// const endBlink = function() {
-//   clearInterval(startBlink);
-// };
-
-
-// const replaceEmptyCellsWithNA = function(dataArray, tableColumn) {
-//   for (let i = 0; i < dataArray.length; i++ ) {
-//     let currentArryIndex = dataArray[i];
-//     let currArrayTxtVal = (currentArryIndex[tableColumn]);
-//     console.log(currArrayTxtVal)
-//     if (currArrayTxtVal === "") {
-//       return "NA";
-//     } else {
-//       console.log(false);
-//     }
-//   }
-// };
-
 const altOptionAppend = function(formCategory, listCategory) {
   let displayAltInput;
   console.log(formCategory);
@@ -82,40 +54,6 @@ const obtainOptionText = function(listCategory) {
   }
 };
 
-// const linkClassIdGen = function(formCategory, listCategory) {
-//   let appendingDivIdTxt = "display-radio-drop-" + listCategory;
-//
-//   let appendingDivId = "#" + appendingDivIdTxt;
-//
-//   let selectContainerIdDefTxt = formCategory + "-select-container-" + listCategory;
-//
-//   let selectContainerSelector = appendingDivId + " .select-container";
-//
-//   $(selectContainerSelector).attr("id", selectContainerIdDefTxt);
-//
-//   let selectContainerSelectorId = "#" + selectContainerIdDefTxt;
-//   let selectElementSelector = selectContainerSelectorId + " .select-element";
-//   let selectElementTxt = "select-element-" + listCategory;
-//
-//   $(selectElementSelector).attr("id", selectElementTxt);
-  // Option Vals
-  //
-  //
-  //
-  // let categoryIdent = appendingDivId + " .category-identifier";
-  //
-  //
-  // let selectElDivIdText = formCategory + "-category-select-" + listCategory;
-  // // let selectElement = appendingDivId + " .select-element";
-  //
-  // let optionElement = appendingDivId + " .option-element";
-  // let addOptionClass = formCategory + "-option-" + listCategory;
-  //
-  // // $(categoryIdent).attr("id", selectContainerIdDefTxt);
-  // $(appendingDivId).attr("id", selectContainerIdDefTxt);
-  // $(selectElement).attr("id", selectElDivIdText);
-  // $(optionElement).addClass(addOptionClass);
-// };
 
 const insertFailure = function() {
   console.log('failure');
@@ -136,7 +74,7 @@ const jobDropdownDataResults = (data) => {
   }
 
   $(containerAppendId).append(dataDropdown);
-  // linkClassIdGen(formCategory, listCategory);
+
 };
 
 const showDropOptionsCreatePage = function(formCategory, listCategory) {
@@ -206,14 +144,11 @@ const preselectDefault = function(divId, defaultVal) {
 
 module.exports = {
   radioClassIdNameGen,
-  // linkClassIdGen,
   showDropOptionsCreatePage,
-  // altLinkClassIdGen,
   altOptionAppend,
   insertFailure,
   jobDropdownDataResults,
   obtainOptionVal,
   obtainOptionText,
   preselectDefault,
-  // replaceEmptyCellsWithNA
 };
