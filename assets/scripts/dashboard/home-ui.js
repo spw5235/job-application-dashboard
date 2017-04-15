@@ -3,7 +3,7 @@
 const displayJobsHome = require('../templates/dashboard/jobs-home.handlebars');
 const store = require('../store');
 const displayReminderDashboard = require('../templates/reminder/get-reminders.handlebars');
-
+const remindersApi = require('../reminders/api');
 
 
 const todaysDate = function() {
@@ -36,63 +36,8 @@ const isItUpcoming = function(today, deadline) {
   }
 };
 
-const showJobDashTable = (data) => {
-  $('.content').children().remove();
-
-  let newDataObject = {
-    jobs: []
-  };
-
-  let today = todaysDate();
-
-  let allJobsData = data.jobs;
-
-  for (let i = 0; i < allJobsData.length; i++) {
-    let currentDeadline = allJobsData[i].deadline;
-
-    if (currentDeadline !== null && currentDeadline !== undefined) {
-
-      let convertedNum = convertDateToNum(currentDeadline);
-
-      let isUpcoming = isItUpcoming(today, convertedNum);
-
-      if (isUpcoming) {
-        newDataObject.jobs.push(allJobsData[i]);
-      }
-
-    }
-  }
-
-    if (newDataObject.jobs.length > 0) {
-      let jobDashTable = displayJobsHome({
-        jobs: newDataObject.jobs
-      });
-      $(".content").append(jobDashTable);
-    }
-};
-
 const homeFailure = function() {
   console.log('falure');
-};
-
-const determineRemindersLength = function(data) {
-  let reminderDataArr = data.reminders;
-  let count = 0;
-
-  for (let i = 0; i < reminderDataArr.length; i++) {
-
-    if (reminderDataArr[i].reminder_date === null || reminderDataArr[i].reminder_date === undefined) {
-      console.log('wont count');
-    } else {
-      let currentLength = reminderDataArr[i].reminder_date.length;
-
-      if (currentLength === 10) {
-        count += 1;
-      }
-    }
-  }
-
-  return count;
 };
 
 const addDateToNum = function(data) {
@@ -214,7 +159,44 @@ const showRemindersDashTable = (data) => {
   };
 
 
+  const showJobDashTable = (data) => {
+    $('.content').children().remove();
 
+    let newDataObject = {
+      jobs: []
+    };
+
+    let today = todaysDate();
+
+    let allJobsData = data.jobs;
+
+    for (let i = 0; i < allJobsData.length; i++) {
+      let currentDeadline = allJobsData[i].deadline;
+
+      if (currentDeadline !== null && currentDeadline !== undefined) {
+
+        let convertedNum = convertDateToNum(currentDeadline);
+
+        let isUpcoming = isItUpcoming(today, convertedNum);
+
+        if (isUpcoming) {
+          newDataObject.jobs.push(allJobsData[i]);
+        }
+
+      }
+    }
+
+      if (newDataObject.jobs.length > 0) {
+        let jobDashTable = displayJobsHome({
+          jobs: newDataObject.jobs
+        });
+        $(".content").append(jobDashTable);
+      }
+
+      remindersApi.getReminders()
+        .done(showRemindersDashTable)
+        .fail(homeFailure);
+  };
 
 
 

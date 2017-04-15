@@ -8,17 +8,14 @@ const remindersApi = require('../reminders/api');
 
 const onGetDash = function() {
   event.preventDefault();
-  // jobsApi.getJobs()
-  //   .done(homeUi.showJobDashTable)
-  //   .fail(homeUi.homeFailure);
-  // remindersApi.getReminders()
-  //   .done(homeUi.showRemindersDashTable)
-  //   .fail(homeUi.homeFailure);
+  jobsApi.getJobs()
+    .done(homeUi.showJobDashTable)
+    .fail(homeUi.homeFailure);
 };
 
 
 const addHandlers = () => {
-  $('.content').on('click', "#get-dash-btn", onGetDash);
+  $('#get-dash-home-btn').on('click', onGetDash);
 };
 
 module.exports = {
