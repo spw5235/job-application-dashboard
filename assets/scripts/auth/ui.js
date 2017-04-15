@@ -6,6 +6,7 @@ const apiAuth = require('./api');
 const store = require('../store');
 const dashboardHomeUi = require('../dashboard/home-ui');
 const remindersApi = require('../reminders/api');
+const communicationsApi = require('../communications/api');
 
 const blinkNotify = function(div, status) {
   let blinkHtml = '<div id="processing">Processing...</div>';

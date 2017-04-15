@@ -2,73 +2,74 @@
 
 const displayJobsHome = require('../templates/dashboard/jobs-home.handlebars');
 const displayRemindersHome = require('../templates/dashboard/reminders-home.handlebars');
-const displayContactsHome = require('../templates/dashboard/contacts-home.handlebars');
+const displayCommunicationsHome = require('../templates/dashboard/communications-home.handlebars');
 const store = require('../store');
 const remindersApi = require('../reminders/api');
-const contactsApi = require('../contacts/api');
+const communicationsApi = require('../communications/api');
 
 
-const showContactDashTable = (data) => {
-  let newContactDataObject = {
-    contacts: []
+
+const showCommunicationDashTable = (data) => {
+  let newCommunicationDataObject = {
+    communications: []
   };
 
-  let contactOne;
-  let contactTwo;
-  let contactThree;
-  let contactFour;
-  let contactFive;
+  let communicationOne;
+  let communicationTwo;
+  let communicationThree;
+  let communicationFour;
+  let communicationFive;
 
-  let contactArrLength = data.contacts.length;
-  console.log(contactArrLength);
+  let communicationArrLength = data.communications.length;
+  console.log(communicationArrLength);
 
-  if (contactArrLength === 0) {
+  if (communicationArrLength === 0) {
     return;
-  } else if ( contactArrLength === 1 ) {
-    contactOne = data.contacts[contactArrLength - 1];
-    newContactDataObject.contacts.push(contactOne);
-  } else if ( contactArrLength === 2 ) {
-    contactOne = data.contacts[contactArrLength - 1];
-    newContactDataObject.contacts.push(contactOne);
-    contactTwo = data.contacts[contactArrLength - 2];
-    newContactDataObject.contacts.push(contactTwo);
-  } else if ( contactArrLength === 3 ) {
-    contactOne = data.contacts[contactArrLength - 1];
-    newContactDataObject.contacts.push(contactOne);
-    contactTwo = data.contacts[contactArrLength - 2];
-    newContactDataObject.contacts.push(contactTwo);
-    contactThree = data.contacts[contactArrLength - 3];
-    newContactDataObject.contacts.push(contactThree);
-  } else if ( contactArrLength === 4 ) {
-    contactOne = data.contacts[contactArrLength - 1];
-    newContactDataObject.contacts.push(contactOne);
-    contactTwo = data.contacts[contactArrLength - 2];
-    newContactDataObject.contacts.push(contactTwo);
-    contactThree = data.contacts[contactArrLength - 3];
-    newContactDataObject.contacts.push(contactThree);
-    contactFour = data.contacts[contactArrLength - 4];
-    newContactDataObject.contacts.push(contactFour);
-  } else if (contactArrLength >= 5) {
-    contactOne = data.contacts[contactArrLength - 1];
-    newContactDataObject.contacts.push(contactOne);
-    contactTwo = data.contacts[contactArrLength - 2];
-    newContactDataObject.contacts.push(contactTwo);
-    contactThree = data.contacts[contactArrLength - 3];
-    newContactDataObject.contacts.push(contactThree);
-    contactFour = data.contacts[contactArrLength - 4];
-    newContactDataObject.contacts.push(contactFour);
-    contactFive = data.contacts[contactArrLength - 5];
-    newContactDataObject.contacts.push(contactFive);
+  } else if ( communicationArrLength === 1 ) {
+    communicationOne = data.communications[communicationArrLength - 1];
+    newCommunicationDataObject.communications.push(communicationOne);
+  } else if ( communicationArrLength === 2 ) {
+    communicationOne = data.communications[communicationArrLength - 1];
+    newCommunicationDataObject.communications.push(communicationOne);
+    communicationTwo = data.communications[communicationArrLength - 2];
+    newCommunicationDataObject.communications.push(communicationTwo);
+  } else if ( communicationArrLength === 3 ) {
+    communicationOne = data.communications[communicationArrLength - 1];
+    newCommunicationDataObject.communications.push(communicationOne);
+    communicationTwo = data.communications[communicationArrLength - 2];
+    newCommunicationDataObject.communications.push(communicationTwo);
+    communicationThree = data.communications[communicationArrLength - 3];
+    newCommunicationDataObject.communications.push(communicationThree);
+  } else if ( communicationArrLength === 4 ) {
+    communicationOne = data.communications[communicationArrLength - 1];
+    newCommunicationDataObject.communications.push(communicationOne);
+    communicationTwo = data.communications[communicationArrLength - 2];
+    newCommunicationDataObject.communications.push(communicationTwo);
+    communicationThree = data.communications[communicationArrLength - 3];
+    newCommunicationDataObject.communications.push(communicationThree);
+    communicationFour = data.communications[communicationArrLength - 4];
+    newCommunicationDataObject.communications.push(communicationFour);
+  } else if (communicationArrLength >= 5) {
+    communicationOne = data.communications[communicationArrLength - 1];
+    newCommunicationDataObject.communications.push(communicationOne);
+    communicationTwo = data.communications[communicationArrLength - 2];
+    newCommunicationDataObject.communications.push(communicationTwo);
+    communicationThree = data.communications[communicationArrLength - 3];
+    newCommunicationDataObject.communications.push(communicationThree);
+    communicationFour = data.communications[communicationArrLength - 4];
+    newCommunicationDataObject.communications.push(communicationFour);
+    communicationFive = data.communications[communicationArrLength - 5];
+    newCommunicationDataObject.communications.push(communicationFive);
   }
-  console.log(newContactDataObject);
+  console.log(newCommunicationDataObject);
 
-  data = newContactDataObject;
+  data = newCommunicationDataObject;
 
-  let contactTwoDashboard = displayContactsHome({
-    contacts: data.contacts
+  let communicationTwoDashboard = displayCommunicationsHome({
+    communications: data.communications
   });
 
-  $('.content').append(contactTwoDashboard);
+  $('.content').append(communicationTwoDashboard);
 
 };
 
@@ -200,9 +201,8 @@ const showRemindersDashTable = (data) => {
   });
 
   $('.content').append(reminderDashboard);
-
-  contactsApi.getContacts()
-    .done(showContactDashTable)
+  communicationsApi.getCommunications()
+    .done(showCommunicationDashTable)
     .fail(homeFailure);
   };
 
@@ -250,4 +250,5 @@ module.exports = {
   showJobDashTable,
   homeFailure,
   showRemindersDashTable,
+  showCommunicationDashTable,
 };

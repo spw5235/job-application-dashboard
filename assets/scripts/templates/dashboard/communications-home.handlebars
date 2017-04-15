@@ -1,46 +1,37 @@
-<h3>Recent Communications</h3>
-<table class="table reminder-summary-table table-hover">
-  <table id="reminder-summary-table" class="table reminder-summary-table table-hover">
-    <thead>
+<div class="communication-page group-category">
+
+<h1>Communication Dashboard</h1>
+
+<table class="table communication-summary-table table-hover">
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Communication Method</th>
+      <th>Communication Subject</th>
+      <th>View Record</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each communications as |communication|}}
       <tr>
-        <th data-field="date" data-sortable="true" data-sort-name="_date_data" data-sorter="monthSorter">
-          <div class="notification-date">Notification Date</div>
-        </th>
-        <th data-field="name" data-sortable="true">
-          <div class="company-name">Company Name</div>
-        </th>
-        <th data-field="reminder" data-sortable="true">
-          <div class="th-inner sortable both desc">Reminder Type</div>
-        </th>
-        <th data-field="subject" data-sortable="true">
-          <div class="reminder-subject">Reminder Subject</div>
-        </th>
-        <th>View Record</th>
+        <td class="display-communication-full-name">
+          {{communication.c_date}}
+        </td>
+        <td class="display-communication-company-name">
+          {{communication.c_method}}
+        </td>
+        <td class="display-communication-email">
+          {{communication.c_subject}}
+        </td>
+        <td class="display-communication-submit">
+          <button type="button" class="btn btn-info btn-sm dashboard-communication-record-btn" data-current-communication-id="{{communication.id}}" data-current-company-id="{{communication.company_ref_id}}" data-current-job-id="{{communication.job_ref_id}}" data-current-document-id="{{communication.document_ref_id}}">View Communication</button>
+        </td>
       </tr>
-    </thead>
-    <tbody>
-      {{#each reminders as |reminder|}}
-        <tr>
-          <td class="display-reminder-url">
-            {{reminder.reminder_date}}
-          </td>
-          <td class="display-company-name get-reminders-job-ref-text">
-              {{reminder.job_ref_text}}
-          </td>
-          <td class="display-reminder-name">
-            {{reminder.reminder_type}}
-          </td>
-          <td class="display-reminder-location">
-            {{reminder.reminder_subject}}
-          </td>
-          <td class="display-reminder-submit">
-            <button type="button" class="btn btn-info btn-sm view-reminder-record-btn" data-current-reminder-id="{{reminder.id}}" data-contact-id="{{reminder.contact_ref_id}}">View Reminder</button>
-          </td>
-        </tr>
-      {{/each}}
-    </tbody>
-  </table>
+    {{/each}}
+  </tbody>
+</table>
 <br>
 <div class="dashboard-container">
-  <button id="generate-create-reminder-btn" type="button" class="btn btn-success">Create Reminder</button>
+  <button id="generate-create-communication-btn" type="button" class="btn btn-success">Create Communication</button>
+</div>
 </div>
