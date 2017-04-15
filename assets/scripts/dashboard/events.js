@@ -2,20 +2,23 @@
 
 const jobsApi = require('../jobs/api');
 const homeUi = require('./home-ui');
-// const logic = require('./logic');
+const remindersApi = require('../reminders/api');
 
 // LOGIN EVENTS
 
-const onGetJobDash = function() {
+const onGetDash = function() {
   event.preventDefault();
-  jobsApi.getJobs()
-    .done(homeUi.showJobDashTable)
-    .fail(homeUi.homeFailure);
+  // jobsApi.getJobs()
+  //   .done(homeUi.showJobDashTable)
+  //   .fail(homeUi.homeFailure);
+  // remindersApi.getReminders()
+  //   .done(homeUi.showRemindersDashTable)
+  //   .fail(homeUi.homeFailure);
 };
 
 
 const addHandlers = () => {
-  $('.content').on('click', "#get-dash-btn", onGetJobDash);
+  $('.content').on('click', "#get-dash-btn", onGetDash);
 };
 
 module.exports = {

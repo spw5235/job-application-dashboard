@@ -17,11 +17,8 @@ const todaysDate = function() {
 };
 
 const convertDateToNum = function(date) {
-  console.log(date);
   let dateArray = date.split("-");
-  console.log(dateArray);
   let dateNum = parseInt(dateArray[0] + dateArray[1] + dateArray[2]);
-  console.log(dateNum);
   return dateNum;
 };
 
@@ -43,21 +40,17 @@ const showJobDashTable = (data) => {
   };
 
   let today = todaysDate();
-  console.log(today);
 
   let allJobsData = data.jobs;
 
   for (let i = 0; i < allJobsData.length; i++) {
     let currentDeadline = allJobsData[i].deadline;
-    console.log(currentDeadline);
 
     if (currentDeadline !== null && currentDeadline !== undefined) {
 
       let convertedNum = convertDateToNum(currentDeadline);
-      console.log(convertedNum);
 
       let isUpcoming = isItUpcoming(today, convertedNum);
-      console.log(isUpcoming);
 
       if (isUpcoming) {
         newDataObject.jobs.push(allJobsData[i]);
@@ -78,7 +71,87 @@ const homeFailure = function() {
   console.log('falure');
 };
 
+const determineRemindersLength = function(data) {
+  let reminderDataArr = data.reminders;
+  let count = 0;
+
+  for (let i = 0; i < reminderDataArr.length; i++) {
+
+    if (reminderDataArr[i].reminder_date === null || reminderDataArr[i].reminder_date === undefined) {
+      console.log('wont count');
+    } else {
+      let currentLength = reminderDataArr[i].reminder_date.length;
+
+      if (currentLength === 10) {
+        count += 1;
+      }
+    }
+  }
+
+  return count;
+};
+
+const addDateToNum = function(data) {
+  let newReminderDataObject = {
+    reminders: []
+  };
+
+  let remindersData = data.reminders;
+  const remindersDataLength = data.reminders.length;
+
+  for ( let i = 0; i < remindersDataLength; i++ ) {
+    let currentRemindersDate = data.reminders[i].reminder_date;
+    let isNull = (data.reminders[i].reminder_date === null);
+
+    if (!isNull) {
+      let currentDateToNum = convertDateToNum(currentRemindersDate);
+      remindersData[i].date_to_num = currentDateToNum;
+      newReminderDataObject.reminders.push(remindersData[i]);
+    }
+  }
+  return newReminderDataObject;
+};
+
+const idArray = function(data) {
+
+
+}
+
+const showRemindersDashTable = (data) => {
+  // const maxCount = determineRemindersLength(data);
+  data = addDateToNum(data);
+  console.log(data);
+
+  // let remindersData = data.reminders;
+  // const remindersDataLength = data.reminders.length;
+  //
+  // let newReminderDataObject = {
+  //   reminders: []
+  // };
+
+  // for (let i = 0; i < remindersDataLength; i++) {
+  //
+  //   let currentDateToNum = remindersData[i].date_to_num;
+  //
+  //   if (newReminderDataObject.reminders.length === 0) {
+  //       remindersData[i].date_to_num = currentDateToNum;
+  //       newReminderDataObject.reminders.push(remindersData[i]);
+  //     } else {
+  //       for ( let j = 0; j < remindersDataLength; j++ ) {
+  //         let currentNewDataObject= newReminderDataObject.reminders[j];
+  //         console.log(currentNewDataObject);
+  //       }
+  //     }
+  //   }
+  };
+
+
+
+
+
+
 module.exports = {
   showJobDashTable,
   homeFailure,
+  showRemindersDashTable,
 };

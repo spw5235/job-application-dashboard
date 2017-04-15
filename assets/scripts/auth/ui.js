@@ -5,6 +5,7 @@ const jobsApi = require('../jobs/api');
 const apiAuth = require('./api');
 const store = require('../store');
 const dashboardHomeUi = require('../dashboard/home-ui');
+const remindersApi = require('../reminders/api');
 
 const blinkNotify = function(div, status) {
   let blinkHtml = '<div id="processing">Processing...</div>';
@@ -16,7 +17,6 @@ const blinkNotify = function(div, status) {
   };
 
   if (status === "start") {
-    console.log('start is true');
     setInterval(blinkAnimation, 0);
   } else {
     clearInterval(blinkAnimation);
@@ -38,6 +38,9 @@ const signInSuccess = function() {
   jobsApi.getJobs()
     .done(dashboardHomeUi.showJobDashTable)
     .fail(dashboardHomeUi.homeFailure);
+  remindersApi.getReminders()
+    .done(dashboardHomeUi.showRemindersDashTable)
+    .fail(dashboardHomeUi.homeFailure);
 };
 
 const signInFailure = function() {
@@ -56,9 +59,6 @@ const signUpSuccess = function() {
 
   data.credentials.email = store.signUpEmail;
   data.credentials.password = store.signUpPassword;
-
-  console.log('signupsuccessdata');
-  console.log(data);
 
   apiAuth.signIn(data)
     .then((response) => {
