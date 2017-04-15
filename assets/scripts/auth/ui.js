@@ -38,9 +38,6 @@ const signInSuccess = function() {
   jobsApi.getJobs()
     .done(dashboardHomeUi.showJobDashTable)
     .fail(dashboardHomeUi.homeFailure);
-  remindersApi.getReminders()
-    .done(dashboardHomeUi.showRemindersDashTable)
-    .fail(dashboardHomeUi.homeFailure);
 };
 
 const signInFailure = function() {

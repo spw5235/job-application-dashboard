@@ -2,8 +2,79 @@
 
 const displayJobsHome = require('../templates/dashboard/jobs-home.handlebars');
 const displayRemindersHome = require('../templates/dashboard/reminders-home.handlebars');
+const displayContactsHome = require('../templates/dashboard/contacts-home.handlebars');
 const store = require('../store');
 const remindersApi = require('../reminders/api');
+const contactsApi = require('../contacts/api');
+
+
+const showContactDashTable = (data) => {
+  let newContactDataObject = {
+    contacts: []
+  };
+
+  let contactOne;
+  let contactTwo;
+  let contactThree;
+  let contactFour;
+  let contactFive;
+
+  let contactArrLength = data.contacts.length;
+  console.log(contactArrLength);
+
+  if (contactArrLength === 0) {
+    return;
+  } else if ( contactArrLength === 1 ) {
+    contactOne = data.contacts[contactArrLength - 1];
+    newContactDataObject.contacts.push(contactOne);
+  } else if ( contactArrLength === 2 ) {
+    contactOne = data.contacts[contactArrLength - 1];
+    newContactDataObject.contacts.push(contactOne);
+    contactTwo = data.contacts[contactArrLength - 2];
+    newContactDataObject.contacts.push(contactTwo);
+  } else if ( contactArrLength === 3 ) {
+    contactOne = data.contacts[contactArrLength - 1];
+    newContactDataObject.contacts.push(contactOne);
+    contactTwo = data.contacts[contactArrLength - 2];
+    newContactDataObject.contacts.push(contactTwo);
+    contactThree = data.contacts[contactArrLength - 3];
+    newContactDataObject.contacts.push(contactThree);
+  } else if ( contactArrLength === 4 ) {
+    contactOne = data.contacts[contactArrLength - 1];
+    newContactDataObject.contacts.push(contactOne);
+    contactTwo = data.contacts[contactArrLength - 2];
+    newContactDataObject.contacts.push(contactTwo);
+    contactThree = data.contacts[contactArrLength - 3];
+    newContactDataObject.contacts.push(contactThree);
+    contactFour = data.contacts[contactArrLength - 4];
+    newContactDataObject.contacts.push(contactFour);
+  } else if (contactArrLength >= 5) {
+    contactOne = data.contacts[contactArrLength - 1];
+    newContactDataObject.contacts.push(contactOne);
+    contactTwo = data.contacts[contactArrLength - 2];
+    newContactDataObject.contacts.push(contactTwo);
+    contactThree = data.contacts[contactArrLength - 3];
+    newContactDataObject.contacts.push(contactThree);
+    contactFour = data.contacts[contactArrLength - 4];
+    newContactDataObject.contacts.push(contactFour);
+    contactFive = data.contacts[contactArrLength - 5];
+    newContactDataObject.contacts.push(contactFive);
+  }
+  console.log(newContactDataObject);
+
+  data = newContactDataObject;
+
+  let contactTwoDashboard = displayContactsHome({
+    contacts: data.contacts
+  });
+
+  $('.content').append(contactTwoDashboard);
+
+};
+
+
+
+
 
 
 const todaysDate = function() {
@@ -122,8 +193,6 @@ const showRemindersDashTable = (data) => {
     }
   }
 
-  console.log(emptyRemindersObject);
-
   data = emptyRemindersObject;
 
   let reminderDashboard = displayRemindersHome({
@@ -132,30 +201,9 @@ const showRemindersDashTable = (data) => {
 
   $('.content').append(reminderDashboard);
 
-  // let sortedNumId = store.numIdReminderArr;
-  // console.log(sortedNumId);
-
-  // let remindersData = data.reminders;
-  // const remindersDataLength = data.reminders.length;
-  //
-  // let newReminderDataObject = {
-  //   reminders: []
-  // };
-
-  // for (let i = 0; i < remindersDataLength; i++) {
-  //
-  //   let currentDateToNum = remindersData[i].date_to_num;
-  //
-  //   if (newReminderDataObject.reminders.length === 0) {
-  //       remindersData[i].date_to_num = currentDateToNum;
-  //       newReminderDataObject.reminders.push(remindersData[i]);
-  //     } else {
-  //       for ( let j = 0; j < remindersDataLength; j++ ) {
-  //         let currentNewDataObject= newReminderDataObject.reminders[j];
-  //         console.log(currentNewDataObject);
-  //       }
-  //     }
-  //   }
+  contactsApi.getContacts()
+    .done(showContactDashTable)
+    .fail(homeFailure);
   };
 
 
@@ -197,8 +245,6 @@ const showRemindersDashTable = (data) => {
         .done(showRemindersDashTable)
         .fail(homeFailure);
   };
-
-
 
 module.exports = {
   showJobDashTable,
