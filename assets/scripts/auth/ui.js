@@ -36,8 +36,9 @@ const signInSuccess = function() {
   $(".form-clear").val('');
   $(".homepage-content").hide();
   $("#sign-out").show();
-  jobsApi.getJobs()
-    .done(dashboardHomeUi.showJobDashTable)
+
+  remindersApi.getReminders()
+    .done(dashboardHomeUi.showRemindersDashTable)
     .fail(dashboardHomeUi.homeFailure);
 };
 

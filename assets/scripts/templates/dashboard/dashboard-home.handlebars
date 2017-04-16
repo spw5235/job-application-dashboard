@@ -1,0 +1,178 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-8">
+      <div class="dash-home-table">
+        <h3>Upcoming Reminders</h3>
+        <table id="reminder-summary-table" class="table reminder-summary-table table-hover">
+          <thead>
+            <tr>
+              <th data-field="date" data-sortable="true" data-sort-name="_date_data" data-sorter="monthSorter">
+                <div class="notification-date">Notification Date</div>
+              </th>
+              <th data-field="name" data-sortable="true">
+                <div class="company-name">Company Name</div>
+              </th>
+              <th data-field="reminder" data-sortable="true">
+                <div class="th-inner sortable both desc">Reminder Type</div>
+              </th>
+              <th data-field="subject" data-sortable="true">
+                <div class="reminder-subject">Reminder Subject</div>
+              </th>
+              <th>View Record</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#each reminders as |reminder|}}
+              <tr>
+                <td class="display-reminder-url">
+                  {{reminder.reminder_date}}
+                </td>
+                <td class="display-company-name get-reminders-job-ref-text">
+                  {{reminder.job_ref_text}}
+                </td>
+                <td class="display-reminder-name">
+                  {{reminder.reminder_type}}
+                </td>
+                <td class="display-reminder-location">
+                  {{reminder.reminder_subject}}
+                </td>
+                <td class="display-reminder-submit">
+                  <button type="button" class="btn btn-info btn-sm view-reminder-record-btn" data-current-reminder-id="{{reminder.id}}" data-contact-id="{{reminder.contact_ref_id}}">View Record</button>
+                </td>
+              </tr>
+            {{/each}}
+          </tbody>
+        </table>
+        <p class="reminder-dash-table-empty"></p>
+        <div class="home-dashboard-container">
+          <button id="generate-create-reminder-btn" type="button" class="btn btn-success">Create Reminder</button>
+          <button type="button" class="btn btn-info get-reminders">View Reminders</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="dash-home-table">
+
+        <h3>Approaching Job Deadlines</h3>
+
+        <table class="table job-summary-table table-hover">
+          <thead>
+            <tr>
+              <th>Company Name</th>
+              <th>Job Deadline</th>
+              <th>View Record</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#each jobs as |job|}}
+              <tr>
+                <td class="display-company-name">
+                  {{job.company_name}}
+                </td>
+                <td class="display-job-deadline">
+                  {{job.deadline}}
+                </td>
+                <td>
+                  <button type="button" class="btn btn-info btn-sm dashboard-job-record-btn" data-current-job-id="{{job.id}}">View Record</button>
+                </td>
+              </tr>
+            {{/each}}
+          </tbody>
+        </table>
+        <p class="job-dash-table-empty"></p>
+        <div class="home-dashboard-container">
+          <button id="dashboard-new-job-btn" type="button" class="btn btn-success">Create Job</button>
+          <button type="button" class="btn btn-info get-jobs">View Jobs</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-8">
+      <div class="communication-page group-category dash-home-table">
+        <h3>Recent Communications</h3>
+        <table class="table communication-summary-table table-hover">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <!-- <th>Method</th> -->
+              <th>Subject</th>
+              <th>View Record</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#each communications as |communication|}}
+              <tr>
+                <td class="display-communication-full-name">
+                  {{communication.c_date}}
+                </td>
+                <!-- <td class="display-communication-company-name tablet-mobile-hide">
+          {{communication.c_method}}
+        </td> -->
+                <td class="display-communication-email">
+                  {{communication.c_subject}}
+                </td>
+                <td class="display-communication-submit">
+                  <button type="button" class="btn btn-info btn-sm dashboard-communication-record-btn" data-current-communication-id="{{communication.id}}" data-current-company-id="{{communication.company_ref_id}}" data-current-job-id="{{communication.job_ref_id}}" data-current-document-id="{{communication.document_ref_id}}">View Record</button>
+                </td>
+              </tr>
+            {{/each}}
+          </tbody>
+        </table>
+        <p class="communication-dash-table-empty"></p>
+        <div class="home-dashboard-container">
+          <button id="generate-create-communication-btn" type="button" class="btn btn-success">Create Communication</button>
+          <button type="button" class="btn btn-info get-communications">View Communications</button>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+
+      <div class="contact-page group-category dash-home-table">
+
+        <h3>Recently Added Contacts</h3>
+
+        <table class="table contact-summary-table table-hover">
+          <thead>
+            <tr>
+              <th>Full Name</th>
+              <th>Company Name</th>
+              <!-- <th>Contact Email</th>
+      <th>Contact Phone</th> -->
+              <th>View Record</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#each contacts as |contact|}}
+              <tr>
+                <td class="display-contact-full-name">
+                  {{contact.full_name}}
+                </td>
+                <td class="display-contact-company-name">
+                  {{contact.job_ref_text}}
+                </td>
+                <!-- <td class="display-contact-email">
+          {{contact.email}}
+        </td>
+        <td class="display-contact-phone">
+          {{contact.phone}}
+        </td> -->
+                <td class="display-contact-submit">
+                  <button type="button" class="btn btn-info btn-sm dashboard-contact-record-btn" data-current-contact-id="{{contact.id}}" data-current-job-ref-id="{{contact.job_ref_id}}" data-current-job-ref-text="{{contact.job_ref_text}}">View Record</button>
+                </td>
+              </tr>
+            {{/each}}
+          </tbody>
+        </table>
+        <p class="contact-dash-table-empty"></p>
+        <div class="home-dashboard-container">
+          <button id="dashboard-new-contact-btn" type="button" class="btn btn-success">Create Contact</button>
+          <button type="button" class="btn btn-info get-contacts">View Contacts</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

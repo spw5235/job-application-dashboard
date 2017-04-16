@@ -1,15 +1,15 @@
 'use strict';
 
-const jobsApi = require('../jobs/api');
-const homeUi = require('./home-ui');
+const remindersApi = require('../reminders/api');
+const dashboardHomeUi = require('./home-ui');
 
 // LOGIN EVENTS
 
 const onGetDash = function() {
   event.preventDefault();
-  jobsApi.getJobs()
-    .done(homeUi.showJobDashTable)
-    .fail(homeUi.homeFailure);
+  remindersApi.getReminders()
+    .done(dashboardHomeUi.showRemindersDashTable)
+    .fail(dashboardHomeUi.homeFailure);
 };
 
 
