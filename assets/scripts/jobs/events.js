@@ -86,6 +86,8 @@ const addHandlers = () => {
   $('.content').on('click', '.dashboard-job-record-btn', onShowJobRecord);
   $('#get-jobs-btn').on('click', onGetJobs);
   $('.content').on('click', '#job-record-delete', onDeleteJob);
+  $('.content').on('click', '.get-jobs', onGetJobs);
+
 };
 
 module.exports = {

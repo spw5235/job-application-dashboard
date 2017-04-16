@@ -1,3 +1,5 @@
+<div class="float-table">
+
 <h3>Approaching Job Deadlines</h3>
 
 <table class="table job-summary-table table-hover">
@@ -18,12 +20,15 @@
         {{job.deadline}}
       </td>
       <td>
-        <button type="button" class="btn btn-info btn-sm dashboard-job-record-btn" data-current-job-id="{{job.id}}">View Job </button>
+        <button type="button" class="btn btn-info btn-sm dashboard-job-record-btn" data-current-job-id="{{job.id}}">View Record</button>
       </td>
     </tr>
     {{/each}}
   </tbody>
 </table>
-<div class="dashboard-container">
+<div class="home-dashboard-container">
   <button id="dashboard-new-job-btn" type="button" class="btn btn-success">Create Job</button>
+  <button type="button" class="btn btn-info get-jobs">View Jobs</button>
+</div>
+
 </div>

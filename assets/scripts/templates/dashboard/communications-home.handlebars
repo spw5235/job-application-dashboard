@@ -1,4 +1,4 @@
-<div class="communication-page group-category">
+<div class="communication-page group-category float-table">
 
 <h3>Recent Communications</h3>
 
@@ -24,13 +24,20 @@
           {{communication.c_subject}}
         </td>
         <td class="display-communication-submit">
-          <button type="button" class="btn btn-info btn-sm dashboard-communication-record-btn" data-current-communication-id="{{communication.id}}" data-current-company-id="{{communication.company_ref_id}}" data-current-job-id="{{communication.job_ref_id}}" data-current-document-id="{{communication.document_ref_id}}">View Communication</button>
+          <button type="button" class="btn btn-info btn-sm dashboard-communication-record-btn" data-current-communication-id="{{communication.id}}" data-current-company-id="{{communication.company_ref_id}}" data-current-job-id="{{communication.job_ref_id}}" data-current-document-id="{{communication.document_ref_id}}">View Record</button>
         </td>
       </tr>
     {{/each}}
+    <!-- <tr>
+      <td colspan="4">
+        <button id="generate-create-communication-btn" type="button" class="btn btn-success">Create Communication</button>
+        <button class="get-communications" type="button" class="btn btn-info">View Communications</button>
+      </td>
+    </tr> -->
   </tbody>
 </table>
-<div class="dashboard-container">
+<div class="home-dashboard-container">
   <button id="generate-create-communication-btn" type="button" class="btn btn-success">Create Communication</button>
+  <button type="button" class="btn btn-info get-communications">View Communications</button>
 </div>
 </div>

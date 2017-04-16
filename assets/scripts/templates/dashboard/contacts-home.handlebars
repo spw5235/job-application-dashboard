@@ -1,4 +1,4 @@
-<div class="contact-page group-category">
+<div class="contact-page group-category float-table">
 <h3>Recently Added Contacts</h3>
 
 <table class="table contact-summary-table table-hover">
@@ -27,14 +27,14 @@
           {{contact.phone}}
         </td>
         <td class="display-contact-submit">
-          <button type="button" class="btn btn-info btn-sm dashboard-contact-record-btn" data-current-contact-id ="{{contact.id}}" data-current-job-ref-id="{{contact.job_ref_id}}" data-current-job-ref-text="{{contact.job_ref_text}}">View Contact</button>
+          <button type="button" class="btn btn-info btn-sm dashboard-contact-record-btn" data-current-contact-id ="{{contact.id}}" data-current-job-ref-id="{{contact.job_ref_id}}" data-current-job-ref-text="{{contact.job_ref_text}}">View Record</button>
         </td>
       </tr>
     {{/each}}
   </tbody>
 </table>
-<br><br>
-<div class="dashboard-container">
+<div class="home-dashboard-container">
   <button id="dashboard-new-contact-btn" type="button" class="btn btn-success">Create Contact</button>
+  <button type="button" class="btn btn-info get-contacts">View Contacts</button>
 </div>
 </div>

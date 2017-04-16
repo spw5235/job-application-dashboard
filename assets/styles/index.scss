@@ -1,10 +1,25 @@
 $icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
 @import '~bootstrap-sass/assets/stylesheets/bootstrap';
 
+body {
+  margin: 10px;
+  padding: 5px;
+}
+
+.home-dashboard-container {
+  text-align: center;
+}
+
+
 #sign-out {
   float:left;
   margin-left: 5px;
   display: none;
+}
+
+.float-table {
+  width: 50%;
+  float: left;
 }
 
 #change-password {
