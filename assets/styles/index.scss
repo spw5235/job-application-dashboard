@@ -20,6 +20,7 @@ body {
 .float-table {
   width: 50%;
   float: left;
+  padding: 5px;
 }
 
 #change-password {
@@ -42,4 +43,11 @@ body {
 .credentials .btn-group > .btn, .btn-group-vertical > .btn {
   position: relative;
   float: left;
+}
+
+@media screen and (max-width: 768px) {
+  .float-table {
+    width: 100%;
+    clear: both;
+  }
 }
