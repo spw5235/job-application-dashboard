@@ -4,6 +4,7 @@ const jobsUi = require('./ui');
 const getFormFields = require('../../../lib/get-form-fields');
 const store = require('../store');
 const linkLogic = require('../dashboard/link-logic');
+const logic = require('../dashboard/logic');
 // Job EVENTS
 
 const onGetJobs = function(event) {
@@ -42,15 +43,7 @@ const onCreateJob = function(event) {
   store.createJobData = data;
   store.lastShowJobData = data;
 
-  let submittedUrl = data.job.post_url;
-  let submittedUrlArr = submittedUrl.split("");
-  console.log(submittedUrlArr[0]);
-
-  if (submittedUrlArr[0] === "w") {
-    data.job.post_url = "http://" + submittedUrl;
-  }
-
-  console.log(submittedUrl);
+  data.job.post_url = logic.convertToUrl(data.job.post_url);
 
   jobsApi.createJob(data)
     .done(jobsUi.createJobSuccess)

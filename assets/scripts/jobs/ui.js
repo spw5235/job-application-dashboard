@@ -7,6 +7,7 @@ const displayJobDetails = require('../templates/job/show-job-record.handlebars')
 const displayJobCreateForm = require('../templates/job/create-job.handlebars');
 const jobsApi = require('./api');
 const summaryLogic = require('../summary/summary-logic');
+const logic = require('../dashboard/logic');
 
 const getJobSuccess = (data) => {
   console.log(data);
@@ -52,6 +53,8 @@ const showJobRecordSuccess = (data) => {
     job: data.job
   });
   $('.content').append(jobDetails);
+
+  logic.displayUrl();
 
   // Summary Table reminders
   summaryLogic.initiateJobSummaryTables(data.job.id);
