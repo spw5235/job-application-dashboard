@@ -36,13 +36,22 @@ const onEditJob = function(event) {
 const onCreateJob = function(event) {
   event.preventDefault();
   let data = getFormFields(event.target);
-  store.createJobData = data;
-  store.lastShowJobData = data;
 
   data.job.notes = $("#job-notes-input").val();
 
   store.createJobData = data;
   store.lastShowJobData = data;
+
+  let submittedUrl = data.job.post_url;
+  let submittedUrlArr = submittedUrl.split("");
+  console.log(submittedUrlArr[0]);
+
+  if (submittedUrlArr[0] === "w") {
+    data.job.post_url = "http://" + submittedUrl;
+  }
+
+  console.log(submittedUrl);
+
   jobsApi.createJob(data)
     .done(jobsUi.createJobSuccess)
     .fail(jobsUi.createJobFailure);
