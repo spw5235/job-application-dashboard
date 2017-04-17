@@ -1,17 +1,14 @@
 <div class="update-job-form-container form-container job-page group-category">
   <form class="form job-form reminder-form" id="update-job-form" name="update-job-form" data-update-form="1">
     <fieldset>
-      <legend>Update Job  Form</legend>
+      <legend>Update Job Form</legend>
       <p id="update-job-error" class="warning form-error"></p>
       <p>All fields are <u>optional</u> unless otherwise indicated</p>
 
-      <div class="form-group">
-        <label>Job  Name (required)</label>
-        <input id="job-name-input" class="form-control required-field job-name" name="job[job_name]" placeholder="Job  Name" type="text" value="{{job.job_name}}">
-      </div>
+      <h3 class="company-name-update-form">{{job.company_name}}</h3>
 
       <div class="form-group">
-        <label>Job Title</label>
+        <label>Job Title (required)</label>
         <input class="form-control required-field job-title" name="job[title]" placeholder="Job Title" type="text" value="{{job.title}}">
       </div>
 

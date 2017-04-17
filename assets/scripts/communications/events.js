@@ -4,6 +4,7 @@ const communicationsUi = require('./ui');
 const getFormFields = require('../../../lib/get-form-fields');
 const store = require('../store');
 const linkLogic = require('../dashboard/link-logic');
+const logic = require('../dashboard/logic');
 // Communication EVENTS
 
 const onGetCommunications = function(event) {
@@ -53,6 +54,8 @@ const onCreateCommunication = function(event) {
 
   data.communication.c_method = $("#communication-method-select").val();
   data.communication.c_notes = $("#communication-notes-input").val();
+
+  data.communication.c_link = logic.convertToUrl(data.communication.c_link);
 
   store.createCommunicationData = data;
   store.lastShowCommunicationData = data;
@@ -119,6 +122,8 @@ const onUpdateCommunication = function(event) {
   }
   data.communication.c_notes = $("#communication-notes-input").val();
   data.communication.c_method = $("#communication-method-select").val();
+
+  data.communication.c_link = logic.convertToUrl(data.communication.c_link);
 
   store.createCommunicationData = data;
   store.lastShowCommunicationData = data;

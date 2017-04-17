@@ -22,19 +22,6 @@ const onShowReminderRecord = function(event) {
     .fail(remindersUi.showReminderRecordFailure);
 };
 
-// const onSummaryShowReminder = function(event) {
-//   event.preventDefault();
-//   store.currentReminderId = (this).attr("data-reminder-id");
-//   store.lastShowReminderData = data;
-//
-//   $(".content").children().remove();
-//
-//   let reminderDetails = displayReminderDetails({
-//     reminder: data.reminder
-//   });
-//   $('.content').append(reminderDetails);
-// }
-
 const onEditReminder = function(event) {
   event.preventDefault();
   store.currentReminderId = $(this).attr("data-current-reminder-id");
@@ -42,7 +29,6 @@ const onEditReminder = function(event) {
   store.currentJobRefText = $(this).attr("data-current-job-ref-text");
   store.currentReminderType = $(this).attr("data-current-reminder-type");
 
-  // Template
   let formCategory = "reminder";
   let listCategory = "job";
   remindersUi.generateUpdateForm(listCategory, formCategory);
@@ -65,10 +51,9 @@ const onCreateReminder = function(event) {
     data.reminder.job_ref_text = "";
   }
 
-  delete data["job-category-radio"];
-
   data.reminder.reminder_type = $("#reminder-type-select").val();
   data.reminder.reminder_details = $("#reminder-details-field").val();
+
   store.createReminderData = data;
   store.lastShowReminderData = data;
   remindersApi.createReminder(data)

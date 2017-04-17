@@ -12,7 +12,6 @@ const logic = require('../dashboard/logic');
 const getJobSuccess = (data) => {
   console.log(data);
   $(".notification-container").children().text("");
-  store.jobDataForEdit = data;
 
   $(".content").children().remove();
 
@@ -30,14 +29,16 @@ const getJobSuccess = (data) => {
     if (currArrayOptTwo === "" || currArrayOptTwo === null) {
       dataArr[i].posting_date = unavailable;
     }
-    if (currArrayOptThree === "" || currArrayOptThree === null) {
-      dataArr[i].post_url = unavailable;
-    }
+    // if (currArrayOptThree === "" || currArrayOptThree === null) {
+    //   dataArr[i].post_url = unavailable;
+    // }
   }
 
   let jobDashboard = displayJobDashboard({
     jobs: data.jobs
   });
+
+  store.jobDataForEdit = data;
 
   $('.content').append(jobDashboard);
 };
@@ -107,6 +108,7 @@ const createJobSuccess = (data) => {
   });
   $(".content").append(showJobDetails);
   $(".current").attr("data-current-job-id", store.currentJobId);
+  logic.displayUrl();
 };
 
 const deleteJobSuccess = () => {
@@ -135,6 +137,7 @@ const updateJobSuccess = (data) => {
   });
   $(".content").append(showJobDetails);
   $(".current").attr("data-current-job-id", store.currentJobId);
+  logic.displayUrl();
 };
 
 // const displayJobDropdownSuccess = function(data) {

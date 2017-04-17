@@ -20,10 +20,13 @@ const convertToUrl = function(url) {
 };
 
 const displayUrl = function() {
-  let url = $(".display-url").attr("href");
-
-  if (url === "") {
-
+  console.log('in display');
+  let url = $(".display-url").attr("href").trim();
+  console.log(url);
+  if (url === "" || url === "N/A") {
+    console.log('true');
+    $(".display-empty-p").text("N/A");
+    $(".display-url").remove();
     return;
   }
 

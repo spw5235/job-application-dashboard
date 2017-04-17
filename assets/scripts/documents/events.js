@@ -4,6 +4,7 @@ const documentsUi = require('./ui');
 const getFormFields = require('../../../lib/get-form-fields');
 const store = require('../store');
 const linkLogic = require('../dashboard/link-logic');
+const logic = require('../dashboard/logic');
 // Document EVENTS
 
 const onGetDocuments = function(event) {
@@ -67,6 +68,7 @@ const onCreateDocument = function(event) {
   data.document.doctext = $("#doctext-field").val();
 
   // delete data.document["job-category-radio"];
+  data.document.docurl = logic.convertToUrl(data.document.docurl);
 
   store.createDocumentData = data;
   store.lastShowDocumentData = data;
@@ -132,46 +134,9 @@ const onUpdateDocument = function(event) {
     data.document.job_ref_id = prevJobRefId;
   }
 
-  // store.createDocumentData = data;
-  // store.lastShowDocumentData = data;
-  //
-  // let docTypeSelectVal = $("#document-type-select").val();
-  //
-  // if (docTypeSelectVal === "Other") {
-  //   data.document.doctype = $("#doc-type-other-text").val();
-  // } else {
-  //   data.document.doctype = $("#document-type-select").val();
-  // }
-  //
-  // let listCategory = "job";
-  //
-  // let refUpdatedDiv = "#" + listCategory + "-update-link";
-  //
-  // let isRefBeingUpdated = $(refUpdatedDiv).prop("checked");
-  //
-  // console.log(isRefBeingUpdated);
-  //
-  // if (isRefBeingUpdated) {
-  //   let submitValue = linkLogic.obtainOptionVal(listCategory);
-  //
-  //   data.document.job_ref_id = submitValue;
-  //
-  //
-  //   let submitText = linkLogic.obtainOptionText(listCategory);
-  //   data.document.job_ref_text = submitText;
-  //
-  //
-  //   if (submitValue === -1) {
-  //     data.document.job_ref_id = 0;
-  //     data.document.job_ref_text = "";
-  //   }
-  // } else {
-  //   data.document.job_ref_id = parseInt(store.currentJobRefId);
-  //   data.document.job_ref_text = store.currentJobRefText;
-  // }
-
   data.document.doctype = $("#document-type-select").val();
   data.document.doctext = $("#doctext-field").val();
+  data.document.docurl = logic.convertToUrl(data.document.docurl);
 
   store.createDocumentData = data;
   store.lastShowDocumentData = data;

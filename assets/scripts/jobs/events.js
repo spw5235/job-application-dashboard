@@ -40,10 +40,10 @@ const onCreateJob = function(event) {
 
   data.job.notes = $("#job-notes-input").val();
 
+  data.job.post_url = logic.convertToUrl(data.job.post_url);
+
   store.createJobData = data;
   store.lastShowJobData = data;
-
-  data.job.post_url = logic.convertToUrl(data.job.post_url);
 
   jobsApi.createJob(data)
     .done(jobsUi.createJobSuccess)
@@ -68,6 +68,10 @@ const onUpdateJob = function(event) {
   store.lastShowJobData = data;
 
   data.job.notes = $("#job-notes-input").val();
+
+  data.job.post_url = logic.convertToUrl(data.job.post_url);
+
+  data.job.company_name = $(".company-name-update-form").text();
 
   store.createJobData = data;
   store.lastShowJobData = data;

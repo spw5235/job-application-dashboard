@@ -4,6 +4,7 @@ const contactsUi = require('./ui');
 const getFormFields = require('../../../lib/get-form-fields');
 const store = require('../store');
 const linkLogic = require('../dashboard/link-logic');
+const logic = require('../dashboard/logic');
 // Contact EVENTS
 
 const onGetContacts = function(event) {
@@ -63,7 +64,8 @@ const onCreateContact = function(event) {
 
   data.contact.notes = $("#contact-notes-input").val();
 
-  console.log(data);
+  data.contact.website = logic.convertToUrl(data.contact.website);
+
   store.createContactData = data;
   store.lastShowContactData = data;
   contactsApi.createContact(data)
@@ -134,6 +136,8 @@ const onUpdateContact = function(event) {
     }
 
 data.contact.notes = $("#contact-notes-input").val();
+
+data.contact.website = logic.convertToUrl(data.contact.website);
 
 store.createContactData = data;
 store.lastShowContactData = data;
