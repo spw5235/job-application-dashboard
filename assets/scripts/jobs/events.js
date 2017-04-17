@@ -3,7 +3,6 @@ const jobsApi = require('./api');
 const jobsUi = require('./ui');
 const getFormFields = require('../../../lib/get-form-fields');
 const store = require('../store');
-const linkLogic = require('../dashboard/link-logic');
 const logic = require('../dashboard/logic');
 // Job EVENTS
 

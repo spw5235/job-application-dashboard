@@ -107,7 +107,6 @@ const showContactDashTable = (data) => {
   let contactFive;
 
   let contactArrLength = data.contacts.length;
-  console.log(contactArrLength);
 
   if (contactArrLength === 0) {
     store.isContactDashEmpty = true;
@@ -147,7 +146,6 @@ const showContactDashTable = (data) => {
     contactFive = data.contacts[contactArrLength - 5];
     newContactDataObject.contacts.push(contactFive);
   }
-  console.log(newContactDataObject);
 
   data = newContactDataObject;
 
@@ -210,7 +208,6 @@ const showCommunicationDashTable = (data) => {
   let communicationFive;
 
   let communicationArrLength = data.communications.length;
-  console.log(communicationArrLength);
 
   if (communicationArrLength === 0) {
     store.isCommunicationDashEmpty = true;
@@ -250,7 +247,6 @@ const showCommunicationDashTable = (data) => {
     communicationFive = data.communications[communicationArrLength - 5];
     newCommunicationDataObject.communications.push(communicationFive);
   }
-  console.log(newCommunicationDataObject);
 
   data = newCommunicationDataObject;
   store.finalCommunicationData = data;
@@ -272,9 +268,7 @@ const showJobDashTable = (data) => {
   };
 
   let today = todaysDate();
-  console.log('showjobdash here');
   let allJobsData = data.jobs;
-  console.log(allJobsData.length);
 
   for (let i = 0; i < allJobsData.length; i++) {
     let currentDeadline = allJobsData[i].deadline;

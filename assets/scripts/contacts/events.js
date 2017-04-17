@@ -174,7 +174,6 @@ const onDisplayJobDropdown = function(event) {
 const onHideShowUpdateOptions = function() {
   let isUpdateChecked = $(this).prop("checked");
   let radioButtonContainer = $(this).parent().parent().parent().children(".update-radio-container-btn");
-  console.log(isUpdateChecked);
   if (isUpdateChecked) {
     $(".job-radio-container input").prop("checked", false);
     $(radioButtonContainer).show();

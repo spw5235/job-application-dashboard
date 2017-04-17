@@ -8,8 +8,6 @@ const displayJobCommunicationAltOption = require('../templates/alt-link/communic
 
 const altOptionAppend = function(formCategory, listCategory) {
   let displayAltInput;
-  console.log(formCategory);
-  console.log(listCategory);
   if (formCategory === "contact" && listCategory === "job") {
     displayAltInput = displayJobContactAltOption();
   } else if (formCategory === "communication" && listCategory === "job") {
@@ -20,13 +18,11 @@ const altOptionAppend = function(formCategory, listCategory) {
 };
 
 const obtainOptionVal = function(listCategory) {
-  console.log(listCategory);
   let alternativeEntrySelector = "#alt-input-entry-" + listCategory;
   let alternativeEntryVal = $(alternativeEntrySelector).val();
   let valueSelector = "#select-element-" + listCategory;
   let isRadioCheckedTxt = "#" + listCategory + "-radio-btns-container input";
   let isRadioChecked = $(isRadioCheckedTxt).prop("checked");
-  console.log(alternativeEntryVal);
   if ( alternativeEntryVal === undefined ) {
     if (!isRadioChecked) {
       return 0;
@@ -60,7 +56,6 @@ const insertFailure = function() {
 };
 
 const jobDropdownDataResults = (data) => {
-  console.log(data);
   let listCategory = store.currentListCategory;
   let formCategory = store.currentFormCategory;
 
@@ -132,12 +127,7 @@ const radioClassIdNameGen = function(formCategory, listCategory) {
 
 
 const preselectDefault = function(divId, defaultVal) {
-  console.log(defaultVal);
-  console.log(divId);
-
   let selectText = $(divId + ' option[value="' + defaultVal + '"]');
-
-  console.log(selectText);
   $(selectText).prop('selected', true);
 };
 

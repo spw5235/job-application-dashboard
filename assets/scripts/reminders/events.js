@@ -4,7 +4,7 @@ const remindersUi = require('./ui');
 const getFormFields = require('../../../lib/get-form-fields');
 const store = require('../store');
 const linkLogic = require('../dashboard/link-logic');
-const displayReminderDetails = require('../templates/reminder/show-reminder-record.handlebars');
+// const displayReminderDetails = require('../templates/reminder/show-reminder-record.handlebars');
 // Reminder EVENTS
 
 const onGetReminders = function(event) {
@@ -117,33 +117,6 @@ const onUpdateReminder = function(event) {
     data.reminder.job_ref_id = prevJobRefId;
   }
 
-  // let listCategory = "job";
-  //
-  // let refUpdatedDiv = "#" + listCategory + "-update-link";
-  //
-  // let isRefBeingUpdated = $(refUpdatedDiv).prop("checked");
-  //
-  // console.log(isRefBeingUpdated);
-  //
-  // if (isRefBeingUpdated) {
-  //   let submitValue = linkLogic.obtainOptionVal(listCategory);
-  //
-  //   data.reminder.job_ref_id = submitValue;
-  //
-  //
-  //   let submitText = linkLogic.obtainOptionText(listCategory);
-  //   data.reminder.job_ref_text = submitText;
-  //
-  //
-  //   if (submitValue === -1) {
-  //     data.reminder.job_ref_id = 0;
-  //     data.reminder.job_ref_text = "";
-  //   }
-  // } else {
-  //   data.reminder.job_ref_id = parseInt(store.currentJobRefId);
-  //   data.reminder.job_ref_text = store.currentJobRefText;
-  // }
-
   data.reminder.reminder_type = $("#reminder-type-select").val();
   data.reminder.reminder_details = $("#reminder-details-field").val();
   store.createReminderData = data;
@@ -180,7 +153,6 @@ const onDisplayJobDropdown = function(event) {
 
 const onHideShowCreateOptions = function() {
   let isUpdateChecked = $(this).prop("checked");
-  console.log(isUpdateChecked);
   if ( isUpdateChecked ) {
     $("#job-radio-btns-container input").prop("checked", false);
     $("#job-category-radio-container").show();
@@ -195,7 +167,6 @@ const onHideShowCreateOptions = function() {
 const onHideShowUpdateOptions = function() {
   let isUpdateChecked = $(this).prop("checked");
   let radioButtonContainer = $(this).parent().parent().parent().children(".update-radio-container-btn");
-  console.log(isUpdateChecked);
   if ( isUpdateChecked ) {
     $(".job-radio-container input").prop("checked", false);
     $(radioButtonContainer).show();
@@ -216,11 +187,9 @@ const addHandlers = () => {
   $('#get-reminders-btn').on('click', onGetReminders);
   $('.content').on('click', '#reminder-record-delete', onDeleteReminder);
   $('.content').on('click', '.get-reminders', onGetReminders);
-  // $('.content').on('change', '.job-category', onDisplayJobDropdown);
   $('.content').on('change', "#job-update-link", onHideShowUpdateOptions);
   $('.content').on('change', '.update-job', onDisplayJobDropdown);
   $('.content').on('change', "#job-create-link", onHideShowCreateOptions);
-  // $('.content').on('submit', '.view-secondary-reminder-record-btn', onSummaryShowReminder);
 };
 
 module.exports = {

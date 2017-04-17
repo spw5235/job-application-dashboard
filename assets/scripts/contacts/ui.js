@@ -17,7 +17,6 @@ const getContactSuccess = (data) => {
 
   $(".content").children().remove();
 
-  console.log(data);
   let dataArr = data.contacts;
 
   for (let i = 0; i < dataArr.length; i++ ) {
@@ -59,7 +58,6 @@ const showContactRecordSuccess = (data) => {
 
 const showContactRecordFailure = () => {
   $(".notification-container").children().text("");
-  console.log('failure');
 };
 
 const showContactCreateForm = () => {
@@ -117,12 +115,9 @@ const generateUpdateForm = function(listCategory, formCategory) {
 
 const getContactFailure = () => {
   $(".notification-container").children().text("");
-  console.log('get contact failure');
 };
 
 const createContactSuccess = (data) => {
-  console.log("createsucces");
-  console.log(data);
   store.currentContactId = data.contact.id;
   $(".form-error").text("");
   $(".notification-container").children().text("");
@@ -134,11 +129,11 @@ const createContactSuccess = (data) => {
   });
   $(".content").append(showContactDetails);
   $(".current").attr("data-current-contact-id", store.currentContactId);
+  logic.displayUrl();
 };
 
 const deleteContactSuccess = () => {
   $(".notification-container").children().text("");
-  console.log('delete success');
   contactsApi.getContacts()
     .done(getContactSuccess)
     .fail(getContactFailure);
@@ -146,7 +141,6 @@ const deleteContactSuccess = () => {
 
 const deleteContactFailure = () => {
   $(".notification-container").children().text("");
-  console.log('delete fail');
 };
 
 const updateContactSuccess = (data) => {
@@ -162,6 +156,7 @@ const updateContactSuccess = (data) => {
   });
   $(".content").append(showContactDetails);
   $(".current").attr("data-current-contact-id", store.currentContactId);
+  logic.displayUrl();
 };
 
 const displayContactDropdownSuccess = function(data) {
@@ -182,9 +177,9 @@ const displayContactDropdownSuccess = function(data) {
   }
 };
 
-const dropDownData = function(data) {
-  console.log(data);
-};
+// const dropDownData = function(data) {
+//   console.log(data);
+// };
 
 module.exports = {
   getContactSuccess,
@@ -198,6 +193,5 @@ module.exports = {
   createContactSuccess,
   displayContactDropdownSuccess,
   displayContactOptions,
-  dropDownData,
   generateUpdateForm,
 };

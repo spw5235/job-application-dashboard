@@ -10,7 +10,6 @@ const summaryLogic = require('../summary/summary-logic');
 const logic = require('../dashboard/logic');
 
 const getJobSuccess = (data) => {
-  console.log(data);
   $(".notification-container").children().text("");
 
   $(".content").children().remove();
@@ -21,7 +20,7 @@ const getJobSuccess = (data) => {
     let unavailable = "N/A";
     let currArrayOptOne = (dataArr[i].title);
     let currArrayOptTwo = (dataArr[i].posting_date);
-    let currArrayOptThree = (dataArr[i].post_url);
+    // let currArrayOptThree = (dataArr[i].post_url);
 
     if (currArrayOptOne === "" || currArrayOptOne === null) {
       dataArr[i].title = unavailable;
@@ -44,8 +43,6 @@ const getJobSuccess = (data) => {
 };
 
 const showJobRecordSuccess = (data) => {
-  console.log('show');
-  console.log(data);
   $(".notification-container").children().text("");
   $(".content").children().remove();
   store.lastShowJobData = data;
@@ -65,7 +62,6 @@ const showJobRecordSuccess = (data) => {
 
 const showJobRecordFailure = () => {
   $(".notification-container").children().text("");
-  console.log('failure');
 };
 
 const showJobCreateForm = () => {
@@ -91,12 +87,9 @@ const generateUpdateForm = function() {
 
 const getJobFailure = () => {
   $(".notification-container").children().text("");
-  console.log('get job failure');
 };
 
 const createJobSuccess = (data) => {
-  console.log("createsucces");
-  console.log(data);
   store.currentJobId = data.job.id;
   $(".form-error").text("");
   $(".notification-container").children().text("");
@@ -113,7 +106,6 @@ const createJobSuccess = (data) => {
 
 const deleteJobSuccess = () => {
   $(".notification-container").children().text("");
-  console.log('delete success');
   jobsApi.getJobs()
     .done(getJobSuccess)
     .fail(getJobFailure);
@@ -121,11 +113,9 @@ const deleteJobSuccess = () => {
 
 const deleteJobFailure = () => {
   $(".notification-container").children().text("");
-  console.log('delete fail');
 };
 
 const updateJobSuccess = (data) => {
-  console.log(data);
   store.currentJobId = data.job.id;
   $(".form-error").text("");
   $(".notification-container").children().text("");
@@ -140,27 +130,9 @@ const updateJobSuccess = (data) => {
   logic.displayUrl();
 };
 
-// const displayJobDropdownSuccess = function(data) {
-//   $(".notification-container").children().text("");
-//
-//   let companyOptionDisplay = displayJobOptions({
-//     jobs: data.jobs
-//   });
-//
-//   let dataUpdateFormVal = parseInt($("#update-job-form").attr("data-update-form"));
-//
-//   $('.associate-reminder-with-job-container').append(companyOptionDisplay);
-//
-//   if (dataUpdateFormVal === 1) {
-//     let currentJobId = store.currentJobId;
-//     let valueString = '#select-option-job-name option[value=' + currentJobId + ']';
-//     $(valueString).prop('selected', true);
-//   }
+// const dropDownData = function(data) {
+//   console.log(data);
 // };
-
-const dropDownData = function(data) {
-  console.log(data);
-};
 
 module.exports = {
   getJobSuccess,
@@ -172,6 +144,5 @@ module.exports = {
   updateJobSuccess,
   showJobRecordFailure,
   createJobSuccess,
-  dropDownData,
   generateUpdateForm,
 };

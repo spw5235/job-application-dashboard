@@ -58,7 +58,6 @@ const showDocumentRecordSuccess = (data) => {
 
 const showDocumentRecordFailure = () => {
   $(".notification-container").children().text("");
-  console.log('failure');
 };
 
 const showDocumentCreateForm = () => {
@@ -121,12 +120,9 @@ const generateUpdateForm = function(listCategory, formCategory) {
 
 const getDocumentFailure = () => {
   $(".notification-container").children().text("");
-  console.log('get document failure');
 };
 
 const createDocumentSuccess = (data) => {
-  console.log("createsucces");
-  console.log(data);
   store.currentDocumentId = data.document.id;
   $(".form-error").text("");
   $(".notification-container").children().text("");
@@ -138,11 +134,11 @@ const createDocumentSuccess = (data) => {
   });
   $(".content").append(showDocumentDetails);
   $(".current").attr("data-current-document-id", store.currentDocumentId);
+  logic.displayUrl();
 };
 
 const deleteDocumentSuccess = () => {
   $(".notification-container").children().text("");
-  console.log('delete success');
   documentsApi.getDocuments()
     .done(getDocumentSuccess)
     .fail(getDocumentFailure);
@@ -150,11 +146,9 @@ const deleteDocumentSuccess = () => {
 
 const deleteDocumentFailure = () => {
   $(".notification-container").children().text("");
-  console.log('delete fail');
 };
 
 const updateDocumentSuccess = (data) => {
-  console.log(data);
   store.currentDocumentId = data.document.id;
   $(".form-error").text("");
   $(".notification-container").children().text("");
@@ -166,6 +160,7 @@ const updateDocumentSuccess = (data) => {
   });
   $(".content").append(showDocumentDetails);
   $(".current").attr("data-current-document-id", store.currentDocumentId);
+  logic.displayUrl();
 };
 
 const displayDocumentDropdownSuccess = function(data) {
@@ -186,9 +181,9 @@ const displayDocumentDropdownSuccess = function(data) {
   }
 };
 
-const dropDownData = function(data) {
-  console.log(data);
-};
+// const dropDownData = function(data) {
+//   console.log(data);
+// };
 
 module.exports = {
   getDocumentSuccess,
@@ -202,6 +197,5 @@ module.exports = {
   createDocumentSuccess,
   displayDocumentDropdownSuccess,
   displayDocumentOptions,
-  dropDownData,
   generateUpdateForm,
 };

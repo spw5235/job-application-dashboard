@@ -20,20 +20,15 @@ const convertToUrl = function(url) {
 };
 
 const displayUrl = function() {
-  console.log('in display');
   let url = $(".display-url").attr("href").trim();
-  console.log(url);
   if (url === "" || url === "N/A") {
-    console.log('true');
     $(".display-empty-p").text("N/A");
     $(".display-url").remove();
     return;
   }
 
   let urlArr = url.split("www.");
-  console.log(urlArr);
   let removedPath = urlArr[1].split("/");
-  console.log(removedPath);
   let showPath = "/...";
   let preceding = "www.";
   let fullUrl = preceding + removedPath[0] + showPath;
