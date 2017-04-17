@@ -9,6 +9,7 @@ const contactsApi = require('./api');
 const displayRadioButtonsTemplate = require('../templates/form-template/radio-btn-template.handlebars');
 const displayContactOptions = require('../templates/contact/option-dropdown-contacts.handlebars');
 const linkLogic = require('../dashboard/link-logic');
+const logic = require('../dashboard/logic');
 
 const getContactSuccess = (data) => {
   $(".notification-container").children().text("");
@@ -53,7 +54,7 @@ const showContactRecordSuccess = (data) => {
     contact: data.contact
   });
   $('.content').append(contactDetails);
-  console.log('show suc');
+  logic.displayUrl();
 };
 
 const showContactRecordFailure = () => {

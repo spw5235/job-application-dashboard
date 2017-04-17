@@ -21,6 +21,12 @@ const convertToUrl = function(url) {
 
 const displayUrl = function() {
   let url = $(".display-url").attr("href");
+
+  if (url === "") {
+
+    return;
+  }
+
   let urlArr = url.split("www.");
   console.log(urlArr);
   let removedPath = urlArr[1].split("/");

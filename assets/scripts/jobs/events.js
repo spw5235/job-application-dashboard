@@ -53,6 +53,8 @@ const onCreateJob = function(event) {
 const onDeleteJob = function(event) {
   event.preventDefault();
   store.currentJobId= $("#job-record-delete").attr("data-current-job-id");
+
+
   jobsApi.deleteJob(store.currentJobId)
     .done(jobsUi.deleteJobSuccess)
     .fail(jobsUi.deleteJobFailure);
@@ -80,6 +82,12 @@ const onShowJobCreateForm = function(event) {
   jobsUi.showJobCreateForm();
 };
 
+const onShowDeleteMenu = function(event) {
+  event.preventDefault();
+  $(this).hide();
+  $(".delete-confirmation-contain").show();
+};
+
 const addHandlers = () => {
   $('.content').on('submit', '#new-job-form', onCreateJob);
   $('.content').on('submit', '#update-job-form', onUpdateJob);
@@ -89,7 +97,8 @@ const addHandlers = () => {
   $('#get-jobs-btn').on('click', onGetJobs);
   $('.content').on('click', '#job-record-delete', onDeleteJob);
   $('.content').on('click', '.get-jobs', onGetJobs);
-
+  $('.content').on('click', '#job-record-delete-menu', onShowDeleteMenu);
+  $('.content').on('click', '#job-delete-cancel', onShowJobRecord);
 };
 
 module.exports = {

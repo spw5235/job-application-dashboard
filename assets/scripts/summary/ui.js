@@ -5,11 +5,6 @@ const displayRemindersSummary = require('../templates/summary-table/reminders-su
 const displayDocumentsSummary = require('../templates/summary-table/documents-summary.handlebars');
 const displayContactsSummary = require('../templates/summary-table/contacts-summary.handlebars');
 const displayCommunicationsSummary = require('../templates/summary-table/communications-summary.handlebars');
-// const displayEditJob = require('../templates/job/update-job-form.handlebars');
-// const displayJobDashboard = require('../templates/job/get-jobs.handlebars');
-// const displayJobDetails = require('../templates/job/show-job-record.handlebars');
-// const displayJobCreateForm = require('../templates/job/create-job.handlebars');
-// const jobsApi = require('./api');
 
 const summaryFailure = function() {
   console.log('failure');
@@ -115,7 +110,7 @@ const communicationsSummarySuccess = (data) => {
     });
     $(".communications-summary-table-container").append(communicationsSummaryTable);
   }
-}
+};
 
 module.exports = {
   remindersSummarySuccess,

@@ -9,6 +9,7 @@ const remindersApi = require('./api');
 const displayRadioButtonsTemplate = require('../templates/form-template/radio-btn-template.handlebars');
 const displayReminderOptions = require('../templates/reminder/option-dropdown-reminders.handlebars');
 const linkLogic = require('../dashboard/link-logic');
+const logic = require('../dashboard/logic');
 
 const getReminderSuccess = (data) => {
   $(".notification-container").children().text("");
@@ -56,6 +57,7 @@ const showReminderRecordSuccess = (data) => {
     reminder: data.reminder
   });
   $('.content').append(reminderDetails);
+  logic.displayUrl();
 };
 
 const showReminderRecordFailure = () => {

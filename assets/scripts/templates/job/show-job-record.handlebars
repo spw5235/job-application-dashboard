@@ -49,11 +49,11 @@
       </td>
     </tr>
     <tr>
-      <td class="job-record-title job-record-teacher">
+      <td>
         Job Post Url
       </td>
       <td>
-        <a class="display-url" href="{{job.post_url}}" target="_blank">Link</a>
+        <a class="display-url" href="{{job.post_url}}" target="_blank">N/A</a>
       </td>
     </tr>
     <tr>
@@ -86,7 +86,17 @@
 <div class="dashboard-job-btn-container">
   <div class="job-record-btn-options">
     <button id="job-record-btn-edit" type="button" class="btn btn-warning current" data-current-job-id="{{job.id}}" data-current-company-id="{{job.company_ref_id}}" data-current-job-id="{{job.job_ref_id}}" data-current-document-id="{{job.document_ref_id}}">Edit Job Record</button>
-    <button id="job-record-delete" type="button" class="btn btn-danger current" data-current-job-id="{{job.id}}">Delete Job Record</button>
+    <button id="job-record-delete-menu" type="button" class="btn btn-danger current" data-current-job-id="{{job.id}}">Delete Job Record</button>
+    <br><br>
+  </div>
+  <div class="delete-confirmation-contain">
+    <div class="form-group delete-confirmation">
+      <h3>Warning:</h3>
+      <p>Deleting this job record will also remove all linked records (e.g. linked contacts, linked reminders, etc.)</p>
+      <label>Would you like to continue?</label>
+      <br>
+      <button id="job-record-delete" type="button" class="btn btn-danger current" data-current-job-id="{{job.id}}">Delete All</button>
+      <button id="job-delete-cancel" type="button" class="btn btn-primary current" data-current-job-id="{{job.id}}">Cancel</button>
   </div>
 </div>
 

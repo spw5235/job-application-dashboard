@@ -53,6 +53,8 @@ const showJobRecordSuccess = (data) => {
     job: data.job
   });
   $('.content').append(jobDetails);
+  $(".delete-confirmation-contain").hide();
+  $("#job-record-delete-menu").show();
 
   logic.displayUrl();
 

@@ -9,6 +9,7 @@ const communicationsApi = require('./api');
 const displayRadioButtonsTemplate = require('../templates/form-template/radio-btn-template.handlebars');
 const displayCommunicationOptions = require('../templates/job/option-dropdown-jobs.handlebars');
 const linkLogic = require('../dashboard/link-logic');
+const logic = require('../dashboard/logic');
 
 const getCommunicationSuccess = (data) => {
   $(".notification-container").children().text("");
@@ -55,6 +56,8 @@ const showCommunicationRecordSuccess = (data) => {
     communication: data.communication
   });
   $('.content').append(communicationDetails);
+
+  logic.displayUrl();
 };
 
 const showCommunicationRecordFailure = () => {

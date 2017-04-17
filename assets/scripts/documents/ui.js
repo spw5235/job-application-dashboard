@@ -9,6 +9,7 @@ const documentsApi = require('./api');
 const displayRadioButtonsTemplate = require('../templates/form-template/radio-btn-template.handlebars');
 const displayDocumentOptions = require('../templates/document/option-dropdown-documents.handlebars');
 const linkLogic = require('../dashboard/link-logic');
+const logic = require('../dashboard/logic');
 
 const getDocumentSuccess = (data) => {
   $(".notification-container").children().text("");
@@ -52,6 +53,7 @@ const showDocumentRecordSuccess = (data) => {
     document: data.document
   });
   $('.content').append(documentDetails);
+  logic.displayUrl();
 };
 
 const showDocumentRecordFailure = () => {
