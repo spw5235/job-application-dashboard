@@ -1,10 +1,40 @@
 $icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
 @import '~bootstrap-sass/assets/stylesheets/bootstrap';
 
-// body {
-//   margin: 10px;
-//   padding: 5px;
+body {
+  background-color: #ebe3d3;
+  margin: 10px;
+  padding: 5px;
+}
+
+h1 {
+  color: #33312c;
+}
+
+h2 {
+  color: #585551;
+}
+
+h3 {
+  color: #800000;
+}
+
+// .nav-main-container {
+//   border: 1px solid #585551;
 // }
+
+.table-hover > tbody > tr > td {
+  border-top: 1px solid #585551;
+  border-bottom: 1px solid #585551;
+}
+
+.table > thead > tr > th {
+  border-bottom: 1px solid #585551;
+}
+
+.table-hover > tbody > tr:hover {
+    background-color: #cbc1ad;
+}
 
 .home-dashboard-container {
   text-align: center;
