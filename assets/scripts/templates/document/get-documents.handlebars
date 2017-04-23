@@ -7,26 +7,26 @@
         <table class="table document-summary-table table-hover">
           <thead>
             <tr>
-              <th>Date</th>
-              <th>Document Type</th>
+              <th class="hidden-xs">Date</th>
+              <th class="hidden-xs">Document Type</th>
               <th>Document Subject</th>
-              <th>Document Url</th>
+              <th class="hidden-xs">Document Url</th>
               <th>View Record</th>
             </tr>
           </thead>
           <tbody>
             {{#each documents as |document|}}
               <tr>
-                <td class="display-document-date">
+                <td class="display-document-date hidden-xs">
                   {{document.docdate}}
                 </td>
-                <td class="display-document-type">
+                <td class="display-document-type hidden-xs">
                   {{document.doctype}}
                 </td>
                 <td class="display-document-subject">
                   {{document.docsubject}}
                 </td>
-                <td class="display-document-url">
+                <td class="display-document-url hidden-xs">
                   {{document.docurl}}
                 </td>
                 <td class="display-document-submit">

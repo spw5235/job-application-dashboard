@@ -7,8 +7,8 @@
         <thead>
           <tr>
             <th>Company Name</th>
-            <th>Job Title</th>
-            <th>Job Deadline</th>
+            <th class="hidden-xs">Job Title</th>
+            <th class="hidden-xs">Job Deadline</th>
             <th>View Record</th>
           </tr>
         </thead>
@@ -18,10 +18,10 @@
               <td class="display-company-name">
                 {{job.company_name}}
               </td>
-              <td class="display-job-title">
+              <td class="display-job-title hidden-xs">
                 {{job.title}}
               </td>
-              <td class="display-job-deadline">
+              <td class="display-job-deadline hidden-xs">
                 {{job.deadline}}
               </td>
               <td>
