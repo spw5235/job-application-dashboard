@@ -7,6 +7,10 @@ body {
   padding: 5px;
 }
 
+.dashboard-container {
+  text-align: center;
+}
+
 h1 {
   color: #33312c;
 }
@@ -50,11 +54,11 @@ h3 {
   display: none;
 }
 
-.float-table {
-  width: 50%;
-  float: left;
-  padding: 5px;
-}
+// .float-table {
+//   width: 50%;
+//   float: left;
+//   padding: 5px;
+// }
 
 #change-password {
   float:left;
@@ -78,9 +82,9 @@ h3 {
   float: left;
 }
 
-@media screen and (max-width: 768px) {
-  .float-table {
-    width: 100%;
-    clear: both;
-  }
-}
+// @media screen and (max-width: 768px) {
+//   .float-table {
+//     width: 100%;
+//     clear: both;
+//   }
+// }

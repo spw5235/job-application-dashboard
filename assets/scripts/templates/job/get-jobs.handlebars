@@ -1,35 +1,44 @@
-<h1>Job Dashboard</h1>
+<div class="container">
 
-<table class="table job-summary-table table-hover">
-  <thead>
-    <tr>
-      <th>Company Name</th>
-      <th>Job Title</th>
-      <th>Job Deadline</th>
-      <th>View Record</th>
-    </tr>
-  </thead>
-  <tbody>
-    {{#each jobs as |job|}}
-    <tr>
-      <td class="display-company-name">
-        {{job.company_name}}
-      </td>
-      <td class="display-job-title">
-        {{job.title}}
-      </td>
-      <td class="display-job-deadline">
-        {{job.deadline}}
-      </td>
-      <td>
-        <button type="button" class="btn btn-info btn-sm dashboard-job-record-btn" data-current-job-id="{{job.id}}">View Job </button>
-        <!-- <button class="btn btn-primary dashboard-job-record-btn" type="button" class="btn btn-info btn-sm current" data-current-job-id="{{job.id}}" data-current-company-id="{{job.company_id}}">View Job</button> -->
-      </td>
-    </tr>
-    {{/each}}
-  </tbody>
-</table>
-<br><br>
-<div class="dashboard-container">
-  <button id="dashboard-new-job-btn" type="button" class="btn btn-success">Create Job</button>
+  <div class="row">
+    <div class="col-lg-10 col-lg-offset-1 col-xs-12 col-xs-offset-0">
+      <h1>Job Dashboard</h1>
+      <table class="table job-summary-table table-hover">
+        <thead>
+          <tr>
+            <th>Company Name</th>
+            <th>Job Title</th>
+            <th>Job Deadline</th>
+            <th>View Record</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each jobs as |job|}}
+            <tr>
+              <td class="display-company-name">
+                {{job.company_name}}
+              </td>
+              <td class="display-job-title">
+                {{job.title}}
+              </td>
+              <td class="display-job-deadline">
+                {{job.deadline}}
+              </td>
+              <td>
+                <button type="button" class="btn btn-info btn-sm dashboard-job-record-btn" data-current-job-id="{{job.id}}">View Job </button>
+                <!-- <button class="btn btn-primary dashboard-job-record-btn" type="button" class="btn btn-info btn-sm current" data-current-job-id="{{job.id}}" data-current-company-id="{{job.company_id}}">View Job</button> -->
+              </td>
+            </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="dashboard-container">
+        <button id="dashboard-new-job-btn" type="button" class="btn btn-success">Create Job</button>
+      </div>
+    </div>
+  </div>
 </div>
