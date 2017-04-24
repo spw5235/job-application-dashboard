@@ -9,6 +9,10 @@ const linkLogic = require('../dashboard/link-logic');
 
 const onGetReminders = function(event) {
   event.preventDefault();
+  let screenWidth = window.innerWidth;
+  if (screenWidth < 768) {
+    $(".nav-mobile-ul").slideUp();
+  }
   remindersApi.getReminders()
     .done(remindersUi.getReminderSuccess)
     .fail(remindersUi.getReminderFailure);

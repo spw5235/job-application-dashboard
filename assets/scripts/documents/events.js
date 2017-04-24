@@ -9,6 +9,10 @@ const logic = require('../dashboard/logic');
 
 const onGetDocuments = function(event) {
   event.preventDefault();
+  let screenWidth = window.innerWidth;
+  if (screenWidth < 768) {
+    $(".nav-mobile-ul").slideUp();
+  }
   documentsApi.getDocuments()
     .done(documentsUi.getDocumentSuccess)
     .fail(documentsUi.getDocumentFailure);

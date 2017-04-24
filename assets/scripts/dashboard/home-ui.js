@@ -364,7 +364,15 @@ const showRemindersDashTable = (data) => {
   //   .fail(homeFailure);
   };
 
-
+const showMobileOptions = function() {
+  let areOptionsVisible = $(".nav-mobile-ul").css("display");
+  console.log(areOptionsVisible);
+  if (areOptionsVisible === "none") {
+    $(".nav-mobile-ul").slideDown();
+  } else {
+    $(".nav-mobile-ul").slideUp();
+  }
+};
 
 
 module.exports = {
@@ -372,4 +380,5 @@ module.exports = {
   homeFailure,
   showRemindersDashTable,
   showCommunicationDashTable,
+  showMobileOptions,
 };

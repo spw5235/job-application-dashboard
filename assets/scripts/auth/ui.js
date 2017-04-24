@@ -36,6 +36,11 @@ const signInSuccess = function() {
   $(".form-clear").val('');
   $(".homepage-content").hide();
   $("#sign-out").show();
+  let screenWidth = window.innerWidth;
+  if (screenWidth < 768) {
+    $("#nav-mobile-dropdown").show();
+    $(".nav-mobile-ul").slideUp();
+  }
 
   remindersApi.getReminders()
     .done(dashboardHomeUi.showRemindersDashTable)
@@ -96,6 +101,10 @@ const signOutSuccess = function() {
   $(".homepage-content").show();
   $("#sign-out").hide();
   $("#change-password").hide();
+  let screenWidth = window.innerWidth;
+  if (screenWidth < 768) {
+    $("#nav-mobile-dropdown").hide();
+  }
 };
 
 const signOutFailure = function() {

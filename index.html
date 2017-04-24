@@ -15,6 +15,28 @@
 
 <body class="container-fluid" style="display: none">
 
+  <!-- <div class="navbar navbar-default navbar-static-top collapse navbar-collapse">
+    <div class="container">
+      <div class="navbar-header">
+        <a href='/' class="navbar-brand">Job Application Dashboard</a>
+
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle Navigation</span>
+          <span class="icon-bar show-icon"> </span>
+          <span class="icon-bar show-icon"> </span>
+          <span class="icon-bar show-icon"> </span>
+      </button>
+      </div>
+
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#">Sign-Up</a></li>
+        <li><a href="#">Sign-In</a></li>
+        <li><a href="#">Change Password</a></li>
+        <li><a href="#">Sign-Out</a></li>
+      </ul>
+    </div>
+  </div> -->
+
   <div class="credentials-container">
     <div class="btn-group" id="sign-up">
       <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -78,14 +100,14 @@
           <p class="failure signup-failure"></p>
           <p class="success signup-success"></p>
           <fieldset>
-      			<legend>Change Password</legend>
+            <legend>Change Password</legend>
             <p class="field-description">Old Password</p>
             <input name="passwords[old]" class="form-clear" type="password" placeholder="Old Password">
             <p class="field-description">New Password</p>
             <input name="passwords[new]" class="form-clear" placeholder="New Password" type="password">
             <br>
             <input name="submit" class="btn btn-default" type="submit" value="Change Password">
-      		</fieldset>
+          </fieldset>
         </form>
       </div>
     </div>
@@ -96,17 +118,17 @@
       </button>
     </div>
 
-    <div class="clearfix"></div>
-    <div class="notification-container">
-      <div class="processing"></div>
-      <div class="success-alert">
+  <div class="clearfix"></div>
+  <div class="notification-container">
+    <div class="processing"></div>
+    <div class="success-alert">
 
-      </div>
-      <div class="failure-alert">
+    </div>
+    <div class="failure-alert">
 
-      </div>
     </div>
   </div>
+  <!-- </div> -->
 
   <div class="clearfix"></div>
 
@@ -122,9 +144,10 @@
     <input name="submit" type="submit" value="Sign in!">
   </fieldset>
 </form> -->
-
+<button id="nav-mobile-dropdown" type="button">&#9776;</button>
+<div class="clearfix"></div>
   <div class="nav-main-container">
-    <ul class="nav nav-tabs nav-justified top-nav">
+    <ul class="nav-mobile-ul nav nav-tabs nav-justified top-nav">
       <li id="dash-homepage" class="homepage-category">
         <a id="get-dash-home-btn" class="nav-tab-btn" href="#">Home</a>
       </li>

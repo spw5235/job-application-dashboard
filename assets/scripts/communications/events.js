@@ -9,6 +9,10 @@ const logic = require('../dashboard/logic');
 
 const onGetCommunications = function(event) {
   event.preventDefault();
+  let screenWidth = window.innerWidth;
+  if (screenWidth < 768) {
+    $(".nav-mobile-ul").slideUp();
+  }
   communicationsApi.getCommunications()
     .done(communicationsUi.getCommunicationSuccess)
     .fail(communicationsUi.getCommunicationFailure);

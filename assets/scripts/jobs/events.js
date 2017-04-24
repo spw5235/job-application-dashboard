@@ -8,6 +8,10 @@ const logic = require('../dashboard/logic');
 
 const onGetJobs = function(event) {
   event.preventDefault();
+  let screenWidth = window.innerWidth;
+  if (screenWidth < 768) {
+    $(".nav-mobile-ul").slideUp();
+  }
   jobsApi.getJobs()
     .done(jobsUi.getJobSuccess)
     .fail(jobsUi.getJobFailure);

@@ -7,6 +7,16 @@ body {
   padding: 5px;
 }
 
+#nav-mobile-dropdown {
+  font-size: 20px;
+  float: right;
+}
+
+.credentials-container input {
+  border: 1px solid gray;
+  margin: 2px;
+}
+
 .dashboard-container {
   text-align: center;
 }
@@ -22,10 +32,13 @@ h2 {
 h3 {
   color: #800000;
 }
-
 // .nav-main-container {
 //   border: 1px solid #585551;
 // }
+
+.nav-main-container {
+  display: none;
+}
 
 .table-hover > tbody > tr > td {
   border-top: 1px solid #585551;
@@ -37,7 +50,7 @@ h3 {
 }
 
 .table-hover > tbody > tr:hover {
-    background-color: #cbc1ad;
+  background-color: #cbc1ad;
 }
 
 .home-dashboard-container {
@@ -49,11 +62,10 @@ h3 {
 }
 
 #sign-out {
-  float:left;
+  float: left;
   margin-left: 5px;
   display: none;
 }
-
 // .float-table {
 //   width: 50%;
 //   float: left;
@@ -61,13 +73,12 @@ h3 {
 // }
 
 #change-password {
-  float:left;
+  float: left;
   display: none;
 }
-
-.nav-main-container {
-  display: none;
-}
+// .nav-main-container {
+//   display: none;
+// }
 
 .option-company-id {
   display: none;
@@ -77,14 +88,32 @@ h3 {
   margin-top: 20px;
 }
 
-.credentials .btn-group > .btn, .btn-group-vertical > .btn {
+.btn-group-vertical > .btn,
+.credentials .btn-group > .btn {
   position: relative;
   float: left;
 }
-
 // @media screen and (max-width: 768px) {
 //   .float-table {
 //     width: 100%;
 //     clear: both;
 //   }
-// }
+#nav-mobile-dropdown {
+  display: none;
+  background-color: transparent;
+  border: 1px solid #800000;
+  color: #800000;
+  padding: 3px;
+}
+
+@media screen and (max-width: 767px) {
+  #nav-mobile-dropdown {
+    margin-right: 15px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  #nav-mobile-dropdown {
+    display: none;
+  }
+}

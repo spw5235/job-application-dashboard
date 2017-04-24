@@ -11,6 +11,10 @@ const jobsApi = require('../jobs/api');
 
 const onSignIn = function(event) {
   event.preventDefault();
+  let screenWidth = window.innerWidth;
+  if (screenWidth < 768) {
+    $(".nav-mobile-ul").slideUp();
+  }
   let div = ".signin-success";
   uiAuth.blinkNotify(div, "start");
   let data = getFormFields(event.target);

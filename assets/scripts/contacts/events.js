@@ -9,6 +9,10 @@ const logic = require('../dashboard/logic');
 
 const onGetContacts = function(event) {
   event.preventDefault();
+  let screenWidth = window.innerWidth;
+  if (screenWidth < 768) {
+    $(".nav-mobile-ul").slideUp();
+  }
   contactsApi.getContacts()
     .done(contactsUi.getContactSuccess)
     .fail(contactsUi.getContactFailure);
