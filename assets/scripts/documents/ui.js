@@ -12,7 +12,6 @@ const linkLogic = require('../dashboard/link-logic');
 const logic = require('../dashboard/logic');
 
 const getDocumentSuccess = (data) => {
-  $(".notification-container").children().text("");
   store.documentDataForEdit = data;
 
   $(".content").children().remove();
@@ -129,7 +128,7 @@ const createDocumentSuccess = (data) => {
   $(".form-error").text("");
   $(".notification-container").children().text("");
   $(".content").children().remove();
-  $(".success-alert").text("Document Has Been Successfully Created");
+  $(".success-alert").text("The record has been successfully created.");
 
   let showDocumentDetails = displayDocumentDetails({
     document: store.createDocumentData.document
@@ -141,6 +140,7 @@ const createDocumentSuccess = (data) => {
 
 const deleteDocumentSuccess = () => {
   $(".notification-container").children().text("");
+  $(".success-alert").text("The record has been successfully deleted");
   documentsApi.getDocuments()
     .done(getDocumentSuccess)
     .fail(getDocumentFailure);
@@ -156,7 +156,7 @@ const updateDocumentSuccess = (data) => {
   $(".form-error").text("");
   $(".notification-container").children().text("");
   $(".content").children().remove();
-  $(".success-alert").text("Document Has Been Successfully Updated");
+  $(".success-alert").text("The record has been successfully updated.");
 
   let showDocumentDetails = displayDocumentDetails({
     document: data.document

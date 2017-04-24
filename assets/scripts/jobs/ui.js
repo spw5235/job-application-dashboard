@@ -10,7 +10,6 @@ const summaryLogic = require('../summary/summary-logic');
 const logic = require('../dashboard/logic');
 
 const getJobSuccess = (data) => {
-  $(".notification-container").children().text("");
 
   $(".content").children().remove();
 
@@ -96,7 +95,7 @@ const createJobSuccess = (data) => {
   $(".form-error").text("");
   $(".notification-container").children().text("");
   $(".content").children().remove();
-  $(".success-alert").text("Job Has Been Successfully Created");
+  $(".success-alert").text("The record has been successfully created.");
 
   let showJobDetails = displayJobDetails({
     job: store.createJobData.job
@@ -108,6 +107,7 @@ const createJobSuccess = (data) => {
 
 const deleteJobSuccess = () => {
   $(".notification-container").children().text("");
+  $(".success-alert").text("The record has been successfully deleted");
   jobsApi.getJobs()
     .done(getJobSuccess)
     .fail(getJobFailure);
@@ -123,7 +123,7 @@ const updateJobSuccess = (data) => {
   $(".form-error").text("");
   $(".notification-container").children().text("");
   $(".content").children().remove();
-  $(".success-alert").text("Job Has Been Successfully Updated");
+  $(".success-alert").text("The record has been successfully updated");
 
   let showJobDetails = displayJobDetails({
     job: data.job
@@ -142,10 +142,6 @@ const updateJobFailure = function() {
   $(".notification-container").children().text("");
   $(".failure-alert").text("An error has occured and the record has not been updated. Please make sure all required fields are complete");
 };
-
-// const dropDownData = function(data) {
-//   console.log(data);
-// };
 
 module.exports = {
   getJobSuccess,

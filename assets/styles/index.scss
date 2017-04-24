@@ -6,6 +6,7 @@ body {
   margin: 10px;
   padding: 5px;
   font-size: 15px;
+  font-family: 'Open Sans', sans-serif;
 }
 
 .form-container {
@@ -32,15 +33,22 @@ body {
 
 .notification-container {
   text-align: center;
-  padding: 5px;
 }
 
 .success-alert {
   color: green;
+  text-decoration: underline;
+  margin-top: 5px;
+  padding: 5px;
+  font-size: 16px;
 }
 
 .failure-alert {
   color: red;
+  text-decoration: underline;
+  margin-top: 5px;
+  padding: 5px;
+  font-size: 18px;
 }
 
 #web-logo {

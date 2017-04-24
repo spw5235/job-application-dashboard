@@ -12,7 +12,6 @@ const linkLogic = require('../dashboard/link-logic');
 const logic = require('../dashboard/logic');
 
 const getContactSuccess = (data) => {
-  $(".notification-container").children().text("");
   store.contactDataForEdit = data;
 
   $(".content").children().remove();
@@ -124,7 +123,7 @@ const createContactSuccess = (data) => {
   $(".form-error").text("");
   $(".notification-container").children().text("");
   $(".content").children().remove();
-  $(".success-alert").text("Contact Has Been Successfully Created");
+  $(".success-alert").text("The record has been successfully created.");
 
   let showContactDetails = displayContactDetails({
     contact: store.createContactData.contact
@@ -136,6 +135,7 @@ const createContactSuccess = (data) => {
 
 const deleteContactSuccess = () => {
   $(".notification-container").children().text("");
+  $(".success-alert").text("The record has been successfully deleted");
   contactsApi.getContacts()
     .done(getContactSuccess)
     .fail(getContactFailure);
@@ -152,7 +152,7 @@ const updateContactSuccess = (data) => {
   $(".form-error").text("");
   $(".notification-container").children().text("");
   $(".content").children().remove();
-  $(".success-alert").text("Contact Has Been Successfully Updated");
+  $(".success-alert").text("The record has been successfully updated.");
 
   let showContactDetails = displayContactDetails({
     contact: data.contact

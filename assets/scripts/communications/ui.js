@@ -12,7 +12,6 @@ const linkLogic = require('../dashboard/link-logic');
 const logic = require('../dashboard/logic');
 
 const getCommunicationSuccess = (data) => {
-  $(".notification-container").children().text("");
   store.communicationDataForEdit = data;
 
   $(".content").children().remove();
@@ -132,8 +131,8 @@ const createCommunicationSuccess = (data) => {
   store.currentCommunicationId = data.communication.id;
   $(".form-error").text("");
   $(".notification-container").children().text("");
+  $(".success-alert").text("The record has been successfully created");
   $(".content").children().remove();
-  $(".success-alert").text("Communication Has Been Successfully Created");
 
   let showCommunicationDetails = displayCommunicationDetails({
     communication: store.createCommunicationData.communication
@@ -145,6 +144,7 @@ const createCommunicationSuccess = (data) => {
 
 const deleteCommunicationSuccess = () => {
   $(".notification-container").children().text("");
+  $(".success-alert").text("The record has been successfully deleted");
   communicationsApi.getCommunications()
     .done(getCommunicationSuccess)
     .fail(getCommunicationFailure);
@@ -162,7 +162,7 @@ const updateCommunicationSuccess = (data) => {
   $(".form-error").text("");
   $(".notification-container").children().text("");
   $(".content").children().remove();
-  $(".success-alert").text("Communication Has Been Successfully Updated");
+  $(".success-alert").text("The record has been successfully updated");
 
   let showCommunicationDetails = displayCommunicationDetails({
     communication: data.communication
