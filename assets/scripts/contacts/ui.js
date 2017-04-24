@@ -58,6 +58,7 @@ const showContactRecordSuccess = (data) => {
 
 const showContactRecordFailure = () => {
   $(".notification-container").children().text("");
+  $(".failure-alert").text("An error has occured and the record could not be retrieved.");
 };
 
 const showContactCreateForm = () => {
@@ -115,6 +116,7 @@ const generateUpdateForm = function(listCategory, formCategory) {
 
 const getContactFailure = () => {
   $(".notification-container").children().text("");
+  $(".failure-alert").text("An error has occured and the records could not be retrieved.");
 };
 
 const createContactSuccess = (data) => {
@@ -141,6 +143,7 @@ const deleteContactSuccess = () => {
 
 const deleteContactFailure = () => {
   $(".notification-container").children().text("");
+  $(".failure-alert").text("An error has occured and the record could not be deleted.");
 };
 
 const updateContactSuccess = (data) => {
@@ -177,9 +180,15 @@ const displayContactDropdownSuccess = function(data) {
   }
 };
 
-// const dropDownData = function(data) {
-//   console.log(data);
-// };
+const createContactFailure = function() {
+  $(".notification-container").children().text("");
+  $(".failure-alert").text("An error has occured and the record could not be created. Please make sure all required fields are filled");
+};
+
+const updateContactFailure = function() {
+  $(".notification-container").children().text("");
+  $(".failure-alert").text("An error has occured and the record could not be updated. Please make sure all required fields are filled");
+};
 
 module.exports = {
   getContactSuccess,
@@ -194,4 +203,6 @@ module.exports = {
   displayContactDropdownSuccess,
   displayContactOptions,
   generateUpdateForm,
+  createContactFailure,
+  updateContactFailure,
 };

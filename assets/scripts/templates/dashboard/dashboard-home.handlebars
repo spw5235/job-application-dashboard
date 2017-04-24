@@ -25,7 +25,7 @@
                   {{reminder.reminder_subject}}
                 </td>
                 <td class="display-reminder-submit">
-                  <button type="button" class="btn btn-info btn-sm view-reminder-record-btn" data-current-reminder-id="{{reminder.id}}" data-contact-id="{{reminder.contact_ref_id}}">View Record</button>
+                  <button type="button" class="btn btn-default btn-sm view-reminder-record-btn" data-current-reminder-id="{{reminder.id}}" data-contact-id="{{reminder.contact_ref_id}}">View Record</button>
                 </td>
               </tr>
             {{/each}}
@@ -33,8 +33,8 @@
         </table>
         <p class="reminder-dash-table-empty"></p>
         <div class="home-dashboard-container">
-          <button id="generate-create-reminder-btn" type="button" class="btn btn-success">Create Reminder</button>
-          <button type="button" class="btn btn-info get-reminders">View Reminders</button>
+          <button id="generate-create-reminder-btn" type="button" class="btn btn-success">Create</button>
+          <button type="button" class="btn btn-info get-reminders">View All</button>
         </div>
       </div>
     </div>
@@ -58,7 +58,7 @@
                   {{job.company_name}}
                 </td>
                 <td>
-                  <button type="button" class="btn btn-info btn-sm dashboard-job-record-btn" data-current-job-id="{{job.id}}">View Record</button>
+                  <button type="button" class="btn btn-default btn-sm dashboard-job-record-btn" data-current-job-id="{{job.id}}">View Record</button>
                 </td>
               </tr>
             {{/each}}
@@ -66,8 +66,8 @@
         </table>
         <p class="job-dash-table-empty"></p>
         <div class="home-dashboard-container">
-          <button id="dashboard-new-job-btn" type="button" class="btn btn-success">Create Job</button>
-          <button type="button" class="btn btn-info get-jobs">View Jobs</button>
+          <button id="dashboard-new-job-btn" type="button" class="btn btn-success">Create</button>
+          <button type="button" class="btn btn-info get-jobs">View All</button>
         </div>
 
       </div>
@@ -100,7 +100,7 @@
                   {{communication.c_subject}}
                 </td>
                 <td class="display-communication-submit">
-                  <button type="button" class="btn btn-info btn-sm dashboard-communication-record-btn" data-current-communication-id="{{communication.id}}" data-current-company-id="{{communication.company_ref_id}}" data-current-job-id="{{communication.job_ref_id}}" data-current-document-id="{{communication.document_ref_id}}">View Record</button>
+                  <button type="button" class="btn btn-default btn-sm dashboard-communication-record-btn" data-current-communication-id="{{communication.id}}" data-current-company-id="{{communication.company_ref_id}}" data-current-job-id="{{communication.job_ref_id}}" data-current-document-id="{{communication.document_ref_id}}">View Record</button>
                 </td>
               </tr>
             {{/each}}
@@ -108,8 +108,8 @@
         </table>
         <p class="communication-dash-table-empty"></p>
         <div class="home-dashboard-container">
-          <button id="generate-create-communication-btn" type="button" class="btn btn-success">Create Communication</button>
-          <button type="button" class="btn btn-info get-communications">View Communications</button>
+          <button id="generate-create-communication-btn" type="button" class="btn btn-success">Create</button>
+          <button type="button" class="btn btn-info get-communications">View All</button>
         </div>
       </div>
     </div>
@@ -133,7 +133,7 @@
                   {{contact.full_name}}
                 </td>
                 <td class="display-contact-submit">
-                  <button type="button" class="btn btn-info btn-sm dashboard-contact-record-btn" data-current-contact-id="{{contact.id}}" data-current-job-ref-id="{{contact.job_ref_id}}" data-current-job-ref-text="{{contact.job_ref_text}}">View Record</button>
+                  <button type="button" class="btn btn-default btn-sm dashboard-contact-record-btn" data-current-contact-id="{{contact.id}}" data-current-job-ref-id="{{contact.job_ref_id}}" data-current-job-ref-text="{{contact.job_ref_text}}">View Record</button>
                 </td>
               </tr>
             {{/each}}
@@ -141,8 +141,8 @@
         </table>
         <p class="contact-dash-table-empty"></p>
         <div class="home-dashboard-container">
-          <button id="dashboard-new-contact-btn" type="button" class="btn btn-success">Create Contact</button>
-          <button type="button" class="btn btn-info get-contacts">View Contacts</button>
+          <button id="dashboard-new-contact-btn" type="button" class="btn btn-success">Create</button>
+          <button type="button" class="btn btn-info get-contacts">View All</button>
         </div>
       </div>
     </div>

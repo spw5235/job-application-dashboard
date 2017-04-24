@@ -58,6 +58,7 @@ const showDocumentRecordSuccess = (data) => {
 
 const showDocumentRecordFailure = () => {
   $(".notification-container").children().text("");
+  $(".failure-alert").text("An error has occured and the record could not be displayed.");
 };
 
 const showDocumentCreateForm = () => {
@@ -120,6 +121,7 @@ const generateUpdateForm = function(listCategory, formCategory) {
 
 const getDocumentFailure = () => {
   $(".notification-container").children().text("");
+  $(".failure-alert").text("An error has occured and the records could not be retrieved.");
 };
 
 const createDocumentSuccess = (data) => {
@@ -146,6 +148,7 @@ const deleteDocumentSuccess = () => {
 
 const deleteDocumentFailure = () => {
   $(".notification-container").children().text("");
+  $(".failure-alert").text("An error has occured and the record could not be deleted.");
 };
 
 const updateDocumentSuccess = (data) => {
@@ -181,9 +184,15 @@ const displayDocumentDropdownSuccess = function(data) {
   }
 };
 
-// const dropDownData = function(data) {
-//   console.log(data);
-// };
+const createDocumentFailure = function() {
+  $(".notification-container").children().text("");
+  $(".failure-alert").text("An error has occured and the record could not be created. Please make sure all required fields are filled");
+};
+
+const updateDocumentFailure = function() {
+  $(".notification-container").children().text("");
+  $(".failure-alert").text("An error has occured and the record could not be updated. Please make sure all required fields are filled");
+};
 
 module.exports = {
   getDocumentSuccess,
@@ -198,4 +207,6 @@ module.exports = {
   displayDocumentDropdownSuccess,
   displayDocumentOptions,
   generateUpdateForm,
+  createDocumentFailure,
+  updateDocumentFailure,
 };

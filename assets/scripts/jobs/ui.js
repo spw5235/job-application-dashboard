@@ -62,10 +62,11 @@ const showJobRecordSuccess = (data) => {
 
 const showJobRecordFailure = () => {
   $(".notification-container").children().text("");
+  $(".failure-alert").text("An error has occured displaying the job record");
+
 };
 
 const showJobCreateForm = () => {
-
   $(".notification-container").children().text("");
   $(".content").children().remove();
   let showCreateJobForm = displayJobCreateForm();
@@ -87,6 +88,7 @@ const generateUpdateForm = function() {
 
 const getJobFailure = () => {
   $(".notification-container").children().text("");
+  $(".failure-alert").text("An error has occured when retrieving the job record");
 };
 
 const createJobSuccess = (data) => {
@@ -113,6 +115,7 @@ const deleteJobSuccess = () => {
 
 const deleteJobFailure = () => {
   $(".notification-container").children().text("");
+  $(".failure-alert").text("An error has occured when deleting the job record");
 };
 
 const updateJobSuccess = (data) => {
@@ -130,6 +133,16 @@ const updateJobSuccess = (data) => {
   logic.displayUrl();
 };
 
+const createJobFailure = function() {
+  $(".notification-container").children().text("");
+  $(".failure-alert").text("An error has occured. Please make sure all required fields are complete");
+};
+
+const updateJobFailure = function() {
+  $(".notification-container").children().text("");
+  $(".failure-alert").text("An error has occured and the record has not been updated. Please make sure all required fields are complete");
+};
+
 // const dropDownData = function(data) {
 //   console.log(data);
 // };
@@ -145,4 +158,6 @@ module.exports = {
   showJobRecordFailure,
   createJobSuccess,
   generateUpdateForm,
+  createJobFailure,
+  updateJobFailure,
 };

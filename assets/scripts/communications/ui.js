@@ -19,7 +19,7 @@ const getCommunicationSuccess = (data) => {
 
   let communicationsArr = data.communications;
 
-  for (let i = 0; i < communicationsArr.length; i++ ) {
+  for (let i = 0; i < communicationsArr.length; i++) {
     let unavailable = "N/A";
     let currArrayRefText = (communicationsArr[i].job_ref_text);
     let currArrayDate = (communicationsArr[i].c_date);
@@ -60,6 +60,7 @@ const showCommunicationRecordSuccess = (data) => {
 
 const showCommunicationRecordFailure = () => {
   $(".notification-container").children().text("");
+  $(".failure-alert").text("An error has occured and the record could not be displayed.");
 };
 
 const showCommunicationCreateForm = () => {
@@ -83,7 +84,7 @@ const showCommunicationCreateForm = () => {
 const generateUpdateForm = function(listCategory, formCategory) {
   $(".notification-container").children().text("");
   $(".content").children().remove();
-// data-current-c-method
+  // data-current-c-method
   let data = store.lastShowCommunicationData;
 
   let editCommunication = displayEditCommunication({
@@ -101,7 +102,7 @@ const generateUpdateForm = function(listCategory, formCategory) {
   let updateFormId = "#update-" + formCategory + "-form";
   let updateFormStatus = parseInt($(updateFormId).attr("data-update-form"));
 
-  if ( updateFormStatus === 1) {
+  if (updateFormStatus === 1) {
     let categoryText = "." + listCategory + "-radio-container ";
     $(categoryText).show();
     $(".update-radio-container-btn").hide();
@@ -123,6 +124,8 @@ const generateUpdateForm = function(listCategory, formCategory) {
 
 const getCommunicationFailure = () => {
   $(".notification-container").children().text("");
+  $(".notification-container").children().text("");
+  $(".failure-alert").text("An error has occured and the records could not be retrieved.");
 };
 
 const createCommunicationSuccess = (data) => {
@@ -149,6 +152,8 @@ const deleteCommunicationSuccess = () => {
 
 const deleteCommunicationFailure = () => {
   $(".notification-container").children().text("");
+  $(".notification-container").children().text("");
+  $(".failure-alert").text("An error has occured and the record could not be deleted.");
 };
 
 const updateCommunicationSuccess = (data) => {
@@ -185,9 +190,15 @@ const displayCommunicationDropdownSuccess = function(data) {
   }
 };
 
-// const dropDownData = function(data) {
-//   console.log(data);
-// };
+const createCommunicationFailure = function() {
+  $(".notification-container").children().text("");
+  $(".failure-alert").text("An error has occured and the record could not be created. Please make sure all required fields are filled");
+};
+
+const updateCommunicationFailure = function() {
+  $(".notification-container").children().text("");
+  $(".failure-alert").text("An error has occured and the record could not be updated. Please make sure all required fields are filled");
+};
 
 module.exports = {
   getCommunicationSuccess,
@@ -202,4 +213,6 @@ module.exports = {
   displayCommunicationDropdownSuccess,
   displayCommunicationOptions,
   generateUpdateForm,
+  createCommunicationFailure,
+  updateCommunicationFailure,
 };

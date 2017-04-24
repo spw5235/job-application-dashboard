@@ -1,11 +1,6 @@
 'use strict';
 
-// const displayJobsHome = require('../templates/dashboard/jobs-home.handlebars');
-// const displayRemindersHome = require('../templates/dashboard/reminders-home.handlebars');
-// const displayCommunicationsHome = require('../templates/dashboard/communications-home.handlebars');
-// const displayContactsHome = require('../templates/dashboard/contacts-home.handlebars');
 const store = require('../store');
-// const remindersApi = require('../reminders/api');
 const communicationsApi = require('../communications/api');
 const contactsApi = require('../contacts/api');
 const jobsApi = require('../jobs/api');
@@ -251,12 +246,6 @@ const showCommunicationDashTable = (data) => {
   data = newCommunicationDataObject;
   store.finalCommunicationData = data;
 
-  // let communicationTwoDashboard = displayCommunicationsHome({
-  //   communications: data.communications
-  // });
-  //
-  // $('.content').append(communicationTwoDashboard);
-  //
   contactsApi.getContacts()
     .done(showContactDashTable)
     .fail(homeFailure);
@@ -294,28 +283,11 @@ const showJobDashTable = (data) => {
   communicationsApi.getCommunications()
     .done(showCommunicationDashTable)
     .fail(homeFailure);
-
-    // let jobDashTable = displayJobsHome({
-    //   jobs: newDataObject.jobs
-    // });
-    // $(".content").append(jobDashTable);
-
-
-    // if (newDataObject.jobs.length > 0) {
-    //   let jobDashTable = displayJobsHome({
-    //     jobs: newDataObject.jobs
-    //   });
-    //   $(".content").append(jobDashTable);
-    // }
-
-    // remindersApi.getReminders()
-    //   .done(showRemindersDashTable)
-    //   .fail(homeFailure);
 };
 
 
 const showRemindersDashTable = (data) => {
-  // const maxCount = determineRemindersLength(data);
+  $(".notification-container").children().text("");
   data = addDateToNum(data);
   let dataLength = data.reminders.length;
 
@@ -354,14 +326,6 @@ const showRemindersDashTable = (data) => {
   jobsApi.getJobs()
     .done(showJobDashTable)
     .fail(homeFailure);
-  // let reminderDashboard = displayRemindersHome({
-  //   reminders: data.reminders
-  // });
-  //
-  // $('.content').append(reminderDashboard);
-  // communicationsApi.getCommunications()
-  //   .done(showCommunicationDashTable)
-  //   .fail(homeFailure);
   };
 
 const showMobileOptions = function() {

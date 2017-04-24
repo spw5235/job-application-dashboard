@@ -59,6 +59,7 @@ const showReminderRecordSuccess = (data) => {
 
 const showReminderRecordFailure = () => {
   $(".notification-container").children().text("");
+  $(".failure-alert").text("An error has occured and the record could not be retrieved");
 };
 
 const showReminderCreateForm = () => {
@@ -119,6 +120,7 @@ const generateUpdateForm = function(listCategory, formCategory) {
 
 const getReminderFailure = () => {
   $(".notification-container").children().text("");
+  $(".failure-alert").text("An error has occured and the records could not be retrieved");
 };
 
 const createReminderSuccess = (data) => {
@@ -147,6 +149,7 @@ const deleteReminderSuccess = () => {
 
 const deleteReminderFailure = () => {
   $(".notification-container").children().text("");
+  $(".failure-alert").text("An error has occured and the records could not be deleted");
 };
 
 const updateReminderSuccess = (data) => {
@@ -183,9 +186,15 @@ const displayReminderDropdownSuccess = function(data) {
   }
 };
 
-// const dropDownData = function(data) {
-//   console.log(data);
-// };
+const createReminderFailure = function() {
+  $(".notification-container").children().text("");
+  $(".failure-alert").text("An error has occured and the record could not be created.  Please make sure all required fields are complete");
+};
+
+const updateReminderFailure = function() {
+  $(".notification-container").children().text("");
+  $(".failure-alert").text("An error has occured and the record could not be updated.  Please make sure all required fields are complete");
+};
 
 module.exports = {
   getReminderSuccess,
@@ -200,4 +209,6 @@ module.exports = {
   displayReminderDropdownSuccess,
   displayReminderOptions,
   generateUpdateForm,
+  createReminderFailure,
+  updateReminderFailure,
 };

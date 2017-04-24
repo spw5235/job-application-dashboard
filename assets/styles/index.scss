@@ -8,6 +8,10 @@ body {
   font-size: 15px;
 }
 
+.form-container {
+  max-width: 700px;
+}
+
 .job-app-image-p {
   float: right;
 }
@@ -51,6 +55,8 @@ body {
 #nav-mobile-dropdown {
   font-size: 20px;
   float: right;
+  margin-left: 2px;
+  margin-right: 2px;
 }
 
 .credentials-container input {
