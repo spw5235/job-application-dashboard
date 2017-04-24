@@ -5,6 +5,40 @@ body {
   background-color: #ebe3d3;
   margin: 10px;
   padding: 5px;
+  font-size: 15px;
+}
+
+.job-app-image-p {
+  float: right;
+}
+
+#homepage-job-app-img {
+  max-width: 100%;
+  width: 250px;
+  height: auto;
+  margin: 10px;
+}
+
+.notification-container {
+  text-align: center;
+  padding: 5px;
+}
+
+.success-alert {
+  color: green;
+}
+
+.failure-alert {
+  color: red;
+}
+
+#web-logo {
+  float: right;
+  margin-top: 0;
+}
+
+#web-logo h3 {
+  margin-top: 0;
 }
 
 #nav-mobile-dropdown {
@@ -23,14 +57,17 @@ body {
 
 h1 {
   color: #33312c;
+  font-size: 30px;
 }
 
 h2 {
   color: #585551;
+  font-size: 25px;
 }
 
 h3 {
   color: #800000;
+  font-size: 20px;
 }
 // .nav-main-container {
 //   border: 1px solid #585551;

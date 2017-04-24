@@ -41,6 +41,9 @@ const signInSuccess = function() {
     $("#nav-mobile-dropdown").show();
     $(".nav-mobile-ul").slideUp();
   }
+  if (screenWidth < 500) {
+    $("#web-logo h3").text('Dashboard');
+  }
 
   remindersApi.getReminders()
     .done(dashboardHomeUi.showRemindersDashTable)
