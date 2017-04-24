@@ -7,7 +7,7 @@ const jobsApi = require('../jobs/api');
 const displayDashboardHome = require('../templates/dashboard/dashboard-home.handlebars');
 
 const homeFailure = function() {
-  console.log('falure');
+  $(".failure-alert").text("An error has occured. Please try again");
 };
 
 const todaysDate = function() {
@@ -330,7 +330,6 @@ const showRemindersDashTable = (data) => {
 
 const showMobileOptions = function() {
   let areOptionsVisible = $(".nav-mobile-ul").css("display");
-  console.log(areOptionsVisible);
   if (areOptionsVisible === "none") {
     $(".nav-mobile-ul").slideDown();
   } else {

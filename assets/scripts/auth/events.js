@@ -5,7 +5,6 @@ const getFormFields = require('../../../lib/get-form-fields');
 const store = require('../store');
 const dashboardHomeUi = require('../dashboard/home-ui');
 const jobsApi = require('../jobs/api');
-// const logic = require('./logic');
 
 // LOGIN EVENTS
 

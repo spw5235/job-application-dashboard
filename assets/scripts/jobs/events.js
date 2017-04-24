@@ -4,6 +4,7 @@ const jobsUi = require('./ui');
 const getFormFields = require('../../../lib/get-form-fields');
 const store = require('../store');
 const logic = require('../dashboard/logic');
+
 // Job EVENTS
 
 const onGetJobs = function(event) {

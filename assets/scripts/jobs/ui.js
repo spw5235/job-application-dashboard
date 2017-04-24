@@ -19,7 +19,6 @@ const getJobSuccess = (data) => {
     let unavailable = "N/A";
     let currArrayOptOne = (dataArr[i].title);
     let currArrayOptTwo = (dataArr[i].posting_date);
-    // let currArrayOptThree = (dataArr[i].post_url);
 
     if (currArrayOptOne === "" || currArrayOptOne === null) {
       dataArr[i].title = unavailable;
@@ -27,9 +26,7 @@ const getJobSuccess = (data) => {
     if (currArrayOptTwo === "" || currArrayOptTwo === null) {
       dataArr[i].posting_date = unavailable;
     }
-    // if (currArrayOptThree === "" || currArrayOptThree === null) {
-    //   dataArr[i].post_url = unavailable;
-    // }
+
   }
 
   let jobDashboard = displayJobDashboard({

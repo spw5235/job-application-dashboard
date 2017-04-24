@@ -30,7 +30,6 @@ const getReminderSuccess = (data) => {
     }
     if (currArrayReminderDate === "" || currArrayReminderDate === null) {
       remindersArr[i].reminder_date = unavailable;
-      console.log(currArrayReminderDate);
     }
     if (currArrayReminderDetails === "" || currArrayReminderDetails === null) {
       remindersArr[i].reminder_details = unavailable;

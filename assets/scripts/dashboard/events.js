@@ -3,8 +3,6 @@
 const remindersApi = require('../reminders/api');
 const dashboardHomeUi = require('./home-ui');
 
-// LOGIN EVENTS
-
 const onGetDash = function() {
   event.preventDefault();
   let screenWidth = window.innerWidth;
@@ -18,7 +16,7 @@ const onGetDash = function() {
 
 const showMobileOptions = function() {
   dashboardHomeUi.showMobileOptions();
-}
+};
 
 
 const addHandlers = () => {

@@ -52,7 +52,7 @@ const obtainOptionText = function(listCategory) {
 
 
 const insertFailure = function() {
-  console.log('failure');
+  $(".failure-alert").text("An error has occured. Please try again");
 };
 
 const jobDropdownDataResults = (data) => {

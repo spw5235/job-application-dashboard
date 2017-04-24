@@ -5,6 +5,7 @@ const getFormFields = require('../../../lib/get-form-fields');
 const store = require('../store');
 const linkLogic = require('../dashboard/link-logic');
 const logic = require('../dashboard/logic');
+
 // Document EVENTS
 
 const onGetDocuments = function(event) {
@@ -70,7 +71,6 @@ const onCreateDocument = function(event) {
   data.document.doctype = $("#document-type-select").val();
   data.document.doctext = $("#doctext-field").val();
 
-  // delete data.document["job-category-radio"];
   data.document.docurl = logic.convertToUrl(data.document.docurl);
 
   store.createDocumentData = data;
@@ -195,7 +195,6 @@ const addHandlers = () => {
   $('.content').on('click', '.dashboard-document-record-btn', onShowDocumentRecord);
   $('#get-documents-btn').on('click', onGetDocuments);
   $('.content').on('click', '#document-record-delete', onDeleteDocument);
-  // $('.content').on('change', '.job-category', onDisplayJobDropdown);
   $('.content').on('change', "#job-update-link", onHideShowUpdateOptions);
   $('.content').on('change', '.update-job', onDisplayJobDropdown);
 };

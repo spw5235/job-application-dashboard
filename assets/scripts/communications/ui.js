@@ -83,6 +83,7 @@ const showCommunicationCreateForm = () => {
 const generateUpdateForm = function(listCategory, formCategory) {
   $(".notification-container").children().text("");
   $(".content").children().remove();
+
   // data-current-c-method
   let data = store.lastShowCommunicationData;
 

@@ -4,7 +4,7 @@ const remindersUi = require('./ui');
 const getFormFields = require('../../../lib/get-form-fields');
 const store = require('../store');
 const linkLogic = require('../dashboard/link-logic');
-// const displayReminderDetails = require('../templates/reminder/show-reminder-record.handlebars');
+
 // Reminder EVENTS
 
 const onGetReminders = function(event) {

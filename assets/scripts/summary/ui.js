@@ -7,7 +7,7 @@ const displayContactsSummary = require('../templates/summary-table/contacts-summ
 const displayCommunicationsSummary = require('../templates/summary-table/communications-summary.handlebars');
 
 const summaryFailure = function() {
-  console.log('failure');
+  $(".failure-alert").text("An error has occured. Please try again");
 };
 
 const remindersSummarySuccess = (data) => {

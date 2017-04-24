@@ -5,7 +5,6 @@ const summaryUi = require('./ui');
 const store = require('../store');
 
 const initiateJobSummaryTables = function(jobId) {
-  console.log(jobId);
   store.masterJobId = jobId;
   summaryApi.getReminders()
     .done(summaryUi.remindersSummarySuccess)

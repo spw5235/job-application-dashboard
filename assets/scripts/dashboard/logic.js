@@ -1,11 +1,5 @@
 'use strict';
 
-// const jobsApi = require('../jobs/api');
-// const store = require('../store');
-// const displayJobOptions =  require('../templates/link/contact-form-job-link.handlebars');
-// const displayJobContactAltOption = require('../templates/alt-link/contact-form-job-alt-link.handlebars');
-// const displayJobCommunicationAltOption = require('../templates/alt-link/communication-form-job-alt-link.handlebars');
-
 const convertToUrl = function(url) {
   let submittedUrlArr = url.split("");
   let returnUrl;

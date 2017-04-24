@@ -1,7 +1,6 @@
 'use strict';
 
 const jobsApi = require('../jobs/api');
-// const jobsUi = require('../jobs/ui');
 const apiAuth = require('./api');
 const store = require('../store');
 const dashboardHomeUi = require('../dashboard/home-ui');
@@ -74,15 +73,6 @@ const signUpSuccess = function() {
     })
     .done(signInSuccess)
     .catch(signInFailure);
-
-  // $("#processing").remove();
-  // $(".signup-failure").text("");
-  // $(".notification-container").children().text("");
-  // let transferEmail = $("#sign-up .signup-email").val();
-  // $("#sign-in .signin-email").val(transferEmail);
-  // $("#sign-up").removeClass("open");
-  // $("#sign-in").addClass("open");
-  // $(".signin-success").slideDown(300).text("You have successfully signed-up.  Please sign-in to continue").delay(3500).slideUp(300);
 };
 
 const signUpFailure = function() {
