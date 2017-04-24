@@ -12,6 +12,13 @@ body {
   float: right;
 }
 
+#jobs-screenshot, #reminders-screenshot {
+  max-width: 100%;
+  width: 400px;
+  height: auto;
+  margin: 10px;
+}
+
 #homepage-job-app-img {
   max-width: 100%;
   width: 250px;
