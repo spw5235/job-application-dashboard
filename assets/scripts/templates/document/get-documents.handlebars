@@ -27,7 +27,8 @@
                   {{document.docsubject}}
                 </td>
                 <td class="display-document-url hidden-xs">
-                  {{document.docurl}}
+                  <p class="display-empty-p"></p>
+                  <a class="display-url" href="{{document.docurl}}" target="_blank"></a>
                 </td>
                 <td class="display-document-submit">
                   <button type="button" class="btn btn-info btn-sm dashboard-document-record-btn" data-current-document-id="{{document.id}}">View document</button>

@@ -40,7 +40,7 @@ const getDocumentSuccess = (data) => {
   });
 
   $('.content').append(documentDashboard);
-
+  logic.displayUrl();
 };
 
 const showDocumentRecordSuccess = (data) => {

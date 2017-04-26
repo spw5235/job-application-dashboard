@@ -53,7 +53,6 @@ const showReminderRecordSuccess = (data) => {
     reminder: data.reminder
   });
   $('.content').append(reminderDetails);
-  logic.displayUrl();
 };
 
 const showReminderRecordFailure = () => {
@@ -139,7 +138,6 @@ const createReminderSuccess = (data) => {
   $(".content").append(showReminderDetails);
   $("#reminder-record-btn-edit").attr("data-current-reminder-type", data.reminder.reminder_type);
   $(".current").attr("data-current-reminder-id", store.currentReminderId);
-  logic.displayUrl();
 };
 
 const deleteReminderSuccess = () => {
@@ -167,7 +165,6 @@ const updateReminderSuccess = (data) => {
   });
   $(".content").append(showReminderDetails);
   $(".current").attr("data-current-reminder-id", store.currentReminderId);
-  logic.displayUrl();
 };
 
 const displayReminderDropdownSuccess = function(data) {

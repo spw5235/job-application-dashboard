@@ -2,9 +2,7 @@
 
   <h1>Communication Overview</h1>
 
-  <h2 class="communication-name-header" data-current-communication-name="{{communication.id}}">{{communication.full_name}}</h2>
-
-  <h3>{{communication.job_ref_text}} Communication Details</h3>
+  <h3>Communication Details</h3>
   <table class="table communication-record-table table-hover">
     <tbody>
       <tr>
@@ -17,10 +15,10 @@
       </tr>
       <tr>
         <td class="communication-record-last-name">
-          Communication Communication Name:
+          Company Name:
         </td>
         <td class="display-communication-last-name">
-          {{communication.communication_ref_name}}
+          {{communication.job_ref_text}}
         </td>
       </tr>
       <tr>
@@ -50,7 +48,6 @@
       <tr>
         <td class="c-url-link">
           Communication Url Link
-          <br> Example: http://gmail.com/12343:
         </td>
         <td class="display-communication-phone">
           <a class="display-url" href="{{communication.c_link}}" target="_blank">N/A</a>

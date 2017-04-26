@@ -58,22 +58,47 @@ const convertToUrl = function(url) {
 };
 
 const displayUrl = function() {
+  let showPath = "/...";
+  let preceding = "www.";
+  let removedPath;
+  let fullUrl;
   let url = $(".display-url").attr("href");
+  let urlArr;
+  let isWWW = (url.split("www.").length > 1);
+  let isHttp = (url.split("http://").length > 1);
+  let isHttpS = (url.split("https://").length > 1);
+  let isBlank = (url.trim() === "");
 
-  if (url === "" || url === "N/A" || url === undefined || url === "undefined" || url === null || url === "null") {
+  if (isWWW) {
+    urlArr = url.split("www.");
+    removedPath = urlArr[1].split("/");
+    fullUrl = preceding + removedPath[0] + showPath;
+    $(".display-url").text(fullUrl);
+    $(".display-empty-p").remove();
+    return;
+  } else if (isHttpS) {
+    urlArr = url.split("https://");
+    removedPath = urlArr[1].split("/");
+    fullUrl = preceding + removedPath[0] + showPath;
+    $(".display-url").text(fullUrl);
+    $(".display-empty-p").remove();
+    return;
+  } else if (isHttp) {
+    urlArr = url.split("http://");
+    removedPath = urlArr[1].split("/");
+    fullUrl = preceding + removedPath[0] + showPath;
+    $(".display-url").text(fullUrl);
+    $(".display-empty-p").remove();
+    return;
+  } else if (isBlank) {
     $(".display-empty-p").text("N/A");
     $(".display-url").remove();
     return;
   } else {
-    url = $(".display-url").attr("href").trim();
+  	$(".display-url").text("link");
+    $(".display-empty-p").remove();
+    return;
   }
-
-  let urlArr = url.split("www.");
-  let removedPath = urlArr[1].split("/");
-  let showPath = "/...";
-  let preceding = "www.";
-  let fullUrl = preceding + removedPath[0] + showPath;
-  $(".display-url").text(fullUrl);
 };
 
 module.exports = {
