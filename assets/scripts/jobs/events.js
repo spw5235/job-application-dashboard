@@ -43,6 +43,7 @@ const onCreateJob = function(event) {
   let data = getFormFields(event.target);
 
   data.job.notes = $("#job-notes-input").val();
+  data.job.job_description = $("#job-description-input").val();
 
   data.job.post_url = logic.convertToUrl(data.job.post_url);
 
@@ -72,6 +73,8 @@ const onUpdateJob = function(event) {
   store.lastShowJobData = data;
 
   data.job.notes = $("#job-notes-input").val();
+
+  data.job.job_description = $("#job-description-input").val();
 
   data.job.post_url = logic.convertToUrl(data.job.post_url);
 
