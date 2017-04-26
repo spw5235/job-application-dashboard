@@ -5,22 +5,14 @@
   <h2 class="contact-name-header" data-current-contact-name="{{contact.id}}">{{contact.full_name}}</h2>
 
   <h3>Contact Details</h3>
-  <table class="table contact-record-table table-hover">
+  <table class="table contact-record-table">
     <tbody>
       <tr>
-        <td class="contact-record-first-name-header">
-          Contact First Name:
+        <td>
+          Name:
         </td>
-        <td class="display-contact-first-name">
-          {{contact.first_name}}
-        </td>
-      </tr>
-      <tr>
-        <td class="contact-record-last-name-header">
-          Contact Last Name:
-        </td>
-        <td class="display-contact-last-name">
-          {{contact.last_name}}
+        <td>
+          {{contact.first_name}} {{contact.last_name}}
         </td>
       </tr>
       <tr>
