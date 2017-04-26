@@ -197,6 +197,7 @@ const addHandlers = () => {
   $('.content').on('click', '#document-record-delete', onDeleteDocument);
   $('.content').on('change', "#job-update-link", onHideShowUpdateOptions);
   $('.content').on('change', '.update-job', onDisplayJobDropdown);
+  $('.content').on('click', '#get-documents-back-btn', onGetDocuments);
 };
 
 module.exports = {

@@ -110,6 +110,7 @@ const addHandlers = () => {
   $('.content').on('click', '.get-jobs', onGetJobs);
   $('.content').on('click', '#job-record-delete-menu', onShowDeleteMenu);
   $('.content').on('click', '#job-delete-cancel', onShowJobRecord);
+  $('.content').on('click', '#get-jobs-back-btn', onGetJobs);
 };
 
 module.exports = {

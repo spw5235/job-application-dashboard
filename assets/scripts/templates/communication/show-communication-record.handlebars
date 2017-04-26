@@ -1,76 +1,82 @@
 <div class="communication-page group-category">
 
-<h1>Communication Overview</h1>
+  <h1>Communication Overview</h1>
 
-<h2 class="communication-name-header" data-current-communication-name="{{communication.id}}">{{communication.full_name}}</h2>
+  <h2 class="communication-name-header" data-current-communication-name="{{communication.id}}">{{communication.full_name}}</h2>
 
-<h3>{{communication.job_ref_text}} Communication Details</h3>
-<table class="table communication-record-table table-hover">
-  <tbody>
-    <tr>
-      <td class="communication-record-first-name">
-        Communication Date:
-      </td>
-      <td class="display-communication-first-name">
-        {{communication.c_date}}
-      </td>
-    </tr>
-    <tr>
-      <td class="communication-record-last-name">
-        Communication Communication Name:
-      </td>
-      <td class="display-communication-last-name">
-        {{communication.communication_ref_name}}
-      </td>
-    </tr>
-    <tr>
-      <td class="company-name">
-        Communication Method
-      </td>
-      <td class="display-communication-company-name">
-        {{communication.c_method}}
-      </td>
-    </tr>
-    <tr>
-      <td class="communication-job-title">
-        Job Title:
-      </td>
-      <td class="display-communication-job-title">
-        {{communication.c_subject}}
-      </td>
-    </tr>
-    <tr>
-      <td class="communication-record-email">
-        Communication Email:
-      </td>
-      <td class="display-communication-email">
-        {{communication.c_details}}
-      </td>
-    </tr>
-    <tr>
-      <td class="c-url-link">
-        Communication Url Link
-        <br>
-        Example: http://gmail.com/12343:
-      </td>
-      <td class="display-communication-phone">
+  <h3>{{communication.job_ref_text}} Communication Details</h3>
+  <table class="table communication-record-table table-hover">
+    <tbody>
+      <tr>
+        <td class="communication-record-first-name">
+          Communication Date:
+        </td>
+        <td class="display-communication-first-name">
+          {{communication.c_date}}
+        </td>
+      </tr>
+      <tr>
+        <td class="communication-record-last-name">
+          Communication Communication Name:
+        </td>
+        <td class="display-communication-last-name">
+          {{communication.communication_ref_name}}
+        </td>
+      </tr>
+      <tr>
+        <td class="company-name">
+          Communication Method
+        </td>
+        <td class="display-communication-company-name">
+          {{communication.c_method}}
+        </td>
+      </tr>
+      <tr>
+        <td class="communication-job-title">
+          Job Title:
+        </td>
+        <td class="display-communication-job-title">
+          {{communication.c_subject}}
+        </td>
+      </tr>
+      <tr>
+        <td class="communication-record-email">
+          Communication Email:
+        </td>
+        <td class="display-communication-email">
+          {{communication.c_details}}
+        </td>
+      </tr>
+      <tr>
+        <td class="c-url-link">
+          Communication Url Link
+          <br> Example: http://gmail.com/12343:
+        </td>
+        <td class="display-communication-phone">
           <a class="display-url" href="{{communication.c_link}}" target="_blank">N/A</a>
-      </td>
-    </tr>
-    <tr>
-      <td class="communication-record-website">
-        Communication Notes:
-      </td>
-      <td class="display-communication-note">
-        {{communication.c_notes}}
-      </td>
-    </tr>
-  </tbody>
-</table>
+        </td>
+      </tr>
+      <tr>
+        <td class="communication-record-website">
+          Communication Notes:
+        </td>
+        <td class="display-communication-note">
+          {{communication.c_notes}}
+        </td>
+      </tr>
+    </tbody>
+  </table>
 
-<div class="dashboard-communication-btn-container">
-  <div class="communication-record-btn-options">
-    <button id="communication-record-btn-edit" type="button" class="btn btn-warning current" data-current-c-method="{{communication.c_method}}" data-current-communication-id="{{communication.id}}" data-current-job-ref-text="{{communication.job_ref_text}}" data-current-job-ref-id="{{communication.job_ref_id}}">Edit Communication Record</button>
-    <button id="communication-record-delete" type="button" class="btn btn-danger current" data-current-communication-id="{{communication.id}}">Delete Communication Record</button>
+  <div class="dashboard-communication-btn-container">
+    <div class="communication-record-btn-options">
+      <button id="communication-record-btn-edit" type="button" class="btn btn-warning current" data-current-c-method="{{communication.c_method}}" data-current-communication-id="{{communication.id}}" data-current-job-ref-text="{{communication.job_ref_text}}"
+          data-current-job-ref-id="{{communication.job_ref_id}}">Edit Communication Record</button>
+      <button id="communication-record-delete" type="button" class="btn btn-danger current" data-current-communication-id="{{communication.id}}">Delete Communication Record</button>
+    </div>
   </div>
+
+  <div class="back-btn-container">
+    <button id="get-communications-back-btn" type="button" class="btn btn-default current">Back</button>
+  </div>
+
 </div>

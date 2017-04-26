@@ -201,6 +201,7 @@ const addHandlers = () => {
   $('.content').on('change', "#job-update-link", onHideShowUpdateOptions);
   $('.content').on('change', '.update-job', onDisplayJobDropdown);
   $('.content').on('click', '.get-contacts', onGetContacts);
+  $('.content').on('click', '#get-contacts-back-btn', onGetContacts);
 };
 
 module.exports = {

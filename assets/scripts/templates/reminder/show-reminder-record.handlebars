@@ -42,15 +42,7 @@
         Linked Company:
       </td>
       <td class="display-reminder-note">
-        {{reminder.job_name}}
-      </td>
-    </tr>
-    <tr>
-      <td class="reminder-record-title reminder-archive">
-        Linked Contacts:
-      </td>
-      <td class="display-reminder-note">
-        {{reminder.contact_name}}
+        {{reminder.job_ref_text}}
       </td>
     </tr>
   </tbody>
@@ -61,3 +53,8 @@
     <button id="reminder-record-btn-edit" type="button" class="btn btn-warning current" data-current-reminder-id="{{reminder.id}}" data-current-job-ref-id="{{reminder.job_ref_id}}" data-current-job-ref-text="{{reminder.job_ref_text}}" data-current-reminder-type="{{reminder.reminder_type}}">Edit Reminder Record</button>
     <button id="reminder-record-delete" type="button" class="btn btn-danger current" data-current-reminder-id="{{reminder.id}}">Delete Reminder Record</button>
   </div>
+</div>
+
+<div class="back-btn-container">
+  <button id="back-to-reminders" type="button" class="btn btn-default current">Back</button>
+</div>
