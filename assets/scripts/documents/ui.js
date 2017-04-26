@@ -116,6 +116,8 @@ const generateUpdateForm = function(listCategory, formCategory) {
   let preselectDiv = "#document-type-select";
   linkLogic.preselectDefault(preselectDiv, preselectVal);
 
+  let divId = "#doctext-field";
+  logic.textAreaHeightUpdate(divId);
 };
 
 const getDocumentFailure = () => {

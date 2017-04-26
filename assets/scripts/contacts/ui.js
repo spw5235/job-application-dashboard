@@ -111,6 +111,8 @@ const generateUpdateForm = function(listCategory, formCategory) {
     $(currentRefTextValTxt).text("N/A");
   }
 
+  let divId = "#contact-notes-input";
+  logic.textAreaHeightUpdate(divId);
 };
 
 const getContactFailure = () => {

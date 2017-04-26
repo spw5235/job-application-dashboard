@@ -1,16 +1,29 @@
 <h1>Reminder Overview</h1>
 
-<h2 class="reminder-name-header" data-current-reminder-name="{{reminder.id}}">{{reminder.full_name}}</h2>
-
-<h3>Reminder Details</h3>
 <table class="table reminder-record-table table-hover">
   <tbody>
+    <tr>
+      <td class="reminder-record-title reminder-record-note">
+        Reminder Notification Date:
+      </td>
+      <td class="display-reminder-note">
+        {{reminder.reminder_date}}
+      </td>
+    </tr>
     <tr>
       <td class="reminder-record-title reminder-reminder-type">
         Reminder Type:
       </td>
       <td class="display-reminder-type">
         {{reminder.reminder_type}}
+      </td>
+    </tr>
+    <tr>
+      <td class="reminder-record-title reminder-archive">
+        Linked Company:
+      </td>
+      <td class="display-reminder-note">
+        {{reminder.job_ref_text}}
       </td>
     </tr>
     <tr>
@@ -25,24 +38,8 @@
       <td class="reminder-record-title reminder-details">
         Reminder Details:
       </td>
-      <td class="display-reminder-teacher">
+      <td class="maintain-spacing">
         {{reminder.reminder_details}}
-      </td>
-    </tr>
-    <tr>
-      <td class="reminder-record-title reminder-record-note">
-        Reminder Notification Date:
-      </td>
-      <td class="display-reminder-note">
-        {{reminder.reminder_date}}
-      </td>
-    </tr>
-    <tr>
-      <td class="reminder-record-title reminder-archive">
-        Linked Company:
-      </td>
-      <td class="display-reminder-note">
-        {{reminder.job_ref_text}}
       </td>
     </tr>
   </tbody>

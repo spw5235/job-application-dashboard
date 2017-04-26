@@ -120,6 +120,10 @@ const generateUpdateForm = function(listCategory, formCategory) {
 
   $(selectText).prop('selected', true);
 
+  let divId = "#communication-notes-input";
+  logic.textAreaHeightUpdate(divId);
+
+
 };
 
 const getCommunicationFailure = () => {

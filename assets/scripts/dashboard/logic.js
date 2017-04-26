@@ -1,5 +1,29 @@
 'use strict';
 
+const textAreaHeightUpdate = function(divId) {
+  let text = $(divId).text();
+  let tempDiv = $('<div id="temp"></div>');
+  let currentTdWidth = $(divId).width();
+  let currentTdWidthPx = currentTdWidth.toString() + "px";
+  tempDiv.css({
+    "width": currentTdWidthPx,
+    "white-space": "pre-line",
+    "font-size": "15px"
+  });
+
+  tempDiv.text(text);
+  $('body').append(tempDiv);
+
+  let useHeight = $("#temp").height();
+
+  if (useHeight > 0) {
+    let useHeightPx = useHeight.toString() + "px";
+    $(divId).css("height", useHeightPx);
+  }
+
+  $("#temp").remove();
+};
+
 const convertToUrl = function(url) {
   let submittedUrlArr = url.split("");
   let returnUrl;
@@ -32,4 +56,5 @@ const displayUrl = function() {
 module.exports = {
   convertToUrl,
   displayUrl,
+  textAreaHeightUpdate,
 };

@@ -115,6 +115,9 @@ const generateUpdateForm = function(listCategory, formCategory) {
   let preselectVal = store.currentReminderType;
   let preselectDiv = "#reminder-type-select";
   linkLogic.preselectDefault(preselectDiv, preselectVal);
+
+  let divId = "#reminder-details-field";
+  logic.textAreaHeightUpdate(divId);
 };
 
 const getReminderFailure = () => {

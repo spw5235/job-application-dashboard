@@ -39,6 +39,7 @@ const getJobSuccess = (data) => {
 };
 
 const showJobRecordSuccess = (data) => {
+
   $(".notification-container").children().text("");
   $(".content").children().remove();
   store.lastShowJobData = data;
@@ -80,6 +81,15 @@ const generateUpdateForm = function() {
     job: data.job
   });
   $('.content').append(editJob);
+
+  let jobDescriptionId = "#job-description-input";
+  let jobResponsibilitiesId = "#job-responsibilities-input";
+  let jobRequirementId = "#job-requirement-input";
+  let jobNotesId = "#job-notes-input";
+  logic.textAreaHeightUpdate(jobDescriptionId);
+  logic.textAreaHeightUpdate(jobResponsibilitiesId);
+  logic.textAreaHeightUpdate(jobRequirementId);
+  logic.textAreaHeightUpdate(jobNotesId);
 };
 
 const getJobFailure = () => {
