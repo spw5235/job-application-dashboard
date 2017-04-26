@@ -187,6 +187,11 @@ const onHideShowUpdateOptions = function() {
   }
 };
 
+const resizeTextArea = function() {
+    let divId = $(this).attr("id");
+    logic.onResizeTextarea(divId);
+};
+
 const addHandlers = () => {
   $('.content').on('submit', '#new-document-form', onCreateDocument);
   $('.content').on('submit', '#update-document-form', onUpdateDocument);
@@ -198,6 +203,7 @@ const addHandlers = () => {
   $('.content').on('change', "#job-update-link", onHideShowUpdateOptions);
   $('.content').on('change', '.update-job', onDisplayJobDropdown);
   $('.content').on('click', '#get-documents-back-btn', onGetDocuments);
+  $('.content').on('keyup', '#doctext-field', resizeTextArea);
 };
 
 module.exports = {

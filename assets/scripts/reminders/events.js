@@ -4,6 +4,7 @@ const remindersUi = require('./ui');
 const getFormFields = require('../../../lib/get-form-fields');
 const store = require('../store');
 const linkLogic = require('../dashboard/link-logic');
+const logic = require('../dashboard/logic');
 
 // Reminder EVENTS
 
@@ -182,6 +183,11 @@ const onHideShowUpdateOptions = function() {
   }
 };
 
+const resizeTextArea = function() {
+    let divId = $(this).attr("id");
+    logic.onResizeTextarea(divId);
+};
+
 const addHandlers = () => {
   $('.content').on('submit', '#new-reminder-form', onCreateReminder);
   $('.content').on('submit', '#update-reminder-form', onUpdateReminder);
@@ -195,6 +201,7 @@ const addHandlers = () => {
   $('.content').on('change', '.update-job', onDisplayJobDropdown);
   $('.content').on('change', "#job-create-link", onHideShowCreateOptions);
   $('.content').on('click', '#back-to-reminders', onGetReminders);
+  $('.content').on('keyup', '#reminder-details-field', resizeTextArea);
 };
 
 module.exports = {

@@ -57,7 +57,7 @@ const onCreateJob = function(event) {
 
 const onDeleteJob = function(event) {
   event.preventDefault();
-  store.currentJobId= $("#job-record-delete").attr("data-current-job-id");
+  store.currentJobId = $("#job-record-delete").attr("data-current-job-id");
 
 
   jobsApi.deleteJob(store.currentJobId)
@@ -99,6 +99,11 @@ const onShowDeleteMenu = function(event) {
   $(".delete-confirmation-contain").show();
 };
 
+const resizeTextArea = function() {
+    let divId = $(this).attr("id");
+    logic.onResizeTextarea(divId);
+};
+
 const addHandlers = () => {
   $('.content').on('submit', '#new-job-form', onCreateJob);
   $('.content').on('submit', '#update-job-form', onUpdateJob);
@@ -111,6 +116,10 @@ const addHandlers = () => {
   $('.content').on('click', '#job-record-delete-menu', onShowDeleteMenu);
   $('.content').on('click', '#job-delete-cancel', onShowJobRecord);
   $('.content').on('click', '#get-jobs-back-btn', onGetJobs);
+  $('.content').on('keyup', '#job-description-input', resizeTextArea);
+  $('.content').on('keyup', '#job-responsibilities-input', resizeTextArea);
+  $('.content').on('keyup', '#job-requirement-input', resizeTextArea);
+  $('.content').on('keyup', '#job-notes-input', resizeTextArea);
 };
 
 module.exports = {

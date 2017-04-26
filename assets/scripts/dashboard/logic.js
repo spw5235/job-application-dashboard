@@ -1,5 +1,25 @@
 'use strict';
 
+const onResizeTextarea = function(currentId) {
+
+  // let currentId = $(this).attr("id");
+
+  let MaxHeight = 2000;
+  let textarea = document.getElementById(currentId);
+  let textareaRows = textarea.value.split("\n");
+  let counter;
+
+  if (textareaRows[0] !== "undefined" && textareaRows.length < MaxHeight) {
+    counter = textareaRows.length;
+  } else if (textareaRows.length >= MaxHeight) {
+    counter = MaxHeight;
+  } else {
+    counter = 1;
+  }
+
+  textarea.rows = counter;
+};
+
 const textAreaHeightUpdate = function(divId) {
   let text = $(divId).text();
   let tempDiv = $('<div id="temp"></div>');
@@ -57,4 +77,5 @@ module.exports = {
   convertToUrl,
   displayUrl,
   textAreaHeightUpdate,
+  onResizeTextarea
 };

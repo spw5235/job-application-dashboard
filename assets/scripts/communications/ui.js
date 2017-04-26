@@ -122,7 +122,8 @@ const generateUpdateForm = function(listCategory, formCategory) {
 
   let divId = "#communication-notes-input";
   logic.textAreaHeightUpdate(divId);
-
+  let divIdTwo = "#communication-details-input";
+  logic.textAreaHeightUpdate(divIdTwo);
 
 };
 
