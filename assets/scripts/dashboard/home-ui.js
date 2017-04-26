@@ -21,6 +21,7 @@ const todaysDate = function() {
 
   let dateArray = output.split("/");
   let dateNum = parseInt(dateArray[0] + dateArray[1] + dateArray[2]);
+  console.log(dateNum);
   return dateNum;
 };
 
@@ -40,19 +41,32 @@ const isItUpcoming = function(today, deadline) {
   }
 };
 
-const addDateToNum = function(data) {
+const addDateToNumApproach = function(data, type) {
 
   const sortNumber = function(a, b) {
     return a - b;
   };
 
+  const sortNumberOverdue = function(a, b) {
+    return b - a;
+  }
+
   let newReminderDataObject = {
+    reminders: []
+  };
+
+  let overdueReminderDataObject = {
     reminders: []
   };
 
   let numIdArr = [];
 
+  let numIdArrOverdue = [];
+
   let remindersData = data.reminders;
+
+  let remindersDataOverdue = data.reminders;
+
   const remindersDataLength = data.reminders.length;
 
   for ( let i = 0; i < remindersDataLength; i++ ) {
@@ -65,16 +79,31 @@ const addDateToNum = function(data) {
 
       let currentDateToNumDecimal = parseFloat(currentDateToNum + "." + currentId);
 
-      numIdArr.push(currentDateToNumDecimal);
-      remindersData[i].date_to_num = currentDateToNumDecimal;
-      newReminderDataObject.reminders.push(remindersData[i]);
+      let todayDate = todaysDate();
+
+      if (todayDate <= currentDateToNum) {
+        numIdArr.push(currentDateToNumDecimal);
+        remindersData[i].date_to_num = currentDateToNumDecimal;
+        newReminderDataObject.reminders.push(remindersData[i]);
+      } else {
+        numIdArrOverdue.push(currentDateToNumDecimal);
+        remindersDataOverdue[i].date_to_num = currentDateToNumDecimal;
+        overdueReminderDataObject.reminders.push(remindersDataOverdue[i]);
+      }
     }
   }
 
   store.numIdReminderArr = numIdArr.sort(sortNumber);
+  store.numIdReminderArrOverdue = numIdArrOverdue.sort(sortNumberOverdue);
 
-  return newReminderDataObject;
+  if (type === 1) {
+    return newReminderDataObject;
+  } else if (type === 2) {
+    return overdueReminderDataObject;
+  }
 };
+
+//////
 
 const generateEmptyReminders = function(length) {
   let newReminderDataObject = {
@@ -148,7 +177,30 @@ const showContactDashTable = (data) => {
   let communicationFinalData = store.finalCommunicationData;
   let jobFinalData = store.finalJobData;
   let reminderFinalData = store.finalReminderData;
+  let reminderFinalDataOverdue = store.finalReminderDataOverdue;
   store.finalContactData = data;
+
+  console.log(reminderFinalDataOverdue);
+
+  // Converting to overdues
+
+  data = reminderFinalDataOverdue;
+
+  let remindersDataOverdue = data.reminders;
+
+  const remindersDataLength = data.reminders.length;
+
+  let revisedFinalOverdue = {
+      overdues: []
+  };
+
+  for ( let i = 0; i < remindersDataLength; i++ ) {
+    let currentRemindersData = data.reminders[i];
+    revisedFinalOverdue.overdues.push(currentRemindersData);
+  }
+
+  reminderFinalDataOverdue = revisedFinalOverdue;
+  //
 
   $('.content').children().remove();
 
@@ -156,7 +208,8 @@ const showContactDashTable = (data) => {
     reminders: reminderFinalData.reminders,
     jobs: jobFinalData.jobs,
     communications: communicationFinalData.communications,
-    contacts: contactFinalData.contacts
+    contacts: contactFinalData.contacts,
+    overdues: reminderFinalDataOverdue.overdues
   });
 
 
@@ -189,6 +242,14 @@ const showContactDashTable = (data) => {
   } else {
     store.isReminderDashEmpty = false;
   }
+
+  if (store.isReminderDashEmptyOverdue === true) {
+    $(".reminder-dash-table-empty-overdue").text("You have no overdue reminders");
+    store.isReminderDashEmptyOverdue = false;
+  } else {
+    store.isReminderDashEmptyOverdue = false;
+  }
+
 };
 
 const showCommunicationDashTable = (data) => {
@@ -286,9 +347,54 @@ const showJobDashTable = (data) => {
 };
 
 
-const showRemindersDashTable = (data) => {
+const showRemindersApproachDashTable = (data) => {
   $(".notification-container").children().text("");
-  data = addDateToNum(data);
+
+  ///////////////////////////////////
+  /////////////Overdue///////////////
+  ///////////////////////////////////
+
+  let dataOverdue = addDateToNumApproach(data, 2);
+
+  let dataLengthOverdue = dataOverdue.reminders.length;
+
+  let emptyRemindersObjectOverdue = generateEmptyReminders(dataLengthOverdue);
+
+  let numIdArrOverdue = store.numIdReminderArrOverdue;
+
+  for (let i = 0; i < numIdArrOverdue.length; i++) {
+    let numIdToStringOverdue = numIdArrOverdue[i].toString();
+    let splitIdOverdue = numIdToStringOverdue.split(".");
+    let splitIdToNumOverdue = parseInt(splitIdOverdue[1]);
+    emptyRemindersObjectOverdue.reminders[i].id = splitIdToNumOverdue;
+  }
+
+  for (let i = 0; i < emptyRemindersObjectOverdue.reminders.length; i++) {
+    let currentEmptyDataOverdue = emptyRemindersObjectOverdue.reminders[i];
+    let emptyDataIdOverdue = emptyRemindersObjectOverdue.reminders[i].id;
+
+    for (let j = 0; j < dataOverdue.reminders.length; j++) {
+      if (dataOverdue.reminders[j].id === emptyDataIdOverdue) {
+        currentEmptyDataOverdue.reminder_date = dataOverdue.reminders[j].reminder_date;
+        currentEmptyDataOverdue.job_ref_text = dataOverdue.reminders[j].job_ref_text;
+        currentEmptyDataOverdue.reminder_type = dataOverdue.reminders[j].reminder_type;
+        currentEmptyDataOverdue.reminder_subject = dataOverdue.reminders[j].reminder_subject;
+      }
+    }
+  }
+
+  dataOverdue = emptyRemindersObjectOverdue;
+
+  if (emptyRemindersObjectOverdue.reminders.length === 0) {
+    store.isReminderDashEmptyOverdue = true;
+  }
+  store.finalReminderDataOverdue = dataOverdue;
+
+///////////////////////////////////
+/////////////Upcoming//////////////
+///////////////////////////////////
+
+  data = addDateToNumApproach(data, 1);
   let dataLength = data.reminders.length;
 
   let emptyRemindersObject = generateEmptyReminders(dataLength);
@@ -341,7 +447,7 @@ const showMobileOptions = function() {
 module.exports = {
   showJobDashTable,
   homeFailure,
-  showRemindersDashTable,
+  showRemindersApproachDashTable,
   showCommunicationDashTable,
   showMobileOptions,
 };

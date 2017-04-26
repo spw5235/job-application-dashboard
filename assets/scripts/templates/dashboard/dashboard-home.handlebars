@@ -147,4 +147,47 @@
       </div>
     </div>
   </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="dash-home-table">
+        <h3>Overdue Reminders</h3>
+        <table id="reminder-summary-table" class="table reminder-summary-table table-hover">
+          <thead>
+            <tr>
+              <th class="hidden-xs">Notification Date</th>
+              <th class="hidden-md hidden-sm hidden-xs">Company Name</th>
+              <th>Reminder Subject</th>
+              <th>View Record</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#each overdues as |overdue|}}
+              <tr>
+                <td class="hidden-xs">
+                  {{overdue.reminder_date}}
+                </td>
+                <td class="hidden-md hidden-sm hidden-xs display-company-name get-reminders-job-ref-text">
+                  {{overdue.job_ref_text}}
+                </td>
+                <td class="display-reminder-location">
+                  {{overdue.reminder_subject}}
+                </td>
+                <td class="display-reminder-submit">
+                  <button type="button" class="btn btn-default btn-sm view-reminder-record-btn" data-current-reminder-id="{{overdue.id}}" data-contact-id="{{overdue.contact_ref_id}}">View Record</button>
+                </td>
+              </tr>
+            {{/each}}
+          </tbody>
+        </table>
+        <p class="reminder-dash-table-empty-overdue"></p>
+        <div class="home-dashboard-container">
+          <button id="generate-create-reminder-overdue-btn" type="button" class="btn btn-success">Create</button>
+          <button type="button" class="btn btn-info get-reminders">View All</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
 </div>

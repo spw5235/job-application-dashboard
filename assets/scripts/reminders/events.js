@@ -193,6 +193,7 @@ const addHandlers = () => {
   $('.content').on('submit', '#update-reminder-form', onUpdateReminder);
   $('.content').on('click', '#reminder-record-btn-edit', onEditReminder);
   $('.content').on('click', '#generate-create-reminder-btn', onShowReminderCreateForm);
+  $('.content').on('click', '#generate-create-reminder-overdue-btn', onShowReminderCreateForm);
   $('.content').on('click', '.view-reminder-record-btn', onShowReminderRecord);
   $('#get-reminders-btn').on('click', onGetReminders);
   $('.content').on('click', '#reminder-record-delete', onDeleteReminder);

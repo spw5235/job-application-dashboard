@@ -45,7 +45,7 @@ const signInSuccess = function() {
   }
 
   remindersApi.getReminders()
-    .done(dashboardHomeUi.showRemindersDashTable)
+    .done(dashboardHomeUi.showRemindersApproachDashTable)
     .fail(dashboardHomeUi.homeFailure);
 };
 

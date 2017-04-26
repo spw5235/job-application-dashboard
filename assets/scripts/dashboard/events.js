@@ -10,7 +10,7 @@ const onGetDash = function() {
     $(".nav-mobile-ul").slideUp();
   }
   remindersApi.getReminders()
-    .done(dashboardHomeUi.showRemindersDashTable)
+    .done(dashboardHomeUi.showRemindersApproachDashTable)
     .fail(dashboardHomeUi.homeFailure);
 };
 
