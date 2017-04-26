@@ -58,11 +58,14 @@ const convertToUrl = function(url) {
 };
 
 const displayUrl = function() {
-  let url = $(".display-url").attr("href").trim();
-  if (url === "" || url === "N/A") {
+  let url = $(".display-url").attr("href");
+
+  if (url === "" || url === "N/A" || url === undefined || url === "undefined" || url === null || url === "null") {
     $(".display-empty-p").text("N/A");
     $(".display-url").remove();
     return;
+  } else {
+    url = $(".display-url").attr("href").trim();
   }
 
   let urlArr = url.split("www.");
