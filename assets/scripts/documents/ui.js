@@ -40,7 +40,6 @@ const getDocumentSuccess = (data) => {
   });
 
   $('.content').append(documentDashboard);
-  logic.displayUrl();
 };
 
 const showDocumentRecordSuccess = (data) => {
@@ -75,6 +74,8 @@ const showDocumentCreateForm = () => {
 
   linkLogic.radioClassIdNameGen(formCategory, listCategory);
   $("#job-category-radio-container").hide();
+  let defaultDate = logic.defaultDate();
+  $(".default-date").val(defaultDate);
 };
 
 

@@ -77,6 +77,10 @@ const showCommunicationCreateForm = () => {
 
   linkLogic.radioClassIdNameGen(formCategory, listCategory);
   $("#job-category-radio-container").hide();
+
+  let defaultDate = logic.defaultDate();
+  $(".default-date").val(defaultDate);
+
 };
 
 

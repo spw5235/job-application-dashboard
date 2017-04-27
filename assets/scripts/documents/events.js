@@ -204,6 +204,7 @@ const addHandlers = () => {
   $('.content').on('change', '.update-job', onDisplayJobDropdown);
   $('.content').on('click', '#get-documents-back-btn', onGetDocuments);
   $('.content').on('keyup', '#doctext-field', resizeTextArea);
+  $('.content').on('click', '.get-documents', onGetDocuments);
 };
 
 module.exports = {

@@ -120,8 +120,8 @@ const addHandlers = () => {
   $('.content').on('keyup', '#job-responsibilities-input', resizeTextArea);
   $('.content').on('keyup', '#job-requirement-input', resizeTextArea);
   $('.content').on('keyup', '#job-notes-input', resizeTextArea);
+  $('.content').on('click', '#dashboard-recent-job-btn', onGetJobs);
 };
-
 module.exports = {
   addHandlers,
 };

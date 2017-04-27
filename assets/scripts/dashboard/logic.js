@@ -1,5 +1,25 @@
 'use strict';
 
+// const isDateBlank = function() {
+//   let enteredDate = $(".is-date-blank").val();
+//   console.log(enteredDate);
+//   if (enteredDate === "") {
+//     return true;
+//   } else {
+//     return false;
+//   }
+// };
+
+const defaultDate = function() {
+  let d = new Date();
+  let month = d.getMonth()+1;
+  let day = d.getDate();
+  let output = d.getFullYear() + '-' +
+    (month<10 ? '0' : '') + month + '-' +
+    (day<10 ? '0' : '') + day;
+  return output;
+};
+
 const onResizeTextarea = function(currentId) {
 
   // let currentId = $(this).attr("id");
@@ -105,5 +125,7 @@ module.exports = {
   convertToUrl,
   displayUrl,
   textAreaHeightUpdate,
-  onResizeTextarea
+  onResizeTextarea,
+  defaultDate,
+  // isDateBlank,
 };

@@ -13,6 +13,19 @@ textarea {
   min-height: 90px;
 }
 
+.clear-default-date {
+  margin-left: 5px;
+  padding: 2px 5px;
+  background-color:black;
+  color:white;
+  cursor: pointer;
+}
+
+.clear-default-date:hover {
+  background-color: lightgray;
+  color: black;
+}
+
 .create-textarea {
   height: auto;
   resize: none;

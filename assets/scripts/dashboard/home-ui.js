@@ -2,6 +2,7 @@
 
 const store = require('../store');
 const communicationsApi = require('../communications/api');
+const documentsApi = require('../documents/api');
 const contactsApi = require('../contacts/api');
 const jobsApi = require('../jobs/api');
 const displayDashboardHome = require('../templates/dashboard/dashboard-home.handlebars');
@@ -18,10 +19,8 @@ const todaysDate = function() {
     (month<10 ? '0' : '') + month + '/' +
     (day<10 ? '0' : '') + day;
 
-
   let dateArray = output.split("/");
   let dateNum = parseInt(dateArray[0] + dateArray[1] + dateArray[2]);
-  console.log(dateNum);
   return dateNum;
 };
 
@@ -49,7 +48,7 @@ const addDateToNumApproach = function(data, type) {
 
   const sortNumberOverdue = function(a, b) {
     return b - a;
-  }
+  };
 
   let newReminderDataObject = {
     reminders: []
@@ -176,6 +175,7 @@ const showContactDashTable = (data) => {
   let contactFinalData = data;
   let communicationFinalData = store.finalCommunicationData;
   let jobFinalData = store.finalJobData;
+  let documentFinalData = store.finalDocumentData;
   let reminderFinalData = store.finalReminderData;
   let reminderFinalDataOverdue = store.finalReminderDataOverdue;
   store.finalContactData = data;
@@ -185,8 +185,6 @@ const showContactDashTable = (data) => {
   // Converting to overdues
 
   data = reminderFinalDataOverdue;
-
-  let remindersDataOverdue = data.reminders;
 
   const remindersDataLength = data.reminders.length;
 
@@ -208,6 +206,7 @@ const showContactDashTable = (data) => {
     reminders: reminderFinalData.reminders,
     jobs: jobFinalData.jobs,
     communications: communicationFinalData.communications,
+    documents: documentFinalData.documents,
     contacts: contactFinalData.contacts,
     overdues: reminderFinalDataOverdue.overdues
   });
@@ -250,7 +249,78 @@ const showContactDashTable = (data) => {
     store.isReminderDashEmptyOverdue = false;
   }
 
+  if (store.isDocumentDashEmptyOverdue === true) {
+    $(".document-dash-table-empty").text("No documents have been recently created.");
+    store.isReminderDashEmptyOverdue = false;
+  } else {
+    store.isReminderDashEmptyOverdue = false;
+  }
+
+
 };
+
+
+const showDocumentDashTable = (data) => {
+  let newDocumentDataObject = {
+    documents: []
+  };
+
+  let documentOne;
+  let documentTwo;
+  let documentThree;
+  let documentFour;
+  let documentFive;
+
+  let documentArrLength = data.documents.length;
+
+  if (documentArrLength === 0) {
+    store.isDocumentDashEmpty = true;
+  } else if ( documentArrLength === 1 ) {
+    documentOne = data.documents[documentArrLength - 1];
+    newDocumentDataObject.documents.push(documentOne);
+  } else if ( documentArrLength === 2 ) {
+    documentOne = data.documents[documentArrLength - 1];
+    newDocumentDataObject.documents.push(documentOne);
+    documentTwo = data.documents[documentArrLength - 2];
+    newDocumentDataObject.documents.push(documentTwo);
+  } else if ( documentArrLength === 3 ) {
+    documentOne = data.documents[documentArrLength - 1];
+    newDocumentDataObject.documents.push(documentOne);
+    documentTwo = data.documents[documentArrLength - 2];
+    newDocumentDataObject.documents.push(documentTwo);
+    documentThree = data.documents[documentArrLength - 3];
+    newDocumentDataObject.documents.push(documentThree);
+  } else if ( documentArrLength === 4 ) {
+    documentOne = data.documents[documentArrLength - 1];
+    newDocumentDataObject.documents.push(documentOne);
+    documentTwo = data.documents[documentArrLength - 2];
+    newDocumentDataObject.documents.push(documentTwo);
+    documentThree = data.documents[documentArrLength - 3];
+    newDocumentDataObject.documents.push(documentThree);
+    documentFour = data.documents[documentArrLength - 4];
+    newDocumentDataObject.documents.push(documentFour);
+  } else if (documentArrLength >= 5) {
+    documentOne = data.documents[documentArrLength - 1];
+    newDocumentDataObject.documents.push(documentOne);
+    documentTwo = data.documents[documentArrLength - 2];
+    newDocumentDataObject.documents.push(documentTwo);
+    documentThree = data.documents[documentArrLength - 3];
+    newDocumentDataObject.documents.push(documentThree);
+    documentFour = data.documents[documentArrLength - 4];
+    newDocumentDataObject.documents.push(documentFour);
+    documentFive = data.documents[documentArrLength - 5];
+    newDocumentDataObject.documents.push(documentFive);
+  }
+
+  data = newDocumentDataObject;
+  store.finalDocumentData = data;
+
+  contactsApi.getContacts()
+    .done(showContactDashTable)
+    .fail(homeFailure);
+};
+
+
 
 const showCommunicationDashTable = (data) => {
   let newCommunicationDataObject = {
@@ -307,44 +377,110 @@ const showCommunicationDashTable = (data) => {
   data = newCommunicationDataObject;
   store.finalCommunicationData = data;
 
-  contactsApi.getContacts()
-    .done(showContactDashTable)
+  documentsApi.getDocuments()
+    .done(showDocumentDashTable)
     .fail(homeFailure);
 };
 
+
+// Archived upcoming job deadlines //
 const showJobDashTable = (data) => {
-  let newDataObject = {
+
+  let newJobDataObject = {
     jobs: []
   };
 
-  let today = todaysDate();
-  let allJobsData = data.jobs;
+  let jobOne;
+  let jobTwo;
+  let jobThree;
+  let jobFour;
+  let jobFive;
 
-  for (let i = 0; i < allJobsData.length; i++) {
-    let currentDeadline = allJobsData[i].deadline;
+  let jobArrLength = data.jobs.length;
 
-    if (currentDeadline !== null && currentDeadline !== undefined) {
-
-      let convertedNum = convertDateToNum(currentDeadline);
-
-      let isUpcoming = isItUpcoming(today, convertedNum);
-
-      if (isUpcoming) {
-        newDataObject.jobs.push(allJobsData[i]);
-      }
-
-    }
-  }
-
-  if ( newDataObject.jobs.length === 0) {
+  if (jobArrLength === 0) {
     store.isJobDashEmpty = true;
+  } else if ( jobArrLength === 1 ) {
+    jobOne = data.jobs[jobArrLength - 1];
+    newJobDataObject.jobs.push(jobOne);
+  } else if ( jobArrLength === 2 ) {
+    jobOne = data.jobs[jobArrLength - 1];
+    newJobDataObject.jobs.push(jobOne);
+    jobTwo = data.jobs[jobArrLength - 2];
+    newJobDataObject.jobs.push(jobTwo);
+  } else if ( jobArrLength === 3 ) {
+    jobOne = data.jobs[jobArrLength - 1];
+    newJobDataObject.jobs.push(jobOne);
+    jobTwo = data.jobs[jobArrLength - 2];
+    newJobDataObject.jobs.push(jobTwo);
+    jobThree = data.jobs[jobArrLength - 3];
+    newJobDataObject.jobs.push(jobThree);
+  } else if ( jobArrLength === 4 ) {
+    jobOne = data.jobs[jobArrLength - 1];
+    newJobDataObject.jobs.push(jobOne);
+    jobTwo = data.jobs[jobArrLength - 2];
+    newJobDataObject.jobs.push(jobTwo);
+    jobThree = data.jobs[jobArrLength - 3];
+    newJobDataObject.jobs.push(jobThree);
+    jobFour = data.jobs[jobArrLength - 4];
+    newJobDataObject.jobs.push(jobFour);
+  } else if (jobArrLength >= 5) {
+    jobOne = data.jobs[jobArrLength - 1];
+    newJobDataObject.jobs.push(jobOne);
+    jobTwo = data.jobs[jobArrLength - 2];
+    newJobDataObject.jobs.push(jobTwo);
+    jobThree = data.jobs[jobArrLength - 3];
+    newJobDataObject.jobs.push(jobThree);
+    jobFour = data.jobs[jobArrLength - 4];
+    newJobDataObject.jobs.push(jobFour);
+    jobFive = data.jobs[jobArrLength - 5];
+    newJobDataObject.jobs.push(jobFive);
   }
 
-  store.finalJobData = newDataObject;
+  data = newJobDataObject;
+  store.finalJobData = data;
+
   communicationsApi.getCommunications()
     .done(showCommunicationDashTable)
     .fail(homeFailure);
 };
+
+
+//
+// // Archived upcoming job deadlines //
+// const showJobDashTable = (data) => {
+//   let newDataObject = {
+//     jobs: []
+//   };
+//
+//   let today = todaysDate();
+//   let allJobsData = data.jobs;
+//
+//   for (let i = 0; i < allJobsData.length; i++) {
+//     let currentDeadline = allJobsData[i].deadline;
+//
+//     if (currentDeadline !== null && currentDeadline !== undefined) {
+//
+//       let convertedNum = convertDateToNum(currentDeadline);
+//
+//       let isUpcoming = isItUpcoming(today, convertedNum);
+//
+//       if (isUpcoming) {
+//         newDataObject.jobs.push(allJobsData[i]);
+//       }
+//
+//     }
+//   }
+//
+//   if ( newDataObject.jobs.length === 0) {
+//     store.isJobDashEmpty = true;
+//   }
+//
+//   store.finalJobData = newDataObject;
+//   communicationsApi.getCommunications()
+//     .done(showCommunicationDashTable)
+//     .fail(homeFailure);
+// };
 
 
 const showRemindersApproachDashTable = (data) => {

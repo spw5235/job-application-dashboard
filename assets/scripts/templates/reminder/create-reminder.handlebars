@@ -7,6 +7,11 @@
       <p>All fields are <u>optional</u> unless otherwise indicated</p>
 
       <div class="form-group">
+        <label>Reminder Notification Date <span class="clear-default-date">&#10005;</span></label>
+        <input class="form-control field-input default-date" name="reminder[reminder_date]" placeholder="Date" type="date">
+      </div>
+
+      <div class="form-group">
         <label>Reminder Type (required)</label>
         <select class="form-control" id="reminder-type-select">
             <option class="form-control required-field" name="reminder[reminder_type]" placeholder="reminder Type" type="text" value="Action">Action</option>
@@ -22,11 +27,6 @@
       <div class="form-group">
         <label>Reminder Details</label>
         <textarea id="reminder-details-field" class="create-textarea form-control field-input reminder-details" name="reminder[reminder_details]" type="text" placeholder="Reminder Details"></textarea>
-      </div>
-
-      <div class="form-group">
-        <label>Reminder Notification Date</label>
-        <input class="form-control field-input" name="reminder[reminder_date]" placeholder="Date" type="date">
       </div>
 
       <div class="job-create-link-container form-group">
