@@ -1,22 +1,54 @@
 'use strict';
 
-// const isDateBlank = function() {
-//   let enteredDate = $(".is-date-blank").val();
-//   console.log(enteredDate);
-//   if (enteredDate === "") {
-//     return true;
-//   } else {
-//     return false;
-//   }
+const convertPercentage = function() {
+    let allInputs = document.querySelectorAll('.text-input');
+    let allInputsLength = allInputs.length;
+
+    for (let i = 0; i < allInputsLength; ++i) {
+      let currentVal = allInputs[i].value;
+      let currentArr = currentVal.split("");
+
+      for (let j = 0; j < currentArr.length; j++) {
+        if (currentArr[j] === "%") {
+          currentArr[j] = " percent";
+        }
+      }
+
+      let revisedValue = currentArr.join("");
+
+      allInputs[i].value = revisedValue;
+
+    }
+
+  };
+
+  //
+  //
+  // let cellVal = $("#doctext-field").val();
+  //
+  // console.log(cellVal);
+  //
+  // let cellValArr = cellVal.split("");
+  //
+  // for (let i = 0; i < cellValArr.length; i++) {
+  //   if (cellValArr[i] === "%") {
+  //     cellValArr[i] = " percent";
+  //   }
+  // }
+  //
+  // let revisedCellVal = cellValArr.join("");
+  //
+  // console.log(cellVal);
+  // $("#doctext-field").val(revisedCellVal);
 // };
 
 const defaultDate = function() {
   let d = new Date();
-  let month = d.getMonth()+1;
+  let month = d.getMonth() + 1;
   let day = d.getDate();
   let output = d.getFullYear() + '-' +
-    (month<10 ? '0' : '') + month + '-' +
-    (day<10 ? '0' : '') + day;
+    (month < 10 ? '0' : '') + month + '-' +
+    (day < 10 ? '0' : '') + day;
   return output;
 };
 
@@ -44,6 +76,8 @@ const textAreaHeightUpdate = function(divId) {
   let text = $(divId).text();
   let tempDiv = $('<div id="temp"></div>');
   let currentTdWidth = $(divId).width();
+  console.log(divId);
+  console.log(currentTdWidth);
   let currentTdWidthPx = currentTdWidth.toString() + "px";
   tempDiv.css({
     "width": currentTdWidthPx,
@@ -115,7 +149,7 @@ const displayUrl = function() {
     $(".display-url").remove();
     return;
   } else {
-  	$(".display-url").text("link");
+    $(".display-url").text("link");
     $(".display-empty-p").remove();
     return;
   }
@@ -127,5 +161,6 @@ module.exports = {
   textAreaHeightUpdate,
   onResizeTextarea,
   defaultDate,
+  convertPercentage,
   // isDateBlank,
 };

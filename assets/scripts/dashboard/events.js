@@ -20,8 +20,7 @@ const showMobileOptions = function() {
 
 const clearDefaultDate = function() {
   $(".default-date").val("");
-}
-
+};
 
 const addHandlers = () => {
   $('#get-dash-home-btn').on('click', onGetDash);

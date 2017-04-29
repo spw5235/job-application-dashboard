@@ -40,6 +40,7 @@ const onEditJob = function(event) {
 
 const onCreateJob = function(event) {
   event.preventDefault();
+  logic.convertPercentage();
   let data = getFormFields(event.target);
 
   data.job.notes = $("#job-notes-input").val();
@@ -67,6 +68,7 @@ const onDeleteJob = function(event) {
 
 const onUpdateJob = function(event) {
   event.preventDefault();
+  logic.convertPercentage();
   let data = getFormFields(event.target);
 
   store.createJobData = data;

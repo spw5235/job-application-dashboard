@@ -40,6 +40,7 @@ const onEditCommunication = function(event) {
 
 const onCreateCommunication = function(event) {
   event.preventDefault();
+  logic.convertPercentage();
   let data = getFormFields(event.target);
 
   let listCategory = "job";
@@ -79,6 +80,7 @@ const onDeleteCommunication = function(event) {
 
 const onUpdateCommunication = function(event) {
   event.preventDefault();
+  logic.convertPercentage();
   let data = getFormFields(event.target);
 
   let prevJobRefId = store.currentJobRefId;

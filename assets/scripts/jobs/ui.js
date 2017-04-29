@@ -11,6 +11,8 @@ const logic = require('../dashboard/logic');
 
 const getJobSuccess = (data) => {
 
+  $(".notification-container").children().text("");
+
   $(".content").children().remove();
 
   let dataArr = data.jobs;
@@ -60,7 +62,6 @@ const showJobRecordSuccess = (data) => {
 const showJobRecordFailure = () => {
   $(".notification-container").children().text("");
   $(".failure-alert").text("An error has occured displaying the job record");
-
 };
 
 const showJobCreateForm = () => {

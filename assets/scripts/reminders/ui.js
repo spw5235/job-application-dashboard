@@ -144,6 +144,7 @@ const createReminderSuccess = (data) => {
 
 const deleteReminderSuccess = () => {
   $(".notification-container").children().text("");
+  $(".failure-alert").text("An error has occured and the record could not be deleted.");
   remindersApi.getReminders()
     .done(getReminderSuccess)
     .fail(getReminderFailure);

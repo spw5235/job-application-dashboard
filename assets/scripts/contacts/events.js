@@ -40,6 +40,7 @@ const onEditContact = function(event) {
 
 const onCreateContact = function(event) {
   event.preventDefault();
+  logic.convertPercentage();
   let data = getFormFields(event.target);
 
   let firstName = $(".contact-first-name").val().trim();
@@ -87,6 +88,7 @@ const onDeleteContact = function(event) {
 
 const onUpdateContact = function(event) {
   event.preventDefault();
+  logic.convertPercentage();
   let data = getFormFields(event.target);
 
   let firstName = $(".contact-first-name").val().trim();

@@ -41,6 +41,7 @@ const onEditReminder = function(event) {
 
 const onCreateReminder = function(event) {
   event.preventDefault();
+  logic.convertPercentage();
   let data = getFormFields(event.target);
 
   let listCategory = "job";
@@ -76,6 +77,7 @@ const onDeleteReminder = function(event) {
 
 const onUpdateReminder = function(event) {
   event.preventDefault();
+  logic.convertPercentage();
   let data = getFormFields(event.target);
 
   let prevJobRefId = store.currentJobRefId;

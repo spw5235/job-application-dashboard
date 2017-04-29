@@ -13,6 +13,7 @@ const logic = require('../dashboard/logic');
 
 const getDocumentSuccess = (data) => {
   store.documentDataForEdit = data;
+  $(".notification-container").children().text("");
 
   $(".content").children().remove();
 

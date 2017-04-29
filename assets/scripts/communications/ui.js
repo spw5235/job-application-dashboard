@@ -12,6 +12,7 @@ const linkLogic = require('../dashboard/link-logic');
 const logic = require('../dashboard/logic');
 
 const getCommunicationSuccess = (data) => {
+  $(".notification-container").children().text("");
   store.communicationDataForEdit = data;
 
   $(".content").children().remove();
@@ -65,7 +66,6 @@ const showCommunicationRecordFailure = () => {
 const showCommunicationCreateForm = () => {
   let listCategory = "job";
   let formCategory = "communication";
-
 
   $(".notification-container").children().text("");
   $(".content").children().remove();
@@ -133,7 +133,6 @@ const generateUpdateForm = function(listCategory, formCategory) {
 
 const getCommunicationFailure = () => {
   $(".notification-container").children().text("");
-  $(".notification-container").children().text("");
   $(".failure-alert").text("An error has occured and the records could not be retrieved.");
 };
 
@@ -161,7 +160,6 @@ const deleteCommunicationSuccess = () => {
 };
 
 const deleteCommunicationFailure = () => {
-  $(".notification-container").children().text("");
   $(".notification-container").children().text("");
   $(".failure-alert").text("An error has occured and the record could not be deleted.");
 };

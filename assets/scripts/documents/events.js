@@ -42,6 +42,10 @@ const onEditDocument = function(event) {
 
 const onCreateDocument = function(event) {
   event.preventDefault();
+  logic.convertPercentage();
+  // document.querySelectorAll('.form-control').forEach(function() {
+  //   logic.convertPercentage();
+  // });
   let data = getFormFields(event.target);
   store.createDocumentData = data;
   store.lastShowDocumentData = data;
@@ -91,6 +95,7 @@ const onDeleteDocument = function(event) {
 
 const onUpdateDocument = function(event) {
   event.preventDefault();
+  logic.convertPercentage();
   let data = getFormFields(event.target);
 
   let prevJobRefId = store.currentJobRefId;
