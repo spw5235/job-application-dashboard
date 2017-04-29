@@ -10,6 +10,7 @@ const jobsApi = require('../jobs/api');
 
 const onSignIn = function(event) {
   event.preventDefault();
+  $(".disable-btn").prop("disabled",true);
   let screenWidth = window.innerWidth;
   if (screenWidth < 768) {
     $(".nav-mobile-ul").slideUp();
@@ -28,6 +29,7 @@ const onSignIn = function(event) {
 
 const onSignUp = function(event) {
   event.preventDefault();
+  $(".disable-btn").prop("disabled",true);
   let div = ".signup-success";
   uiAuth.blinkNotify(div, "start");
   let data = getFormFields(event.target);
@@ -86,12 +88,17 @@ const viewDash = function() {
     .fail(dashboardHomeUi.homeFailure);
 };
 
+const onBtnOptions = function() {
+  $(".disable-btn").prop("disabled",false);
+};
+
 const addHandlers = () => {
   $('#sign-up').on('submit', onSignUp);
   $('#sign-in').on('submit', onSignIn);
   $('#change-password').on('submit', onChangePassword);
   $('#sign-out button').on('click', onSignOut);
   $('#get-dash-btn').on('click', viewDash);
+  $('.dropdown-toggle').on('click', onBtnOptions);
 };
 
 module.exports = {

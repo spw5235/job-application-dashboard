@@ -51,6 +51,7 @@ const signInSuccess = function() {
 
 const signInFailure = function() {
   $("#processing").remove();
+  $(".disable-btn").prop("disabled",false);
   $(".notification-container").children().text("");
   $('.signin-failure').text('Failed sign-in attempt. User email may not exist and/or passwords may not match').show(0).delay(4000).slideUp(500);
 };
@@ -77,6 +78,7 @@ const signUpSuccess = function() {
 
 const signUpFailure = function() {
   $("#processing").remove();
+  $(".disable-btn").prop("disabled", false);
   $(".notification-container").children().text("");
   $(".signup-failure").slideDown(300).text("Sign-up error. Please ensure that you are using a valid email and passwords match.");
 };
