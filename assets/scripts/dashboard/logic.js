@@ -22,26 +22,6 @@ const convertPercentage = function() {
 
   };
 
-  //
-  //
-  // let cellVal = $("#doctext-field").val();
-  //
-  // console.log(cellVal);
-  //
-  // let cellValArr = cellVal.split("");
-  //
-  // for (let i = 0; i < cellValArr.length; i++) {
-  //   if (cellValArr[i] === "%") {
-  //     cellValArr[i] = " percent";
-  //   }
-  // }
-  //
-  // let revisedCellVal = cellValArr.join("");
-  //
-  // console.log(cellVal);
-  // $("#doctext-field").val(revisedCellVal);
-// };
-
 const defaultDate = function() {
   let d = new Date();
   let month = d.getMonth() + 1;
