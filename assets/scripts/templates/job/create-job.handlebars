@@ -54,7 +54,18 @@
 
       <div class="form-group">
         <label>Job Notes</label>
-        <textarea id ="job-notes-input" class="create-textarea text-input form-control field-input note-input" name="job[note]" placeholder="Job Notes" type="textarea"></textarea>
+        <textarea id="job-notes-input" class="create-textarea text-input form-control field-input note-input" name="job[note]" placeholder="Job Notes" type="textarea"></textarea>
+      </div>
+
+      <div class="job-create-link-container form-group">
+        <label>Have you applied to the job?</label>
+        <div class="form-group">
+          <span>Check Box for Yes</span>
+          <input id="job-applied-checkbox" class="edit-input-aet" name="job[applied]" placeholder="applied" type="checkbox" value="">
+        </div>
+        <div class="form-group job-applied-date-container">
+          <input id="job-applied-date-field" name="job[date_applied]" class="form-control" placeholder="Application Date" type="date">
+        </div>
       </div>
 
       <div class="form-group">

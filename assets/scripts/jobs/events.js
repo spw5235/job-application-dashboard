@@ -48,6 +48,15 @@ const onCreateJob = function(event) {
 
   data.job.post_url = logic.convertToUrl(data.job.post_url);
 
+  let isJobAppliedChecked = $('#job-applied-checkbox').prop("checked");
+
+  if (isJobAppliedChecked) {
+    data.job.applied = true;
+  } else {
+    data.job.applied = false;
+  }
+
+  console.log(data);
   store.createJobData = data;
   store.lastShowJobData = data;
 
@@ -106,6 +115,25 @@ const resizeTextArea = function() {
     logic.onResizeTextarea(divId);
 };
 
+const onAppliedForJob = function(event) {
+  event.preventDefault();
+
+  let isCurrentlyChecked = $(this).prop("checked");
+  console.log(isCurrentlyChecked);
+  let defaultDate = logic.defaultDate();
+
+  if (isCurrentlyChecked) {
+    $(this).prop("checked", true);
+    $(".job-applied-date-container").show();
+    $("#job-applied-date-field").val(defaultDate);
+  } else {
+    $(this).prop("checked", false);
+    $(".job-applied-date-container").hide();
+    $("#job-applied-date-field").val(null);
+  }
+
+};
+
 const addHandlers = () => {
   $('.content').on('submit', '#new-job-form', onCreateJob);
   $('.content').on('submit', '#update-job-form', onUpdateJob);
@@ -123,6 +151,7 @@ const addHandlers = () => {
   $('.content').on('keyup', '#job-requirement-input', resizeTextArea);
   $('.content').on('keyup', '#job-notes-input', resizeTextArea);
   $('.content').on('click', '#dashboard-recent-job-btn', onGetJobs);
+  $('.content').on('change', '#job-applied-checkbox', onAppliedForJob);
 };
 module.exports = {
   addHandlers,

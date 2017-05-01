@@ -69,6 +69,7 @@ const showJobCreateForm = () => {
   $(".content").children().remove();
   let showCreateJobForm = displayJobCreateForm();
   $('.content').append(showCreateJobForm);
+  $(".job-applied-date-container").hide();
 };
 
 
@@ -99,6 +100,7 @@ const getJobFailure = () => {
 };
 
 const createJobSuccess = (data) => {
+  console.log(data);
   store.currentJobId = data.job.id;
   $(".form-error").text("");
   $(".notification-container").children().text("");
