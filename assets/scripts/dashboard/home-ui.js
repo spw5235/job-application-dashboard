@@ -13,11 +13,11 @@ const homeFailure = function() {
 
 const todaysDate = function() {
   let d = new Date();
-  let month = d.getMonth()+1;
+  let month = d.getMonth() + 1;
   let day = d.getDate();
   let output = d.getFullYear() + '/' +
-    (month<10 ? '0' : '') + month + '/' +
-    (day<10 ? '0' : '') + day;
+    (month < 10 ? '0' : '') + month + '/' +
+    (day < 10 ? '0' : '') + day;
 
   let dateArray = output.split("/");
   let dateNum = parseInt(dateArray[0] + dateArray[1] + dateArray[2]);
@@ -68,7 +68,7 @@ const addDateToNumApproach = function(data, type) {
 
   const remindersDataLength = data.reminders.length;
 
-  for ( let i = 0; i < remindersDataLength; i++ ) {
+  for (let i = 0; i < remindersDataLength; i++) {
     let currentRemindersDate = data.reminders[i].reminder_date;
     let isNull = (data.reminders[i].reminder_date === null);
 
@@ -118,6 +118,25 @@ const generateEmptyReminders = function(length) {
   return newReminderDataObject;
 };
 
+const hideEmptyRows = function(tableId, rowThreshold) {
+  let jQueryTableId = tableId + " tr";
+  $(jQueryTableId).each(function() {
+    let count = 0;
+
+    $('td', this).each(function() {
+      let text = $(this).text().trim();
+
+      if (text === "") {
+        count += 1;
+      }
+    })
+
+    if (count === rowThreshold) {
+      $(this).remove();
+    }
+  });
+};
+
 const showContactDashTable = (data) => {
   let newContactDataObject = {
     contacts: []
@@ -133,22 +152,22 @@ const showContactDashTable = (data) => {
 
   if (contactArrLength === 0) {
     store.isContactDashEmpty = true;
-  } else if ( contactArrLength === 1 ) {
+  } else if (contactArrLength === 1) {
     contactOne = data.contacts[contactArrLength - 1];
     newContactDataObject.contacts.push(contactOne);
-  } else if ( contactArrLength === 2 ) {
+  } else if (contactArrLength === 2) {
     contactOne = data.contacts[contactArrLength - 1];
     newContactDataObject.contacts.push(contactOne);
     contactTwo = data.contacts[contactArrLength - 2];
     newContactDataObject.contacts.push(contactTwo);
-  } else if ( contactArrLength === 3 ) {
+  } else if (contactArrLength === 3) {
     contactOne = data.contacts[contactArrLength - 1];
     newContactDataObject.contacts.push(contactOne);
     contactTwo = data.contacts[contactArrLength - 2];
     newContactDataObject.contacts.push(contactTwo);
     contactThree = data.contacts[contactArrLength - 3];
     newContactDataObject.contacts.push(contactThree);
-  } else if ( contactArrLength === 4 ) {
+  } else if (contactArrLength === 4) {
     contactOne = data.contacts[contactArrLength - 1];
     newContactDataObject.contacts.push(contactOne);
     contactTwo = data.contacts[contactArrLength - 2];
@@ -189,10 +208,10 @@ const showContactDashTable = (data) => {
   const remindersDataLength = data.reminders.length;
 
   let revisedFinalOverdue = {
-      overdues: []
+    overdues: []
   };
 
-  for ( let i = 0; i < remindersDataLength; i++ ) {
+  for (let i = 0; i < remindersDataLength; i++) {
     let currentRemindersData = data.reminders[i];
     revisedFinalOverdue.overdues.push(currentRemindersData);
   }
@@ -213,6 +232,13 @@ const showContactDashTable = (data) => {
 
 
   $('.content').append(dashboardHome);
+
+  hideEmptyRows("#reminder-summary-table", 3);
+  hideEmptyRows("#overdue-reminder-summary-table", 3);
+  hideEmptyRows(".job-summary-table", 3);
+  hideEmptyRows(".document-summary-table", 2);
+  hideEmptyRows(".contact-summary-table", 1);
+  hideEmptyRows(".communication-summary-table", 3);
 
   if (store.isContactDashEmpty === true) {
     $(".contact-dash-table-empty").text("No contacts have been recently added");
@@ -275,22 +301,22 @@ const showDocumentDashTable = (data) => {
 
   if (documentArrLength === 0) {
     store.isDocumentDashEmpty = true;
-  } else if ( documentArrLength === 1 ) {
+  } else if (documentArrLength === 1) {
     documentOne = data.documents[documentArrLength - 1];
     newDocumentDataObject.documents.push(documentOne);
-  } else if ( documentArrLength === 2 ) {
+  } else if (documentArrLength === 2) {
     documentOne = data.documents[documentArrLength - 1];
     newDocumentDataObject.documents.push(documentOne);
     documentTwo = data.documents[documentArrLength - 2];
     newDocumentDataObject.documents.push(documentTwo);
-  } else if ( documentArrLength === 3 ) {
+  } else if (documentArrLength === 3) {
     documentOne = data.documents[documentArrLength - 1];
     newDocumentDataObject.documents.push(documentOne);
     documentTwo = data.documents[documentArrLength - 2];
     newDocumentDataObject.documents.push(documentTwo);
     documentThree = data.documents[documentArrLength - 3];
     newDocumentDataObject.documents.push(documentThree);
-  } else if ( documentArrLength === 4 ) {
+  } else if (documentArrLength === 4) {
     documentOne = data.documents[documentArrLength - 1];
     newDocumentDataObject.documents.push(documentOne);
     documentTwo = data.documents[documentArrLength - 2];
@@ -337,22 +363,22 @@ const showCommunicationDashTable = (data) => {
 
   if (communicationArrLength === 0) {
     store.isCommunicationDashEmpty = true;
-  } else if ( communicationArrLength === 1 ) {
+  } else if (communicationArrLength === 1) {
     communicationOne = data.communications[communicationArrLength - 1];
     newCommunicationDataObject.communications.push(communicationOne);
-  } else if ( communicationArrLength === 2 ) {
+  } else if (communicationArrLength === 2) {
     communicationOne = data.communications[communicationArrLength - 1];
     newCommunicationDataObject.communications.push(communicationOne);
     communicationTwo = data.communications[communicationArrLength - 2];
     newCommunicationDataObject.communications.push(communicationTwo);
-  } else if ( communicationArrLength === 3 ) {
+  } else if (communicationArrLength === 3) {
     communicationOne = data.communications[communicationArrLength - 1];
     newCommunicationDataObject.communications.push(communicationOne);
     communicationTwo = data.communications[communicationArrLength - 2];
     newCommunicationDataObject.communications.push(communicationTwo);
     communicationThree = data.communications[communicationArrLength - 3];
     newCommunicationDataObject.communications.push(communicationThree);
-  } else if ( communicationArrLength === 4 ) {
+  } else if (communicationArrLength === 4) {
     communicationOne = data.communications[communicationArrLength - 1];
     newCommunicationDataObject.communications.push(communicationOne);
     communicationTwo = data.communications[communicationArrLength - 2];
@@ -400,22 +426,22 @@ const showJobDashTable = (data) => {
 
   if (jobArrLength === 0) {
     store.isJobDashEmpty = true;
-  } else if ( jobArrLength === 1 ) {
+  } else if (jobArrLength === 1) {
     jobOne = data.jobs[jobArrLength - 1];
     newJobDataObject.jobs.push(jobOne);
-  } else if ( jobArrLength === 2 ) {
+  } else if (jobArrLength === 2) {
     jobOne = data.jobs[jobArrLength - 1];
     newJobDataObject.jobs.push(jobOne);
     jobTwo = data.jobs[jobArrLength - 2];
     newJobDataObject.jobs.push(jobTwo);
-  } else if ( jobArrLength === 3 ) {
+  } else if (jobArrLength === 3) {
     jobOne = data.jobs[jobArrLength - 1];
     newJobDataObject.jobs.push(jobOne);
     jobTwo = data.jobs[jobArrLength - 2];
     newJobDataObject.jobs.push(jobTwo);
     jobThree = data.jobs[jobArrLength - 3];
     newJobDataObject.jobs.push(jobThree);
-  } else if ( jobArrLength === 4 ) {
+  } else if (jobArrLength === 4) {
     jobOne = data.jobs[jobArrLength - 1];
     newJobDataObject.jobs.push(jobOne);
     jobTwo = data.jobs[jobArrLength - 2];
@@ -526,9 +552,9 @@ const showRemindersApproachDashTable = (data) => {
   }
   store.finalReminderDataOverdue = dataOverdue;
 
-///////////////////////////////////
-/////////////Upcoming//////////////
-///////////////////////////////////
+  ///////////////////////////////////
+  /////////////Upcoming//////////////
+  ///////////////////////////////////
 
   data = addDateToNumApproach(data, 1);
   let dataLength = data.reminders.length;
@@ -560,6 +586,7 @@ const showRemindersApproachDashTable = (data) => {
 
   data = emptyRemindersObject;
 
+  console.log(data);
   if (emptyRemindersObject.reminders.length === 0) {
     store.isReminderDashEmpty = true;
   }
@@ -568,7 +595,7 @@ const showRemindersApproachDashTable = (data) => {
   jobsApi.getJobs()
     .done(showJobDashTable)
     .fail(homeFailure);
-  };
+};
 
 const showMobileOptions = function() {
   let areOptionsVisible = $(".nav-mobile-ul").css("display");
