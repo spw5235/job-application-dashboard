@@ -221,6 +221,9 @@ const showContactDashTable = (data) => {
 
   $('.content').children().remove();
 
+  console.log(troubleshoot);
+  console.log(reminderFinalData.reminders);
+
   let dashboardHome = displayDashboardHome({
     reminders: reminderFinalData.reminders,
     jobs: jobFinalData.jobs,
