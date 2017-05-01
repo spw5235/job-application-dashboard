@@ -199,8 +199,6 @@ const showContactDashTable = (data) => {
   let reminderFinalDataOverdue = store.finalReminderDataOverdue;
   store.finalContactData = data;
 
-  console.log(reminderFinalDataOverdue);
-
   // Converting to overdues
 
   data = reminderFinalDataOverdue;
@@ -220,9 +218,6 @@ const showContactDashTable = (data) => {
   //
 
   $('.content').children().remove();
-
-  console.log("troubleshoot");
-  console.log(reminderFinalData.reminders);
 
   let dashboardHome = displayDashboardHome({
     reminders: reminderFinalData.reminders,
@@ -589,7 +584,6 @@ const showRemindersApproachDashTable = (data) => {
 
   data = emptyRemindersObject;
 
-  console.log(data);
   if (emptyRemindersObject.reminders.length === 0) {
     store.isReminderDashEmpty = true;
   }

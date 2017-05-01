@@ -56,8 +56,6 @@ const textAreaHeightUpdate = function(divId) {
   let text = $(divId).text();
   let tempDiv = $('<div id="temp"></div>');
   let currentTdWidth = $(divId).width();
-  console.log(divId);
-  console.log(currentTdWidth);
   let currentTdWidthPx = currentTdWidth.toString() + "px";
   tempDiv.css({
     "width": currentTdWidthPx,
