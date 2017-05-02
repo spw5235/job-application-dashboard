@@ -1,120 +1,136 @@
-<div class="container">
-
-  <h1>Job Overview</h1>
-
-  <h3>Job Details</h3>
-  <table class="table job-record-table">
-    <tbody>
-      <tr>
-        <td>Job Application Priority</td>
-        <td>{{job.priority_num}}</td>
-      </tr>
-      <tr>
-        <td class="job-record-company-name">
-          Company Name:
-        </td>
-        <td>
-          {{job.company_name}}
-        </td>
-      </tr>
-      <tr>
-        <td class="job-record-title">
-          Job Title:
-        </td>
-        <td>
-          {{job.title}}
-        </td>
-      </tr>
-      <tr>
-        <tr>
-          <td>
-            Deadline:
-          </td>
-          <td>
-            {{job.deadline}}
-          </td>
-        </tr>
-        <tr>
-          <td>
-            Salary:
-          </td>
-          <td>
-            {{job.salary}}
-          </td>
-        </tr>
-        <tr>
-          <td>
-            Posting Date
-          </td>
-          <td>
-            {{job.posting_date}}
-          </td>
-        </tr>
-        <tr>
-          <td>
-            Job Post Url
-          </td>
-          <td>
-            <p class="display-empty-p"></p>
-            <a class="display-url" href="{{job.post_url}}" target="_blank"></a>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            Job Description
-          </td>
-          <td class="maintain-spacing">
-            {{job.job_description}}
-          </td>
-        </tr>
-        <tr>
-          <td>
-            Responsibilities
-          </td>
-          <td class="maintain-spacing">
-            {{job.responsibility}}
-          </td>
-        </tr>
-        <tr>
-          <td>Requirements:</td>
-          <td class="maintain-spacing">
-            {{job.requirement}}
-          </td>
-        </tr>
-        <tr>
-          <td>Notes:</td>
-          <td class="maintain-spacing">
-            {{job.note}}
-          </td>
-        </tr>
-    </tbody>
-  </table>
-
-  <div class="dashboard-job-btn-container">
-    <div class="job-record-btn-options">
-      <button id="job-record-btn-edit" type="button" class="btn btn-warning current" data-current-job-id="{{job.id}}" data-current-company-id="{{job.company_ref_id}}" data-current-job-id="{{job.job_ref_id}}" data-current-document-id="{{job.document_ref_id}}">Edit Job Record</button>
-      <button id="job-record-delete-menu" type="button" class="btn btn-danger current" data-current-job-id="{{job.id}}">Delete Job Record</button>
-      <br><br>
-    </div>
-    <div class="delete-confirmation-contain">
-      <div class="form-group delete-confirmation">
-        <h3>Warning:</h3>
-        <p>Deleting this job record will also remove all linked records (e.g. linked contacts, linked reminders, etc.)</p>
-        <label>Would you like to continue?</label>
-        <br>
-        <button id="job-record-delete" type="button" class="btn btn-danger current" data-current-job-id="{{job.id}}">Delete All</button>
-        <button id="job-delete-cancel" type="button" class="btn btn-primary current" data-current-job-id="{{job.id}}">Cancel</button>
-      </div>
-    </div>
-
-    <div class="reminders-summary-table-container"></div>
-    <div class="communications-summary-table-container"></div>
-    <div class="contacts-summary-table-container"></div>
-    <div class="documents-summary-table-container"></div>
-
+<div class="row">
+  <div class="col-sm-5 col-sm-offset-1 col-xs-12 col-xs-offset-0">
+    <h1>Job Details</h1>
   </div>
-
-  <div class="back-btn-container">
-    <button type="button" class="btn btn-default current get-jobs-back-btn">Back</button>
+  <div class="col-sm-5 col-xs-12 col-xs-offset-0">
+    <h1>Application Status: {{#if job.applied}}<span class="green">Submitted</span>{{else}}<span class="red">Pending</span>{{/if}}</h1>
   </div>
 </div>
+<div class- "row">
+  <div class="col-xs-12 col-xs-offset-0">
+    <table class="table job-record-table">
+      <tbody>
+        <tr>
+          <td class="job-record-company-name">
+            Company Name:
+          </td>
+          <td>
+            {{job.company_name}}
+          </td>
+        </tr>
+        <tr>
+          <td class="job-record-title">
+            Job Title:
+          </td>
+          <td>
+            {{job.title}}
+          </td>
+        </tr>
+        <tr>
+          <td>Application Priority</td>
+          <td>{{job.priority_num}}</td>
+        </tr>
+        {{#if job.applied}}
+          <tr>
+            <td>Application Submission Date</td>
+            <td>{{job.date_applied}}</td>
+          </tr>
+        {{/if}}
+
+        <tr>
+          <tr>
+            <td>
+              Deadline:
+            </td>
+            <td>
+              {{job.deadline}}
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Salary:
+            </td>
+            <td>
+              {{job.salary}}
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Posting Date
+            </td>
+            <td>
+              {{job.posting_date}}
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Job Post Url
+            </td>
+            <td>
+              <p class="display-empty-p"></p>
+              <a class="display-url" href="{{job.post_url}}" target="_blank"></a>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Job Description
+            </td>
+            <td class="maintain-spacing">
+              {{job.job_description}}
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Responsibilities
+            </td>
+            <td class="maintain-spacing">
+              {{job.responsibility}}
+            </td>
+          </tr>
+          <tr>
+            <td>Requirements:</td>
+            <td class="maintain-spacing">
+              {{job.requirement}}
+            </td>
+          </tr>
+          <tr>
+            <td>Notes:</td>
+            <td class="maintain-spacing">
+              {{job.note}}
+            </td>
+          </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+
+      <div class="dashboard-job-btn-container">
+        <div class="job-record-btn-options">
+          <button id="job-record-btn-edit" type="button" class="btn btn-warning current" data-current-job-id="{{job.id}}" data-current-company-id="{{job.company_ref_id}}" data-current-job-id="{{job.job_ref_id}}" data-current-document-id="{{job.document_ref_id}}">Edit Job Record</button>
+          <button id="job-record-delete-menu" type="button" class="btn btn-danger current" data-current-job-id="{{job.id}}">Delete Job Record</button>
+          <br><br>
+        </div>
+        <div class="delete-confirmation-contain">
+          <div class="form-group delete-confirmation">
+            <h3>Warning:</h3>
+            <p>Deleting this job record will also remove all linked records (e.g. linked contacts, linked reminders, etc.)</p>
+            <label>Would you like to continue?</label>
+            <br>
+            <button id="job-record-delete" type="button" class="btn btn-danger current" data-current-job-id="{{job.id}}">Delete All</button>
+            <button id="job-delete-cancel" type="button" class="btn btn-primary current" data-current-job-id="{{job.id}}">Cancel</button>
+          </div>
+        </div>
+      </div>
+      <div class="reminders-summary-table-container"></div>
+      <div class="communications-summary-table-container"></div>
+      <div class="contacts-summary-table-container"></div>
+      <div class="documents-summary-table-container"></div>
+
+    </div>
+
+    <div class="back-btn-container">
+      <button type="button" class="btn btn-default current get-jobs-back-btn">Back</button>
+    </div>
+  </div>

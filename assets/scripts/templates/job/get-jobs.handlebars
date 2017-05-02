@@ -1,14 +1,19 @@
-<div class="container">
+
 
   <div class="row">
-    <div class="col-lg-10 col-lg-offset-1 col-xs-12 col-xs-offset-0">
+    <div class="col-xs-12">
       <h1>Job Dashboard</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-10 col-lg-offset-1 col-xs-12 col-xs-offset-0">
       <table class="table job-summary-table table-hover">
         <thead>
           <tr>
             <th>Company Name</th>
             <th class="hidden-xs">Job Title</th>
-            <th class="hidden-xs">Job Deadline</th>
+            <th>Applied?</th>
+            <th class="hidden-xs">Job Priority</th>
             <th>View Record</th>
           </tr>
         </thead>
@@ -21,8 +26,15 @@
               <td class="display-job-title hidden-xs">
                 {{job.title}}
               </td>
-              <td class="display-job-deadline hidden-xs">
-                {{job.deadline}}
+              <td>
+                {{#if job.applied}}
+                  Yes
+                {{else}}
+                  No
+                {{/if}}
+              </td>
+              <td class="hidden-xs">
+                {{job.priority_num}}
               </td>
               <td>
                 <button type="button" class="btn btn-default btn-sm dashboard-job-record-btn" data-current-job-id="{{job.id}}">View Job </button>
@@ -40,4 +52,3 @@
       </div>
     </div>
   </div>
-</div>
