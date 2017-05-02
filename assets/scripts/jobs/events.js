@@ -40,6 +40,8 @@ const onEditJob = function(event) {
 
 const onCreateJob = function(event) {
   event.preventDefault();
+
+  store.addDefaultReminder = $("#default-reminder-input").prop("checked");
   logic.convertPercentage();
   let data = getFormFields(event.target);
 
@@ -61,7 +63,7 @@ const onCreateJob = function(event) {
   store.lastShowJobData = data;
 
   jobsApi.createJob(data)
-    .done(jobsUi.createJobSuccess)
+    .done(jobsUi.createDefaultReminderSuccess)
     .fail(jobsUi.createJobFailure);
 };
 

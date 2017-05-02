@@ -8,6 +8,7 @@ const displayJobCreateForm = require('../templates/job/create-job.handlebars');
 const jobsApi = require('./api');
 const summaryLogic = require('../summary/summary-logic');
 const logic = require('../dashboard/logic');
+const remindersApi = require('../reminders/api');
 
 const getJobSuccess = (data) => {
 
@@ -102,7 +103,8 @@ const getJobFailure = () => {
   $(".failure-alert").text("An error has occured when retrieving the job record");
 };
 
-const createJobSuccess = (data) => {
+const createJobSuccess = function(data) {
+// const createJobSuccess = (data) => {
   console.log(data);
   store.currentJobId = data.job.id;
   $(".form-error").text("");
@@ -156,6 +158,59 @@ const updateJobFailure = function() {
   $(".failure-alert").text("An error has occured and the record has not been updated. Please make sure all required fields are complete");
 };
 
+const createdefaultSuccess = (data) => {
+  console.log('createdefaultSuccess');
+  console.log(data);
+
+  let sendJobData = store.savedJobDataPostCreate;
+
+  createJobSuccess(sendJobData);
+};
+
+const createdefaultFailure = function() {
+  console.log("createdefaultFailure");
+  createJobFailure();
+};
+
+const createDefaultReminderSuccess = function(data) {
+  console.log(data);
+  let returnedJobData = data;
+  store.savedJobDataPostCreate = data;
+
+  let companyName = data.job.company_name;
+  let jobId = data.job.id;
+  let jobNote = data.job.note;
+  let defaultReminder = data.job.default_reminder;
+
+  console.log("defaultReminder");
+  console.log(defaultReminder);
+
+  if (defaultReminder) {
+    console.log('default reminder true');
+
+    data = {
+      reminder: {}
+    };
+
+    data.reminder.reminder_date = logic.defaultDate();
+    data.reminder.reminder_type = "Action";
+    data.reminder.reminder_subject = companyName + ": Default Notification";
+    data.reminder.job_ref_text = companyName;
+    data.reminder.job_ref_id = jobId;
+    data.reminder.reminder_details = jobNote;
+
+    console.log(data);
+
+    remindersApi.createReminder(data)
+      .done(createdefaultSuccess)
+      .fail(createdefaultFailure);
+
+  }
+
+  createJobSuccess(returnedJobData);
+
+};
+
 module.exports = {
   getJobSuccess,
   showJobRecordSuccess,
@@ -169,4 +224,5 @@ module.exports = {
   generateUpdateForm,
   createJobFailure,
   updateJobFailure,
+  createDefaultReminderSuccess
 };
