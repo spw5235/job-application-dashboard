@@ -192,7 +192,7 @@ const addHandlers = () => {
   $('.content').on('click', '#communication-record-delete', onDeleteCommunication);
   $('.content').on('change', "#job-update-link", onHideShowUpdateOptions);
   $('.content').on('change', '.update-job', onDisplayJobDropdown);
-  $('.content').on('click', '#get-communications-back-btn', onGetCommunications);
+  $('.content').on('click', '.get-communications-back-btn', onGetCommunications);
   $('.content').on('keyup', '#communication-details-input', resizeTextArea);
   $('.content').on('keyup', '#communication-notes-input', resizeTextArea);
 };

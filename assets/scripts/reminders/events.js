@@ -203,7 +203,7 @@ const addHandlers = () => {
   $('.content').on('change', "#job-update-link", onHideShowUpdateOptions);
   $('.content').on('change', '.update-job', onDisplayJobDropdown);
   $('.content').on('change', "#job-create-link", onHideShowCreateOptions);
-  $('.content').on('click', '#back-to-reminders', onGetReminders);
+  $('.content').on('click', '.back-to-reminders', onGetReminders);
   $('.content').on('keyup', '#reminder-details-field', resizeTextArea);
 };
 

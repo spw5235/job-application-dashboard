@@ -228,7 +228,7 @@ const addHandlers = () => {
   $('.content').on('click', '.get-jobs', onGetJobs);
   $('.content').on('click', '#job-record-delete-menu', onShowDeleteMenu);
   $('.content').on('click', '#job-delete-cancel', onShowJobRecord);
-  $('.content').on('click', '#get-jobs-back-btn', onGetJobs);
+  $('.content').on('click', '.get-jobs-back-btn', onGetJobs);
   $('.content').on('keyup', '#job-description-input', resizeTextArea);
   $('.content').on('keyup', '#job-responsibilities-input', resizeTextArea);
   $('.content').on('keyup', '#job-requirement-input', resizeTextArea);
@@ -236,6 +236,7 @@ const addHandlers = () => {
   $('.content').on('click', '#dashboard-recent-job-btn', onGetJobs);
   $('.content').on('change', '#job-applied-checkbox', onAppliedForJob);
   $('.content').on('change', '.job-radio-applied-btn', onShowAppliedUpdate);
+  $('.content').on('click', '.get-jobs-back-btn', onGetJobs);
 };
 
 

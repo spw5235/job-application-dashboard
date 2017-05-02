@@ -7,7 +7,8 @@
       <p>All fields are <u>optional</u> unless otherwise indicated</p>
 
       <div class="form-group">
-        <label>Reminder Notification Date <span class="clear-default-date">&#10005;</span></label>
+        <!-- <label>Reminder Notification Date <span class="clear-default-date">&#10005;</span></label> -->
+        <label>Reminder Notification Date</label>
         <input class="form-control field-input default-date" name="reminder[reminder_date]" placeholder="Date" type="date">
       </div>
 
@@ -47,6 +48,7 @@
 
       <div class="form-group">
         <input class="btn btn-success submit-btn current" name="submit" id="create-reminder-btn" type="submit" value="Submit">
+        <button type="button" class="btn btn-danger submit-btn current back-to-reminders">Cancel</button>
       </div>
     </fieldset>
   </form>

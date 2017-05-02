@@ -8,7 +8,8 @@
       <p>All fields are <u>optional</u> unless otherwise indicated</p>
 
       <div class="form-group">
-        <label>Document Date <span class="clear-default-date">&#10005;</span></label>
+        <!-- <label>Document Date <span class="clear-default-date">&#10005;</span></label> -->
+        <label>Document Date</label>
         <input class="default-date form-control required-field" name="document[docdate]" placeholder="Document Date" type="date">
       </div>
 
@@ -55,6 +56,7 @@
 
       <div class="form-group">
         <input class="btn btn-success submit-btn current" name="submit" id="create-document-btn" type="submit" value="Submit">
+        <button type="button" class="btn btn-danger submit-btn current get-documents-back-btn">Cancel</button>
       </div>
     </fieldset>
   </form>
