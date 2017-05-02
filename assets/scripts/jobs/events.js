@@ -41,7 +41,14 @@ const onEditJob = function(event) {
 const onCreateJob = function(event) {
   event.preventDefault();
 
-  store.addDefaultReminder = $("#default-reminder-input").prop("checked");
+  let createDefaultReminder = $("#default-reminder-input").prop("checked");
+
+  if (createDefaultReminder === "true" || createDefaultReminder === true) {
+    store.addDefaultReminder = true;
+  } else {
+    store.addDefaultReminder = false;
+  }
+
   logic.convertPercentage();
   let data = getFormFields(event.target);
 
@@ -52,7 +59,7 @@ const onCreateJob = function(event) {
 
   let isJobAppliedChecked = $('#job-applied-checkbox').prop("checked");
 
-  if (isJobAppliedChecked) {
+  if (isJobAppliedChecked === "true" || isJobAppliedChecked === true) {
     data.job.applied = true;
   } else {
     data.job.applied = false;

@@ -71,6 +71,7 @@ const showJobCreateForm = () => {
   let showCreateJobForm = displayJobCreateForm();
   $('.content').append(showCreateJobForm);
   $(".job-applied-date-container").hide();
+  $("#default-reminder-input").prop("checked", true);
 };
 
 
@@ -156,6 +157,7 @@ const createJobFailure = function() {
 const updateJobFailure = function() {
   $(".notification-container").children().text("");
   $(".failure-alert").text("An error has occured and the record has not been updated. Please make sure all required fields are complete");
+  store.addDefaultReminder = false;
 };
 
 const createdefaultSuccess = (data) => {
@@ -163,12 +165,13 @@ const createdefaultSuccess = (data) => {
   console.log(data);
 
   let sendJobData = store.savedJobDataPostCreate;
-
+  store.addDefaultReminder = false;
   createJobSuccess(sendJobData);
 };
 
 const createdefaultFailure = function() {
   console.log("createdefaultFailure");
+  store.addDefaultReminder = false;
   createJobFailure();
 };
 
@@ -180,7 +183,7 @@ const createDefaultReminderSuccess = function(data) {
   let companyName = data.job.company_name;
   let jobId = data.job.id;
   let jobNote = data.job.note;
-  let defaultReminder = data.job.default_reminder;
+  let defaultReminder = store.addDefaultReminder;
 
   console.log("defaultReminder");
   console.log(defaultReminder);
@@ -206,6 +209,8 @@ const createDefaultReminderSuccess = function(data) {
       .fail(createdefaultFailure);
 
   }
+
+  store.addDefaultReminder = false;
 
   createJobSuccess(returnedJobData);
 
