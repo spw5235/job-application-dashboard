@@ -48,8 +48,35 @@
       </div>
 
       <div class="form-group">
-        <label>Job Notes</label>
+        <label>Job Notes {{job.applied_date}}</label>
         <textarea id="job-notes-input" class="form-control text-input field-input comment" form="update-job-form" name="job[note]" placeholder="Job Notes" type="text" value="">{{job.note}}</textarea>
+      </div>
+
+      <div class="job-create-link-container form-group">
+        <p>
+          {{#if job.applied}}
+            Application Status: Applied on {{job.date_applied}}
+          {{else}}
+            Application Status: You have not applied for this job.
+          {{/if}}
+        </p>
+
+        <div class="form-group job-radio-applied-container update-radio-applied-container-btn">
+          <label>Would you like to update the application status?</label>
+          <label><input id="job-radio-applied-yes" class="job-category job-radio-applied-btn" type="radio" name="job-radio" value="1">Yes</label>
+          <label><input id="job-radio-applied-no" class="job-category job-radio-applied-btn" type="radio" name="job-radio" value="0" data-original-applied-val="{{job.applied}}" data-original-date-val="{{job.date_applied}}">No</label>
+        </div>
+
+        <div class="update-application-status-container">
+          <label>Have you applied to the job?</label>
+          <div class="form-group">
+            <span>Check Box for Yes</span>
+            <input id="job-applied-checkbox" class="edit-input-aet" name="job[applied]" placeholder="applied" type="checkbox" value="" data-attr-applied="{{job.applied}}">
+          </div>
+          <div class="form-group job-applied-date-container">
+            <input id="job-applied-date-field" name="job[date_applied]" class="form-control" placeholder="Application Date" type="date" value="{{job.date_applied}}" data-attr-update-form="1">
+          </div>
+        </div>
       </div>
 
       <div class="form-group">

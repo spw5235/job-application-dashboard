@@ -91,6 +91,34 @@ const onUpdateJob = function(event) {
 
   data.job.company_name = $(".company-name-update-form").text();
 
+  let isJobAppliedChecked = $('#job-applied-checkbox').prop("checked");
+
+  let isJobRadioAppliedShown = $("#job-radio-applied-no").prop("checked");
+  let jobAppliedOriginalVal = $("#job-radio-applied-no").attr("data-original-applied-val");
+  // let dataOriginalValAttribute = $("#job-radio-applied-no").attr("data-original-applied-val");
+  let dataOriginalDateAttribute = $("#job-radio-applied-no").attr("data-original-date-val");
+
+  if (jobAppliedOriginalVal === "true") {
+    jobAppliedOriginalVal = true;
+  } else {
+    jobAppliedOriginalVal = false;
+  }
+
+  console.log(jobAppliedOriginalVal);
+
+  if (!isJobRadioAppliedShown) {
+    if (isJobAppliedChecked) {
+      data.job.applied = true;
+    } else {
+      data.job.applied = false;
+    }
+  }
+
+  if (isJobRadioAppliedShown) {
+    data.job.applied = jobAppliedOriginalVal;
+    data.job.date_applied = dataOriginalDateAttribute;
+  }
+
   store.createJobData = data;
   store.lastShowJobData = data;
 
@@ -125,11 +153,57 @@ const onAppliedForJob = function(event) {
   if (isCurrentlyChecked) {
     $(this).prop("checked", true);
     $(".job-applied-date-container").show();
-    $("#job-applied-date-field").val(defaultDate);
+    let isUpdateForm = parseInt($("#job-applied-date-field").attr("data-attr-update-form"));
+    let isNewDate = $("#job-applied-date-field").val();
+    if (isUpdateForm === 0) {
+      $("#job-applied-date-field").val(defaultDate);
+    }
+
+    if (isUpdateForm === 1) {
+      let alreadyApplied = $("#job-applied-checkbox").attr("data-attr-applied");
+      if (isNewDate === "" && alreadyApplied === "false") {
+        $("#job-applied-date-field").val(defaultDate);
+      }
+    }
+
   } else {
     $(this).prop("checked", false);
     $(".job-applied-date-container").hide();
     $("#job-applied-date-field").val(null);
+  }
+
+};
+
+const onShowAppliedUpdate = function(event) {
+  event.preventDefault();
+
+  const currentVal = parseInt($(this).val());
+  console.log(currentVal);
+
+  if (currentVal === 1) {
+    // $("#job-radio-applied-no").prop("checked", false);
+    $("#job-radio-applied-yes").prop("checked", true);
+    $(".update-application-status-container").show();
+
+    let applicationStatus = $("#job-applied-checkbox").attr("data-attr-applied");
+    console.log(applicationStatus);
+
+    console.log(applicationStatus === "true");
+    // if (applicationStatus === "true") {
+    //   $("#job-applied-date-update-field").show();
+    //   $("#job-applied-checkbox").click();
+    // }
+    let alreadyApplied = $("#job-applied-checkbox").attr("data-attr-applied");
+
+    if (alreadyApplied === "true") {
+      $("#job-applied-checkbox").click();
+    }
+  }
+
+  if (currentVal === 0) {
+    // $("#job-radio-applied-yes").prop("checked", false);
+    $("#job-radio-applied-no").prop("checked", true);
+    $(".update-application-status-container").hide();
   }
 
 };
@@ -152,7 +226,11 @@ const addHandlers = () => {
   $('.content').on('keyup', '#job-notes-input', resizeTextArea);
   $('.content').on('click', '#dashboard-recent-job-btn', onGetJobs);
   $('.content').on('change', '#job-applied-checkbox', onAppliedForJob);
+  $('.content').on('change', '.job-radio-applied-btn', onShowAppliedUpdate);
 };
+
+
+
 module.exports = {
   addHandlers,
 };

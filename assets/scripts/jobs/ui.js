@@ -84,6 +84,9 @@ const generateUpdateForm = function() {
   });
   $('.content').append(editJob);
 
+  $(".update-application-status-container").hide();
+  $("#job-radio-applied-no").prop("checked", true);
+
   let jobDescriptionId = "#job-description-input";
   let jobResponsibilitiesId = "#job-responsibilities-input";
   let jobRequirementId = "#job-requirement-input";
