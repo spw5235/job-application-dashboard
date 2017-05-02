@@ -52,6 +52,18 @@
         <textarea id="job-notes-input" class="form-control text-input field-input comment" form="update-job-form" name="job[note]" placeholder="Job Notes" type="text" value="">{{job.note}}</textarea>
       </div>
 
+      <div class="form-group">
+        <label>Application Priority Scale</label>
+        <label>1 being the highest priority</label>
+        <select class="form-control" name="job[priority_num]" id="job-priority-select" value="{{job.priority_num}}">
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+        </select>
+      </div>
+
       <div class="job-create-link-container form-group">
         <p>
           {{#if job.applied}}
