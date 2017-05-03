@@ -1,7 +1,6 @@
 'use strict';
 
 const formatDate = function(date) {
-  console.log(date);
   if (date !== null) {
     let splitDate = date.split("-");
 
@@ -19,15 +18,15 @@ const formatDate = function(date) {
 const dateFormatByClass = function() {
   let classCollection = $(".format-date");
   classCollection.each(function() {
-    let textVal = $(this).text()
+    let textVal = $(this).text();
 
     if (textVal !== "") {
       textVal = $(this).text().trim();
       let formattedDate = formatDate(textVal);
-      console.log(formattedDate);
+      // console.log(formattedDate);
       $(this).text(formattedDate);
     }
-    console.log(textVal);
+    // console.log(textVal);
   });
 };
 

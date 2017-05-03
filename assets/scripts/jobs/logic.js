@@ -2,7 +2,7 @@
 
 const sortPendingByPriority = function(data) {
 
-  console.log(data);
+  // console.log(data);
 
   let oneArr = [];
   let twoArr = [];
@@ -59,7 +59,7 @@ const sortPendingByPriority = function(data) {
 
 const removeAppliedJobs = function(data) {
 
-  console.log(data);
+  // console.log(data);
 
   let currentJobData = data.jobs;
 

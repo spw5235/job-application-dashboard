@@ -31,15 +31,15 @@ const convertDateToNum = function(date) {
   return dateNum;
 };
 
-const isItUpcoming = function(today, deadline) {
-  let differenceVal = deadline - today;
-  let isWithinRange = (differenceVal <= 5 && differenceVal > 0);
-  if (isWithinRange) {
-    return true;
-  } else {
-    return false;
-  }
-};
+// const isItUpcoming = function(today, deadline) {
+//   let differenceVal = deadline - today;
+//   let isWithinRange = (differenceVal <= 5 && differenceVal > 0);
+//   if (isWithinRange) {
+//     return true;
+//   } else {
+//     return false;
+//   }
+// };
 
 const addDateToNumApproach = function(data, type) {
 
@@ -130,7 +130,7 @@ const hideEmptyRows = function(tableId, rowThreshold) {
       if (text === "") {
         count += 1;
       }
-    })
+    });
 
     if (count === rowThreshold) {
       $(this).remove();

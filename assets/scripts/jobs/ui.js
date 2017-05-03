@@ -13,7 +13,7 @@ const remindersApi = require('../reminders/api');
 const jobLogic = require('./logic');
 
 const getJobSuccess = (data) => {
-  // console.log(data);
+  // // console.log(data);
 
   $(".notification-container").children().text("");
 
@@ -159,7 +159,7 @@ const generateUpdateForm = function() {
   logic.textAreaHeightUpdate(jobNotesId);
 
   let currentValOfSelect = $("#job-priority-select").attr("data-job-priority");
-  console.log(currentValOfSelect);
+  // console.log(currentValOfSelect);
   $("#job-priority-select").val(currentValOfSelect);
 };
 

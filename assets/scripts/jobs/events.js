@@ -114,7 +114,7 @@ const onUpdateJob = function(event) {
     jobAppliedOriginalVal = false;
   }
 
-  console.log(jobAppliedOriginalVal);
+  // console.log(jobAppliedOriginalVal);
 
   if (!isJobRadioAppliedShown) {
     if (isJobAppliedChecked) {
@@ -157,7 +157,7 @@ const onAppliedForJob = function(event) {
   event.preventDefault();
 
   let isCurrentlyChecked = $(this).prop("checked");
-  console.log(isCurrentlyChecked);
+  // console.log(isCurrentlyChecked);
   let defaultDate = logic.defaultDate();
 
   if (isCurrentlyChecked) {
@@ -188,17 +188,17 @@ const onShowAppliedUpdate = function(event) {
   event.preventDefault();
 
   const currentVal = parseInt($(this).val());
-  console.log(currentVal);
+  // console.log(currentVal);
 
   if (currentVal === 1) {
     // $("#job-radio-applied-no").prop("checked", false);
     $("#job-radio-applied-yes").prop("checked", true);
     $(".update-application-status-container").show();
 
-    let applicationStatus = $("#job-applied-checkbox").attr("data-attr-applied");
-    console.log(applicationStatus);
+    // let applicationStatus = $("#job-applied-checkbox").attr("data-attr-applied");
+    // console.log(applicationStatus);
 
-    console.log(applicationStatus === "true");
+    // console.log(applicationStatus === "true");
     // if (applicationStatus === "true") {
     //   $("#job-applied-date-update-field").show();
     //   $("#job-applied-checkbox").click();
