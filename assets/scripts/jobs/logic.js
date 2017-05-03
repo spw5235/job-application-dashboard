@@ -75,13 +75,6 @@ const removeAppliedJobs = function(data) {
     jobs: emptyArr
   };
 
-  console.log(emptyJobObject);
-
-  // let returnedData = sortPendingByPriority(emptyJobObject);
-
-  // console.log(returnedData);
-  // return returnedData;
-
   let oneArr = [];
   let twoArr = [];
   let threeArr = [];
@@ -91,7 +84,6 @@ const removeAppliedJobs = function(data) {
 
   let currentData = emptyJobObject.jobs;
 
-  console.log(currentData);
   for (let i = 0; i < currentData.length; i++) {
     if (currentData[i].priority_num === 1) {
       oneArr.push(currentData[i]);
@@ -106,17 +98,6 @@ const removeAppliedJobs = function(data) {
     }
   }
 
-  console.log("oneArr");
-  console.log(oneArr);
-  // console.log("twoArr");
-  // console.log(twoArr);
-  // console.log("threeArr");
-  // console.log(threeArr);
-  // console.log("fourArr");
-  // console.log(fourArr);
-  // console.log("fiveArr");
-  // console.log(fiveArr);
-
   let finalArr = [];
   finalArr.push(oneArr);
   finalArr.push(twoArr);
@@ -124,82 +105,18 @@ const removeAppliedJobs = function(data) {
   finalArr.push(fourArr);
   finalArr.push(fiveArr);
 
-  // console.log(finalArr);
-
   let merged = [].concat.apply([], finalArr);
-
-  // console.log(merged);
 
   data = {
     jobs: merged
-  }
-
-  console.log(data);
+  };
 
   return data;
-
-  // data = {
-  //   jobs: fourArr, fiveArr
-  // };
-
-  //good at 20
-
-
-
-
-  //
-  // let pendingJobObject = {
-  //   jobs: []
-  // };
-  //
-  // let blankArr = [];
-  //
-  // if ( oneArr.length > 0 ) {
-  //   blankArr.push(oneArr[0]);
-  // }
-  //
-  // console.log("post 1 pendingJobObject");
-  // console.log(pendingJobObject);
-  //
-  // if ( twoArr.length > 0 ) {
-  //   blankArr.push(twoArr[0]);
-  // }
-  //
-  // console.log("post 2 pendingJobObject");
-  // console.log(pendingJobObject);
-  //
-  // if ( threeArr.length > 0 ) {
-  //   blankArr.push(threeArr[0]);
-  // }
-  //
-  // console.log("post 3 pendingJobObject");
-  // console.log(pendingJobObject);
-  //
-  // if ( fourArr.length > 0 ) {
-  //   blankArr.push(fourArr[0]);
-  // }
-  //
-  // console.log("post 4 pendingJobObject");
-  // console.log(pendingJobObject);
-  //
-  // if ( fiveArr.length > 0 ) {
-  //   blankArr.push(fiveArr[0]);
-  // }
-  //
-  // console.log("post 5 pendingJobObject");
-  // console.log(blankArr);
-  //
-  // console.log("final pendingJobObject");
-  // console.log(blankArr);
-  //
-  // return blankArr;
-
-
-
 
 };
 
 
 module.exports = {
+  sortPendingByPriority,
   removeAppliedJobs,
 };
