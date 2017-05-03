@@ -32,7 +32,7 @@
 <div class="row">
   <div class="col-xs-12 col-sm-6">
     <div class="dash-home-table">
-      <h2>Upcoming</h3>
+      <h2>Upcoming</h2>
         <table id="reminder-summary-table" class="table reminder-summary-table table-hover">
           <thead>
             <tr>
@@ -62,16 +62,16 @@
           </tbody>
         </table>
         <p class="reminder-dash-table-empty"></p>
-        <div class="home-dashboard-container">
+        <!-- <div class="home-dashboard-container">
           <button id="generate-create-reminder-btn" type="button" class="btn btn-success">Create</button>
           <button type="button" class="btn btn-info get-reminders">View All</button>
-        </div>
+        </div> -->
       </div>
     </div>
 
     <div class="col-xs-12 col-sm-6">
       <div class="dash-home-table">
-        <h2>Overdue Reminders</h3>
+        <h2>Overdue</h2>
         <table id="overdue-reminder-summary-table" class="table reminder-summary-table table-hover">
           <thead>
             <tr>
@@ -101,10 +101,19 @@
           </tbody>
         </table>
         <p class="reminder-dash-table-empty-overdue"></p>
-        <div class="home-dashboard-container">
+        <!-- <div class="home-dashboard-container">
           <button id="generate-create-reminder-overdue-btn" type="button" class="btn btn-success">Create</button>
           <button type="button" class="btn btn-info get-reminders">View All</button>
-        </div>
+        </div> -->
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="home-dashboard-container">
+        <button id="generate-create-reminder-overdue-btn" type="button" class="btn btn-success">Create</button>
+        <button type="button" class="btn btn-info get-reminders">View All</button>
       </div>
     </div>
   </div>
@@ -219,7 +228,7 @@
               {{/each}}
             </tbody>
           </table>
-        <p class="document-dash-table-empty"></p>
+        <p class="document-dash-recent-table-empty"></p>
         <div class="home-dashboard-container">
           <button id="dashboard-new-document-btn" type="button" class="btn btn-success">Create</button>
           <button type="button" class="btn btn-info get-documents">View All</button>
@@ -255,7 +264,7 @@
             {{/each}}
           </tbody>
         </table>
-        <p class="contact-dash-table-empty"></p>
+        <p class="contact-dash-recent-table-empty"></p>
         <div class="home-dashboard-container">
           <button id="dashboard-new-contact-btn" type="button" class="btn btn-success">Create</button>
           <button type="button" class="btn btn-info get-contacts">View All</button>
@@ -295,7 +304,7 @@
             {{/each}}
           </tbody>
         </table>
-        <p class="communication-dash-table-empty"></p>
+        <p class="communication-dash-recent-table-empty"></p>
         <div class="home-dashboard-container">
           <button id="generate-create-communication-btn" type="button" class="btn btn-success">Create</button>
           <button type="button" class="btn btn-info get-communications">View All</button>

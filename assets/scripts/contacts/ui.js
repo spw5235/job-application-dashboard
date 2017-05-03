@@ -41,6 +41,13 @@ const getContactSuccess = (data) => {
 
   $('.content').append(contactDashboard);
 
+  let allContactsEmptyLength = $(".contact-summary-table tbody").children().length;
+
+  if (allContactsEmptyLength === 0) {
+    $(".contact-summary-table").remove();
+    $(".all-contacts-empty").text('There are no contacts associated with your account. Click "Create Contact" to get started.');
+  }
+
 };
 
 const showContactRecordSuccess = (data) => {

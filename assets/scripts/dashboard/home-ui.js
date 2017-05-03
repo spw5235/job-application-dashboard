@@ -238,6 +238,49 @@ const showContactDashTable = (data) => {
   hideEmptyRows(".contact-summary-table", 1);
   hideEmptyRows(".communication-summary-table", 3);
 
+  let upcomingReminderLength = $("#reminder-summary-table tbody").children().length;
+
+  if (upcomingReminderLength === 0) {
+    $("#reminder-summary-table").remove();
+  }
+
+  let overdueRemindersEmptyLength = $("#overdue-reminder-summary-table tbody").children().length;
+
+  if (overdueRemindersEmptyLength === 0) {
+    $("#overdue-reminder-summary-table").remove();
+    // $(".all-reminders-empty").text('There are no reminders associated with your account. Click "Create Reminder" to get started.');
+  }
+
+  let jobEmptyLength = $(".job-summary-table tbody").children().length;
+
+  if (jobEmptyLength === 0) {
+    $(".job-summary-table").remove();
+    $(".job-dash-recent-table-empty").text("No jobs have been created recently");
+  }
+
+  let documentEmptyLength = $(".document-summary-table tbody").children().length;
+
+  if (documentEmptyLength === 0) {
+    $(".document-summary-table").remove();
+    $(".document-dash-recent-table-empty").text("No documents have been created recently");
+  }
+
+  let contactEmptyLength = $(".contact-summary-table tbody").children().length;
+
+  if (contactEmptyLength === 0) {
+    $(".contact-summary-table").remove();
+    $(".contact-dash-recent-table-empty").text("No contacts have been created recently");
+  }
+
+  let communicationEmptyLength = $(".communication-summary-table tbody").children().length;
+
+  if (communicationEmptyLength === 0) {
+    $(".communication-summary-table").remove();
+    $(".communication-dash-recent-table-empty").text("No communications have been created recently");
+  }
+
+  ////
+
   if (store.isContactDashEmpty === true) {
     $(".contact-dash-table-empty").text("No contacts have been recently added");
     store.isContactDashEmpty = false;

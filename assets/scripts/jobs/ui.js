@@ -56,6 +56,12 @@ const getJobSuccess = (data) => {
 
   $('.job-pending-priority-container').append(jobAppliedData);
 
+  let allJobsEmptyLength = $(".job-summary-table tbody").children().length;
+
+  if (allJobsEmptyLength === 0) {
+    $(".all-jobs-empty-remove").remove();
+    $(".all-jobs-empty").text('There are no jobs associated with your account. Click "Create Job" to get started.');
+  }
 };
 
 const showJobRecordSuccess = (data) => {
@@ -115,6 +121,10 @@ const generateUpdateForm = function() {
   logic.textAreaHeightUpdate(jobResponsibilitiesId);
   logic.textAreaHeightUpdate(jobRequirementId);
   logic.textAreaHeightUpdate(jobNotesId);
+
+  let currentValOfSelect = $("#job-priority-select").attr("data-job-priority");
+  console.log(currentValOfSelect);
+  $("#job-priority-select").val(currentValOfSelect);
 };
 
 const getJobFailure = () => {

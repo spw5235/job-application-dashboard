@@ -42,6 +42,13 @@ const getCommunicationSuccess = (data) => {
 
   $('.content').append(communicationDashboard);
 
+  let allCommunicationsEmptyLength = $(".communications-summary-table tbody").children().length;
+
+  if (allCommunicationsEmptyLength === 0) {
+    $(".communication-summary-table").remove();
+    $(".all-communications-empty").text('There are no communications associated with your account. Click "Create Communication" to get started.');
+  }
+
 };
 
 const showCommunicationRecordSuccess = (data) => {

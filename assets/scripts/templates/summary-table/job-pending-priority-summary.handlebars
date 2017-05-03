@@ -1,12 +1,12 @@
-<h3>Pending Application Priority</h3>
+<h3>Incomplete Applications</h3>
 
-<table class="table job-summary-table table-hover">
+<table class="table job-summary-table">
   <thead>
     <tr>
       <th>Company Name</th>
-      <th class="hidden-xs">Job Title</th>
-      <th>Applied?</th>
-      <th class="hidden-xs">Job Priority</th>
+      <th class="hidden-xs hidden-sm">Job Title</th>
+      <th class="hidden-xs hidden-sm">Applied?</th>
+      <th>Job Priority</th>
       <th>View Record</th>
     </tr>
   </thead>
@@ -16,17 +16,17 @@
         <td class="display-company-name">
           {{job.company_name}}
         </td>
-        <td class="display-job-title hidden-xs">
+        <td class="display-job-title hidden-xs hidden-sm">
           {{job.title}}
         </td>
-        <td>
+        <td class="hidden-xs hidden-sm">
           {{#if job.applied}}
             Yes
           {{else}}
             No
           {{/if}}
         </td>
-        <td class="hidden-xs">
+        <td>
           {{job.priority_num}}
         </td>
         <td>

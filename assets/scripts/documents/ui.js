@@ -41,6 +41,13 @@ const getDocumentSuccess = (data) => {
   });
 
   $('.content').append(documentDashboard);
+
+  let allDocumentsEmptyLength = $(".document-summary-table tbody").children().length;
+
+  if (allDocumentsEmptyLength === 0) {
+    $(".document-summary-table").remove();
+    $(".all-documents-empty").text('There are no documents associated with your account. Click "Create Document" to get started.');
+  }
 };
 
 const showDocumentRecordSuccess = (data) => {

@@ -42,6 +42,13 @@ const getReminderSuccess = (data) => {
 
   $('.content').append(reminderDashboard);
 
+  let allRemindersEmptyLength = $("#reminder-summary-table tbody").children().length;
+
+  if (allRemindersEmptyLength === 0) {
+    $("#reminder-summary-table").remove();
+    $(".all-reminders-empty").text('There are no reminders associated with your account. Click "Create Reminder" to get started.');
+  }
+
 };
 
 const showReminderRecordSuccess = (data) => {
