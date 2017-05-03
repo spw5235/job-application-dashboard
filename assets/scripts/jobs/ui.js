@@ -3,34 +3,37 @@
 const store = require('../store');
 const displayEditJob = require('../templates/job/update-job-form.handlebars');
 const displayJobDashboard = require('../templates/job/get-jobs.handlebars');
+const displayJobPendingPriority = require('../templates/summary-table/job-pending-priority-summary.handlebars');
 const displayJobDetails = require('../templates/job/show-job-record.handlebars');
 const displayJobCreateForm = require('../templates/job/create-job.handlebars');
 const jobsApi = require('./api');
 const summaryLogic = require('../summary/summary-logic');
 const logic = require('../dashboard/logic');
 const remindersApi = require('../reminders/api');
+const jobLogic = require('./logic');
 
 const getJobSuccess = (data) => {
+  // console.log(data);
 
   $(".notification-container").children().text("");
 
   $(".content").children().remove();
 
-  let dataArr = data.jobs;
-
-  for (let i = 0; i < dataArr.length; i++ ) {
-    let unavailable = "N/A";
-    let currArrayOptOne = (dataArr[i].title);
-    let currArrayOptTwo = (dataArr[i].posting_date);
-
-    if (currArrayOptOne === "" || currArrayOptOne === null) {
-      dataArr[i].title = unavailable;
-    }
-    if (currArrayOptTwo === "" || currArrayOptTwo === null) {
-      dataArr[i].posting_date = unavailable;
-    }
-
-  }
+  // let dataArr = data.jobs;
+  //
+  // for (let i = 0; i < dataArr.length; i++ ) {
+  //   let unavailable = "N/A";
+  //   let currArrayOptOne = (dataArr[i].title);
+  //   let currArrayOptTwo = (dataArr[i].posting_date);
+  //
+  //   if (currArrayOptOne === "" || currArrayOptOne === null) {
+  //     dataArr[i].title = unavailable;
+  //   }
+  //   if (currArrayOptTwo === "" || currArrayOptTwo === null) {
+  //     dataArr[i].posting_date = unavailable;
+  //   }
+  //
+  // }
 
   let jobDashboard = displayJobDashboard({
     jobs: data.jobs
@@ -39,6 +42,20 @@ const getJobSuccess = (data) => {
   store.jobDataForEdit = data;
 
   $('.content').append(jobDashboard);
+
+  let pendingPriorityData = jobLogic.removeAppliedJobs(data);
+
+  let jobAppliedData = displayJobPendingPriority({
+    jobs: pendingPriorityData.jobs
+  });
+
+  // let dashboardHome = displayDashboardHome({
+  //   reminders: reminderFinalData.reminders,
+  //   jobs: jobFinalData.jobs,
+  // }
+
+  $('.job-pending-priority-container').append(jobAppliedData);
+
 };
 
 const showJobRecordSuccess = (data) => {
@@ -51,6 +68,7 @@ const showJobRecordSuccess = (data) => {
     job: data.job
   });
   $('.content').append(jobDetails);
+
   $(".delete-confirmation-contain").hide();
   $("#job-record-delete-menu").show();
 
@@ -106,7 +124,6 @@ const getJobFailure = () => {
 
 const createJobSuccess = function(data) {
 // const createJobSuccess = (data) => {
-  console.log(data);
   store.currentJobId = data.job.id;
   $(".form-error").text("");
   $(".notification-container").children().text("");
@@ -160,9 +177,7 @@ const updateJobFailure = function() {
   store.addDefaultReminder = false;
 };
 
-const createdefaultSuccess = (data) => {
-  console.log('createdefaultSuccess');
-  console.log(data);
+const createdefaultSuccess = () => {
 
   let sendJobData = store.savedJobDataPostCreate;
   store.addDefaultReminder = false;
@@ -170,13 +185,11 @@ const createdefaultSuccess = (data) => {
 };
 
 const createdefaultFailure = function() {
-  console.log("createdefaultFailure");
   store.addDefaultReminder = false;
   createJobFailure();
 };
 
 const createDefaultReminderSuccess = function(data) {
-  console.log(data);
   let returnedJobData = data;
   store.savedJobDataPostCreate = data;
 
@@ -185,11 +198,7 @@ const createDefaultReminderSuccess = function(data) {
   let jobNote = data.job.note;
   let defaultReminder = store.addDefaultReminder;
 
-  console.log("defaultReminder");
-  console.log(defaultReminder);
-
   if (defaultReminder) {
-    console.log('default reminder true');
 
     data = {
       reminder: {}
@@ -201,8 +210,6 @@ const createDefaultReminderSuccess = function(data) {
     data.reminder.job_ref_text = companyName;
     data.reminder.job_ref_id = jobId;
     data.reminder.reminder_details = jobNote;
-
-    console.log(data);
 
     remindersApi.createReminder(data)
       .done(createdefaultSuccess)
