@@ -9,6 +9,20 @@ body {
   font-family: 'Open Sans', sans-serif;
 }
 
+.linked-company {
+  color: blue;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+#processing {
+  color: green;
+}
+
+.dropdown-menu {
+  padding: 5px;
+}
+
 .job-applied-date-container {
   display: none;
 }
@@ -148,6 +162,14 @@ textarea {
   text-align: center;
 }
 
+.underline {
+  text-decoration: underline;
+}
+
+.center {
+  text-align: center;
+}
+
 h1 {
   color: #33312c;
   font-size: 30px;
@@ -167,7 +189,7 @@ h3 {
   display: none;
 }
 
-.table-hover > tbody > tr > td {
+.table > tbody > tr > td {
   border-top: 1px solid #585551;
   border-bottom: 1px solid #585551;
 }

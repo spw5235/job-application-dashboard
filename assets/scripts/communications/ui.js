@@ -36,13 +36,15 @@ const getCommunicationSuccess = (data) => {
     }
   }
 
+  console.log(data);
+
   let communicationDashboard = displayCommunicationDashboard({
     communications: data.communications
   });
 
   $('.content').append(communicationDashboard);
 
-  let allCommunicationsEmptyLength = $(".communications-summary-table tbody").children().length;
+  let allCommunicationsEmptyLength = $(".communication-summary-table tbody").children().length;
 
   if (allCommunicationsEmptyLength === 0) {
     $(".communication-summary-table").remove();

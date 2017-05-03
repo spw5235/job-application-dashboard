@@ -1,5 +1,7 @@
 'use strict';
 
+
+
 const convertPercentage = function() {
     let allInputs = document.querySelectorAll('.text-input');
     let allInputsLength = allInputs.length;

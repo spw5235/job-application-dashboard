@@ -1,60 +1,77 @@
 <div class="document-page group-category">
-  <h1>Document Details</h1>
+  <div class="row">
+    <div class="col-xs-12 col-xs-offset-0 col-sm-9">
+      <h1>Document Details</h1>
 
-  <h3>{{document.job_ref_text}}</h3>
-  <table class="table document-record-table">
-    <tbody>
-      <tr>
-        <td class="document-record-date">
-          Document Date:
-        </td>
-        <td class="display-document-name">
-          {{document.docdate}}
-        </td>
-      </tr>
-      <tr>
-        <td class="document-record-title document-record-location">
-          Document Type:
-        </td>
-        <td class="display-document-doctype">
-          {{document.doctype}}
-        </td>
-      </tr>
-      <tr>
-        <td class="document-url">
-          Document Url:
-        </td>
-        <td class="display-document-url">
-          <a class="display-url" href="{{document.docurl}}" target="_blank">N/A</a>
-        </td>
-      </tr>
-      <tr>
-        <td class="document-record-title document-record-subject">
-          Document Subject:
-        </td>
-        <td class="display-document-subject">
-          {{document.docsubject}}
-        </td>
-      </tr>
-      <tr>
-        <td class="document-record-title document-record-note">
-          Document Text:
-        </td>
-        <td class="display-document-note maintain-spacing">
-          {{document.doctext}}
-        </td>
-      </tr>
-    </tbody>
-  </table>
-
-  <div class="dashboard-document-btn-container">
-    <div class="document-record-btn-options">
-      <button id="document-record-btn-edit" type="button" class="btn btn-warning current" data-current-document-id="{{document.id}}" data-current-doc-type="{{document.doctype}}" data-current-job-ref-id="{{document.job_ref_id}}" data-current-job-ref-text="{{document.job_ref_text}}">Edit Document Record</button>
-      <button id="document-record-delete" type="button" class="btn btn-danger current" data-current-document-id="{{document.id}}">Delete Document Record</button>
+      <h3>{{document.job_ref_text}}</h3>
+      <table class="table document-record-table">
+        <tbody>
+          <tr>
+            <td class="document-record-date">
+              Document Date:
+            </td>
+            <td class="display-document-name">
+              {{document.docdate}}
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Linked Company:
+            </td>
+            <td class="linked-company" data-job-ref-id="{{document.job_ref_id}}">
+              {{document.job_ref_text}}
+            </td>
+          </tr>
+          <tr>
+            <td class="document-record-title document-record-location">
+              Document Type:
+            </td>
+            <td class="display-document-doctype">
+              {{document.doctype}}
+            </td>
+          </tr>
+          <tr>
+            <td class="document-url">
+              Document Url:
+            </td>
+            <td class="display-document-url">
+              <a class="display-url" href="{{document.docurl}}" target="_blank">N/A</a>
+            </td>
+          </tr>
+          <tr>
+            <td class="document-record-title document-record-subject">
+              Document Subject:
+            </td>
+            <td class="display-document-subject">
+              {{document.docsubject}}
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <p class="underline">Document Text:</p>
+              <p>{{document.doctext}}</p>
+            </td>
+          </tr>
+          <!-- <tr>
+            <td class="document-record-title document-record-note">
+              Document Text:
+            </td>
+            <td class="display-document-note maintain-spacing">
+              {{document.doctext}}
+            </td>
+          </tr> -->
+        </tbody>
+      </table>
     </div>
   </div>
 
-  <div class="back-btn-container">
-    <button type="button" class="btn btn-default current get-documents-back-btn">Back</button>
+  <div class="row">
+    <div class="col-xs-12 col-xs-offset-0 col-sm-9">
+      <div class="document-record-btn-options center">
+        <button type="button" class="btn btn-default current get-documents-back-btn">Back</button>
+        <button id="document-record-btn-edit" type="button" class="btn btn-warning current" data-current-document-id="{{document.id}}" data-current-doc-type="{{document.doctype}}" data-current-job-ref-id="{{document.job_ref_id}}" data-current-job-ref-text="{{document.job_ref_text}}">Edit Document Record</button>
+        <button id="document-record-delete" type="button" class="btn btn-danger current" data-current-document-id="{{document.id}}">Delete Document Record</button>
+      </div>
+    </div>
   </div>
 </div>

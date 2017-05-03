@@ -1,11 +1,11 @@
 <h3>Linked Contacts</h3>
 
-<table class="table summary-table table-hover">
+<table class="table summary-table table-hover job-exists-show">
   <thead>
     <tr>
       <th>Name</th>
       <th>Email</th>
-      <th>Phone</th>
+      <th>View Record</th>
     </tr>
   </thead>
   <tbody>
@@ -16,9 +16,6 @@
         </td>
         <td class="display-contact-full-name">
           {{contact.email}}
-        </td>
-        <td class="display-contact-full-name">
-          {{contact.phone}}
         </td>
         <td class="display-contact-submit">
           <button type="button" class="btn btn-info btn-sm view-secondary-btn dashboard-contact-record-btn" data-current-contact-id="{{contact.id}}" data-current-job-id="{{contact.job_ref_id}}" data-current-job-text="{{contact.job_ref_text}}">View Contact</button>

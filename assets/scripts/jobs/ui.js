@@ -82,6 +82,37 @@ const showJobRecordSuccess = (data) => {
 
   // Summary Table reminders
   summaryLogic.initiateJobSummaryTables(data.job.id);
+
+  // let communicationEmptyLength = $(".communications-summary-table-container").children().length;
+  //
+  // if (communicationEmptyLength === 0) {
+  //   $(".communications-summary-table-container").children().remove();
+  //   $(".communications-empty-message").append("<h3>Linked Communications</h3>");
+  //   $(".communications-empty-message").append("<p>There are no communications linked to this company.</p>");
+  // }
+  //
+  // let contactEmptyLength = $(".contacts-summary-table-container").children().length;
+  //
+  // if (contactEmptyLength === 0) {
+  //   $(".contacts-summary-table-container").children().remove();
+  //   $(".contacts-empty-message").append("<h3>Linked Contacts</h3>");
+  //   $(".contacts-empty-message").append("<p>There are no contacts linked to this company.</p>");
+  // }
+  //
+  // // let remindersEmptyLength = $(".reminders-summary-table-container").children("table").children().length;
+  // // if (remindersEmptyLength > 0) {
+  // //   $(".reminders-summary-table-container").remove();
+  // //   $(".reminders-empty-message").append("<h3>Linked Reminders</h3>");
+  // //   $(".reminders-empty-message").append("<p>There are no reminders linked to this company.</p>");
+  // // }
+  //
+  // let documentsEmptyLength = $(".documents-summary-table-container").children().length;
+  //
+  // if (documentsEmptyLength === 0) {
+  //   $(".documents-summary-table-container").remove();
+  //   $(".documents-empty-message").append("<h3>Linked Documents</h3>");
+  //   $(".documents-empty-message").append("<p>There are no documents linked to this company.</p>");
+  // }
 };
 
 const showJobRecordFailure = () => {

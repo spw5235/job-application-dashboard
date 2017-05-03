@@ -32,6 +32,10 @@ const remindersSummarySuccess = (data) => {
       reminders: reminderSummaryObject.reminders
     });
     $(".reminders-summary-table-container").append(remindersSummaryTable);
+  } else {
+    $(".reminders-summary-table-container").remove();
+    $(".reminders-empty-message").append("<h3>Linked Reminders</h3>");
+    $(".reminders-empty-message").append("<p>There are no reminders linked to this company.</p>");
   }
 
 };
@@ -58,6 +62,10 @@ const documentsSummarySuccess = (data) => {
       documents: reminderSummaryObject.documents
     });
     $(".documents-summary-table-container").append(documentsSummaryTable);
+  } else {
+    $(".documents-summary-table-container").remove();
+    $(".documents-empty-message").append("<h3>Linked Documents</h3>");
+    $(".documents-empty-message").append("<p>There are no documents linked to this company.</p>");
   }
 
 };
@@ -84,6 +92,10 @@ const contactsSummarySuccess = (data) => {
       contacts: reminderSummaryObject.contacts
     });
     $(".contacts-summary-table-container").append(contactsSummaryTable);
+  } else {
+    $(".contacts-summary-table-container").remove();
+    $(".contacts-empty-message").append("<h3>Linked Contacts</h3>");
+    $(".contacts-empty-message").append("<p>There are no contacts linked to this company.</p>");
   }
 };
 
@@ -109,6 +121,10 @@ const communicationsSummarySuccess = (data) => {
       communications: reminderSummaryObject.communications
     });
     $(".communications-summary-table-container").append(communicationsSummaryTable);
+  } else {
+    $(".communications-summary-table-container").remove();
+    $(".communications-empty-message").append("<h3>Linked Communications</h3>");
+    $(".communications-empty-message").append("<p>There are no communications linked to this company.</p>");
   }
 };
 

@@ -1,57 +1,59 @@
-<h1>Reminder Overview</h1>
+<div class="row">
+  <div class="col-xs-12 col-xs-offset-0 col-sm-9">
 
-<table class="table reminder-record-table">
-  <tbody>
-    <tr>
-      <td class="reminder-record-title reminder-record-note">
-        Reminder Notification Date:
-      </td>
-      <td class="display-reminder-note">
-        {{reminder.reminder_date}}
-      </td>
-    </tr>
-    <tr>
-      <td class="reminder-record-title reminder-reminder-type">
-        Reminder Type:
-      </td>
-      <td class="display-reminder-type">
-        {{reminder.reminder_type}}
-      </td>
-    </tr>
-    <tr>
-      <td class="reminder-record-title reminder-archive">
-        Linked Company:
-      </td>
-      <td class="display-reminder-note">
-        {{reminder.job_ref_text}}
-      </td>
-    </tr>
-    <tr>
-      <td class="reminder-record-title reminder-record-location">
-        Reminder Subject:
-      </td>
-      <td class="display-reminder-subject">
-        {{reminder.reminder_subject}}
-      </td>
-    </tr>
-    <tr>
-      <td class="reminder-record-title reminder-details">
-        Reminder Details:
-      </td>
-      <td class="maintain-spacing">
-        {{reminder.reminder_details}}
-      </td>
-    </tr>
-  </tbody>
-</table>
+    <h1>Reminder Details</h1>
 
-<div class="dashboard-reminder-btn-container">
-  <div class="reminder-record-btn-options">
-    <button id="reminder-record-btn-edit" type="button" class="btn btn-warning current" data-current-reminder-id="{{reminder.id}}" data-current-job-ref-id="{{reminder.job_ref_id}}" data-current-job-ref-text="{{reminder.job_ref_text}}" data-current-reminder-type="{{reminder.reminder_type}}">Edit Reminder Record</button>
-    <button id="reminder-record-delete" type="button" class="btn btn-danger current" data-current-reminder-id="{{reminder.id}}">Delete Reminder Record</button>
+    <table class="table reminder-record-table">
+      <tbody>
+        <tr>
+          <td class="reminder-record-title reminder-record-note">
+            Reminder Notification Date:
+          </td>
+          <td class="display-reminder-note">
+            {{reminder.reminder_date}}
+          </td>
+        </tr>
+        <tr>
+          <td class="reminder-record-title reminder-reminder-type">
+            Reminder Type:
+          </td>
+          <td class="display-reminder-type">
+            {{reminder.reminder_type}}
+          </td>
+        </tr>
+        <tr>
+          <td class="reminder-record-title reminder-archive">
+            Linked Company:
+          </td>
+          <td class="linked-company display-reminder-note" data-job-ref-id="{{reminder.job_ref_id}}">
+            {{reminder.job_ref_text}}
+          </td>
+        </tr>
+        <tr>
+          <td class="reminder-record-title reminder-record-location">
+            Reminder Subject:
+          </td>
+          <td class="display-reminder-subject">
+            {{reminder.reminder_subject}}
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <p class="underline">Reminder Details:</p>
+            <p>{{reminder.reminder_details}}</p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>
 
-<div class="back-btn-container">
-  <button type="button" class="btn btn-default current back-to-reminders">Back</button>
+<div class="row">
+  <div class="col-xs-12 col-xs-offset-0 col-sm-9">
+    <div class="reminder-record-btn-options center">
+      <button type="button" class="btn btn-default current back-to-reminders">Back</button>
+      <button id="reminder-record-btn-edit" type="button" class="btn btn-warning current" data-current-reminder-id="{{reminder.id}}" data-current-job-ref-id="{{reminder.job_ref_id}}" data-current-job-ref-text="{{reminder.job_ref_text}}" data-current-reminder-type="{{reminder.reminder_type}}">Edit Reminder Record</button>
+      <button id="reminder-record-delete" type="button" class="btn btn-danger current" data-current-reminder-id="{{reminder.id}}">Delete Reminder Record</button>
+    </div>
+  </div>
 </div>

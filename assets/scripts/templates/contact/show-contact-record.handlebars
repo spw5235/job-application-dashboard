@@ -1,80 +1,79 @@
 <div class="contact-page group-category">
+  <div class="row">
+    <div class="col-xs-12 col-xs-offset-0 col-sm-9">
 
-  <h1>Contact Overview</h1>
+      <h1>Contact Details</h1>
 
-  <h2 class="contact-name-header" data-current-contact-name="{{contact.id}}">{{contact.full_name}}</h2>
+      <h2 class="contact-name-header" data-current-contact-name="{{contact.id}}">{{contact.full_name}}</h2>
 
-  <h3>Contact Details</h3>
-  <table class="table contact-record-table">
-    <tbody>
-      <tr>
-        <td>
-          Name:
-        </td>
-        <td>
-          {{contact.first_name}} {{contact.last_name}}
-        </td>
-      </tr>
-      <tr>
-        <td class="contact-record-company-name-header">
-          Contact Company Name:
-        </td>
-        <td class="display-contact-company-name">
-          {{contact.job_ref_text}}
-        </td>
-      </tr>
-      <tr>
-        <td class="contact-job-title">
-          Job Title:
-        </td>
-        <td class="display-contact-job-title">
-          {{contact.job_title}}
-        </td>
-      </tr>
-      <tr>
-        <td class="contact-record-email">
-          Contact Email:
-        </td>
-        <td class="display-contact-email">
-          {{contact.email}}
-        </td>
-      </tr>
-      <tr>
-        <td class="contact-record-phone">
-          Contact Phone:
-        </td>
-        <td class="display-contact-phone">
-          {{contact.phone}}
-        </td>
-      </tr>
-      <tr>
-        <td class="contact-record-website">
-          Contact Website:
-        </td>
-        <td class="display-contact-note">
-          <p class="display-empty-p"></p>
-          <a class="display-url" href="{{contact.website}}" target="_blank"></a>
-        </td>
-      </tr>
-      <tr>
-        <td class="contact-record-title contact-record-note">
-          Contact Notes:
-        </td>
-        <td class="display-contact-notes maintain-spacing">
-          {{contact.notes}}
-        </td>
-      </tr>
-    </tbody>
-  </table>
-
-  <div class="dashboard-contact-btn-container">
-    <div class="contact-record-btn-options">
-      <button id="contact-record-btn-edit" type="button" class="btn btn-warning current" data-current-contact-id="{{contact.id}}" data-current-job-ref-text="{{contact.job_ref_text}}" data-current-job-ref-id="{{contact.job_ref_id}}">Edit Contact Record</button>
-      <button id="contact-record-delete" type="button" class="btn btn-danger current" data-current-contact-id="{{contact.id}}">Delete Contact Record</button>
+      <table class="table contact-record-table">
+        <tbody>
+          <tr>
+            <td>
+              Name:
+            </td>
+            <td>
+              {{contact.first_name}} {{contact.last_name}}
+            </td>
+          </tr>
+          <tr>
+            <td class="contact-record-company-name-header">
+              Company Name:
+            </td>
+            <td class="linked-company" data-job-ref-id="{{contact.job_ref_id}}">
+              {{contact.job_ref_text}}
+            </td>
+          </tr>
+          <tr>
+            <td class="contact-job-title">
+              Job Title:
+            </td>
+            <td class="display-contact-job-title">
+              {{contact.job_title}}
+            </td>
+          </tr>
+          <tr>
+            <td class="contact-record-email">
+              Contact Email:
+            </td>
+            <td class="display-contact-email">
+              {{contact.email}}
+            </td>
+          </tr>
+          <tr>
+            <td class="contact-record-phone">
+              Contact Phone:
+            </td>
+            <td class="display-contact-phone">
+              {{contact.phone}}
+            </td>
+          </tr>
+          <tr>
+            <td class="contact-record-website">
+              Contact Website:
+            </td>
+            <td class="display-contact-note">
+              <p class="display-empty-p"></p>
+              <a class="display-url" href="{{contact.website}}" target="_blank"></a>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <p class="underline">Contact Notes:</p>
+              <p>{{contact.notes}}</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 
-  <div class="back-btn-container">
-    <button type="button" class="btn btn-default current get-contacts-back-btn">Back</button>
+  <div class="row">
+    <div class="col-xs-12 col-xs-offset-0 col-sm-9">
+      <div class="contact-record-btn-options center">
+        <button type="button" class="btn btn-default current get-contacts-back-btn">Back</button>
+        <button id="contact-record-btn-edit" type="button" class="btn btn-warning current" data-current-contact-id="{{contact.id}}" data-current-job-ref-text="{{contact.job_ref_text}}" data-current-job-ref-id="{{contact.job_ref_id}}">Edit Contact Record</button>
+        <button id="contact-record-delete" type="button" class="btn btn-danger current" data-current-contact-id="{{contact.id}}">Delete Contact Record</button>
+      </div>
+    </div>
   </div>
-</div>
