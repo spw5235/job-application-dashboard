@@ -49,17 +49,21 @@ const getReminderSuccess = (data) => {
     $(".all-reminders-empty").text('There are no reminders associated with your account. Click "Create Reminder" to get started.');
   }
 
+  logic.dateFormatByClass();
+
 };
 
 const showReminderRecordSuccess = (data) => {
   $(".notification-container").children().text("");
   $(".content").children().remove();
   store.lastShowReminderData = data;
+  // data.reminder.reminder_date = logic.formatDate(data.reminder.reminder_date)
 
   let reminderDetails = displayReminderDetails({
     reminder: data.reminder
   });
   $('.content').append(reminderDetails);
+  logic.dateFormatByClass();
 };
 
 const showReminderRecordFailure = () => {
@@ -147,11 +151,13 @@ const createReminderSuccess = (data) => {
   $(".content").append(showReminderDetails);
   $("#reminder-record-btn-edit").attr("data-current-reminder-type", data.reminder.reminder_type);
   $(".current").attr("data-current-reminder-id", store.currentReminderId);
+  logic.dateFormatByClass();
 };
 
 const deleteReminderSuccess = () => {
   $(".notification-container").children().text("");
   $(".failure-alert").text("An error has occured and the record could not be deleted.");
+  logic.dateFormatByClass();
   remindersApi.getReminders()
     .done(getReminderSuccess)
     .fail(getReminderFailure);
@@ -175,6 +181,7 @@ const updateReminderSuccess = (data) => {
   });
   $(".content").append(showReminderDetails);
   $(".current").attr("data-current-reminder-id", store.currentReminderId);
+  logic.dateFormatByClass();
 };
 
 const displayReminderDropdownSuccess = function(data) {

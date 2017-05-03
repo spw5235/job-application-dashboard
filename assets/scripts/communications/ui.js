@@ -36,8 +36,6 @@ const getCommunicationSuccess = (data) => {
     }
   }
 
-  console.log(data);
-
   let communicationDashboard = displayCommunicationDashboard({
     communications: data.communications
   });
@@ -50,7 +48,7 @@ const getCommunicationSuccess = (data) => {
     $(".communication-summary-table").remove();
     $(".all-communications-empty").text('There are no communications associated with your account. Click "Create Communication" to get started.');
   }
-
+  logic.dateFormatByClass();
 };
 
 const showCommunicationRecordSuccess = (data) => {
@@ -65,6 +63,7 @@ const showCommunicationRecordSuccess = (data) => {
   $('.content').append(communicationDetails);
 
   logic.displayUrl();
+  logic.dateFormatByClass();
 };
 
 const showCommunicationRecordFailure = () => {
@@ -158,11 +157,13 @@ const createCommunicationSuccess = (data) => {
   $(".content").append(showCommunicationDetails);
   $(".current").attr("data-current-communication-id", store.currentCommunicationId);
   logic.displayUrl();
+  logic.dateFormatByClass();
 };
 
 const deleteCommunicationSuccess = () => {
   $(".notification-container").children().text("");
   $(".success-alert").text("The record has been successfully deleted");
+  logic.dateFormatByClass();
   communicationsApi.getCommunications()
     .done(getCommunicationSuccess)
     .fail(getCommunicationFailure);
@@ -187,6 +188,7 @@ const updateCommunicationSuccess = (data) => {
   $(".content").append(showCommunicationDetails);
   $(".current").attr("data-current-communication-id", store.currentCommunicationId);
   logic.displayUrl();
+  logic.dateFormatByClass();
 };
 
 const displayCommunicationDropdownSuccess = function(data) {

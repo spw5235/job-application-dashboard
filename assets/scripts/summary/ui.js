@@ -1,6 +1,7 @@
 'use strict';
 
 const store = require('../store');
+const logic = require('../dashboard/logic');
 const displayRemindersSummary = require('../templates/summary-table/reminders-summary.handlebars');
 const displayDocumentsSummary = require('../templates/summary-table/documents-summary.handlebars');
 const displayContactsSummary = require('../templates/summary-table/contacts-summary.handlebars');
@@ -37,7 +38,7 @@ const remindersSummarySuccess = (data) => {
     $(".reminders-empty-message").append("<h3>Linked Reminders</h3>");
     $(".reminders-empty-message").append("<p>There are no reminders linked to this company.</p>");
   }
-
+  logic.dateFormatByClass();
 };
 
 const documentsSummarySuccess = (data) => {
@@ -126,6 +127,7 @@ const communicationsSummarySuccess = (data) => {
     $(".communications-empty-message").append("<h3>Linked Communications</h3>");
     $(".communications-empty-message").append("<p>There are no communications linked to this company.</p>");
   }
+  logic.dateFormatByClass();
 };
 
 module.exports = {

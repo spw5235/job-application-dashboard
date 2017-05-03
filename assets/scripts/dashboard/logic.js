@@ -1,6 +1,35 @@
 'use strict';
 
+const formatDate = function(date) {
+  console.log(date);
+  if (date !== null) {
+    let splitDate = date.split("-");
 
+    if (splitDate.length > 1) {
+      let revisedDate = `${splitDate[1]}/${splitDate[2]}/${splitDate[0]}`;
+      return revisedDate;
+    } else {
+      return date;
+    }
+  } else {
+    return null;
+  }
+};
+
+const dateFormatByClass = function() {
+  let classCollection = $(".format-date");
+  classCollection.each(function() {
+    let textVal = $(this).text()
+
+    if (textVal !== "") {
+      textVal = $(this).text().trim();
+      let formattedDate = formatDate(textVal);
+      console.log(formattedDate);
+      $(this).text(formattedDate);
+    }
+    console.log(textVal);
+  });
+};
 
 const convertPercentage = function() {
     let allInputs = document.querySelectorAll('.text-input');
@@ -142,5 +171,7 @@ module.exports = {
   onResizeTextarea,
   defaultDate,
   convertPercentage,
+  formatDate,
+  dateFormatByClass,
   // isDateBlank,
 };

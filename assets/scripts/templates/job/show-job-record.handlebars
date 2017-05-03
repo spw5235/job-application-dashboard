@@ -42,7 +42,7 @@
             <td>
               Deadline:
             </td>
-            <td>
+            <td class="format-date">
               {{job.deadline}}
             </td>
           </tr>
@@ -58,7 +58,7 @@
             <td>
               Posting Date
             </td>
-            <td>
+            <td class="format-date">
               {{job.posting_date}}
             </td>
           </tr>
@@ -110,10 +110,8 @@
     </div>
     <div class="delete-confirmation-contain">
       <div class="form-group delete-confirmation">
-        <h3>Warning:</h3>
-        <p>Deleting this job record will also remove all linked records (e.g. linked contacts, linked reminders, etc.)</p>
-        <label>Would you like to continue?</label>
-        <br>
+        <h3><span class="red-color">Warning: </span>Deleting this job record will also remove all linked records (e.g. linked contacts, linked reminders, etc.). Would you like to continue?</h3>
+        <!-- <p>Deleting this job record will also remove all linked records (e.g. linked contacts, linked reminders, etc.)</p> -->
         <button id="job-record-delete" type="button" class="btn btn-danger current" data-current-job-id="{{job.id}}">Delete All</button>
         <button id="job-delete-cancel" type="button" class="btn btn-primary current" data-current-job-id="{{job.id}}">Cancel</button>
       </div>

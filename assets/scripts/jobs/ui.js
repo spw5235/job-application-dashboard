@@ -70,6 +70,9 @@ const showJobRecordSuccess = (data) => {
   $(".content").children().remove();
   store.lastShowJobData = data;
 
+  // data.job.posting_date = logic.formatDate(data.job.posting_date);
+  // data.job.deadline = logic.formatDate(data.job.deadline);
+
   let jobDetails = displayJobDetails({
     job: data.job
   });
@@ -82,6 +85,8 @@ const showJobRecordSuccess = (data) => {
 
   // Summary Table reminders
   summaryLogic.initiateJobSummaryTables(data.job.id);
+
+  logic.dateFormatByClass();
 
   // let communicationEmptyLength = $(".communications-summary-table-container").children().length;
   //
@@ -177,6 +182,7 @@ const createJobSuccess = function(data) {
   $(".content").append(showJobDetails);
   $(".current").attr("data-current-job-id", store.currentJobId);
   logic.displayUrl();
+  logic.dateFormatByClass();
 };
 
 const deleteJobSuccess = () => {
@@ -199,12 +205,16 @@ const updateJobSuccess = (data) => {
   $(".content").children().remove();
   $(".success-alert").text("The record has been successfully updated");
 
+  // data.job.posting_date = logic.formatDate(data.job.posting_date);
+  // data.job.deadline = logic.formatDate(data.job.deadline);
+
   let showJobDetails = displayJobDetails({
     job: data.job
   });
   $(".content").append(showJobDetails);
   $(".current").attr("data-current-job-id", store.currentJobId);
   logic.displayUrl();
+  logic.dateFormatByClass();
 };
 
 const createJobFailure = function() {

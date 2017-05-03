@@ -16,13 +16,13 @@
         <tbody>
           {{#each communications as |communication|}}
             <tr>
-              <td class="display-communication-full-name hidden-xs">
+              <td class="format-date hidden-xs">
                 {{communication.c_date}}
               </td>
-              <td class="display-communication-company-name hidden-xs">
+              <td class="hidden-xs">
                 {{communication.c_method}}
               </td>
-              <td class="display-communication-email">
+              <td>
                 {{communication.c_subject}}
               </td>
               <td class="display-communication-submit">

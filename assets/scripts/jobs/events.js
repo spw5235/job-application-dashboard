@@ -65,9 +65,10 @@ const onCreateJob = function(event) {
     data.job.applied = false;
   }
 
-  console.log(data);
-  store.createJobData = data;
   store.lastShowJobData = data;
+  // data.job.posting_date = logic.formatDate(data.job.posting_date);
+  // data.job.deadline = logic.formatDate(data.job.deadline);
+  store.createJobData = data;
 
   jobsApi.createJob(data)
     .done(jobsUi.createDefaultReminderSuccess)
@@ -143,7 +144,7 @@ const onShowJobCreateForm = function(event) {
 
 const onShowDeleteMenu = function(event) {
   event.preventDefault();
-  $(this).hide();
+  $('.job-record-btn-options').hide();
   $(".delete-confirmation-contain").show();
 };
 

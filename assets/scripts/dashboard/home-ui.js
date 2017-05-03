@@ -5,6 +5,7 @@ const communicationsApi = require('../communications/api');
 const documentsApi = require('../documents/api');
 const contactsApi = require('../contacts/api');
 const jobsApi = require('../jobs/api');
+const logic = require('./logic');
 const displayDashboardHome = require('../templates/dashboard/dashboard-home.handlebars');
 
 const homeFailure = function() {
@@ -323,7 +324,7 @@ const showContactDashTable = (data) => {
     store.isReminderDashEmptyOverdue = false;
   }
 
-
+logic.dateFormatByClass();
 };
 
 
@@ -381,7 +382,7 @@ const showDocumentDashTable = (data) => {
 
   data = newDocumentDataObject;
   store.finalDocumentData = data;
-
+logic.dateFormatByClass();
   contactsApi.getContacts()
     .done(showContactDashTable)
     .fail(homeFailure);
@@ -443,7 +444,7 @@ const showCommunicationDashTable = (data) => {
 
   data = newCommunicationDataObject;
   store.finalCommunicationData = data;
-
+logic.dateFormatByClass();
   documentsApi.getDocuments()
     .done(showDocumentDashTable)
     .fail(homeFailure);
@@ -506,7 +507,7 @@ const showJobDashTable = (data) => {
 
   data = newJobDataObject;
   store.finalJobData = data;
-
+logic.dateFormatByClass();
   communicationsApi.getCommunications()
     .done(showCommunicationDashTable)
     .fail(homeFailure);
@@ -631,7 +632,7 @@ const showRemindersApproachDashTable = (data) => {
     store.isReminderDashEmpty = true;
   }
   store.finalReminderData = data;
-
+logic.dateFormatByClass();
   jobsApi.getJobs()
     .done(showJobDashTable)
     .fail(homeFailure);

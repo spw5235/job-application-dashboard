@@ -48,6 +48,7 @@ const getDocumentSuccess = (data) => {
     $(".document-summary-table").remove();
     $(".all-documents-empty").text('There are no documents associated with your account. Click "Create Document" to get started.');
   }
+  logic.dateFormatByClass();
 };
 
 const showDocumentRecordSuccess = (data) => {
@@ -60,6 +61,7 @@ const showDocumentRecordSuccess = (data) => {
   });
   $('.content').append(documentDetails);
   logic.displayUrl();
+  logic.dateFormatByClass();
 };
 
 const showDocumentRecordFailure = () => {
@@ -147,11 +149,13 @@ const createDocumentSuccess = (data) => {
   $(".content").append(showDocumentDetails);
   $(".current").attr("data-current-document-id", store.currentDocumentId);
   logic.displayUrl();
+  logic.dateFormatByClass();
 };
 
 const deleteDocumentSuccess = () => {
   $(".notification-container").children().text("");
   $(".success-alert").text("The record has been successfully deleted");
+  logic.dateFormatByClass();
   documentsApi.getDocuments()
     .done(getDocumentSuccess)
     .fail(getDocumentFailure);
@@ -175,6 +179,7 @@ const updateDocumentSuccess = (data) => {
   $(".content").append(showDocumentDetails);
   $(".current").attr("data-current-document-id", store.currentDocumentId);
   logic.displayUrl();
+  logic.dateFormatByClass();
 };
 
 const displayDocumentDropdownSuccess = function(data) {
