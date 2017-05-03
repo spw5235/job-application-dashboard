@@ -20,6 +20,31 @@
         <input class="form-control text-input required-field" name="contact[nickname]" placeholder="Contact Nickname" type="text" value="{{contact.nickname}}">
       </div>
 
+      <div class="form-group">
+        <label>Job Title</label>
+        <input class="form-control text-input required-field" name="contact[job_title]" placeholder="Contact Job Title" type="text" value="{{contact.job_title}}">
+      </div>
+
+      <div class="form-group">
+        <label>Email</label>
+        <input class="form-control text-input required-field" name="contact[email]" placeholder="Contact Email" type="text" value="{{contact.email}}">
+      </div>
+
+      <div class="form-group">
+        <label>Phone</label>
+        <input class="form-control text-input required-field" name="contact[phone]" placeholder="Contact Phone" type="text" value="{{contact.phone}}">
+      </div>
+
+      <div class="form-group">
+        <label>Website</label>
+        <input class="form-control required-field" name="contact[website]" placeholder="Contact Website" type="text" value="{{contact.website}}">
+      </div>
+
+      <div class="form-group">
+        <label>Contact Notes</label>
+        <textarea id="contact-notes-input" class="form-control text-input field-input note-input" name="contact[notes]" placeholder="Contact Notes">{{contact.notes}}</textarea>
+      </div>
+
       <div class="form-group job-radio-container current-value-update-page">
         <label>Current Company Association:</label>
         <div class="update-radio-link-value-status-container">
@@ -46,30 +71,6 @@
       <div class="form-group display-alt-job"></div>
       <div class="form-group display-dropdown-job"></div>
 
-      <div class="form-group">
-        <label>Job Title</label>
-        <input class="form-control text-input required-field" name="contact[job_title]" placeholder="Contact Job Title" type="text" value="{{contact.job_title}}">
-      </div>
-
-      <div class="form-group">
-        <label>Email</label>
-        <input class="form-control text-input required-field" name="contact[email]" placeholder="Contact Email" type="text" value="{{contact.email}}">
-      </div>
-
-      <div class="form-group">
-        <label>Phone</label>
-        <input class="form-control text-input required-field" name="contact[phone]" placeholder="Contact Phone" type="text" value="{{contact.phone}}">
-      </div>
-
-      <div class="form-group">
-        <label>Website</label>
-        <input class="form-control required-field" name="contact[website]" placeholder="Contact Website" type="text" value="{{contact.website}}">
-      </div>
-
-      <div class="form-group">
-        <label>Contact Notes</label>
-        <textarea id="contact-notes-input" class="form-control text-input field-input note-input" name="contact[notes]" placeholder="Contact Notes">{{contact.notes}}</textarea>
-      </div>
 
       <div class="form-group">
         <input class="btn btn-success submit-btn current" name="submit" id="submit-contact-update-btn" type="submit" value="Submit" data-current-ref-id="{{contact.job_ref_id}}" data-current-ref-text="{{contact.job_ref_text}}">
