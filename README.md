@@ -47,6 +47,7 @@ Link to the live application: [https://spwisner.github.io/job-application-dashbo
 Link to the API Source: [https://github.com/spwisner/job-application-dashboard-api](https://github.com/spwisner/job-application-dashboard-api).
 
 Application Screenshot:
+
 ![alt text](https://cloud.githubusercontent.com/assets/13546265/25689988/c6226034-305a-11e7-934f-f1a26bddb15a.png "Application Screenshot")
 
 ## Technologies Used
@@ -59,8 +60,8 @@ This SPA utilizes the following technologies
 -   JavaScript
 -   jQuery
 -   Ajax
--   Ruby on Rails
--   Ruby
+-   Ruby on Rails [API Source](https://github.com/spwisner/job-application-dashboard-api)
+-   Ruby [API Source](https://github.com/spwisner/job-application-dashboard-api)
 
 ## Application Approach & Design
 
@@ -78,9 +79,9 @@ The following is a sample of user stories that were considered in the production
 ### Wireframes
 Based on the user-stories, mulitiple wireframes were created for this application.  They can be found by clicking the followings links:
 
-[Dashboard ](https://drive.google.com/file/d/0B_Hv9u6cm8IVQUtuSWFlQ1ktYW8/view?usp=sharing)
-[Job Posting Dashboard ](https://drive.google.com/file/d/0B_Hv9u6cm8IVLVFwYW1HWWgwa2s/view?usp=sharing)
-[Application View ](https://drive.google.com/file/d/0B_Hv9u6cm8IVbFcza3BwWkJxRDQ/view?usp=sharing)
+- [Dashboard ](https://drive.google.com/file/d/0B_Hv9u6cm8IVQUtuSWFlQ1ktYW8/view?usp=sharing)
+- [Job Posting Dashboard ](https://drive.google.com/file/d/0B_Hv9u6cm8IVLVFwYW1HWWgwa2s/view?usp=sharing)
+- [Application View ](https://drive.google.com/file/d/0B_Hv9u6cm8IVbFcza3BwWkJxRDQ/view?usp=sharing)
 
 ### Dependencies
 
