@@ -78,10 +78,9 @@ The following is a sample of user stories that were considered in the production
 ### Wireframes
 Based on the user-stories, mulitiple wireframes were created for this application.  They can be found by clicking the followings links:
 
-[Homepage ](https://drive.google.com/open?id=0B_Hv9u6cm8IVY1dIV2ZWMTlteWs)
-[Post Sign-In ](https://drive.google.com/open?id=0B_Hv9u6cm8IVUU9rb0hoMnpudlk)
-[Start New Session ](https://drive.google.com/open?id=0B_Hv9u6cm8IVeXA2NWtsek00UVk)
-[Past Session Report ](https://drive.google.com/open?id=0B_Hv9u6cm8IVR2loY054dkJHV1U)
+[Dashboard ](https://drive.google.com/file/d/0B_Hv9u6cm8IVQUtuSWFlQ1ktYW8/view?usp=sharing)
+[Job Posting Dashboard ](https://drive.google.com/file/d/0B_Hv9u6cm8IVLVFwYW1HWWgwa2s/view?usp=sharing)
+[Application View ](https://drive.google.com/file/d/0B_Hv9u6cm8IVbFcza3BwWkJxRDQ/view?usp=sharing)
 
 ### Dependencies
 
