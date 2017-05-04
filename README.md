@@ -58,8 +58,8 @@ This SPA utilizes the following technologies
 -   JavaScript
 -   jQuery
 -   Ajax
--   Ruby on Rails [API Source](https://github.com/spwisner/job-application-dashboard-api)
--   Ruby [API Source](https://github.com/spwisner/job-application-dashboard-api)
+-   Ruby on Rails ([API Source](https://github.com/spwisner/job-application-dashboard-api))
+-   Ruby ([API Source](https://github.com/spwisner/job-application-dashboard-api))
 
 ## Application Approach & Design
 
