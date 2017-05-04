@@ -1,5 +1,7 @@
 # Job Application Dashboard
 
+![alt text](https://cloud.githubusercontent.com/assets/13546265/25689988/c6226034-305a-11e7-934f-f1a26bddb15a.png "Application Screenshot")
+
 ## Application Overview
 
 ### Application Description
@@ -45,10 +47,6 @@ An additional feature enables users to rank the importance of a specific job app
 Link to the live application: [https://spwisner.github.io/job-application-dashboard/](https://spwisner.github.io/job-application-dashboard/).
 
 Link to the API Source: [https://github.com/spwisner/job-application-dashboard-api](https://github.com/spwisner/job-application-dashboard-api).
-
-Application Screenshot:
-
-![alt text](https://cloud.githubusercontent.com/assets/13546265/25689988/c6226034-305a-11e7-934f-f1a26bddb15a.png "Application Screenshot")
 
 ## Technologies Used
 
