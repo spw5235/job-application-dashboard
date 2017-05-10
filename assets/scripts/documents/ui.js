@@ -56,12 +56,15 @@ const showDocumentRecordSuccess = (data) => {
   $(".content").children().remove();
   store.lastShowDocumentData = data;
 
+  console.log(data.document.doctext);
+
   let documentDetails = displayDocumentDetails({
     document: data.document
   });
   $('.content').append(documentDetails);
   logic.displayUrl();
   logic.dateFormatByClass();
+  $(".doc-text-insert").text(data.document.doctext);
 };
 
 const showDocumentRecordFailure = () => {

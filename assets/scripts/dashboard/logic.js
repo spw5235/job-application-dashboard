@@ -1,5 +1,166 @@
 'use strict';
 
+const letterToNum = function(letter) {
+  let num;
+  if (letter === "a") {
+    num = 1;
+  } else if (letter === "b") {
+    num = 2;
+  } else if (letter === "c") {
+    num = 3;
+  } else if (letter === "d") {
+    num = 4;
+  } else if (letter === "e") {
+    num = 5;
+  } else if (letter === "f") {
+    num = 6;
+  } else if (letter === "g") {
+    num = 7;
+  } else if (letter === "h") {
+    num = 8;
+  } else if (letter === "i") {
+    num = 9;
+  } else if (letter === "j") {
+    num = 10;
+  } else if (letter === "k") {
+    num = 11;
+  } else if (letter === "l") {
+    num = 12;
+  } else if (letter === "m") {
+    num = 13;
+  } else if (letter === "n") {
+    num = 14;
+  } else if (letter === "o") {
+    num = 15;
+  } else if (letter === "p") {
+    num = 16;
+  } else if (letter === "q") {
+    num = 17;
+  } else if (letter === "r") {
+    num = 18;
+  } else if (letter === "s") {
+    num = 19;
+  } else if (letter === "t") {
+    num = 20;
+  } else if (letter === "u") {
+    num = 21;
+  } else if (letter === "v") {
+    num = 22;
+  } else if (letter === "w") {
+    num = 23;
+  } else if (letter === "x") {
+    num = 24;
+  } else if (letter === "y") {
+    num = 25;
+  } else if (letter === "z") {
+    num = 26;
+  } else if (letter === " ") {
+    num = 27;
+  } else {
+    num = 0;
+  }
+
+  return num;
+};
+
+const NumToLetter = function(letter) {
+  let num;
+  if (num === 1) {
+    letter = "a";
+  } else if (num === 2) {
+    letter = "b";
+  } else if (letter === 3) {
+    letter = "c";
+  } else if (letter === 4) {
+    letter = "d";
+  } else if (letter === 5) {
+    letter = "e";
+  } else if (letter === 6) {
+    letter = "f";
+  } else if (letter === 7) {
+    letter = "g";
+  } else if (letter === 8) {
+    letter = "h";
+  } else if (letter === 9) {
+    letter = "i";
+  } else if (letter === 10) {
+    letter = "j";
+  } else if (letter === 11) {
+    letter = "k";
+  } else if (letter === 12) {
+    letter = "l";
+  } else if (letter === 13) {
+    letter = "m";
+  } else if (letter === 14) {
+    letter = "n";
+  } else if (letter === 15) {
+    letter = "o";
+  } else if (letter === 16) {
+    letter = "p";
+  } else if (letter === 17) {
+    letter = "q";
+  } else if (letter === 18) {
+    letter = "r";
+  } else if (letter === 19) {
+    letter = "s";
+  } else if (letter === 20) {
+    letter = "t";
+  } else if (letter === 21) {
+    letter = "u";
+  } else if (letter === 22) {
+    letter = "v";
+  } else if (letter === 23) {
+    letter = "w";
+  } else if (letter === 24) {
+    letter = "x";
+  } else if (letter === 25) {
+    letter = "y";
+  } else if (letter === 26) {
+    letter = "z";
+  } else if (letter === 27) {
+    letter = " ";
+  } else {
+    letter = "";
+  }
+
+  return letter;
+};
+
+const alphabatize = function(company) {
+  console.log(company);
+
+  let nameSplit = company.toLowerCase().split("");
+
+  // Will need if statement for blank situation
+
+  let emptyArr = [];
+
+  for (let i = 0; i < nameSplit.length; i++) {
+    let letter = nameSplit[i];
+    let number = letterToNum(letter);
+    emptyArr.push(number);
+  }
+
+  console.log('convert to num arr');
+  console.log(emptyArr);
+
+  let convertBack = [];
+
+  for (let i = 0; i < emptyArr.length; i++) {
+    let num = emptyArr[i];
+    let letter = NumToLetter(num);
+    convertBack.push(letter);
+  }
+
+  console.log('letterArr');
+  console.log(convertBack);
+
+  convertBack = convertBack.join("");
+
+  console.log(convertBack);
+
+};
+
 const formatDate = function(date) {
   if (date !== null) {
     let splitDate = date.split("-");
@@ -172,5 +333,6 @@ module.exports = {
   convertPercentage,
   formatDate,
   dateFormatByClass,
+  alphabatize,
   // isDateBlank,
 };

@@ -5,6 +5,8 @@ const dashboardHomeUi = require('./home-ui');
 const store = require('../store');
 const jobsApi = require('../jobs/api');
 const jobsUi = require('../jobs/ui');
+const getFormFields = require('../../../lib/get-form-fields');
+const logic = require('./logic');
 
 const onGetDash = function() {
   event.preventDefault();
@@ -33,10 +35,18 @@ const showLinkedCompany = function(event) {
     .fail(jobsUi.showJobRecordFailure);
 };
 
+const alphabatize = function(event) {
+  event.preventDefault();
+  let data = getFormFields(event.target);
+  let companyName = data.test.company_name.trim();
+  logic.alphabatize(companyName);
+};
+
 const addHandlers = () => {
   $('#get-dash-home-btn').on('click', onGetDash);
   $('#nav-mobile-dropdown').on('click', showMobileOptions);
   $('.content').on('click', '.linked-company', showLinkedCompany);
+  $('#alphabatize-form').on('submit', alphabatize);
   // $('.content').on('click', '.clear-default-date', clearDefaultDate);
 };
 
