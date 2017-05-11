@@ -280,11 +280,12 @@ const showContactDashTable = (data) => {
     $(".communication-dash-recent-table-empty").text("No communications have been created recently");
   }
 
-  ////
+  // The following responds to empty tables on homepage
 
   if (store.isContactDashEmpty === true) {
     $(".contact-dash-table-empty").text("No contacts have been recently added");
     store.isContactDashEmpty = false;
+    $('.remove-contact-center').removeClass("center");
   } else {
     store.isContactDashEmpty = false;
   }
@@ -292,6 +293,7 @@ const showContactDashTable = (data) => {
   if (store.isCommunicationDashEmpty === true) {
     $(".communication-dash-table-empty").text("No communications have been recently added");
     store.isCommunicationDashEmpty = false;
+    $('.remove-communication-center').removeClass("center");
   } else {
     store.isCommunicationDashEmpty = false;
   }
@@ -299,12 +301,15 @@ const showContactDashTable = (data) => {
   if (store.isJobDashEmpty === true) {
     $(".job-dash-table-empty").text("No deadlines occur in the next five days");
     store.isJobDashEmpty = false;
+    $('.remove-job-center').removeClass("center");
   } else {
     store.isJobDashEmpty = false;
   }
 
   if (store.isReminderDashEmpty === true) {
     $(".reminder-dash-table-empty").text("You have no reminders due in the next five days");
+    $('.hide-empty-reminder').remove();
+    $('.remove-reminder-center').removeClass("center");
     store.isReminderDashEmpty = false;
   } else {
     store.isReminderDashEmpty = false;
@@ -317,11 +322,12 @@ const showContactDashTable = (data) => {
     store.isReminderDashEmptyOverdue = false;
   }
 
-  if (store.isDocumentDashEmptyOverdue === true) {
+  if (store.isDocumentDashEmpty === true) {
     $(".document-dash-table-empty").text("No documents have been recently created.");
-    store.isReminderDashEmptyOverdue = false;
+    store.isDocumentDashEmpty = false;
+    $(".remove-document-center").removeClass("center");
   } else {
-    store.isReminderDashEmptyOverdue = false;
+    store.isDocumentDashEmpty = false;
   }
 
 logic.dateFormatByClass();
